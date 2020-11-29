@@ -10,12 +10,18 @@ import { CommonListarComponent } from './common-listar.component';
   styleUrls: ['./alumnos.component.css']
 })
 export class AlumnosComponent
-extends CommonListarComponent<Alumno,AlumnoService> implements OnInit {
+  extends CommonListarComponent<Alumno, AlumnoService> implements OnInit {
 
-  constructor(service:AlumnoService) {
+  mostrarColumnasAlumnos: string[] = [
+    'id', 'nombre', 'apellido',
+    'correo', 'telefono', 'carrera',
+    'semestre', 'promAsistencia','editar','eliminar'
+  ];
+
+  constructor(service: AlumnoService) {
     super(service)
-    this.titulo="Listado de alumnos"
+    this.titulo = "Listado de alumnos"
     this.nombreModel = Alumno.name;
-   }
-   
+  }
+
 }

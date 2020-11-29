@@ -31,11 +31,13 @@ export class UsuariosComponent implements OnInit { //extends CommonListarCompone
 
   ngOnInit() {
     this.service.UsuarioRoleAlumno().subscribe(ua => {
+      console.log(ua + ' list student user')
       this.usuariosAlumno = ua
       this.iniciarPaginador();
     })
 
     this.service.UsuarioRoleDocente().subscribe(ud => {
+      console.log(ud + ' list docente user')
       this.usuariosDocente = ud
       this.iniciarPaginador();
     })
@@ -45,7 +47,7 @@ export class UsuariosComponent implements OnInit { //extends CommonListarCompone
   iniciarPaginador(): void {
     this.dataSource = new MatTableDataSource<Usuario>(this.usuariosAlumno);
     this.dataSource.paginator = this.paginator;
-
+        
     this.dataSourceDocente = new MatTableDataSource<Usuario>(this.usuariosDocente);
     this.dataSourceDocente.paginator = this.paginatorDocente;
   }

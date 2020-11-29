@@ -1,81 +1,159 @@
 <mat-card style="background: rgb(209, 208, 208);">
-    <mat-card-header *ngIf="usuario">
-        <mat-card-title>
-            Docente del Usuario {{usuario.username}}
-        </mat-card-title>
-    </mat-card-header>
+  <mat-card-header *ngIf="usuario">
+    <mat-card-title>
+      Docente del Usuario {{usuario.username}}
+    </mat-card-title>
+  </mat-card-header>
 
-    <mat-card-content>
-        <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
-            <mat-tab label="Crear Perfil" *ngIf="!docente">
+  <mat-card-content>
+    <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
+      <mat-tab label="Crear Perfil" *ngIf="!docente">
 
-                <mat-form-field class="mx-3" style="width: 45%;">
-                    <label for="nombre">Nombre</label>
+        <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-label for="nombre">Nombre</mat-label>
 
-                    <input matInput name="nombre" [(ngModel)]="docentes.nombre">
-                </mat-form-field>
+          <input matInput name="nombre" [(ngModel)]="docentes.nombre">
+          <div class="alert alert-danger" *ngIf="error?.nombre">
+            {{ error.nombre }}
+          </div>
+        </mat-form-field>
 
-                <mat-form-field class="mx-3" style="width: 45%;">
-                    <label for="apellido">Apellido</label>
+        <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-label for="apellido">Apellido</mat-label>
 
-                    <input matInput name="apellido" [(ngModel)]="docentes.apellido">
-                </mat-form-field>
+          <input matInput name="apellido" [(ngModel)]="docentes.apellido">
+          <div class="alert alert-danger" *ngIf="error?.apellido">
+            {{ error.apellido }}
+          </div>
+        </mat-form-field>
 
-                <mat-form-field class="mx-3" style="width: 45%;">
-                    <label for="correo">Correo</label>
+        <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-label for="correo">Correo</mat-label>
 
-                    <input matInput name="correo" [(ngModel)]="docentes.correo">
-                </mat-form-field>
+          <input matInput name="correo" [(ngModel)]="docentes.correo">
+          <div class="alert alert-danger" *ngIf="error?.correo">
+            {{ error.correo }}
+          </div>
+        </mat-form-field>
 
-                <mat-form-field class="mx-3" style="width: 45%;">
-                    <label for="division">Division</label>
+        <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-label for="division">Division</mat-label>
 
-                    <input matInput name="division" [(ngModel)]="docentes.division">
-                </mat-form-field>
-
-
-
-                <button mat-raised-button color="primary" class="m-4" (click)="createDocente()">
-                    Crear
-                </button>
-            </mat-tab>
-
-
-            <mat-tab label="Editar Perfil" *ngIf="docente">
-
-
-                <mat-form-field class="mx-3" style="width: 45%;">
-                    <label for="nombre">Nombre</label>
-
-                    <input matInput name="nombre" [(ngModel)]="docente.nombre">
-                </mat-form-field>
-
-                <mat-form-field class="mx-3" style="width: 45%;">
-                    <label for="apellido">Apellido</label>
-
-                    <input matInput name="apellido" [(ngModel)]="docente.apellido">
-                </mat-form-field>
-
-                <mat-form-field class="mx-3" style="width: 45%;">
-                    <label for="correo">Correo</label>
-
-                    <input matInput name="correo" [(ngModel)]="docente.correo">
-                </mat-form-field>
-
-                <mat-form-field class="mx-3" style="width: 45%;">
-                    <label for="division">Carrera</label>
-
-                    <input matInput name="division" [(ngModel)]="docente.division">
-                </mat-form-field>
+          <input matInput name="division" [(ngModel)]="docentes.division">
+          <div class="alert alert-danger" *ngIf="error?.division">
+            {{ error.division }}
+          </div>
+        </mat-form-field>
 
 
 
-                <button mat-raised-button color="primary" class="m-4" (click)="editar()">
-                    Editar
-                </button>
+        <button mat-raised-button color="primary" class="m-4" (click)="createDocente()">
+          Crear
+        </button>
+      </mat-tab>
 
-            </mat-tab>
-        </mat-tab-group>
 
-    </mat-card-content>
+      <mat-tab label="Editar Perfil" *ngIf="docente">
+        <div class="container my-5 p-10">
+
+          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-label for="nombre">Nombre</mat-label>
+
+            <input matInput name="nombre" [(ngModel)]="docente.nombre">
+            <div class="alert alert-danger" *ngIf="error?.nombre">
+              {{ error.nombre }}
+            </div>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-label for="apellido">Apellido</mat-label>
+
+            <input matInput name="apellido" [(ngModel)]="docente.apellido">
+            <div class="alert alert-danger" *ngIf="error?.apellido">
+              {{ error.apellido }}
+            </div>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-label for="correo">Correo</mat-label>
+
+            <input required matInput name="correo" [(ngModel)]="docente.correo">
+            <div class="alert alert-danger" *ngIf="error?.correo">
+              {{ error.correo }}
+            </div>
+          </mat-form-field>
+
+          <mat-form-field class="mx-3" style="width: 45%;">
+            <label for="division">Carrera</label>
+
+            <input matInput name="division" [(ngModel)]="docente.division">
+            <div class="alert alert-danger" *ngIf="error?.division">
+              {{ error.division }}
+            </div>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="m-4" (click)="editar()">
+            Editar
+          </button>
+        </div>
+      </mat-tab>
+
+      <!-- ****************************  archivos  *************************-->
+      <mat-tab label="Crear archivo" *ngIf="docente">
+        <div class="container my-5 p-10">
+          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-label for="nombre">Nombre</mat-label>
+            <input matInput name="nombre" [(ngModel)]="archivo.nombre">
+            <div class="alert alert-danger" *ngIf="error?.nombre">
+              {{ error.nombre }}
+            </div>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-label for="tipo">Tipo</mat-label>
+            <input matInput name="tipo" [(ngModel)]="archivo.tipo">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-label for="comentario">Comentario</mat-label>
+            <input matInput name="comentario" [(ngModel)]="archivo.comentario">
+            <div class="alert alert-danger" *ngIf="error?.comentario">
+              {{ error.comentario }}
+            </div>
+          </mat-form-field>
+
+          <div class="input-group">
+            <div class="custom-file">
+              <input (change)="seleccionarArchivo($event)" type="file" class="custom-file-input" id="inputGroupFile04"
+                aria-describedby="inputGroupFileAddon04">
+              <label class="custom-file-label" for="inputGroupFile04">Escoger archivo</label>
+            </div>
+            <div class="input-group-append">
+              <button (click)="subirArchivo()" [disabled]="!archivoSelected" class="btn btn-outline-secondary"
+                type="button" id="inputGroupFileAddon04">Subir</button>
+            </div>
+          </div>
+          <br>
+          <span *ngIf="archivoSelected">Archivo seleccionado
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-file-text-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z" />
+            </svg>
+          </span>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+  </mat-card-content>
+
+  <button mat-raised-button color="primary" class="m-4" [routerLink]="['/usuarios']">
+    Regresar
+
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-return-left" fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z" />
+    </svg>
+  </button>
 </mat-card>

@@ -8,7 +8,7 @@ export abstract class CommonListarComponent<E extends Generic,S extends CommonSe
   titulo:string;
   listar: E[]
   protected nombreModel: string;
-
+  error: any;
   totalRegistros = 0;
   paginaActual = 0;
   totalPorPagina = 4;
@@ -52,6 +52,11 @@ export abstract class CommonListarComponent<E extends Generic,S extends CommonSe
        // this.listar = this.listar.filter(a => a !== e);
        this.calcularRangos();
        Swal.fire('Eliminado:', `${this.nombreModel} eliminado con éxito`, 'success');
+      },err => {
+        if(err.status === 400){
+          this.error = err.error;
+          console.log(this.error);
+        }
       });
     }
   });

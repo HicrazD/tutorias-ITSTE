@@ -25,8 +25,8 @@ export class AsignarAlumnosComponent implements OnInit {
 
   tabIndex = 0;
 
-  mostrarColumnas: string[] = ['nombre', 'apellido','seleccion'];
-  mostrarColumnasAlumnos: string[] = ['id', 'nombre', 'apellido', 'correo', 'carrera','eliminar'];
+  mostrarColumnas: string[] = ['nombre', 'apellido','carrera','seleccion'];
+  mostrarColumnasAlumnos: string[] = ['id','nombre', 'apellido', 'correo', 'carrera','eliminar'];
   seleccion: SelectionModel<Alumno> = new SelectionModel<Alumno>(true, []);
   
   constructor(private route: ActivatedRoute,

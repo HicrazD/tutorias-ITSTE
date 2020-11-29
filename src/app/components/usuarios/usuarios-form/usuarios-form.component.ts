@@ -39,6 +39,11 @@ export class UsuariosFormComponent
       console.log(usuario);
       alert(`Usuario ${usuario.username} creado con exito`);
       this.router.navigate(['/login']);
+    },err => {
+      if(err.status === 400 ){
+        this.error = err.error;
+        console.log(this.error);
+      }
     })
   }
 
@@ -57,6 +62,11 @@ export class UsuariosFormComponent
             else{
               alert(`Usuario ${usuario.username} creado con exito`);
               this.router.navigate(['/docentes/form/docente-perfil/'+usuario.username])
+            }
+          },err => {
+            if(err.status === 400 ){
+              this.error = err.error;
+              console.log(this.error);
             }
           })
         }

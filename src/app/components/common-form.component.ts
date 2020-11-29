@@ -51,7 +51,7 @@ export abstract class CommonFormComponent<E extends Generic, S extends CommonSer
       Swal.fire('Modificado:', `${this.nombreModel}actualizado con éxito`, 'success');
       this.router.navigate([this.redirect]);
     }, err => {
-      if(err.status === 400){
+      if(err.status === 400 || err.status === 400){
         this.error = err.error;
         console.log(this.error);
       }

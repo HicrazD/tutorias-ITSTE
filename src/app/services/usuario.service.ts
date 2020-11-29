@@ -1,10 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Roles } from '../models/roles';
 import { Usuario } from '../models/usuario';
 import { CommonService } from './common.service';
-import { RoleService } from './role.service';
 
 @Injectable({
   providedIn: 'root'

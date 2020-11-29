@@ -12,18 +12,14 @@ import { CommonListarComponent } from '../alumnos/common-listar.component';
   styleUrls: ['./docentes.component.css']
 })
 export class DocentesComponent 
-extends CommonListarComponent<Docente,DocenteService> implements OnInit {
+extends CommonListarComponent<Docente,DocenteService> implements OnInit {  
 
-  
-
-  mostrarColumnasDocentes: string[] = ['id', 'nombre', 'apellido', 'correo', 'division','asignar','eliminar'];
+  mostrarColumnasDocentes: string[] = ['id', 'nombre', 'apellido', 'correo', 'division','asignar','edit','eliminar'];
 
   constructor(service:DocenteService) { 
     super(service)
     this.titulo="Listado de docentes"
     this.nombreModel = Docente.name;
-  }
-
-  
+  }  
 
 }

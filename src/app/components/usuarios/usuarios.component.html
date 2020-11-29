@@ -1,11 +1,11 @@
-<mat-card class="my-3" style="background-image: url(../../../assets/backgroundTECNM.jpg);">
+<mat-card class="my-3" style="background: #1B396A;">
   <mat-card-header>
     <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex" style="background:#FF9800;">
       <mat-tab label="Alumnos">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-5 my-4" style="width: 90%;">
+        <table mat-table [dataSource]="usuariosAlumno" class="mat-elevation-z8 mx-5 my-4" style="width: 90%;">
 
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Clave</th>

@@ -1,37 +1,240 @@
-<div class="container">    
-  <h1>{{titulo}}</h1>
-<form>
-    <div class="form-group">
-      <label for="id">Id</label>
-      <input type="text" name="id" class="form-control" id="id" 
-      [(ngModel)]="alumno.id">
-    </div>
+<div class="container my-5">
 
-    <div class="form-group">
-        <label for="nombre">nombre</label>
-        <input type="text" name="nombre" class="form-control" id="nombre" 
-        [(ngModel)]="alumno.nombre">
-      </div>
+  <mat-card>
+    <mat-card-header *ngIf="model">
+      <mat-card-title>
+        Alumno {{model.nombre}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
 
-      <div class="form-group">
-        <label for="apellido">apellido</label>
-        <input type="text" name="apellido" class="form-control" id="apellido" 
-        [(ngModel)]="alumno.apellido">
-      </div>
+      <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
+        <!--*******************      Editar Perfil *****************-->
+        <mat-tab label="Editar Perfil">
+          <div class="container" class="my-5 p-10">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+              <mat-label for="matricula">Matricula</mat-label>
+              <input required matInput name="matricula" [(ngModel)]="model.matricula">
+              <mat-error *ngIf="error?.matricula">{{ error.matricula }}</mat-error>
+            </mat-form-field>
 
-      <div class="form-group">
-        <label for="correo">correo</label>
-        <input type="text" name="correo" class="form-control" id="correo" 
-        [(ngModel)]="alumno.correo">
-      </div>
+            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+              <mat-label for="nombre">Nombre</mat-label>
+              <input matInput required name="nombre" [(ngModel)]="model.nombre">
+              <div class="alert alert-danger" *ngIf="error?.nombre">
+                {{ error.nombre }}
+              </div>
+            </mat-form-field>
 
-      <div class="form-group">
-        <label for="carrera">carrera</label>
-        <input type="text" name="carrera" class="form-control" id="carrera" 
-        [(ngModel)]="alumno.carrera">
-      </div>
-    <button type="button" class="btn btn-primary" (click)="editar()">Editar</button>
-    
-  </form>
+            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+              <mat-label for="apellido">Apellido</mat-label>
+              <input matInput required name="apellido" [(ngModel)]="model.apellido">
+              <div class="alert alert-danger" *ngIf="error?.apellido">
+                {{ error.apellido }}
+              </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+              <mat-label for="correo">Correo</mat-label>
+              <input matInput required placeholder="pat@example.com" name="correo" [(ngModel)]="model.correo">
+              <div class="alert alert-danger" *ngIf="error?.correo">
+                {{ error.correo }}
+              </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+              <mat-label for="telefono">Telefono</mat-label>
+              <input matInput required name="telefono" [(ngModel)]="model.telefono">
+              <div class="alert alert-danger" *ngIf="error?.telefono">
+                {{ error.telefono }}
+              </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 25%;" class="mx-3">
+              <mat-label>Seleccionar Carrera</mat-label>
+              <mat-select [(ngModel)]="model.carrera">
+                <mat-option>None</mat-option>
+                <mat-option required *ngFor="let c of carrera" [value]="c.valor">{{c.muestraValor}}</mat-option>
+              </mat-select>
+              <div class="alert alert-danger" *ngIf="error?.carrera">
+                {{ error.carrera }}
+              </div>
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill" style="width: 25%;" class="mx-3">
+              <mat-select required [(ngModel)]="model.semestre">
+                <mat-option>-- None --</mat-option>
+                <mat-option required *ngFor="let s of semestre" [value]="s.valor">{{s.muestraValor}}</mat-option>
+              </mat-select>
+              <div class="alert alert-danger" *ngIf="error?.semestre">
+                {{ error.semestre }}
+              </div>
+              <mat-label>
+                <b> SEMESTRE</b>
+              </mat-label>
+            </mat-form-field>
+
+
+            <button mat-raised-button color="primary" class="m-4" (click)="editar()">
+              Editar
+            </button>
+          </div>
+
+
+        </mat-tab>
+
+        <!--*******************      Crear archivos *****************-->
+        <mat-tab label="Crear archivos">
+          <div class="container" class="my-5 p-10">
+            <mat-form-field appearance="outline" style="width: 45%;">
+              <mat-label for="nombre">Nombre</mat-label>
+              <input matInput name="nombre" [(ngModel)]="archivo.nombre">
+              <div class="alert alert-danger" *ngIf="error?.nombre">
+                {{ error.nombre }}
+              </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 25%;" class="mx-5">
+              <mat-select required [(ngModel)]="archivo.tipo">
+                <mat-option>-- None --</mat-option>
+                <mat-option *ngFor="let t of tipo" [value]="t.valor">{{t.muestraValor}}</mat-option>
+              </mat-select>
+              <div class="alert alert-danger" *ngIf="error?.tipo">
+                {{ error.tipo }}
+              </div>
+              <mat-label>
+                <b> Tipo</b> <i> archivo</i>
+              </mat-label>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" hintLabel="Max 255 carateres" style="width: 35%;">
+              <mat-label>Comentario</mat-label>
+              <textarea matInput #input maxlength="255" name="comentario" [(ngModel)]="archivo.comentario"></textarea>
+              <mat-hint align="end">{{input.value?.length || 0}}/255</mat-hint>
+            </mat-form-field>
+
+            <div class="input-group my-5">
+              <div class="custom-file">
+                <input (change)="seleccionarArchivo($event)" type="file" class="custom-file-input" id="inputGroupFile04"
+                  aria-describedby="inputGroupFileAddon04">
+                <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                <div class="alert alert-danger" *ngIf="error?.archivo">
+                  {{ error.archivo }}
+                </div>
+              </div>
+              <div class="input-group-append">
+                <button (click)="subirArchivo()" [disabled]="!archivoSelected" class="btn btn-outline-secondary"
+                  type="button" id="inputGroupFileAddon04">Subir</button>
+              </div>
+            </div>
+
+            <span *ngIf="archivoSelected" class="my-5">Archivo Seleccionado
+
+              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2-circle" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                <path fill-rule="evenodd"
+                  d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z" />
+              </svg>
+            </span>
+          </div>
+
+
+
+        </mat-tab>
+        <!--*******************      Ver archivos *****************-->
+        <mat-tab label="Ver archivos">
+          <button type="button" class="btn btn-primary" (click)="mostrarArchivos()">Mostrar archivo(s)</button>
+          <mat-card class="my-3" style="background-image: url(../../../assets/backgroundTECNM.jpg);">
+            <mat-card-header *ngIf="archivos">
+              <mat-card-title class="mx-5" style="color: aliceblue;">Archivos</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <table mat-table [dataSource]="archivos" class="mat-elevation-z8 mx-5" style="width: 90%;">
+
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef> Clave</th>
+                  <td mat-cell *matCellDef="let a"> {{a.id}} </td>
+                </ng-container>
+
+                <!-- nombre Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let a"> {{a.nombre}} </td>
+                </ng-container>
+
+                <!-- comentario Column -->
+                <ng-container matColumnDef="comentario">
+                  <th mat-header-cell *matHeaderCellDef> comentario </th>
+                  <td mat-cell *matCellDef="let a"> {{a.comentario}} </td>
+                </ng-container>
+
+                <!-- tipo Column -->
+                <ng-container matColumnDef="tipo">
+                  <th mat-header-cell *matHeaderCellDef> tipo </th>
+                  <td mat-cell *matCellDef="let a"> {{a.tipo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="archivo">
+                  <th mat-header-cell *matHeaderCellDef> archivo </th>
+                  <td mat-cell *matCellDef="let a">
+                    <a href="http://localhost:8080/api/archivos/uploads/file/{{a.id}}" target="_blank">
+                      <button mat-mini-fab color="primary">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path fill-rule="evenodd"
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </button>
+                    </a>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="editar">
+                  <th mat-header-cell *matHeaderCellDef>Editar</th>
+                  <td mat-cell *matCellDef="let a">
+                    <button mat-mini-fab color="primary" [routerLink]="['/archivos/form',a.id]"
+                      routerLinkActive="router-link-active">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                          d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                      </svg>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="eliminar">
+                  <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+                  <td mat-cell *matCellDef="let a">
+                    <button mat-mini-fab color="warn" (click)="eliminarArchivo(a)">x</button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="mostrarColumnasArchivos"></tr>
+                <tr mat-row *matRowDef="let archivo; columns: mostrarColumnasArchivos;">
+                </tr>
+              </table>
+              <br>
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+
+      </mat-tab-group>
+
+    </mat-card-content>
+    <button mat-raised-button color="primary" class="m-4" [routerLink]="['/alumnos']">
+      Regresar
+
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-return-left" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z" />
+      </svg>
+    </button>
+  </mat-card>
 
 </div>

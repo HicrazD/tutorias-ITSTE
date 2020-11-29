@@ -23,8 +23,17 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { AlumnoPerfilComponent } from './components/alumnos/alumno-perfil/alumno-perfil.component';
 import { DocentePerfilComponent } from './components/docentes/docente-perfil/docente-perfil.component';
+import { DocenteFormComponent } from './components/docentes/docente-form/docente-form.component';
+import { ArchivosComponent } from './components/archivos/archivos/archivos.component';
+import { ArchivosFormComponent } from './components/archivos/archivos-form/archivos-form.component';
+import { HomeComponent } from './components/home/home.component';
+import { ConsultasComponent } from './components/consultas/consultas.component';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +48,11 @@ import { DocentePerfilComponent } from './components/docentes/docente-perfil/doc
     AsignarAlumnosComponent,
     AlumnoPerfilComponent,
     DocentePerfilComponent,
+    DocenteFormComponent,
+    ArchivosComponent,
+    ArchivosFormComponent,
+    HomeComponent,
+    ConsultasComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +68,10 @@ import { DocentePerfilComponent } from './components/docentes/docente-perfil/doc
     MatCheckboxModule,
     MatButtonModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
+    MatListModule,
+    MatProgressBarModule
 
   ],
   providers: [],
