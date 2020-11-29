@@ -1,0 +1,91 @@
+<mat-card>
+    <mat-card-header *ngIf="usuario">
+        <mat-card-title>
+            Alumno del Usuario {{usuario.username}}
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
+            <mat-tab label="Crear Perfil" *ngIf="!alumno">
+
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="id">Matricula</label>
+                    <input matInput name="id" [(ngModel)]="alumnos.id">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="nombre">Nombre</label>
+
+                    <input matInput name="nombre" [(ngModel)]="alumnos.nombre">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="apellido">Apellido</label>
+
+                    <input matInput name="apellido" [(ngModel)]="alumnos.apellido">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="correo">Correo</label>
+
+                    <input matInput name="correo" [(ngModel)]="alumnos.correo">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="carrera">Carrera</label>
+
+                    <input matInput name="carrera" [(ngModel)]="alumnos.carrera">
+                </mat-form-field>
+
+
+
+                <button mat-raised-button color="primary" class="m-4" (click)="createAlumno()">
+                    Crear
+                </button>
+            </mat-tab>
+
+
+            <mat-tab label="Editar Perfil" *ngIf="alumno">
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="id">Matricula</label>
+                    <input matInput name="id" [(ngModel)]="alumno.id">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="nombre">Nombre</label>
+
+                    <input matInput name="nombre" [(ngModel)]="alumno.nombre">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="apellido">Apellido</label>
+
+                    <input matInput name="apellido" [(ngModel)]="alumno.apellido">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="correo">Correo</label>
+
+                    <input matInput name="correo" [(ngModel)]="alumno.correo">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="carrera">Carrera</label>
+
+                    <input matInput name="carrera" [(ngModel)]="alumno.carrera">
+                </mat-form-field>
+
+
+
+                <button mat-raised-button color="primary" class="m-4" (click)="editar()">
+                    Editar
+                </button>
+
+            </mat-tab>
+        </mat-tab-group>
+
+    </mat-card-content>
+</mat-card>

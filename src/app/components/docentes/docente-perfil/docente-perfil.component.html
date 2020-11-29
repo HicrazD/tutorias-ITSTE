@@ -1,0 +1,81 @@
+<mat-card style="background: rgb(209, 208, 208);">
+    <mat-card-header *ngIf="usuario">
+        <mat-card-title>
+            Docente del Usuario {{usuario.username}}
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
+            <mat-tab label="Crear Perfil" *ngIf="!docente">
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="nombre">Nombre</label>
+
+                    <input matInput name="nombre" [(ngModel)]="docentes.nombre">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="apellido">Apellido</label>
+
+                    <input matInput name="apellido" [(ngModel)]="docentes.apellido">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="correo">Correo</label>
+
+                    <input matInput name="correo" [(ngModel)]="docentes.correo">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="division">Division</label>
+
+                    <input matInput name="division" [(ngModel)]="docentes.division">
+                </mat-form-field>
+
+
+
+                <button mat-raised-button color="primary" class="m-4" (click)="createDocente()">
+                    Crear
+                </button>
+            </mat-tab>
+
+
+            <mat-tab label="Editar Perfil" *ngIf="docente">
+
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="nombre">Nombre</label>
+
+                    <input matInput name="nombre" [(ngModel)]="docente.nombre">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="apellido">Apellido</label>
+
+                    <input matInput name="apellido" [(ngModel)]="docente.apellido">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="correo">Correo</label>
+
+                    <input matInput name="correo" [(ngModel)]="docente.correo">
+                </mat-form-field>
+
+                <mat-form-field class="mx-3" style="width: 45%;">
+                    <label for="division">Carrera</label>
+
+                    <input matInput name="division" [(ngModel)]="docente.division">
+                </mat-form-field>
+
+
+
+                <button mat-raised-button color="primary" class="m-4" (click)="editar()">
+                    Editar
+                </button>
+
+            </mat-tab>
+        </mat-tab-group>
+
+    </mat-card-content>
+</mat-card>

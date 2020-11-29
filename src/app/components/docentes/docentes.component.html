@@ -1,0 +1,68 @@
+<mat-card class="my-3" style="background-image: url(../../../assets/backgroundTECNM.jpg);">
+  <mat-card-header *ngIf="listar" >
+    <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="listar" class="mat-elevation-z8 mx-5" style="width: 90%;">
+
+      <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Clave</th>
+          <td mat-cell *matCellDef="let docente"> {{docente.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let docente"> {{docente.nombre}} </td>
+      </ng-container>
+
+      <!-- apellido Column -->
+      <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef> apellido </th>
+          <td mat-cell *matCellDef="let docente"> {{docente.apellido}} </td>
+      </ng-container>
+
+      <!-- Correo Column -->
+      <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef> Correo </th>
+          <td mat-cell *matCellDef="let docente"> {{docente.correo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="division">
+          <th mat-header-cell *matHeaderCellDef> Division </th>
+          <td mat-cell *matCellDef="let docente"> {{docente.division}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="asignar">
+        <th mat-header-cell *matHeaderCellDef>asignar alumnos</th>
+        <td mat-cell *matCellDef="let docente">
+          <button class="btn btn-info btn-sm"
+          [routerLink]="['/docentes/asignar-alumnos', docente.id]">
+      añadir ({{docente.alumnos.length}})
+      </button>
+        </td>
+    </ng-container>
+
+      <ng-container matColumnDef="eliminar">
+          <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+          <td mat-cell *matCellDef="let docente">
+              <button mat-mini-fab color="warn" (click)="eliminar(docente)">x</button>
+          </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="mostrarColumnasDocentes"></tr>
+      <tr mat-row *matRowDef="let docente; columns: mostrarColumnasDocentes;">
+      </tr>
+  </table>
+  <br>
+  <mat-paginator [length]="totalRegistros"
+  [pageSize]="totalPorPagina"
+  [pageIndex]="paginaActual"
+  [pageSizeOptions]="pageSizeOptions"
+  (page) ="paginar($event)"
+  showFirstLastButtons
+  class="mx-5"
+  style="width: 90%;">
+
+</mat-paginator>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,30 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <div class="container formx Max my-3">
+    <h4>{{titulo}}</h4>
+    <br>
+
+    <form class="">
+    <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping"><i class="material-icons prefix">person</i></span>
+        </div>
+        <input type="text" class="form-control" name="username" placeholder="username" aria-label="username" aria-describedby="addon-wrapping"
+        [(ngModel)]="usuario.username">
+    </div>
+<br>
+    <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping"><i class="material-icons prefix">lock</i></span>
+        </div>
+        <input type="password" class="form-control" name="password" placeholder="password" aria-label="password" aria-describedby="addon-wrapping"
+        [(ngModel)]="usuario.password">
+    </div>
+
+<br>
+
+  <button type="button" class="btn btn-primary" 
+  (click)="createRol()">Crear</button>
+</form>
+  </div>
+ 
