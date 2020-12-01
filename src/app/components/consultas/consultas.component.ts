@@ -1,3 +1,4 @@
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Alumno } from 'src/app/models/alumno';
@@ -14,24 +15,39 @@ import Swal from 'sweetalert2';
   styleUrls: ['./consultas.component.css']
 })
 export class ConsultasComponent implements OnInit {
-  archivos: Archivo[]
+  archivosWord: Archivo[]
+  archivosPdf: Archivo[]
+  archivosExcel: Archivo[]
   alumnoMatricula: Alumno = new Alumno()
   docentesFind: Docente[]
   tabIndex = 0;
-
+  tabIndexSub = 0
   division: string
+  endPointWord = "http://localhost:8080/api/archivos/uploads/file-word/{{archivo.id}}"
+  endPoinPdf = "http://localhost:8080/api/archivos/uploads/file-pdf/{{archivo.id}}"
+  endPoinExcel = "http://localhost:8080/api/archivos/uploads/file-excel/{{archivo.id}}"
   nombreOrApellido: string
-
+  tipo = "WORD"
+  tpdf = "PDF"
+  texcel = "EXCEL"
   mostrarColumnas: string[] = ['nombre', 'apellido', 'correo', 'division', 'detalles'];
-  mostrarColumnasAchivo:string[] = ['nombre', 'tipo','ver','detalles'];
+  mostrarColumnasAchivo: string[] = ['nombre', 'tipo', 'ver', 'detalles'];
   constructor(private route: ActivatedRoute,
     private alumnoService: AlumnoService,
     private docenteService: DocenteService,
     private archivoService: ArchivoService) { }
 
   ngOnInit() {
+    this.archivoService.filtrarTipoArchivoWord(this.tipo).subscribe(
+      archivo => this.archivosWord = archivo)
 
+    this.archivoService.filtrarTipoArchivoPdf(this.tpdf).subscribe(
+      archivo => this.archivosPdf = archivo)
+
+    this.archivoService.filtrarTipoArchivoExcel(this.texcel).subscribe(
+      archivo => this.archivosExcel = archivo)
   }
+
 
   filtrar(matricula: number): void {
     let m: number = matricula
@@ -39,8 +55,18 @@ export class ConsultasComponent implements OnInit {
     if (mString.length == 7) {
       console.log(matricula)
       this.alumnoService.filtrarAlumnoByMatricula(matricula).subscribe(m => {
-        this.alumnoMatricula = m
-        console.log(this.alumnoMatricula)
+        if(m == null){
+          Swal.fire(
+            'Alumno?',
+            `No existe ningun alumno con matricula ${matricula}`,
+            'question'
+          )
+        }
+        else{
+          this.alumnoMatricula = m
+          console.log(this.alumnoMatricula)
+        }
+        
       })
     }
   }
@@ -79,11 +105,4 @@ export class ConsultasComponent implements OnInit {
     }
   }
 
-  filtrarTipoArchivo(term: string) {
-    term = term !== undefined ? term.trim() : '';
-    if (term !== '') {
-      this.archivoService.filtrarTipoArchivo(term).subscribe(
-        archivo => this.archivos = archivo)
-    }
-  }
 }

@@ -1,4 +1,4 @@
-<mat-card style="background: #1B396A;" class="container my-5 w-75">
+<mat-card style="background: #1B396A;" class="container my-5 w-75 p-10">
   <mat-card-header>
     <mat-card-title style="color: aliceblue;">
       Consultas
@@ -6,110 +6,240 @@
   </mat-card-header>
 
   <mat-card-content>
-    <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex" style="background: rgb(203, 233, 222);">
-      <!--    *******************     Achivos    ************************-->
+    <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex" class="p-10" style="background: rgb(203, 233, 222);">
+      <!--    *******************     Achivos    (keyup)="filtrarTipoArchivo($event.target.value)"************************-->
       <mat-tab label="Achivos">
+        <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndexSub" class="p-10"
+          style="background: rgb(203, 233, 222);">
+          <!--    *******************     Pdf    ************************-->
+          <mat-tab label="PDF">
+            <div class="container p-10">
+              <mat-form-field class="mx-3" style="width: 45%;">
+                <mat-label>TIPO</mat-label>
+                <input matInput #postalCode [disabled]="true" maxlength="7" [value]="tpdf">
+              </mat-form-field>
 
-        <div class="container">
-          <mat-form-field class="mx-3" style="width: 15%;">
-            <mat-label>Achivo tipo</mat-label>
-            <input matInput placeholder="Buscar archivo " (keyup)="filtrarTipoArchivo($event.target.value)">
-          </mat-form-field>
-
-          <table mat-table [dataSource]="archivos" class="mat-elevation-z8 mx-3 container" style="width: 75%;">
+              <table mat-table [dataSource]="archivosPdf" class="mat-elevation-z8 mx-3 mb-3 container" style="width: 75%;">
 
 
-            <!-- nombre Column -->
-            <ng-container matColumnDef="nombre">
-              <th mat-header-cell *matHeaderCellDef> Nombre </th>
-              <td mat-cell *matCellDef="let archivo"> {{archivo.nombre}} </td>
-            </ng-container>
+                <!-- nombre Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let archivo"> {{archivo.nombre}} </td>
+                </ng-container>
 
-             <!-- tipo Column -->
-             <ng-container matColumnDef="tipo">
-              <th mat-header-cell *matHeaderCellDef> Categoria </th>
-              <td mat-cell *matCellDef="let archivo"> {{archivo.tipo}} </td>
-            </ng-container>
+                <!-- tipo Column -->
+                <ng-container matColumnDef="tipo">
+                  <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                  <td mat-cell *matCellDef="let archivo"> {{archivo.tipo}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="ver">
-              <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
-              <td mat-cell *matCellDef="let archivo">
-                <a href="http://localhost:8080/api/archivos/uploads/file/{{archivo.id}}" target="_blank">
-                  <button mat-mini-fab class="btn btn-info">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                      <path fill-rule="evenodd"
-                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                    </svg>
-                  </button>
-                </a>
-              </td>
-            </ng-container>
-  
-  
-            <!-- detalle Column -->
-            <ng-container matColumnDef="detalles">
-              <th mat-header-cell *matHeaderCellDef> Detalle </th>
-              <td mat-cell *matCellDef="let archivo">
-                <button mat-mini-fab class="btn btn-info" [routerLink]="['/archivos/form',archivo.id]">
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                    <path fill-rule="evenodd"
-                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                  </svg>
-                </button>
-              </td>
-            </ng-container>
-  
-            <tr mat-header-row *matHeaderRowDef="mostrarColumnasAchivo"></tr>
-            <tr mat-row *matRowDef="let archivo; columns: mostrarColumnasAchivo;" >
-            </tr>
-          </table>
-        </div>
+                <!-- Ver Column -->
+                <ng-container matColumnDef="ver">
+                  <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
+                  <td mat-cell *matCellDef="let archivo">
+                    <a href="http://localhost:8080/api/archivos/uploads/file-pdf/{{archivo.id}}" target="_blank">
+                      <button mat-mini-fab class="btn btn-info">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path fill-rule="evenodd"
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </button>
+                    </a>
+                  </td>
+                </ng-container>
+
+
+                <!-- detalle Column -->
+                <ng-container matColumnDef="detalles">
+                  <th mat-header-cell *matHeaderCellDef> Detalle </th>
+                  <td mat-cell *matCellDef="let archivo">
+                    <button mat-mini-fab class="btn btn-info" [routerLink]="['/archivos/form',archivo.id]">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                        <path fill-rule="evenodd"
+                          d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                      </svg>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="mostrarColumnasAchivo"></tr>
+                <tr mat-row *matRowDef="let archivo; columns: mostrarColumnasAchivo;">
+                </tr>
+              </table>
+            </div>
+          </mat-tab>
+          <!--    *******************     Word    ************************-->
+          <mat-tab label="WORD">
+            <div class="container">
+              <mat-form-field class="mx-3" style="width: 45%;">
+                <mat-label>TIPO</mat-label>
+                <input matInput #postalCode [disabled]="true" maxlength="7" [value]="tipo">
+              </mat-form-field>
+
+              <table mat-table [dataSource]="archivosWord" class="mat-elevation-z8 mx-3 mb-3 container" style="width: 75%;">
+
+
+                <!-- nombre Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let archivo"> {{archivo.nombre}} </td>
+                </ng-container>
+
+                <!-- tipo Column -->
+                <ng-container matColumnDef="tipo">
+                  <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                  <td mat-cell *matCellDef="let archivo"> {{archivo.tipo}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="ver">
+                  <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
+                  <td mat-cell *matCellDef="let archivo">
+                    <a href="http://localhost:8080/api/archivos/uploads/file-word/{{archivo.id}}">
+                      <button mat-mini-fab class="btn btn-info">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path fill-rule="evenodd"
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </button>
+                    </a>
+                  </td>
+                </ng-container>
+
+
+                <!-- detalle Column -->
+                <ng-container matColumnDef="detalles">
+                  <th mat-header-cell *matHeaderCellDef> Detalle </th>
+                  <td mat-cell *matCellDef="let archivo">
+                    <button mat-mini-fab class="btn btn-info" [routerLink]="['/archivos/form',archivo.id]">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                        <path fill-rule="evenodd"
+                          d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                      </svg>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="mostrarColumnasAchivo"></tr>
+                <tr mat-row *matRowDef="let archivo; columns: mostrarColumnasAchivo;">
+                </tr>
+              </table>
+            </div>
+          </mat-tab>
+          <!--    *******************     Excel    ************************-->
+          <mat-tab label="EXCEL">
+            <div class="container">
+              <mat-form-field class="mx-3" style="width: 45%;">
+                <mat-label>TIPO</mat-label>
+                <input matInput #postalCode [disabled]="true" maxlength="7" [value]="texcel">
+              </mat-form-field>
+
+              <table mat-table [dataSource]="archivosExcel" class="mat-elevation-z8 mx-3 mb-3 container" style="width: 75%;">
+
+
+                <!-- nombre Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let archivo"> {{archivo.nombre}} </td>
+                </ng-container>
+
+                <!-- tipo Column -->
+                <ng-container matColumnDef="tipo">
+                  <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                  <td mat-cell *matCellDef="let archivo"> {{archivo.tipo}} </td>
+                </ng-container>
+
+                <!-- Ver Column -->
+                <ng-container matColumnDef="ver">
+                  <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
+                  <td mat-cell *matCellDef="let archivo">
+                    <a href="http://localhost:8080/api/archivos/uploads/file-excel/{{archivo.id}}" target="_blank">
+                      <button mat-mini-fab class="btn btn-info">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path fill-rule="evenodd"
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </button>
+                    </a>
+                  </td>
+                </ng-container>
+
+
+                <!-- detalle Column -->
+                <ng-container matColumnDef="detalles">
+                  <th mat-header-cell *matHeaderCellDef> Detalle </th>
+                  <td mat-cell *matCellDef="let archivo">
+                    <button mat-mini-fab class="btn btn-info" [routerLink]="['/archivos/form',archivo.id]">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                        <path fill-rule="evenodd"
+                          d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                      </svg>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="mostrarColumnasAchivo"></tr>
+                <tr mat-row *matRowDef="let archivo; columns: mostrarColumnasAchivo;">
+                </tr>
+              </table>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
       </mat-tab>
 
       <!--    *******************     Alumnos    ************************-->
       <mat-tab label="Alumnos">
+        <div class="container">
+          <mat-form-field class="mx-3 p-10" style="width: 45%;">
+            <mat-label>Matricula</mat-label>
+            <input matInput #postalCode maxlength="7" placeholder="Ex. 94105" (keyup)="filtrar($event.target.value)">
+            <mat-hint align="end">{{postalCode.value.length}} / 7</mat-hint>
+          </mat-form-field>
+          <div class="shadow container w-50 mb-5">
+            <mat-card class="example-card">
+              <mat-card-header style="background: #FF9800; color: rgb(1, 11, 20);">
+                <mat-card-title class="my-5">Alumno Perfil</mat-card-title>
+                <mat-card-subtitle style="color: rgb(3, 27, 48);">Matricula {{alumnoMatricula.matricula}} alumno
+                  {{alumnoMatricula.nombre}}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-list>
+                  <mat-list-item>Matricula: {{alumnoMatricula.matricula}} </mat-list-item>
+                  <mat-list-item>Nombre: {{alumnoMatricula.nombre}} </mat-list-item>
+                  <mat-list-item>Apellido: {{alumnoMatricula.apellido}} </mat-list-item>
+                  <mat-list-item>Carrera: {{alumnoMatricula.carrera}} </mat-list-item>
+                  <mat-list-item>Semestre: {{alumnoMatricula.semestre}} </mat-list-item>
+                </mat-list>
+              </mat-card-content>
+              <mat-card-actions>
+                <div class="example-button-container mx-3">
+                  <button mat-fab color="primary" [routerLink]="['/alumnos/form/',alumnoMatricula.id]"
+                    *ngIf="alumnoMatricula.id">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                    </svg>
+                  </button>
+                </div>
 
-        <mat-form-field class="mx-3" style="width: 45%;">
-          <mat-label>Matricula</mat-label>
-          <input matInput #postalCode maxlength="7" placeholder="Ex. 94105" (keyup)="filtrar($event.target.value)">
-          <mat-hint align="end">{{postalCode.value.length}} / 7</mat-hint>
-        </mat-form-field>
-        <div class="shadow container w-50">
-          <mat-card class="example-card">
-            <mat-card-header style="background: #FF9800; color: rgb(1, 11, 20);">
-              <mat-card-title class="my-5">Alumno Perfil</mat-card-title>
-              <mat-card-subtitle style="color: rgb(3, 27, 48);">Matricula {{alumnoMatricula.matricula}} alumno
-                {{alumnoMatricula.nombre}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <mat-list>
-                <mat-list-item>Matricula: {{alumnoMatricula.matricula}} </mat-list-item>
-                <mat-list-item>Nombre: {{alumnoMatricula.nombre}} </mat-list-item>
-                <mat-list-item>Apellido: {{alumnoMatricula.apellido}} </mat-list-item>
-                <mat-list-item>Carrera: {{alumnoMatricula.carrera}} </mat-list-item>
-                <mat-list-item>Semestre: {{alumnoMatricula.semestre}} </mat-list-item>
-              </mat-list>
-            </mat-card-content>
-            <mat-card-actions>
-              <div class="example-button-container mx-3">
-                <button mat-fab color="primary" [routerLink]="['/alumnos/form/',alumnoMatricula.id]"
-                  *ngIf="alumnoMatricula.id">
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                      d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-                  </svg>
-                </button>
-              </div>
-
-            </mat-card-actions>
-          </mat-card>
+              </mat-card-actions>
+            </mat-card>
+          </div>
         </div>
-
       </mat-tab>
 
       <!--    *******************     Docentes    ************************-->
@@ -133,56 +263,58 @@
           <mat-list>
             <mat-list-item>Division: {{division}} </mat-list-item>
             <mat-list-item>Nombre o Apellido: {{nombreOrApellido}} </mat-list-item>
+            <span>Coinsidencias {{docentesFind?.length}}</span>
           </mat-list>
-        
-
-        <table mat-table [dataSource]="docentesFind" class="mat-elevation-z8 mx-3 container" style="width: 75%;">
 
 
-          <!-- nombre Column -->
-          <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef> Nombre </th>
-            <td mat-cell *matCellDef="let docente"> {{docente.nombre}} </td>
-          </ng-container>
+          <table mat-table [dataSource]="docentesFind" class="mat-elevation-z8 mx-3 my-3 container"
+            *ngIf="docentesFind?.length > 0" style="width: 75%;">
 
-          <!-- apellido Column -->
-          <ng-container matColumnDef="apellido">
-            <th mat-header-cell *matHeaderCellDef> apellido </th>
-            <td mat-cell *matCellDef="let docente"> {{docente.apellido}} </td>
-          </ng-container>
 
-          <!-- correo Column -->
-          <ng-container matColumnDef="correo">
-            <th mat-header-cell *matHeaderCellDef> Correo </th>
-            <td mat-cell *matCellDef="let docente"> {{docente.correo}} </td>
-          </ng-container>
+            <!-- nombre Column -->
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let docente"> {{docente.nombre}} </td>
+            </ng-container>
 
-          <!-- carrera Column -->
-          <ng-container matColumnDef="division">
-            <th mat-header-cell *matHeaderCellDef> Division </th>
-            <td mat-cell *matCellDef="let docente"> {{docente.division}} </td>
-          </ng-container>
+            <!-- apellido Column -->
+            <ng-container matColumnDef="apellido">
+              <th mat-header-cell *matHeaderCellDef> apellido </th>
+              <td mat-cell *matCellDef="let docente"> {{docente.apellido}} </td>
+            </ng-container>
 
-          <!-- carrera Column -->
-          <ng-container matColumnDef="detalles">
-            <th mat-header-cell *matHeaderCellDef> Detalle </th>
-            <td mat-cell *matCellDef="let docente">
-              <button mat-mini-fab class="btn btn-info" [routerLink]="['/docentes/form/docente-archivo', docente.id]">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                  <path fill-rule="evenodd"
-                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                </svg>
-              </button>
-            </td>
-          </ng-container>
+            <!-- correo Column -->
+            <ng-container matColumnDef="correo">
+              <th mat-header-cell *matHeaderCellDef> Correo </th>
+              <td mat-cell *matCellDef="let docente"> {{docente.correo}} </td>
+            </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
-          <tr mat-row *matRowDef="let docente; columns: mostrarColumnas;" >
-          </tr>
-        </table>
-      </div>
+            <!-- carrera Column -->
+            <ng-container matColumnDef="division">
+              <th mat-header-cell *matHeaderCellDef> Division </th>
+              <td mat-cell *matCellDef="let docente"> {{docente.division}} </td>
+            </ng-container>
+
+            <!-- carrera Column -->
+            <ng-container matColumnDef="detalles">
+              <th mat-header-cell *matHeaderCellDef> Detalle </th>
+              <td mat-cell *matCellDef="let docente">
+                <button mat-mini-fab class="btn btn-info" [routerLink]="['/docentes/form/docente-archivo', docente.id]">
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                    <path fill-rule="evenodd"
+                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                  </svg>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
+            <tr mat-row *matRowDef="let docente; columns: mostrarColumnas;">
+            </tr>
+          </table>
+        </div>
       </mat-tab>
 
     </mat-tab-group>

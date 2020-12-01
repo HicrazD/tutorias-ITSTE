@@ -13,7 +13,15 @@ export class ArchivoService extends CommonService<Archivo>{
     super(http)
   } 
 
-  public filtrarTipoArchivo(term: string):Observable<Archivo[]>{
+  public filtrarTipoArchivoWord(term: string):Observable<Archivo[]>{
+    return this.http.get<Archivo[]>(`${this.baseEndpoint}/tipo/${term}`)
+  }
+
+  public filtrarTipoArchivoPdf(term: string):Observable<Archivo[]>{
+    return this.http.get<Archivo[]>(`${this.baseEndpoint}/tipo/${term}`)
+  }
+
+  public filtrarTipoArchivoExcel(term: string):Observable<Archivo[]>{
     return this.http.get<Archivo[]>(`${this.baseEndpoint}/tipo/${term}`)
   }
 

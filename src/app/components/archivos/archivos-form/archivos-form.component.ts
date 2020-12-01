@@ -18,9 +18,9 @@ export class ArchivosFormComponent implements OnInit {
   archivoSelected: File
   error:any
   tipo = [
-    {valor:'PLANTILLA',muestraValor:'PLANTILLA'},
-    {valor:'ENTREGA',muestraValor:'ENTREGA'},
-    {valor:'CONSTANCIA',muestraValor:'CONSTANCIA'},
+    {valor:'WORD',muestraValor:'WORD'},
+    {valor:'EXCEL',muestraValor:'EXCEL'},
+    {valor:'PDF',muestraValor:'PDF'},
   ];
   progreso: number = 0;
   constructor(private service: ArchivoService,
