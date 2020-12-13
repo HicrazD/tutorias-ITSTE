@@ -1,0 +1,41 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="container formx Max my-3 w-50 p-2" style="background:#1B396A ;">
+  <mat-card class="mat-elevation-z8 w-100" style="background:#ff9101fb ;">
+    <h1 class="text-light">
+      {{titulo}}
+      <mat-icon>account_circle</mat-icon>
+    </h1>
+  </mat-card>
+  <br>
+  <mat-card class="mat-elevation-z8 w-100" >
+    <form class="">
+      <div class="input-group flex-nowrap mat-elevation-z8">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping"><i class="material-icons prefix">person</i></span>
+        </div>
+        <input type="text" required class="form-control" name="username" placeholder="username" aria-label="username"
+          aria-describedby="addon-wrapping" [(ngModel)]="usuario.username">
+        <div class="alert alert-danger" *ngIf="error?.username">
+          {{ error.username }}
+        </div>
+      </div>
+      <br>
+      <div class="input-group flex-nowrap mat-elevation-z8">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping"><i class="material-icons prefix">lock</i></span>
+        </div>
+        <input type="password" required class="form-control" name="password" placeholder="password"
+          aria-label="password" aria-describedby="addon-wrapping" [(ngModel)]="usuario.password">
+        <div class="alert alert-danger" *ngIf="error?.password">
+          {{ error.password }}
+        </div>
+      </div>
+
+      <br>
+    </form>
+    <mat-card-actions>
+      <button type="button" class="btn btn-primary" (click)="createRol()">Crear</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

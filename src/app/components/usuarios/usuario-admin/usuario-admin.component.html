@@ -1,0 +1,35 @@
+<div class="container  my-5">
+
+  <!-- END Col one -->
+  <div class="card text-center mx-auto">
+    <div class="title">
+      <i class="fa fa-user-o" aria-hidden="true"></i>
+      <h2>{{titulo}}</h2>
+      <mat-form-field appearance="fill" class="bg-light mt-3">
+        <mat-label>Ingresar codigo</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" (keyup)="fieldCodigo($event.target.value)">
+        <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="card text-center mx-auto my-3">
+    <div class="title">
+      <i class="fa fa-user-o" aria-hidden="true"></i>
+      <h2>Crear Role ({{role?.length}}/3)</h2>
+      <mat-form-field appearance="fill" class="bg-light mt-3" >
+        <mat-label>Ingresar codigo</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [disabled]="role?.length > 0" (keyup)="fieldCodigo2($event.target.value)">
+        <button mat-icon-button matSuffix  (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide" >
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button type="button" class="btn btn-outline-success" [disabled]="codigoRol" (click)="create()">Crear Roles</button>
+    </div>
+  </div>
+
+</div>
