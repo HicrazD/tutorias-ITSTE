@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
+import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { CommonListarComponent } from '../alumnos/common-listar.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -12,44 +13,45 @@ import { CommonListarComponent } from '../alumnos/common-listar.component';
 })
 export class UsuariosComponent implements OnInit { //extends CommonListarComponent<Usuario,UsuarioService> se kito esta parte
   //para experimentar otra forma de poner paginacion con angular material
-  usuariosDocente: Usuario[] = []
-  usuariosAlumno: Usuario[] = []
   titulo = "Lista de usuarios"
-
+  usuarios: Usuario[]
+  usuariosAdmin: Usuario[]
   dataSource: MatTableDataSource<Usuario>;
-  dataSourceDocente: MatTableDataSource<Usuario>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatPaginator, { static: true }) paginatorDocente: MatPaginator;
   pageSizeOptions: number[] = [3, 5, 10, 20, 50];
 
   tabIndex = 0;
   mostrarColumnasUsuarios: string[] = ['id', 'username', 'editar'];
+  mostrarColumnasUsuarios2: string[] = ['id', 'username', 'roles'];
+  mostrarColumnasRoles: string[] = ['id', 'nombre'];
 
-
-  constructor(private service: UsuarioService) { }
+  constructor(private service: UsuarioService, public authService: AuthService, private router: Router) { }
 
 
   ngOnInit() {
-    this.service.UsuarioRoleAlumno().subscribe(ua => {
-      console.log(ua + ' list student user')
-      this.usuariosAlumno = ua
-      this.iniciarPaginador();
+    this.service.listar().subscribe(user => {
+      this.usuarios = user.filter(u => {
+        if (u.roles.length < 2) {
+          return true
+        }
+      })
+      this.usuariosAdmin = user.filter(u => {
+        if (u.roles.length > 1) {
+          return true
+        }
+      })
+      this.iniciarPaginador()
     })
-
-    this.service.UsuarioRoleDocente().subscribe(ud => {
-      console.log(ud + ' list docente user')
-      this.usuariosDocente = ud
-      this.iniciarPaginador();
-    })
-
   }
 
-  iniciarPaginador(): void {
-    this.dataSource = new MatTableDataSource<Usuario>(this.usuariosAlumno);
+  iniciarPaginador(): void{
+    this.dataSource = new MatTableDataSource<Usuario>(this.usuarios);
     this.dataSource.paginator = this.paginator;
-        
-    this.dataSourceDocente = new MatTableDataSource<Usuario>(this.usuariosDocente);
-    this.dataSourceDocente.paginator = this.paginatorDocente;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

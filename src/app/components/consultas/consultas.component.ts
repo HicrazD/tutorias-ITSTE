@@ -6,6 +6,7 @@ import { Archivo } from 'src/app/models/archivo';
 import { Docente } from 'src/app/models/docente';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { ArchivoService } from 'src/app/services/archivo.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { DocenteService } from 'src/app/services/docente.service';
 import Swal from 'sweetalert2';
 
@@ -27,15 +28,16 @@ export class ConsultasComponent implements OnInit {
   endPoinPdf = "http://localhost:8080/api/archivos/uploads/file-pdf/{{archivo.id}}"
   endPoinExcel = "http://localhost:8080/api/archivos/uploads/file-excel/{{archivo.id}}"
   nombreOrApellido: string
-  tipo = "WORD"
-  tpdf = "PDF"
-  texcel = "EXCEL"
+  tipo = "WORD FORMATO"
+  tpdf = "PDF FORMATO"
+  texcel = "EXCEL FORMATO"
   mostrarColumnas: string[] = ['nombre', 'apellido', 'correo', 'division', 'detalles'];
   mostrarColumnasAchivo: string[] = ['nombre', 'tipo', 'ver', 'detalles'];
   constructor(private route: ActivatedRoute,
     private alumnoService: AlumnoService,
     private docenteService: DocenteService,
-    private archivoService: ArchivoService) { }
+    private archivoService: ArchivoService,
+    public authService: AuthService) { }
 
   ngOnInit() {
     this.archivoService.filtrarTipoArchivoWord(this.tipo).subscribe(

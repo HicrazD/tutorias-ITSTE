@@ -11,29 +11,35 @@ import { DocenteFormComponent } from './components/docentes/docente-form/docente
 import { DocentePerfilComponent } from './components/docentes/docente-perfil/docente-perfil.component';
 import { DocentesComponent } from './components/docentes/docentes.component';
 import { HomeComponent } from './components/home/home.component';
+import { AuthGuard } from './components/usuarios/guards/auth.guard';
+import { RoleGuard } from './components/usuarios/guards/role.guard';
+import { LoginAdminComponent } from './components/usuarios/login-admin/login-admin.component';
 import { LoginComponent } from './components/usuarios/login/login.component';
 import { RolUsuarioComponent } from './components/usuarios/rol-usuario/rol-usuario.component';
+import { UsuarioAdminComponent } from './components/usuarios/usuario-admin/usuario-admin.component';
 import { UsuariosFormComponent } from './components/usuarios/usuarios-form/usuarios-form.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
   {path: 'home', component:HomeComponent},
-  {path: 'alumnos', component: AlumnosComponent},
+  {path: 'alumnos', component: AlumnosComponent,canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
   {path: 'alumnos/form/:id', component:AlumnosFormComponent},
   {path: 'alumnos/form/alumno-perfil/:term', component: AlumnoPerfilComponent},  
   {path: 'docentes/asignar-alumnos/:id', component: AsignarAlumnosComponent},
-  {path: 'docentes', component: DocentesComponent},
+  {path: 'docentes', component: DocentesComponent,canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
   {path: 'docentes/form/docente-perfil/:term',component:DocentePerfilComponent},
   {path: 'docentes/form/docente-archivo/:id',component:DocenteFormComponent},
-  {path: 'archivos', component: ArchivosComponent},
-  {path: 'archivos/form', component: ArchivosFormComponent},
-  {path: 'archivos/form/:id', component: ArchivosFormComponent},
-  {path: 'usuarios', component: UsuariosComponent},
+  {path: 'archivos', component: ArchivosComponent,canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
+  {path: 'archivos/form', component: ArchivosFormComponent,data: { role: 'ROLE_ADMIN' }},
+  {path: 'archivos/form/:id', component: ArchivosFormComponent,data: { role: 'ROLE_ADMIN' }},
+  {path: 'usuarios', component: UsuariosComponent,canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
   {path: 'login', component: LoginComponent},
-  {path: 'login/crear/:id',component:UsuariosFormComponent},
+  {path: 'usuarios/form/crear/:term',component:UsuariosFormComponent},
+  {path: 'usuarios/form/crear/usuario-admin/secret/2de6/:term',component:LoginAdminComponent},
+  {path: 'usuarios/url-secret/lvb4/admin/itste',component:UsuarioAdminComponent},// ir primero si eres Admin
   {path: 'rol-usuario', component: RolUsuarioComponent},
-  {path: 'consultas', component:ConsultasComponent}
+  {path: 'consultas', component:ConsultasComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }}
 ];
 
 @NgModule({

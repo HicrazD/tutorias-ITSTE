@@ -1,30 +1,44 @@
-@import url('https://fonts.googleapis.com/css?family=Amarante');
-
-
-
-blockquote, q { quotes: none; }
-blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
-strong, b { font-weight: bold; } 
-
- 
-img { border: 0; max-width: 100%; }
-
-h1 { 
-  font-family: 'Amarante', Tahoma, sans-serif;
-  font-weight: bold;
-  font-size: 3.0em;
-  line-height: 1.1em;
-  margin-bottom: 10px;
-  text-align: left;
-  color: orange;
+.example-container {
+  height: 300px;
+  width: 1150px;
+  max-width: 100%;
+  overflow: auto;
 }
 
-.tr{
-  background:#FBEBDE;
+table {
+  width: 1300px;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px;
+}
+
+th.mat-column-position, td.mat-column-position {
+  padding-left: 8px;
+}
+
+.mat-table-sticky:first-child {
+  border-right: 1px solid #b81818;
+}
+
+.mat-table-sticky:last-child {
+  border-left: 1px solid #e0e0e0;
 }
 /** page structure **/
 #wrapper {
   padding: 10px 17px;   
   box-shadow: 2px 2px 15px  #160AF0;
  
+}
+th.mat-sort-header-sorted {
+  color: rgb(146, 0, 0);
+}
+
+th.mat-sort-header-sorted {
+  color: black;
 }

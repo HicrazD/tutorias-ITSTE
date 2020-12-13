@@ -83,7 +83,6 @@
 
 
         </mat-tab>
-
         <!--*******************      Crear archivos *****************-->
         <mat-tab label="Crear archivos">
           <div class="container" class="my-5 p-10">
@@ -180,7 +179,7 @@
                 <ng-container matColumnDef="archivo">
                   <th mat-header-cell *matHeaderCellDef> archivo </th>
                   <td mat-cell *matCellDef="let a">
-                    <a href="http://localhost:8080/api/archivos/uploads/file/{{a.id}}" target="_blank">
+                    <a href="http://localhost:8080/api/archivos/uploads/file-pdf/{{a.id}}" target="_blank">
                       <button mat-mini-fab color="primary">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
                           xmlns="http://www.w3.org/2000/svg">
@@ -209,8 +208,10 @@
 
                 <ng-container matColumnDef="eliminar">
                   <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-                  <td mat-cell *matCellDef="let a">
-                    <button mat-mini-fab color="warn" (click)="eliminarArchivo(a)">x</button>
+                  <td mat-cell *matCellDef="let a">      
+                    <button mat-mini-fab color="warn" (click)="eliminarArchivo(a)">
+                      <mat-icon aria-hidden="false" aria-label="Delete icon">delete</mat-icon>
+                    </button>
                   </td>
                 </ng-container>
 
@@ -222,7 +223,6 @@
             </mat-card-content>
           </mat-card>
         </mat-tab>
-
       </mat-tab-group>
 
     </mat-card-content>

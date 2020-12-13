@@ -6,6 +6,6 @@ export class Usuario implements Generic{
     id:number
     username:string
     password:string
-    roles:Roles[] = []
+    roles:string[] = []
     archivos:Archivo[] = []
 }

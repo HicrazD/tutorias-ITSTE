@@ -8,7 +8,7 @@ import { DocentesComponent } from './components/docentes/docentes.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { LayoutModule } from './layout/layout.module';
 import { LoginComponent } from './components/usuarios/login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AlumnosFormComponent } from './components/alumnos/alumnos-form/alumnos-form.component';
 import { UsuariosFormComponent } from './components/usuarios/usuarios-form/usuarios-form.component';
 import { RolUsuarioComponent } from './components/usuarios/rol-usuario/rol-usuario.component';
@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AsignarAlumnosComponent } from './components/docentes/asignar-alumnos/asignar-alumnos.component';
 
+import { MatIconModule } from "@angular/material/icon";
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
@@ -25,6 +26,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { AlumnoPerfilComponent } from './components/alumnos/alumno-perfil/alumno-perfil.component';
 import { DocentePerfilComponent } from './components/docentes/docente-perfil/docente-perfil.component';
@@ -33,6 +35,11 @@ import { ArchivosComponent } from './components/archivos/archivos/archivos.compo
 import { ArchivosFormComponent } from './components/archivos/archivos-form/archivos-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { ConsultasComponent } from './components/consultas/consultas.component';
+import { UsuarioAdminComponent } from './components/usuarios/usuario-admin/usuario-admin.component';
+import { TokenInterceptor } from './components/usuarios/interceptors/token.interceptor';
+import { AuthInterceptor } from './components/usuarios/interceptors/auth.interceptor';
+import { LoginAdminComponent } from './components/usuarios/login-admin/login-admin.component';
+
 
 
 @NgModule({
@@ -53,6 +60,8 @@ import { ConsultasComponent } from './components/consultas/consultas.component';
     ArchivosFormComponent,
     HomeComponent,
     ConsultasComponent,
+    UsuarioAdminComponent,
+    LoginAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +71,7 @@ import { ConsultasComponent } from './components/consultas/consultas.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatIconModule,
     MatPaginatorModule,
     MatTableModule,
     MatInputModule,
@@ -71,10 +81,13 @@ import { ConsultasComponent } from './components/consultas/consultas.component';
     MatTabsModule,
     MatSelectModule,
     MatListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatFormFieldModule
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

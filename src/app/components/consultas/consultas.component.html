@@ -8,7 +8,7 @@
   <mat-card-content>
     <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex" class="p-10" style="background: rgb(203, 233, 222);">
       <!--    *******************     Achivos    (keyup)="filtrarTipoArchivo($event.target.value)"************************-->
-      <mat-tab label="Achivos">
+      <mat-tab label="Achivos" *ngIf="authService.hasRole('ROLE_DOCENTE')">
         <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndexSub" class="p-10"
           style="background: rgb(203, 233, 222);">
           <!--    *******************     Pdf    ************************-->
@@ -39,13 +39,8 @@
                   <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
                   <td mat-cell *matCellDef="let archivo">
                     <a href="http://localhost:8080/api/archivos/uploads/file-pdf/{{archivo.id}}" target="_blank">
-                      <button mat-mini-fab class="btn btn-info">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                          <path fill-rule="evenodd"
-                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                        </svg>
+                      <button mat-mini-fab class="btn btn-info mx-3">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">get_app</mat-icon>
                       </button>
                     </a>
                   </td>
@@ -101,13 +96,8 @@
                   <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
                   <td mat-cell *matCellDef="let archivo">
                     <a href="http://localhost:8080/api/archivos/uploads/file-word/{{archivo.id}}">
-                      <button mat-mini-fab class="btn btn-info">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                          <path fill-rule="evenodd"
-                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                        </svg>
+                      <button mat-mini-fab class="btn btn-info mx-3">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">get_app</mat-icon>
                       </button>
                     </a>
                   </td>
@@ -163,13 +153,8 @@
                   <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
                   <td mat-cell *matCellDef="let archivo">
                     <a href="http://localhost:8080/api/archivos/uploads/file-excel/{{archivo.id}}" target="_blank">
-                      <button mat-mini-fab class="btn btn-info">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                          <path fill-rule="evenodd"
-                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                        </svg>
+                      <button mat-mini-fab class="btn btn-info mx-3">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">get_app</mat-icon>
                       </button>
                     </a>
                   </td>
@@ -201,7 +186,7 @@
       </mat-tab>
 
       <!--    *******************     Alumnos    ************************-->
-      <mat-tab label="Alumnos">
+      <mat-tab label="Alumnos" *ngIf="authService.hasRole('ROLE_DOCENTE')">
         <div class="container">
           <mat-form-field class="mx-3 p-10" style="width: 45%;">
             <mat-label>Matricula</mat-label>
@@ -211,7 +196,7 @@
           <div class="shadow container w-50 mb-5">
             <mat-card class="example-card">
               <mat-card-header style="background: #FF9800; color: rgb(1, 11, 20);">
-                <mat-card-title class="my-5">Alumno Perfil</mat-card-title>
+                <mat-card-title class="my-5">Alumno Perfil 	<mat-icon>assignment_ind</mat-icon></mat-card-title>
                 <mat-card-subtitle style="color: rgb(3, 27, 48);">Matricula {{alumnoMatricula.matricula}} alumno
                   {{alumnoMatricula.nombre}}</mat-card-subtitle>
               </mat-card-header>
@@ -243,7 +228,7 @@
       </mat-tab>
 
       <!--    *******************     Docentes    ************************-->
-      <mat-tab label="Docentes">
+      <mat-tab label="Docentes" *ngIf="authService.hasRole('ROLE_ALUMNO')">
 
         <div class="container">
           <mat-form-field class="mx-3" style="width: 15%;">

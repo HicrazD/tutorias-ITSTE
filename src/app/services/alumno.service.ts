@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alumno } from '../models/alumno';
 import { Archivo } from '../models/archivo';
+import { Docente } from '../models/docente';
 import { CommonService } from './common.service';
 
 @Injectable({
@@ -12,6 +13,10 @@ export class AlumnoService extends CommonService<Alumno>{
   protected baseEndpoint = 'http://localhost:8080/api/alumnos'
   constructor(protected http:HttpClient){
     super(http)
+  }
+
+  public filtrarDocentePorAombre(alumno: Alumno): Observable<Docente>{
+    return this.http.get<Docente>(`${this.baseEndpoint}/filtrar-docente/alumno/${alumno.id}`);
   }
 
   public filtrarPorNombre(nombre: string): Observable<Alumno[]>{

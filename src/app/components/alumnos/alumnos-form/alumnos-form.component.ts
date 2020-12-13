@@ -47,10 +47,10 @@ export class AlumnosFormComponent
   ];
 
   tipo = [
-    {valor:'CONSTANCIA',muestraValor:'CONSTANCIA'},
+    {valor:'PDF',muestraValor:'PDF'},
   ];
   mostrarColumnasArchivos: string[] = ['id', 'nombre', 'comentario', 'tipo', 'archivo','editar', 'eliminar'];
-  constructor(service: AlumnoService, private archivoService: ArchivoService,
+  constructor(service: AlumnoService, public archivoService: ArchivoService,
     router: Router,
     route: ActivatedRoute) {
 
@@ -81,10 +81,11 @@ export class AlumnosFormComponent
       this.service.crearConArchivo(this.archivo, this.archivoSelected, this.model.id)
         .subscribe(a => {
           this.archivo = a
-          console.log(a + "se supone k esto es el archivo")
-          Swal.fire('El archivo se subio correctamente creo', `mi pana`)
+          console.log(a)
+          this.tabIndex = 0
+          Swal.fire('Upload File','El archivo se subio correctamente', `success`)
         },err => {
-          if(err.status === 400 || err.status === 405 ){
+          if(err.status == 400 || err.status == 405 ){
             this.error = err.error;
             console.log(this.error);
           }

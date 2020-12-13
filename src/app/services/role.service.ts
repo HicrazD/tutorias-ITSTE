@@ -16,5 +16,12 @@ export class RoleService extends CommonService<Roles>{
     return this.http.get<Roles[]>(`${this.baseEndpoint}/${id}`)
   }
 
+  public filtrarRole(term: string):Observable<Roles>{
+    return this.http.get<Roles>(`${this.baseEndpoint}/filtrar/role-nombre/${term}`)
+  }
+
+  public crearRoles():Observable<Roles>{
+    return this.http.post<Roles>(`${this.baseEndpoint}/create/roles`, {headers: this.cabecera})
+  }
   
 }

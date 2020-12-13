@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
   $("#do_login").click(function() { 
      closeLoginInfo();
      $(this).parent().find('span').css("display","none");
@@ -51,3 +51,4 @@ function closeLoginInfo() {
 $(window).on('resize', function(){
     closeLoginInfo();
 });
+*/

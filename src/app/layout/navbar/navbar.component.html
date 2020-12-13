@@ -21,15 +21,15 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="active1 nav-link" routerLink="/alumnos">Alumnos</a>
+        <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class="active1 nav-link" routerLink="/alumnos">Alumnos</a>
       </li>
 
       <li class="nav-item">
-        <a href="#" class="active2 nav-link" routerLink="/docentes">Docentes</a>
+        <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class="active2 nav-link" routerLink="/docentes">Docentes</a>
       </li>
 
       <li class="nav-item">
-        <a href="#" class="active1 nav-link" routerLink="/usuarios">Usuarios</a>
+        <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class="active1 nav-link" routerLink="/usuarios">Usuarios</a>
       </li>
     </ul>
 
@@ -45,9 +45,25 @@
 
     <form class="form-inline my-2 my-lg-0 ml-auto">
       <ul class="navbar-nav mr-auto">
-        <li>
+        <li *ngIf="!authService.isAuthenticated()">
           <a href="#" class="active nav-link" routerLink="/login">Login</a>
         </li>
+
+        <li *ngIf="authService.isAuthenticated()" class="dropdown">
+          <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{authService.usuario.username}}
+          </a>
+  
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+             <button (click)="logout()" class="dropdown-item" type="submit">Sign Out</button>
+             <div class="container" *ngIf="!authService.hasRole('ROLE_ADMIN')">
+              <button *ngIf="authService.hasRole('ROLE_ALUMNO')" [routerLink]="['/alumnos/form/alumno-perfil/',authService.usuario.username]" class="dropdown-item" type="button">Perfil</button>
+              <button *ngIf="authService.hasRole('ROLE_DOCENTE')" [routerLink]="['/docentes/form/docente-perfil/',authService.usuario.username]" class="dropdown-item" type="button">Perfil</button>
+             </div>
+             
+          </div>
+        </li>
+
       </ul>
     </form>
   </div>

@@ -22,7 +22,7 @@
       </div>
 
      
-      <div class="col-md-4" style="background:#fff; padding:1%; height:20%;">
+      <div class="col-md-4" style="background:#fff; padding:1%; height:20%;" *ngIf="authService.hasRole('ROLE_DOCENTE')">
         <div class="shadow card profile-card-2">
 
           <div class="card-body pt-2">

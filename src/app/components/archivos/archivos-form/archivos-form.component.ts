@@ -13,14 +13,16 @@ import Swal from 'sweetalert2';
 export class ArchivosFormComponent implements OnInit {
 
   archivo: Archivo = new Archivo()
-  archivoCreate:Archivo  = new Archivo()
+  archivoCreate: Archivo = new Archivo()
   tabIndex = 0;
   archivoSelected: File
-  error:any
+  error: any
   tipo = [
-    {valor:'WORD',muestraValor:'WORD'},
-    {valor:'EXCEL',muestraValor:'EXCEL'},
-    {valor:'PDF',muestraValor:'PDF'},
+    { valor: 'WORD', muestraValor: 'WORD' },
+    { valor: 'EXCEL', muestraValor: 'EXCEL' },
+    { valor: 'PDF FORMATO', muestraValor: 'PDF FORMATO' },
+    { valor: 'WORD FORMATO', muestraValor: 'WORD FORMATO' },
+    { valor: 'EXCEL FORMATO', muestraValor: 'EXCEL FORMATO' },
   ];
   progreso: number = 0;
   constructor(private service: ArchivoService,
@@ -29,12 +31,12 @@ export class ArchivosFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
     this.route.paramMap.subscribe(params => {
       const id: number = +params.get('id')
       if (id)
         this.service.ver(id).subscribe(a => {
-          console.log(a )
+          console.log(a)
           this.archivo = a
           this.archivoCreate = a
         })
@@ -45,16 +47,34 @@ export class ArchivosFormComponent implements OnInit {
   seleccionarArchivo(event) {
     this.archivoSelected = event.target.files[0]
     console.log(this.archivoSelected)
-    //officedocument
-    if(this.archivoSelected.type.indexOf('application') ){
-      Swal.fire('Error Upload: ', 'Debe seleccionar un archivo tipo pdf o word', 'error');
-      this.archivoSelected = null
-      console.log(this.archivoSelected)
+    if(this.archivoSelected == null){
+      Swal.fire('Upload?: ', 'No selecciono nada', 'question');
+    }else
+    {
+      if (
+      this.archivoSelected.type.indexOf('application/vnd.openxmlformats-officedocument.word') >= 0) {
+      Swal.fire('Success Upload: ', 'Archivo seleccionado', 'success');
+      this.archivo.tipo = 'WORD'
+      console.log('condicion word')
     }
-    
+    else if (this.archivoSelected.type.indexOf('application/pdf') >= 0) {
+      Swal.fire('Success Upload: ', 'Archivo seleccionado', 'success');
+      this.archivo.tipo = 'PDF'
+      console.log('condicion pdf')
+    }
+    else if (this.archivoSelected.type.indexOf('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') >= 0) {
+      Swal.fire('Success Upload: ', 'Archivo seleccionado', 'success');
+      this.archivo.tipo = 'EXCEL'
+      console.log('condicion excel')
+    }else{
+      Swal.fire('Error Upload: ', 'Debe seleccionar un archivo tipo pdf,word o excel', 'error');
+      this.archivoSelected = null
+      console.log('No es pdf word o excel')
+    }}
+
   }
 
-  subirArchivo():void {
+  subirArchivo(): void {
     if (!this.archivoSelected) {
       Swal.fire('Error Upload: ', 'Debe seleccionar un archivo', 'error');
     } else {
@@ -64,17 +84,17 @@ export class ArchivosFormComponent implements OnInit {
 
       this.service.crearConArchivo(this.archivoCreate, this.archivoSelected)
         .subscribe(event => {
-          if (event.type === HttpEventType.UploadProgress){
+          if (event.type === HttpEventType.UploadProgress) {
             this.progreso = Math.round((event.loaded / event.total) * 100);
-          }else if (event.type === HttpEventType.Response){
+          } else if (event.type === HttpEventType.Response) {
             let response: any = event.body;
             this.archivoCreate = response.archivoCreate as Archivo
             this.router.navigate(['/archivos'])
             console.log(this.archivoCreate)
-          Swal.fire('Actualizado!', `Archivo ${this.archivoSelected.name}`, 'success')
-          } 
-        },err => {
-          if(err.status === 400 || err.status === 500){
+            Swal.fire('Actualizado!', `Archivo ${this.archivoSelected.name}`, 'success')
+          }
+        }, err => {
+          if (err.status === 400 || err.status === 500) {
             this.error = err.error;
             console.log(this.error);
           }
@@ -83,7 +103,7 @@ export class ArchivosFormComponent implements OnInit {
     }
   }
 
-  public editarArchivo():void {
+  public editarArchivo(): void {
     if (!this.archivoSelected || this.archivo.tipo == undefined) {
       Swal.fire('Error Upload: ', 'Faltan por rellenar campos(Posible causa:nombre,tipo,archivo)', 'error');
     } else {
@@ -93,17 +113,17 @@ export class ArchivosFormComponent implements OnInit {
 
       this.service.editarArchivo(this.archivo, this.archivoSelected)
         .subscribe(event => {
-          if (event.type === HttpEventType.UploadProgress){
+          if (event.type === HttpEventType.UploadProgress) {
             this.progreso = Math.round((event.loaded / event.total) * 100);
-          }else if (event.type === HttpEventType.Response){
+          } else if (event.type === HttpEventType.Response) {
             let response: any = event.body;
             this.archivo = response.archivo as Archivo
             this.router.navigate(['/archivos'])
-            console.log(this.archivo)
-          Swal.fire('Actualizado!', `Archivo ${this.archivoSelected.name}`, 'success')
-          }          
-        },err => {
-          if(err.status === 500){
+           // console.log(this.archivo)
+            Swal.fire('Actualizado!', `Archivo ${this.archivoSelected.name}`, 'success')
+          }
+        }, err => {
+          if (err.status === 500) {
             this.error = err.error;
             console.log(this.error);
             Swal.fire({
@@ -115,6 +135,19 @@ export class ArchivosFormComponent implements OnInit {
         });
 
     }
+  }
+
+  public editar(): void {
+    this.service.editar(this.archivo).subscribe(m => {
+      console.log(m);
+      Swal.fire('Modificado:', `Archivo ${this.archivo.nombre} actualizado con éxito`, 'success');
+      this.router.navigate([`/archivos/form/${this.archivo.id}`]);
+    }, err => {
+      if(err.status === 400 || err.status === 405){
+        this.error = err.error;
+        console.log(this.error);
+      }
+    });
   }
 
 

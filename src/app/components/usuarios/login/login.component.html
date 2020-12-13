@@ -1,49 +1,62 @@
 <!--
-Follow me on
-------------
-Codepen: https://codepen.io/mycnlz/
-Dribbble: https://dribbble.com/mycnlz
-Pinterest: https://pinterest.com/mycnlz/
+
 -->
-<div class="container my-10">
+<div class="container my-3 w-50 p-2" style="background:#1B396A ;">
+  <mat-card>
+    <div class="example-container">
 
+      <mat-card-header style="background:#ff9101fb ;" class="p-2 mat-elevation-z8">
+        <mat-card-title class="text-light">Login Usuario</mat-card-title>
+        <mat-card-subtitle class="text-dark">Bienvenido</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="mat-elevation-z8 my-3 container p-3 text-light border border-primary" style="background:#1B396A ;">
+        <mat-form-field appearance="outline" >
+          <mat-label class="text-light">Usuario</mat-label>
+          <input matInput placeholder="Username" [(ngModel)]="usuario.username">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
 
-  <div class="box">
-    <div class='box-form'>
-      <div class='box-login-tab'></div>
-      <div class='box-login-title'>
-        <div class='i i-login'></div>
-        <h2>LOGIN</h2>
-      </div>
-      <div class='box-login'>
-        <div class='fieldset-body' id='login_form'>
+        <mat-form-field appearance="outline">
+          <mat-label class="text-light">Contraseña</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="usuario.password" class="text-light">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <mat-card-actions class="container p-3" >
+        <button (click)="login()" mat-button class="btn btn-outline-primary">Entrar</button>
+        <button [routerLink]="['/rol-usuario']" mat-button class="btn btn-outline-secondary">Crear Cuenta</button>
+      </mat-card-actions>
+
+    </div>
+
+  </mat-card>
+
+</div>
+
+<!--
+
+ <div class='fieldset-body' id='login_form'>
           <button onclick="openLoginInfo();" class='b b-form i i-more' title='Mais Informações'></button>
           <p class='field'>
-            <label for='user'>CORREO</label>
-            <input type='text' id='user' name='user' title='Username' />
+            <label for='user'>Username</label>
+            <input [(ngModel)]="usuario.username" type='text' id='user' name='user' title='Username' />
             <span id='valida' class='i i-warning'></span>
           </p>
           <p class='field'>
             <label for='password'>PASSWORD</label>
-            <input type='password' id='pass' name='password' title='Password' />
+            <input [(ngModel)]="usuario.password" type='password' id='pass' name='password' title='Password' />
             <span id='valida' class='i i-close'></span>
           </p>
           <br>
 
-          <input type='submit' id='do_login' value='GET STARTED' title='Get Started' />
+          <input (click)="login()" type='submit' id='do_login' value='GET STARTED' title='Get Started' />
         </div>
-      </div>
-    </div>
-    <div class='box-info'>
-      <button onclick="closeLoginInfo();" class='b b-info i i-left' title='Back to Sign In'></button>
-      <h3>Need Help?</h3>
 
-      <div class='line-wh'></div>
-      <button onclick="" class='b-support' title='Forgot Password?'> Forgot Password?</button>
-      <button class='b-support' title='Contact Support'> Contact Support</button>
-      <div class='line-wh'></div>
-      <button class='b-cta' title='Sign up now!' [routerLink]="['/rol-usuario']" routerLinkActive="router-link-active">
+  <button class='b-cta' title='Sign up now!' [routerLink]="['/rol-usuario']" routerLinkActive="router-link-active">
         CREATE ACCOUNT</button>
-    </div>
-  </div>
-</div>
+-->
