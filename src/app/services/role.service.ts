@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { URL_BAKEND } from '../config/config';
 import { Roles } from '../models/roles';
 import { CommonService } from './common.service';
 
@@ -8,7 +9,7 @@ import { CommonService } from './common.service';
   providedIn: 'root'
 })
 export class RoleService extends CommonService<Roles>{
-  protected baseEndpoint = 'http://localhost:8080/api/roles'
+  protected baseEndpoint = URL_BAKEND + '/api/roles'
   constructor(protected http:HttpClient){
     super(http)
   }

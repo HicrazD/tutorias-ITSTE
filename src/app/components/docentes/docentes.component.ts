@@ -17,7 +17,7 @@ export class DocentesComponent implements OnInit {  // extends CommonListarCompo
   dataSource: MatTableDataSource<Docente>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   pageSizeOptions: number[] = [4, 5, 10, 20, 50];
-  mostrarColumnasDocentes: string[] = ['id', 'nombre', 'apellido', 'correo', 'division','asignar','edit','eliminar'];
+  mostrarColumnasDocentes: string[] = ['id', 'nombre', 'apellido', 'correo', 'division','examenes','asignar','edit','eliminar'];
   constructor(private service:DocenteService) {  } 
 
   ngOnInit(){

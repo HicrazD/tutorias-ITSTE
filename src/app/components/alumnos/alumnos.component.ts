@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AlumnosComponent implements OnInit {
 
-
+  error:any
   titulo: string = "Listado de alumnos"
   listar:Alumno[] = []
   mostrarColumnasAlumnos: string[] = [
@@ -49,4 +50,31 @@ export class AlumnosComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+
+  public eliminar(e: Alumno): void {
+
+    Swal.fire({
+      title: 'Cuidado:',
+      text: `¿Seguro que desea eliminar?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+      if (result.value) {
+        this.service.eliminar(e.id).subscribe(() => {
+          // this.listar = this.listar.filter(a => a !== e);
+          this.iniciarPaginador();
+          Swal.fire('Eliminado:', `alumno eliminado con éxito`, 'success');
+        }, err => {
+          if (err.status == 400) {
+            this.error = err.error;
+            console.log(this.error);
+          }
+        });
+      }
+    });
+
+  }
 }

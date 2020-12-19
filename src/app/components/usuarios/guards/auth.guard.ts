@@ -2,19 +2,24 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService,
-    private router: Router) { }
+    private router: Router,private usuarioService:UsuarioService) { }
     
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.isAuthenticated()) {
       if (this.isTokenExpirado()) {
+        this.usuarioService.sessionLogOut(this.authService.usuario).subscribe(isLog => {
+         // console.log('Metodo sesionnLogOut en spring')
+         // console.log(isLog)
+        })
         this.authService.logout();
         this.router.navigate(['/login']);
         return false;
@@ -28,7 +33,9 @@ export class AuthGuard implements CanActivate {
   isTokenExpirado(): boolean {
     let token = this.authService.token;
     let payload = this.authService.obtenerDatosToken(token);
-    let now = new Date().getTime() / 1000;
+   // console.log(new Date().getTime())
+    let now = new Date().getTime() / 1000
+   // console.log(now)
     if (payload.exp < now) {
       return true;
     }

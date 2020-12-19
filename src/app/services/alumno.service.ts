@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { URL_BAKEND } from '../config/config';
 import { Alumno } from '../models/alumno';
 import { Archivo } from '../models/archivo';
 import { Docente } from '../models/docente';
@@ -10,7 +11,7 @@ import { CommonService } from './common.service';
   providedIn: 'root'
 })
 export class AlumnoService extends CommonService<Alumno>{
-  protected baseEndpoint = 'http://localhost:8080/api/alumnos'
+  protected baseEndpoint = URL_BAKEND + '/api/alumnos'
   constructor(protected http:HttpClient){
     super(http)
   }

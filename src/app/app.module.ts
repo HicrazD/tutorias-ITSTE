@@ -13,8 +13,23 @@ import { AlumnosFormComponent } from './components/alumnos/alumnos-form/alumnos-
 import { UsuariosFormComponent } from './components/usuarios/usuarios-form/usuarios-form.component';
 import { RolUsuarioComponent } from './components/usuarios/rol-usuario/rol-usuario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AsignarAlumnosComponent } from './components/docentes/asignar-alumnos/asignar-alumnos.component';
+import { AlumnoPerfilComponent } from './components/alumnos/alumno-perfil/alumno-perfil.component';
+import { DocentePerfilComponent } from './components/docentes/docente-perfil/docente-perfil.component';
+import { DocenteFormComponent } from './components/docentes/docente-form/docente-form.component';
+import { ArchivosComponent } from './components/archivos/archivos/archivos.component';
+import { ArchivosFormComponent } from './components/archivos/archivos-form/archivos-form.component';
+import { HomeComponent } from './components/home/home.component';
+import { ConsultasComponent } from './components/consultas/consultas.component';
+import { UsuarioAdminComponent } from './components/usuarios/usuario-admin/usuario-admin.component';
+import { TokenInterceptor } from './components/usuarios/interceptors/token.interceptor';
+import { AuthInterceptor } from './components/usuarios/interceptors/auth.interceptor';
+import { LoginAdminComponent } from './components/usuarios/login-admin/login-admin.component';
+import { SliderComponent } from './components/slider/slider.component';
+import { AsignarExamenesComponent } from './components/docentes/asignar-examenes/asignar-examenes.component';
+import { ExamenesComponent } from './components/examenes/examenes.component';
+import { ExamenesFormComponent } from './components/examenes/examenes-form/examenes-form.component';
+import { ResponderExamenComponent } from './components/alumnos/responder-examen/responder-examen.component';
 
 import { MatIconModule } from "@angular/material/icon";
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -28,17 +43,13 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { AlumnoPerfilComponent } from './components/alumnos/alumno-perfil/alumno-perfil.component';
-import { DocentePerfilComponent } from './components/docentes/docente-perfil/docente-perfil.component';
-import { DocenteFormComponent } from './components/docentes/docente-form/docente-form.component';
-import { ArchivosComponent } from './components/archivos/archivos/archivos.component';
-import { ArchivosFormComponent } from './components/archivos/archivos-form/archivos-form.component';
-import { HomeComponent } from './components/home/home.component';
-import { ConsultasComponent } from './components/consultas/consultas.component';
-import { UsuarioAdminComponent } from './components/usuarios/usuario-admin/usuario-admin.component';
-import { TokenInterceptor } from './components/usuarios/interceptors/token.interceptor';
-import { AuthInterceptor } from './components/usuarios/interceptors/auth.interceptor';
-import { LoginAdminComponent } from './components/usuarios/login-admin/login-admin.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSortModule} from '@angular/material/sort';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { ResponderExamenModalComponent } from './components/alumnos/responder-examen-modal/responder-examen-modal.component';
+import { VerExamenModalComponent } from './components/alumnos/ver-examen-modal/ver-examen-modal.component';
+
 
 
 
@@ -62,7 +73,15 @@ import { LoginAdminComponent } from './components/usuarios/login-admin/login-adm
     ConsultasComponent,
     UsuarioAdminComponent,
     LoginAdminComponent,
+    SliderComponent,
+    AsignarExamenesComponent,
+    ExamenesComponent,
+    ExamenesFormComponent,
+    ResponderExamenComponent,
+    ResponderExamenModalComponent,
+    VerExamenModalComponent,
   ],
+  entryComponents: [ResponderExamenModalComponent,VerExamenModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -82,7 +101,11 @@ import { LoginAdminComponent } from './components/usuarios/login-admin/login-adm
     MatSelectModule,
     MatListModule,
     MatProgressBarModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSortModule,
+    MatAutocompleteModule,
+    MatDialogModule,
+    MatExpansionModule
 
   ],
   providers: [

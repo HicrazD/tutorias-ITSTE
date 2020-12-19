@@ -80,7 +80,7 @@ export class AsignarAlumnosComponent implements OnInit {
   }
 
   asignar(): void {
-    console.log(this.seleccion.selected);
+    //console.log(this.seleccion.selected);
     this.docenteService.asignarAlumnos(this.docente, this.seleccion.selected)
     .subscribe(c => {
       this.tabIndex = 2;

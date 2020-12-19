@@ -1,17 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { URL_BAKEND } from '../config/config';
 import { Usuario } from '../models/usuario';
+import { UsuarioService } from './usuario.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private _usuario: Usuario;
   private _token: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private usuarioService:UsuarioService) { }
 
   public get usuario(): Usuario {
     if (this._usuario != null) {
@@ -35,7 +36,7 @@ export class AuthService {
   
 
   login(usuario: Usuario): Observable<any> {
-    const urlEndpoint = 'http://localhost:8080/oauth/token';
+    const urlEndpoint = URL_BAKEND + '/oauth/token';
 
     const credenciales = btoa('angularapp' + ':' + '12345');
 
@@ -48,7 +49,7 @@ export class AuthService {
     params.set('grant_type', 'password');
     params.set('username', usuario.username);
     params.set('password', usuario.password);
-    console.log(params.toString());
+    //console.log(params.toString());
     return this.http.post<any>(urlEndpoint, params.toString(), { headers: httpHeaders });
   }
 
@@ -89,6 +90,7 @@ export class AuthService {
   }
 
   logout(): void {
+   
     this._token = null;
     this._usuario = null;
     sessionStorage.clear();

@@ -1,0 +1,13 @@
+<div class="container p-3" style="background-color: rgb(10, 54, 92);">
+    <div class="carrousel container " style="margin-left: 13%;">
+        <ul class="sld " [style.width]="sliderc" [style.animation]="animation">
+            <li *ngFor="let img of imag" [style.width]="sliderl">
+    
+                <div class="slider" [style.background-image]="img"></div>
+            </li>
+        </ul>
+    
+    </div>
+</div>
+
+

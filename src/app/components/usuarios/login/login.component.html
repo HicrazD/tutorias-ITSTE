@@ -1,22 +1,22 @@
 <!--
 
 -->
-<div class="container my-3 w-50 p-2" style="background:#1B396A ;">
-  <mat-card>
-    <div class="example-container">
+<div class="container my-3 example-card p-2" style="background:#1B396A ;">
+  <mat-card class="w-100 container">
+    <div class="example-container" >
 
-      <mat-card-header style="background:#ff9101fb ;" class="p-2 mat-elevation-z8">
+      <mat-card-header style="background:#ff9101fb ;" class="p-2 mat-elevation-z8 example-card">
         <mat-card-title class="text-light">Login Usuario</mat-card-title>
         <mat-card-subtitle class="text-dark">Bienvenido</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="mat-elevation-z8 my-3 container p-3 text-light border border-primary" style="background:#1B396A ;">
-        <mat-form-field appearance="outline" >
+        <mat-form-field appearance="outline" class="example-card">
           <mat-label class="text-light">Usuario</mat-label>
           <input matInput placeholder="Username" [(ngModel)]="usuario.username">
           <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="example-card">
           <mat-label class="text-light">Contraseña</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="usuario.password" class="text-light">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"

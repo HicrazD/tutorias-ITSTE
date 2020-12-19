@@ -46,7 +46,7 @@ export class ArchivosFormComponent implements OnInit {
 
   seleccionarArchivo(event) {
     this.archivoSelected = event.target.files[0]
-    console.log(this.archivoSelected)
+   // console.log(this.archivoSelected)
     if(this.archivoSelected == null){
       Swal.fire('Upload?: ', 'No selecciono nada', 'question');
     }else
@@ -55,21 +55,21 @@ export class ArchivosFormComponent implements OnInit {
       this.archivoSelected.type.indexOf('application/vnd.openxmlformats-officedocument.word') >= 0) {
       Swal.fire('Success Upload: ', 'Archivo seleccionado', 'success');
       this.archivo.tipo = 'WORD'
-      console.log('condicion word')
+      //console.log('condicion word')
     }
     else if (this.archivoSelected.type.indexOf('application/pdf') >= 0) {
       Swal.fire('Success Upload: ', 'Archivo seleccionado', 'success');
       this.archivo.tipo = 'PDF'
-      console.log('condicion pdf')
+      //console.log('condicion pdf')
     }
     else if (this.archivoSelected.type.indexOf('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') >= 0) {
       Swal.fire('Success Upload: ', 'Archivo seleccionado', 'success');
       this.archivo.tipo = 'EXCEL'
-      console.log('condicion excel')
+      //console.log('condicion excel')
     }else{
       Swal.fire('Error Upload: ', 'Debe seleccionar un archivo tipo pdf,word o excel', 'error');
       this.archivoSelected = null
-      console.log('No es pdf word o excel')
+     // console.log('No es pdf word o excel')
     }}
 
   }

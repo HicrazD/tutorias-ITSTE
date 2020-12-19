@@ -1,0 +1,42 @@
+<div class="card bg-light mb-3">
+  <div class="card-header">{{titulo}}</div>
+  <div class="card-body">
+    <button class="btn btn-primary my-2" routerLink="/examenes/form">crear</button>
+    <div class="alert alert-info" *ngIf="listar?.length==0">
+      No hay exámenes en el sistema.
+    </div>
+    <table class="table table-hover table-striped" *ngIf="listar?.length>0">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>nombre</th>
+          <th>preguntas</th>
+          <th>editar</th>
+          <th>eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let examen of listar">
+          <td>{{examen.id}}</td>
+          <td>{{examen.nombre}} - {{examen.enabled}}</td>
+          <td>{{examen.preguntas.length}}</td>
+          <td><button class="btn btn-secondary btn-sm" [routerLink]="['/examenes/form', examen.id]">
+              editar
+            </button></td>
+          <td><button mat-raised-button class="btn btn-danger btn-sm" (click)="eliminar(examen)">
+              eliminar
+            </button>
+            <button mat-raised-button class="btn btn-success btn-sm" [disabled]="examen.enabled" (click)="disabledButton(examen)">
+              activar
+            </button>
+            <button mat-raised-button class="btn btn-danger btn-sm" [disabled]="!examen.enabled" (click)="disabledButton(examen)">
+              desactivar
+            </button></td>
+        </tr>
+      </tbody>
+    </table>
+    <mat-paginator [length]="totalRegistros" [pageSize]="totalPorPagina" [pageIndex]="paginaActual"
+      [pageSizeOptions]="pageSizeOptions" (page)="paginar($event)" showFirstLastButtons class="float-left mx-2">
+    </mat-paginator>
+  </div>
+</div>

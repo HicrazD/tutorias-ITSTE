@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
 import { CommonService } from './common.service';
-
+import { URL_BAKEND } from '../config/config'
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService extends CommonService<Usuario> {
-  protected baseEndpoint = 'http://localhost:8080/api/usuarios'
+  protected baseEndpoint = URL_BAKEND + '/api/usuarios'
   constructor(protected http:HttpClient){
     super(http)
   }
@@ -36,5 +36,13 @@ export class UsuarioService extends CommonService<Usuario> {
 
   public filtrarUsernambre(username: string): Observable<Usuario>{
     return this.http.get<Usuario>(`${this.baseEndpoint}/filtrar/username/${username}`);
+  }
+
+  public sessionLogin(usuario: Usuario): Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.baseEndpoint}/sesion-login/status/${usuario.username}`);
+  }
+
+  public sessionLogOut(usuario: Usuario): Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.baseEndpoint}/sesion-logout/status/${usuario.username}`);
   }
 }

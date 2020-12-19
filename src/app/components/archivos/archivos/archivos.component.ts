@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { URL_BAKEND } from 'src/app/config/config';
 import { Archivo } from 'src/app/models/archivo';
 import { ArchivoService } from 'src/app/services/archivo.service';
 import { CommonListarComponent } from '../../alumnos/common-listar.component';
@@ -11,7 +12,7 @@ import { CommonListarComponent } from '../../alumnos/common-listar.component';
 })
 export class ArchivosComponent
 extends CommonListarComponent<Archivo,ArchivoService> implements OnInit {
-
+  urlBackend = URL_BAKEND
   mostrarColumnasArchivos: string[] = ['id', 'nombre', 'comentario', 'tipo', 'archivo','editar','eliminar'];
 
   constructor(service:ArchivoService,router: Router) { 
@@ -24,15 +25,15 @@ extends CommonListarComponent<Archivo,ArchivoService> implements OnInit {
     console.log('redireccion')
     console.log(archivo)
     if (archivo.tipo === 'PDF' || archivo.tipo === 'PDF FORMATO') {
-      window.open(`http://localhost:8080/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
+      window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
     }
 
     if (archivo.tipo === 'WORD' || archivo.tipo === 'WORD FORMATO') {
-      window.open(`http://localhost:8080/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
+      window.open(`${this.urlBackend}/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
     }
 
     if (archivo.tipo === 'EXCEL' || archivo.tipo === 'EXCEL FORMATO') {
-      window.open(`http://localhost:8080/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
+      window.open(`${this.urlBackend}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
     }
   }
 

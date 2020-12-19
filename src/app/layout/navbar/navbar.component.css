@@ -42,3 +42,18 @@ li a {
   letter-spacing: 1px;
   opacity: 1.0;
 }
+
+.carousel-item{
+  width: 70%;
+  height: 200px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+@media (max-width: 600px) {
+  .carousel-item {
+    height: 280px;
+  }
+}

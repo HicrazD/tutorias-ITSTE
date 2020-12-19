@@ -1,4 +1,5 @@
 import { Alumno } from './alumno';
+import { Examen } from './examen';
 import { Generic } from './generic';
 import { Usuario } from './usuario';
 
@@ -10,4 +11,5 @@ export class Docente implements Generic{
     division:string
     usuario:Usuario
     alumnos:Alumno[] = []
+    examenes:Examen[] = []
 }

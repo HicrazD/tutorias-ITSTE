@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { URL_BAKEND } from 'src/app/config/config';
 import { Alumno } from 'src/app/models/alumno';
 import { Archivo } from 'src/app/models/archivo';
 import { Docente } from 'src/app/models/docente';
@@ -18,6 +19,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./alumno-perfil.component.css']
 })
 export class AlumnoPerfilComponent implements OnInit {
+  urlBackend = URL_BAKEND
   docente: Docente
   selected = 'None';
   usuario: Usuario
@@ -49,7 +51,7 @@ export class AlumnoPerfilComponent implements OnInit {
 
   mostrarColumnasArchivos: string[] = [
     'id', 'nombre', 'comentario',
-    'tipo', 'archivo', 'editar','eliminar'
+    'tipo', 'archivo', 'editar', 'eliminar'
   ];
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -63,7 +65,7 @@ export class AlumnoPerfilComponent implements OnInit {
       const username: string = params.get('term')
       if (username)
         this.usuarioService.filtrarUsernambre(username).subscribe(u => {
-          console.log(u)
+         // console.log(u)
           this.usuario = u
         })
     })
@@ -72,13 +74,18 @@ export class AlumnoPerfilComponent implements OnInit {
       const username: string = params.get('term')
       if (username)
         this.alumnoService.filtrarPorUsuarioUsername(username).subscribe(alumno => {
-          console.log(alumno)
-          if (alumno)
+          //console.log(alumno)
+          if (alumno) {
             this.alumno = alumno
-
-          this.alumnoService.filtrarDocentePorAombre(alumno).subscribe(
-            docente => this.docente = docente
-          )
+            this.alumnoService.filtrarDocentePorAombre(alumno).subscribe(
+              docente => { this.docente = docente }, err => {
+                if (err.status == 400) {
+                  this.error = err.error;
+                  console.log(this.error);
+                }
+              }
+            )
+          }
         })
     })
 
@@ -150,12 +157,11 @@ export class AlumnoPerfilComponent implements OnInit {
     this.usuario = this.alumno.usuario
     console.log(this.usuario)
     this.alumnoService.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => {
-      if (au){this.archivos = au}
+      if (au) { this.archivos = au }
     })
 
-    if(!this.archivos)
-    {
-      Swal.fire(`Archivos?`,`No se encontraron archivos`,`question`)
+    if (!this.archivos) {
+      Swal.fire(`Archivos?`, `No se encontraron archivos`, `question`)
     }
   }
 
@@ -163,15 +169,15 @@ export class AlumnoPerfilComponent implements OnInit {
     console.log('redireccion')
     console.log(archivo)
     if (archivo.tipo === 'PDF') {
-      window.open(`http://localhost:8080/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
+      window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
     }
 
     if (archivo.tipo === 'WORD') {
-      window.open(`http://localhost:8080/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
+      window.open(`${this.urlBackend}/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
     }
 
     if (archivo.tipo === 'EXCEL') {
-      window.open(`http://localhost:8080/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
+      window.open(`${this.urlBackend}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
     }
   }
 }

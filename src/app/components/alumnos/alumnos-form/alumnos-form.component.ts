@@ -1,4 +1,3 @@
-import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alumno } from 'src/app/models/alumno';
@@ -6,10 +5,8 @@ import { Archivo } from 'src/app/models/archivo';
 import { Usuario } from 'src/app/models/usuario';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { ArchivoService } from 'src/app/services/archivo.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 import { CommonFormComponent } from '../../common-form.component';
-import { CommonListarComponent } from '../common-listar.component';
 
 @Component({
   selector: 'app-alumnos-form',
@@ -65,23 +62,23 @@ export class AlumnosFormComponent
 
   seleccionarArchivo(event) {
     this.archivoSelected = event.target.files[0]
-    console.log(this.archivoSelected)
+    //console.log(this.archivoSelected)
   }
 
   subirArchivo() {
     if (!this.archivoSelected) {
       Swal.fire('Error Upload: ', 'Debe seleccionar un archivo', 'error');
     } else {
-      console.log('Imprimiendo alumno, usuario y archivo')
+     /* console.log('Imprimiendo alumno, usuario y archivo')
       console.log(this.model)
       console.log(this.usuario)
       console.log(this.archivo)
       console.log(this.archivoSelected)
-
+     */
       this.service.crearConArchivo(this.archivo, this.archivoSelected, this.model.id)
         .subscribe(a => {
           this.archivo = a
-          console.log(a)
+          //console.log(a)
           this.tabIndex = 0
           Swal.fire('Upload File','El archivo se subio correctamente', `success`)
         },err => {
@@ -124,7 +121,7 @@ export class AlumnosFormComponent
 
   mostrarArchivos() {
     this.usuario = this.model.usuario
-    console.log(this.usuario)
+    //console.log(this.usuario)
     this.service.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => {
       if(au)
       this.archivos = au

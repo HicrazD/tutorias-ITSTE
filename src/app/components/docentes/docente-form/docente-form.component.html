@@ -94,7 +94,7 @@
               <ng-container matColumnDef="archivo">
                 <th mat-header-cell *matHeaderCellDef> archivo </th>
                 <td mat-cell *matCellDef="let a">
-                  <a href="http://localhost:8080/api/archivos/uploads/file/{{a.id}}" target="_blank">
+                  <a (click)="redireccion(a)">
                     <button mat-mini-fab color="primary">
                       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg">

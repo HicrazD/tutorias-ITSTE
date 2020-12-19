@@ -1,6 +1,7 @@
 import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { URL_BAKEND } from 'src/app/config/config';
 import { Alumno } from 'src/app/models/alumno';
 import { Archivo } from 'src/app/models/archivo';
 import { Docente } from 'src/app/models/docente';
@@ -16,6 +17,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./consultas.component.css']
 })
 export class ConsultasComponent implements OnInit {
+  urlBackend = URL_BAKEND
   archivosWord: Archivo[]
   archivosPdf: Archivo[]
   archivosExcel: Archivo[]
@@ -24,9 +26,6 @@ export class ConsultasComponent implements OnInit {
   tabIndex = 0;
   tabIndexSub = 0
   division: string
-  endPointWord = "http://localhost:8080/api/archivos/uploads/file-word/{{archivo.id}}"
-  endPoinPdf = "http://localhost:8080/api/archivos/uploads/file-pdf/{{archivo.id}}"
-  endPoinExcel = "http://localhost:8080/api/archivos/uploads/file-excel/{{archivo.id}}"
   nombreOrApellido: string
   tipo = "WORD FORMATO"
   tpdf = "PDF FORMATO"
@@ -55,7 +54,7 @@ export class ConsultasComponent implements OnInit {
     let m: number = matricula
     let mString: string = m.toString()
     if (mString.length == 7) {
-      console.log(matricula)
+     // console.log(matricula)
       this.alumnoService.filtrarAlumnoByMatricula(matricula).subscribe(m => {
         if(m == null){
           Swal.fire(
@@ -66,7 +65,7 @@ export class ConsultasComponent implements OnInit {
         }
         else{
           this.alumnoMatricula = m
-          console.log(this.alumnoMatricula)
+         // console.log(this.alumnoMatricula)
         }
         
       })
@@ -95,14 +94,14 @@ export class ConsultasComponent implements OnInit {
         text: 'Falta rellenar campos',
       })
     } else {
-      console.log(this.division)
-      console.log(this.nombreOrApellido)
+     // console.log(this.division)
+     // console.log(this.nombreOrApellido)
 
       this.docenteService.filtrarPorDivision(this.division, this.nombreOrApellido)
         .subscribe(docentes => {
           this.docentesFind = docentes
-          console.log('Docentes encontrados')
-          console.log(this.docentesFind)
+       //   console.log('Docentes encontrados')
+      //  console.log(this.docentesFind)
         });
     }
   }

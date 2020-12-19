@@ -1,0 +1,28 @@
+.carrousel {
+    width: 86%;
+    overflow: hidden;
+}
+
+.sld {
+    list-style: none;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sld>li {
+    position: relative;
+    float: left;
+}
+
+.sld .slider {
+    display: block;
+    width: 90%;
+    max-width: 85%;
+}
+
+.slider {
+    height: 50vh;
+    background-size: cover;
+    background-position: center center;
+}

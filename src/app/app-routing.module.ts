@@ -3,13 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { AlumnoPerfilComponent } from './components/alumnos/alumno-perfil/alumno-perfil.component';
 import { AlumnosFormComponent } from './components/alumnos/alumnos-form/alumnos-form.component';
 import { AlumnosComponent } from './components/alumnos/alumnos.component';
+import { ResponderExamenModalComponent } from './components/alumnos/responder-examen-modal/responder-examen-modal.component';
+import { ResponderExamenComponent } from './components/alumnos/responder-examen/responder-examen.component';
 import { ArchivosFormComponent } from './components/archivos/archivos-form/archivos-form.component';
 import { ArchivosComponent } from './components/archivos/archivos/archivos.component';
 import { ConsultasComponent } from './components/consultas/consultas.component';
 import { AsignarAlumnosComponent } from './components/docentes/asignar-alumnos/asignar-alumnos.component';
+import { AsignarExamenesComponent } from './components/docentes/asignar-examenes/asignar-examenes.component';
 import { DocenteFormComponent } from './components/docentes/docente-form/docente-form.component';
 import { DocentePerfilComponent } from './components/docentes/docente-perfil/docente-perfil.component';
 import { DocentesComponent } from './components/docentes/docentes.component';
+import { ExamenesFormComponent } from './components/examenes/examenes-form/examenes-form.component';
+import { ExamenesComponent } from './components/examenes/examenes.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './components/usuarios/guards/auth.guard';
 import { RoleGuard } from './components/usuarios/guards/role.guard';
@@ -25,6 +30,7 @@ const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'alumnos', component: AlumnosComponent,canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
   {path: 'alumnos/form/:id', component:AlumnosFormComponent},
+  {path: 'alumnos/responder-examen/:id', component:ResponderExamenComponent}, //id student
   {path: 'alumnos/form/alumno-perfil/:term', component: AlumnoPerfilComponent},  
   {path: 'docentes/asignar-alumnos/:id', component: AsignarAlumnosComponent},
   {path: 'docentes', component: DocentesComponent,canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
@@ -39,7 +45,12 @@ const routes: Routes = [
   {path: 'usuarios/form/crear/usuario-admin/secret/2de6/:term',component:LoginAdminComponent},
   {path: 'usuarios/url-secret/lvb4/admin/itste',component:UsuarioAdminComponent},// ir primero si eres Admin
   {path: 'rol-usuario', component: RolUsuarioComponent},
-  {path: 'consultas', component:ConsultasComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }}
+  {path: 'consultas', component:ConsultasComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
+  {path: 'examenes/asignar-examenes/:id', component: AsignarExamenesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},// id docente
+  {path: 'examenes/asignar-examenes', component: AsignarExamenesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
+  {path: 'examenes/form/:id', component:ExamenesFormComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
+  {path: 'examenes/form', component:ExamenesFormComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
+  {path: 'examenes', component:ExamenesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }}
 ];
 
 @NgModule({

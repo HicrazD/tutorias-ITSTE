@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { URL_BAKEND } from 'src/app/config/config';
 import { Archivo } from 'src/app/models/archivo';
 import { Docente } from 'src/app/models/docente';
 import { Usuario } from 'src/app/models/usuario';
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./docente-perfil.component.css']
 })
 export class DocentePerfilComponent implements OnInit {
+  urlBackend = URL_BAKEND
   usuario: Usuario
   docentes: Docente = new Docente()
   docente: Docente
@@ -151,15 +153,15 @@ export class DocentePerfilComponent implements OnInit {
     console.log('redireccion')
     console.log(archivo)
     if (archivo.tipo === 'PDF') {
-      window.open(`http://localhost:8080/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
+      window.open(`{{urlBackend}}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
     }
 
     if (archivo.tipo === 'WORD') {
-      window.open(`http://localhost:8080/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
+      window.open(`{{urlBackend}}/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
     }
 
     if (archivo.tipo === 'EXCEL') {
-      window.open(`http://localhost:8080/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
+      window.open(`{{urlBackend}}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
     }
   }
 

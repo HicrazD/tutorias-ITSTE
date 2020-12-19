@@ -30,8 +30,9 @@ export abstract class CommonListarComponent<E extends Generic, S extends CommonS
 
   private calcularRangos() {
     this.service.listarPaginas(this.paginaActual.toString(), this.totalPorPagina.toString())
-      .subscribe(p => {
+      .subscribe(p => {        
         this.listar = p.content as E[];
+       // console.log(this.listar)
         this.totalRegistros = p.totalElements as number;
       });
   }

@@ -1,18 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { URL_BAKEND } from '../config/config';
 import { Alumno } from '../models/alumno';
 import { Archivo } from '../models/archivo';
 import { Docente } from '../models/docente';
+import { Examen } from '../models/examen';
 import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocenteService extends CommonService<Docente>{
-  protected baseEndpoint = 'http://localhost:8080/api/docentes'
+  protected baseEndpoint = URL_BAKEND + '/api/docentes'
   constructor(protected http:HttpClient){
     super(http)
+  }
+
+  public obtenerCursoPorAlumnoId(alumno: Alumno): Observable<Docente>{
+    return this.http.get<Docente>(`${this.baseEndpoint}/filtrar-docente/alumno/${alumno.id}`);
+  }
+
+  public obtenerDocentePorAlumnoId(alumno: Alumno): Observable<Docente>{
+    return this.http.get<Docente>(`${this.baseEndpoint}/docente-alumno/${alumno.id}`);
   }
 
   asignarAlumnos(docente: Docente, alumnos: Alumno[]): Observable<Docente>{
@@ -50,5 +60,21 @@ export class DocenteService extends CommonService<Docente>{
     formData.append('comentario', a.comentario);
     formData.append('tipo', a.tipo);
     return this.http.post<Archivo>(`${this.baseEndpoint}/${id}/crear-archivo`,formData);
+  }
+
+  asignarExamenes(docente: Docente, examenes: Examen[]): Observable<Docente>{
+    return this.http.put<Docente>(`${this.baseEndpoint}/${docente.id}/asignar-examenes`,
+    examenes, {headers: this.cabecera})
+
+  }
+
+  eliminarExamen(docente: Docente, examen: Examen):Observable<Docente>{
+    return this.http.put<Docente>(`${this.baseEndpoint}/${docente.id}/eliminar-examen`,
+    examen, {headers: this.cabecera})
+  }
+
+  asignarExamenesTodos(examenes: Examen[]): Observable<Docente[]>{
+    return this.http.put<Docente[]>(`${this.baseEndpoint}/asignar-examenes/all`,
+    examenes,{headers: this.cabecera});
   }
 }

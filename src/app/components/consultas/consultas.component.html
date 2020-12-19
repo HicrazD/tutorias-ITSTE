@@ -38,7 +38,7 @@
                 <ng-container matColumnDef="ver">
                   <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
                   <td mat-cell *matCellDef="let archivo">
-                    <a href="http://localhost:8080/api/archivos/uploads/file-pdf/{{archivo.id}}" target="_blank">
+                    <a href="{{urlBackend}}/api/archivos/uploads/file-pdf/{{archivo.id}}" target="_blank">
                       <button mat-mini-fab class="btn btn-info mx-3">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">get_app</mat-icon>
                       </button>
@@ -95,7 +95,7 @@
                 <ng-container matColumnDef="ver">
                   <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
                   <td mat-cell *matCellDef="let archivo">
-                    <a href="http://localhost:8080/api/archivos/uploads/file-word/{{archivo.id}}">
+                    <a href="{{URL_BAKEND}}/api/archivos/uploads/file-word/{{archivo.id}}">
                       <button mat-mini-fab class="btn btn-info mx-3">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">get_app</mat-icon>
                       </button>
@@ -152,7 +152,7 @@
                 <ng-container matColumnDef="ver">
                   <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
                   <td mat-cell *matCellDef="let archivo">
-                    <a href="http://localhost:8080/api/archivos/uploads/file-excel/{{archivo.id}}" target="_blank">
+                    <a href="{{URL_BAKEND}}/api/archivos/uploads/file-excel/{{archivo.id}}" target="_blank">
                       <button mat-mini-fab class="btn btn-info mx-3">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">get_app</mat-icon>
                       </button>
