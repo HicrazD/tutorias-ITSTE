@@ -1,0 +1,68 @@
+[debug] [2020-12-19T11:18:00.891Z] ----------------------------------------------------------------------
+[debug] [2020-12-19T11:18:00.895Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Doci\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2020-12-19T11:18:00.896Z] CLI Version:   8.19.0
+[debug] [2020-12-19T11:18:00.896Z] Platform:      win32
+[debug] [2020-12-19T11:18:00.896Z] Node Version:  v14.15.1
+[debug] [2020-12-19T11:18:00.898Z] Time:          Sat Dec 19 2020 05:18:00 GMT-0600 (hora estándar central)
+[debug] [2020-12-19T11:18:00.899Z] ----------------------------------------------------------------------
+[debug] [2020-12-19T11:18:00.899Z] 
+[debug] [2020-12-19T11:18:00.911Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-19T11:18:00.912Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\angular projects\TutoriasResidencia
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2020-12-19T11:18:16.156Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects?pageSize=100  
+ 
+[debug] [2020-12-19T11:18:16.510Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sat, 19 Dec 2020 11:18:15 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  Using project angular-app-itste1-d8235 (angular-app-itste1) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2020-12-19T11:22:07.449Z] ----------------------------------------------------------------------
+[debug] [2020-12-19T11:22:07.453Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Doci\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2020-12-19T11:22:07.454Z] CLI Version:   8.19.0
+[debug] [2020-12-19T11:22:07.454Z] Platform:      win32
+[debug] [2020-12-19T11:22:07.454Z] Node Version:  v14.15.1
+[debug] [2020-12-19T11:22:07.456Z] Time:          Sat Dec 19 2020 05:22:07 GMT-0600 (hora estándar central)
+[debug] [2020-12-19T11:22:07.456Z] ----------------------------------------------------------------------
+[debug] [2020-12-19T11:22:07.457Z] 
+[debug] [2020-12-19T11:22:07.469Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-19T11:22:07.470Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\angular projects\TutoriasResidencia
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+

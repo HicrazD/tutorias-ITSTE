@@ -29,16 +29,5 @@ th.mat-column-position, td.mat-column-position {
 .mat-table-sticky:last-child {
   border-left: 1px solid #e0e0e0;
 }
-/** page structure **/
-#wrapper {
-  padding: 10px 17px;   
-  box-shadow: 2px 2px 15px  #160AF0;
- 
-}
-th.mat-sort-header-sorted {
-  color: rgb(146, 0, 0);
-}
 
-th.mat-sort-header-sorted {
-  color: black;
-}
+

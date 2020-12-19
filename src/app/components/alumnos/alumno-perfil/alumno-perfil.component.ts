@@ -65,7 +65,7 @@ export class AlumnoPerfilComponent implements OnInit {
       const username: string = params.get('term')
       if (username)
         this.usuarioService.filtrarUsernambre(username).subscribe(u => {
-         // console.log(u)
+          // console.log(u)
           this.usuario = u
         })
     })
@@ -78,7 +78,8 @@ export class AlumnoPerfilComponent implements OnInit {
           if (alumno) {
             this.alumno = alumno
             this.alumnoService.filtrarDocentePorAombre(alumno).subscribe(
-              docente => { this.docente = docente }, err => {
+              docente => { this.docente = docente }
+              , err => {
                 if (err.status == 400) {
                   this.error = err.error;
                   console.log(this.error);
@@ -86,9 +87,11 @@ export class AlumnoPerfilComponent implements OnInit {
               }
             )
           }
+          this.alumnoService.filtrarArchivosByUsuarioId(this.alumno.usuario.id).subscribe(au => {
+            if (au) { this.archivos = au }
+          })
         })
     })
-
 
 
   }
@@ -160,9 +163,6 @@ export class AlumnoPerfilComponent implements OnInit {
       if (au) { this.archivos = au }
     })
 
-    if (!this.archivos) {
-      Swal.fire(`Archivos?`, `No se encontraron archivos`, `question`)
-    }
   }
 
   redireccion(archivo: Archivo) {
