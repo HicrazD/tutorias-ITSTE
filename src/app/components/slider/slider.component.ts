@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-
 
 @Component({
   selector: 'app-slider',
@@ -8,7 +6,19 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit {
-  @Input('imgs') sld: string;
+
+  constructor(){}
+  ngOnInit(){}
+
+}
+
+
+
+
+
+//*********************************************************************************** */
+
+/*@Input('imgs') sld: string;
   @Input('timer') transition: string;
   imgs;
   imag: any[] = [];
@@ -61,6 +71,4 @@ export class SliderComponent implements OnInit {
     this.imgs.forEach(e => {
       this.imag.push(this.sanitizer.bypassSecurityTrustStyle('url(./assets/slider/' + e + '.png)'))
     });
-  }
-
-}
+  }*/

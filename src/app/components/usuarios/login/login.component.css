@@ -1,22 +1,19 @@
-.example-container .mat-form-field + .mat-form-field {
-  margin-left: 8px;
-  max-width: 100%;
+.example-container {
+  width: 500px;
+  max-width: 90%;
+  min-width: 60%;
+  overflow: auto;
 }
-
-.example-right-align {
-  text-align: right;
-}
-
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
-}
-
-input.example-right-align {
-  -moz-appearance: textfield;
-}
-
 
 .example-card {
-  max-width: 600px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 70%;
+  overflow: auto;
+}
+
+.mat-form-field{
+  width: 100%;
+  max-width: 100%;
+  min-width: 50%;
 }

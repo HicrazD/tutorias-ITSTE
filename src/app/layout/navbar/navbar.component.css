@@ -43,17 +43,15 @@ li a {
   opacity: 1.0;
 }
 
-.carousel-item{
-  width: 70%;
-  height: 200px;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.example-container{
+  height: 80px;
+  width: 100%;
+  overflow: auto;
 }
 
-@media (max-width: 600px) {
-  .carousel-item {
-    height: 280px;
+@media screen and (max-width: 400px){
+  img{
+    background-size: 100% 100%;
+    width: 30%;
   }
 }

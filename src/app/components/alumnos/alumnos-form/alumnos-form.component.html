@@ -12,13 +12,13 @@
         <!--*******************      Editar Perfil *****************-->
         <mat-tab label="Editar Perfil">
           <div class="container" class="my-5 p-10">
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
               <mat-label for="matricula">Matricula</mat-label>
               <input required matInput name="matricula" [(ngModel)]="model.matricula">
               <mat-error *ngIf="error?.matricula">{{ error.matricula }}</mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
               <mat-label for="nombre">Nombre</mat-label>
               <input matInput required name="nombre" [(ngModel)]="model.nombre">
               <div class="alert alert-danger" *ngIf="error?.nombre">
@@ -26,7 +26,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
               <mat-label for="apellido">Apellido</mat-label>
               <input matInput required name="apellido" [(ngModel)]="model.apellido">
               <div class="alert alert-danger" *ngIf="error?.apellido">
@@ -34,7 +34,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
               <mat-label for="correo">Correo</mat-label>
               <input matInput required placeholder="pat@example.com" name="correo" [(ngModel)]="model.correo">
               <div class="alert alert-danger" *ngIf="error?.correo">
@@ -42,7 +42,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
               <mat-label for="telefono">Telefono</mat-label>
               <input matInput required name="telefono" [(ngModel)]="model.telefono">
               <div class="alert alert-danger" *ngIf="error?.telefono">
@@ -50,7 +50,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" style="width: 25%;" class="mx-3">
+            <mat-form-field appearance="fill" style="width: 350px;max-width: 60%;" class="mx-3">
               <mat-label>Seleccionar Carrera</mat-label>
               <mat-select [(ngModel)]="model.carrera">
                 <mat-option>None</mat-option>
@@ -60,9 +60,18 @@
                 {{ error.carrera }}
               </div>
             </mat-form-field>
+
+            <mat-form-field appearance="outline" class="mx-3" style="width: 350px;max-width: 50%;">
+              <mat-label for="promAsistencia">Asistencia Total</mat-label>
+              <input matInput required type="number" name="promAsistencia" [(ngModel)]="model.promAsistencia">
+              <div class="alert alert-danger" *ngIf="error?.promAsistencia">
+                {{ error.promAsistencia }}
+              </div>
+            </mat-form-field>
+            
             <br>
 
-            <mat-form-field appearance="fill" style="width: 25%;" class="mx-3">
+            <mat-form-field appearance="fill" style="width: 350px;max-width: 60%;" class="mx-3">
               <mat-select required [(ngModel)]="model.semestre">
                 <mat-option>-- None --</mat-option>
                 <mat-option required *ngFor="let s of semestre" [value]="s.valor">{{s.muestraValor}}</mat-option>
@@ -86,7 +95,7 @@
         <!--*******************      Crear archivos *****************-->
         <mat-tab label="Crear archivos">
           <div class="container" class="my-5 p-10">
-            <mat-form-field appearance="outline" style="width: 45%;">
+            <mat-form-field appearance="outline" style="width: 450px;max-width: 70%;">
               <mat-label for="nombre">Nombre</mat-label>
               <input matInput name="nombre" [(ngModel)]="archivo.nombre">
               <div class="alert alert-danger" *ngIf="error?.nombre">
@@ -94,7 +103,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" style="width: 25%;" class="mx-5">
+            <mat-form-field appearance="fill" style="width: 450px;max-width: 70%;">
               <mat-select required [(ngModel)]="archivo.tipo">
                 <mat-option>-- None --</mat-option>
                 <mat-option *ngFor="let t of tipo" [value]="t.valor">{{t.muestraValor}}</mat-option>
@@ -107,7 +116,7 @@
               </mat-label>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" hintLabel="Max 255 carateres" style="width: 35%;">
+            <mat-form-field appearance="outline" hintLabel="Max 255 carateres" style="width: 450px;max-width: 70%;">
               <mat-label>Comentario</mat-label>
               <textarea matInput #input maxlength="255" name="comentario" [(ngModel)]="archivo.comentario"></textarea>
               <mat-hint align="end">{{input.value?.length || 0}}/255</mat-hint>
@@ -146,12 +155,14 @@
         <!--*******************      Ver archivos *****************-->
         <mat-tab label="Ver archivos">
           <button type="button" class="btn btn-primary" (click)="mostrarArchivos()">Mostrar archivo(s)</button>
-          <mat-card class="my-3" style="background-image: url(../../../assets/backgroundTECNM.jpg);">
+          <mat-card class="my-3" style="background:#1B396AE6;">
             <mat-card-header *ngIf="archivos">
               <mat-card-title class="mx-5" style="color: aliceblue;">Archivos</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <table mat-table [dataSource]="archivos" class="mat-elevation-z8 mx-5" style="width: 90%;">
+              <div class="container example-container">                
+              
+              <table mat-table [dataSource]="archivos" class="mat-elevation-z8 ">
 
                 <ng-container matColumnDef="id">
                   <th mat-header-cell *matHeaderCellDef> Clave</th>
@@ -219,6 +230,7 @@
                 <tr mat-row *matRowDef="let archivo; columns: mostrarColumnasArchivos;">
                 </tr>
               </table>
+            </div>
               <br>
             </mat-card-content>
           </mat-card>

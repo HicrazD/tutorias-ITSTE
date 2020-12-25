@@ -1,6 +1,6 @@
-<div class="container my-5 p-3" style="background-color: #1B396A;">
+<div class="container my-5 p-3" style="background-color: #0061598c;">
 
-  <mat-card style="background: rgb(255, 255, 255);">
+  <mat-card style="background: rgb(235, 228, 228);">
     <mat-card-header *ngIf="usuario">
       <mat-card-title class="mat-elevation-z8 p-3" style="background: #ff9101fb;">
         Docente del Usuario {{usuario.username}}
@@ -11,7 +11,7 @@
       <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
         <mat-tab label="Crear Perfil" *ngIf="!docente">
 
-          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
             <mat-label for="nombre">Nombre</mat-label>
 
             <input matInput name="nombre" [(ngModel)]="docentes.nombre">
@@ -20,7 +20,7 @@
             </div>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
             <mat-label for="apellido">Apellido</mat-label>
 
             <input matInput name="apellido" [(ngModel)]="docentes.apellido">
@@ -29,7 +29,7 @@
             </div>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
             <mat-label for="correo">Correo</mat-label>
 
             <input matInput name="correo" [(ngModel)]="docentes.correo">
@@ -38,7 +38,7 @@
             </div>
           </mat-form-field>
 
-          <mat-form-field appearance="fill" style="width: 25%;" class="mx-3">
+          <mat-form-field appearance="fill" style="width: 350px;max-width: 70%;" class="mx-3">
             <mat-label>Seleccionar Division</mat-label>
             <mat-select [(ngModel)]="docentes.division">
               <mat-option>None</mat-option>
@@ -56,8 +56,8 @@
         <mat-tab label="Editar Perfil" *ngIf="docente">
           <div class="container my-5 p-10">
 
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
-              <mat-label for="nombre"  >Nombre</mat-label>
+            <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
+              <mat-label for="nombre">Nombre</mat-label>
 
               <input matInput name="nombre" [(ngModel)]="docente.nombre">
               <div class="alert alert-danger" *ngIf="error?.nombre">
@@ -65,7 +65,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
               <mat-label for="apellido">Apellido</mat-label>
 
               <input matInput name="apellido" [(ngModel)]="docente.apellido">
@@ -74,7 +74,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
               <mat-label for="correo">Correo</mat-label>
 
               <input required matInput name="correo" [(ngModel)]="docente.correo">
@@ -83,7 +83,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" style="width: 25%;" class="mx-3">
+            <mat-form-field appearance="fill" style="width: 350px;max-width: 70%;" class="mx-3">
               <mat-label>Seleccionar Division</mat-label>
               <mat-select [(ngModel)]="docente.division">
                 <mat-option>None</mat-option>
@@ -103,7 +103,7 @@
         <!-- ****************************  Crear archivo  *************************-->
         <mat-tab label="Crear archivo" *ngIf="docente">
           <div class="container my-5 p-10">
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
               <mat-label for="nombre">Nombre</mat-label>
               <input matInput name="nombre" [(ngModel)]="archivo.nombre">
               <div class="alert alert-danger" *ngIf="error?.nombre">
@@ -111,7 +111,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" style="width: 25%;" class="mx-3">
+            <mat-form-field appearance="fill" style="width: 450px;max-width: 70%;" class="mx-3">
               <mat-select [disabled]="true" required [(ngModel)]="archivo.tipo">
                 <mat-option>-- None --</mat-option>
                 <mat-option required *ngFor="let t of tipo" [value]="t.valor">{{t.muestraValor}}</mat-option>
@@ -124,7 +124,7 @@
               </mat-label>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+            <mat-form-field appearance="outline" class="mx-3" style="width: 350px;max-width: 70%;">
               <mat-label for="comentario">Comentario</mat-label>
               <input matInput name="comentario" [(ngModel)]="archivo.comentario">
               <div class="alert alert-danger" *ngIf="error?.comentario">
@@ -153,44 +153,44 @@
             </span>
           </div>
         </mat-tab>
-<!-- ****************************  Ver archivos  *************************-->
+        <!-- ****************************  Ver archivos  *************************-->
         <mat-tab label="Ver archivos">
           <button type="button" class="btn btn-primary" (click)="mostrarArchivos()">Mostrar archivo(s)</button>
           <mat-card class="my-3" style="background: #1B396A;">
             <mat-card-header *ngIf="archivos">
               <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
             </mat-card-header>
-            <mat-card-content>
-              <table mat-table [dataSource]="archivos" class="mat-elevation-z8 mx-5" style="width: 90%;">
-  
+            <mat-card-content style="height: 300px; width: 1400px; max-width: 100%; overflow: auto;">
+              <table mat-table [dataSource]="archivos" class="mat-elevation-z8 mx-1" style="width: 1000px;">
+
                 <ng-container matColumnDef="id">
                   <th mat-header-cell *matHeaderCellDef> Clave</th>
                   <td mat-cell *matCellDef="let a"> {{a.id}} </td><!-- a de archivo; solo funciona dentro de td -->
                 </ng-container>
-  
+
                 <!-- nombre Column -->
                 <ng-container matColumnDef="nombre">
                   <th mat-header-cell *matHeaderCellDef> Nombre </th>
                   <td mat-cell *matCellDef="let a"> {{a.nombre}} </td>
                 </ng-container>
-  
+
                 <!-- comentario Column -->
                 <ng-container matColumnDef="comentario">
                   <th mat-header-cell *matHeaderCellDef> comentario </th>
                   <td mat-cell *matCellDef="let a"> {{a.comentario}} </td>
                 </ng-container>
-  
+
                 <!-- tipo Column -->
                 <ng-container matColumnDef="tipo">
                   <th mat-header-cell *matHeaderCellDef> tipo </th>
                   <td mat-cell *matCellDef="let a"> {{a.tipo}} </td>
                 </ng-container>
-  
+
                 <ng-container matColumnDef="archivo">
                   <th mat-header-cell *matHeaderCellDef> archivo </th>
                   <td mat-cell *matCellDef="let a">
                     <a>
-                      <button  (click)="redireccion(a)" mat-mini-fab color="primary">
+                      <button (click)="redireccion(a)" mat-mini-fab color="primary">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
                           xmlns="http://www.w3.org/2000/svg">
                           <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
@@ -201,15 +201,15 @@
                     </a>
                   </td>
                 </ng-container>
-  
-  
+
+
                 <ng-container matColumnDef="eliminar">
                   <th mat-header-cell *matHeaderCellDef>Eliminar</th>
                   <td mat-cell *matCellDef="let a">
                     <button mat-mini-fab color="warn" (click)="eliminar(a)">x</button>
                   </td>
                 </ng-container>
-  
+
                 <tr mat-header-row *matHeaderRowDef="mostrarColumnasArchivos"></tr>
                 <tr mat-row *matRowDef="let archivo; columns: mostrarColumnasArchivos;">
                 </tr>

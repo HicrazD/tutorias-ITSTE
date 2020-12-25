@@ -47,8 +47,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatGridListModule} from '@angular/material/grid-list';
 import { ResponderExamenModalComponent } from './components/alumnos/responder-examen-modal/responder-examen-modal.component';
 import { VerExamenModalComponent } from './components/alumnos/ver-examen-modal/ver-examen-modal.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -80,6 +82,7 @@ import { VerExamenModalComponent } from './components/alumnos/ver-examen-modal/v
     ResponderExamenComponent,
     ResponderExamenModalComponent,
     VerExamenModalComponent,
+    FooterComponent,
   ],
   entryComponents: [ResponderExamenModalComponent,VerExamenModalComponent],
   imports: [
@@ -105,7 +108,8 @@ import { VerExamenModalComponent } from './components/alumnos/ver-examen-modal/v
     MatSortModule,
     MatAutocompleteModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatGridListModule
 
   ],
   providers: [

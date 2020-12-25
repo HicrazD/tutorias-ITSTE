@@ -1,14 +1,17 @@
 .example-container {
-    height: 400px;
-    width: 550px;
-    max-width: 100%;
-    overflow: auto;
-  }
-  
-  table {
-    width: 800px;
-  }
-  
+  height: 120px;
+  width: 1300px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+table {
+  width: 700px;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
   td.mat-column-star {
     width: 20px;
     padding-right: 8px;

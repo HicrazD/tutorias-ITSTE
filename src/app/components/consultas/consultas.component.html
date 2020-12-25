@@ -1,4 +1,4 @@
-<mat-card style="background: #1B396A;" class="container my-5 w-75 p-10">
+<mat-card style="background: #1B396A;" class="container my-5 w-100 p-10">
   <mat-card-header>
     <mat-card-title style="color: aliceblue;">
       Consultas
@@ -6,7 +6,7 @@
   </mat-card-header>
 
   <mat-card-content>
-    <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex" class="p-10" style="background: rgb(203, 233, 222);">
+    <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex" class="p-10" style="background: rgb(199, 199, 199);">
       <!--    *******************     Achivos    (keyup)="filtrarTipoArchivo($event.target.value)"************************-->
       <mat-tab label="Achivos" *ngIf="authService.hasRole('ROLE_DOCENTE')">
         <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndexSub" class="p-10"
@@ -20,7 +20,7 @@
               </mat-form-field>
 
               <table mat-table [dataSource]="archivosPdf" class="mat-elevation-z8 mx-3 mb-3 container"
-                style="width: 75%;">
+                style="width: 85%;">
 
 
                 <!-- nombre Column -->
@@ -78,7 +78,7 @@
               </mat-form-field>
 
               <table mat-table [dataSource]="archivosWord" class="mat-elevation-z8 mx-3 mb-3 container"
-                style="width: 75%;">
+                style="width: 80%;">
 
 
                 <!-- nombre Column -->
@@ -235,12 +235,12 @@
       <mat-tab label="Docentes" *ngIf="authService.hasRole('ROLE_ALUMNO')">
 
         <div class="container example-container p-2">
-          <mat-form-field class="mx-3" style="width: 15%;">
+          <mat-form-field class="mx-3" style="width: 250px;max-width: 60%;">
             <mat-label>Division</mat-label>
             <input matInput placeholder="Buscar division" (keyup)="fieldDivision($event.target.value)">
           </mat-form-field>
 
-          <mat-form-field class="mx-3" style="width: 25%;">
+          <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;">
             <mat-label>Nombre o Apellido</mat-label>
             <input matInput placeholder="Buscar por nombre o apellido" (keyup)="fieldNOrA($event.target.value)">
           </mat-form-field>

@@ -13,7 +13,7 @@ extends CommonListarComponent<Examen, ExamenService> implements OnInit{
 
   constructor(service: ExamenService,router: Router) {
     super(service,router);
-    this.titulo = 'Listado de exámenes';
+    this.titulo = 'Evaluaciones';
     this.nombreModel = Examen.name;
    }
 

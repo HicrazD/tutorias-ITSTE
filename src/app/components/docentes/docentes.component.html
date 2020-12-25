@@ -3,15 +3,15 @@
     <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="container p-5" style="background: #FF9800;">
+    <div class="container p-2" style="background: #FF9800;">
 
       <mat-card class="w-100 ">
-        <mat-form-field class="w-25">
+        <mat-form-field >
           <mat-label class="text-dark">Buscar</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
         </mat-form-field>
       </mat-card>
-      <div class="example-container mat-elevation-z8 my-1 w-100" *ngIf="listar?.length>0">
+      <div class="example-container mat-elevation-z8  w-100" *ngIf="listar?.length>0">
         <table mat-table [dataSource]="dataSource">
 
           <ng-container matColumnDef="id" sticky>

@@ -41,9 +41,10 @@ const routes: Routes = [
   {path: 'archivos/form/:id', component: ArchivosFormComponent,data: { role: 'ROLE_ADMIN' }},
   {path: 'usuarios', component: UsuariosComponent,canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
   {path: 'login', component: LoginComponent},
-  {path: 'usuarios/form/crear/:term',component:UsuariosFormComponent},
-  {path: 'usuarios/form/crear/usuario-admin/secret/2de6/:term',component:LoginAdminComponent},
+  {path: 'usuarios/form/crear',component:UsuariosFormComponent},
+  {path: 'usuarios/form/crear/usuario-admin/secret/2de6',component:LoginAdminComponent},
   {path: 'usuarios/url-secret/lvb4/admin/itste',component:UsuarioAdminComponent},// ir primero si eres Admin
+  {path: 'usuarios/url-secret/lvb4/admin/itste/:id',component:UsuarioAdminComponent},
   {path: 'rol-usuario', component: RolUsuarioComponent},
   {path: 'consultas', component:ConsultasComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
   {path: 'examenes/asignar-examenes/:id', component: AsignarExamenesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},// id docente

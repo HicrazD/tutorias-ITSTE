@@ -31,9 +31,7 @@
             "scripts": [
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/jquery/dist/jquery.slim.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/js/Login.js",
-              "src/assets/js/tables.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -103,9 +101,7 @@
             "scripts": [
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/jquery/dist/jquery.slim.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/js/Login.js",
-              "src/assets/js/tables.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           }
         },

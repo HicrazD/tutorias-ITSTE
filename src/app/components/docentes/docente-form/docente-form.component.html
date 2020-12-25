@@ -16,7 +16,7 @@
           <input matInput name="id" [(ngModel)]="model.id">
         </mat-form-field>
         -->
-          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
             <mat-label for="nombre">Nombre</mat-label>
 
             <input matInput required name="nombre" [(ngModel)]="model.nombre">
@@ -25,7 +25,7 @@
             </div>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
             <mat-label for="apellido">Apellido</mat-label>
 
             <input matInput required name="apellido" [(ngModel)]="model.apellido">
@@ -34,7 +34,7 @@
             </div>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="mx-3" style="width: 45%;">
+          <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
             <mat-label for="correo">Correo</mat-label>
 
             <input matInput required name="correo" [(ngModel)]="model.correo">
@@ -43,7 +43,7 @@
             </div>
           </mat-form-field>
 
-          <mat-form-field appearance="fill" style="width: 25%;" class="mx-3">
+          <mat-form-field appearance="fill" style="width: 350px;max-width: 50%;" class="mx-3">
             <mat-label>Seleccionar Division</mat-label>
             <mat-select [(ngModel)]="model.division">
               <mat-option>None</mat-option>
@@ -66,59 +66,61 @@
             <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <table mat-table [dataSource]="archivos" class="mat-elevation-z8 mx-5" style="width: 90%;">
+            <div class="container example-container">
+              <table mat-table [dataSource]="archivos" class="mat-elevation-z8 mx-5" style="width: 90%;">
 
-              <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> Clave</th>
-                <td mat-cell *matCellDef="let a"> {{a.id}} </td><!-- a de archivo; solo funciona dentro de td -->
-              </ng-container>
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef> Clave</th>
+                  <td mat-cell *matCellDef="let a"> {{a.id}} </td><!-- a de archivo; solo funciona dentro de td -->
+                </ng-container>
 
-              <!-- nombre Column -->
-              <ng-container matColumnDef="nombre">
-                <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                <td mat-cell *matCellDef="let a"> {{a.nombre}} </td>
-              </ng-container>
+                <!-- nombre Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let a"> {{a.nombre}} </td>
+                </ng-container>
 
-              <!-- comentario Column -->
-              <ng-container matColumnDef="comentario">
-                <th mat-header-cell *matHeaderCellDef> comentario </th>
-                <td mat-cell *matCellDef="let a"> {{a.comentario}} </td>
-              </ng-container>
+                <!-- comentario Column -->
+                <ng-container matColumnDef="comentario">
+                  <th mat-header-cell *matHeaderCellDef> comentario </th>
+                  <td mat-cell *matCellDef="let a"> {{a.comentario}} </td>
+                </ng-container>
 
-              <!-- tipo Column -->
-              <ng-container matColumnDef="tipo">
-                <th mat-header-cell *matHeaderCellDef> tipo </th>
-                <td mat-cell *matCellDef="let a"> {{a.tipo}} </td>
-              </ng-container>
+                <!-- tipo Column -->
+                <ng-container matColumnDef="tipo">
+                  <th mat-header-cell *matHeaderCellDef> tipo </th>
+                  <td mat-cell *matCellDef="let a"> {{a.tipo}} </td>
+                </ng-container>
 
-              <ng-container matColumnDef="archivo">
-                <th mat-header-cell *matHeaderCellDef> archivo </th>
-                <td mat-cell *matCellDef="let a">
-                  <a (click)="redireccion(a)">
-                    <button mat-mini-fab color="primary">
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                        <path fill-rule="evenodd"
-                          d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                      </svg>
-                    </button>
-                  </a>
-                </td>
-              </ng-container>
+                <ng-container matColumnDef="archivo">
+                  <th mat-header-cell *matHeaderCellDef> archivo </th>
+                  <td mat-cell *matCellDef="let a">
+                    <a (click)="redireccion(a)">
+                      <button mat-mini-fab color="primary">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path fill-rule="evenodd"
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </button>
+                    </a>
+                  </td>
+                </ng-container>
 
 
-              <ng-container matColumnDef="eliminar">
-                <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-                <td mat-cell *matCellDef="let a">
-                  <button mat-mini-fab color="warn" (click)="eliminar(a)">x</button>
-                </td>
-              </ng-container>
+                <ng-container matColumnDef="eliminar">
+                  <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+                  <td mat-cell *matCellDef="let a">
+                    <button mat-mini-fab color="warn" (click)="eliminar(a)">x</button>
+                  </td>
+                </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="mostrarColumnasArchivos"></tr>
-              <tr mat-row *matRowDef="let archivo; columns: mostrarColumnasArchivos;">
-              </tr>
-            </table>
+                <tr mat-header-row *matHeaderRowDef="mostrarColumnasArchivos"></tr>
+                <tr mat-row *matRowDef="let archivo; columns: mostrarColumnasArchivos;">
+                </tr>
+              </table>
+            </div>
             <br>
           </mat-card-content>
         </mat-card>

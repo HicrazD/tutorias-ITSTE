@@ -1,13 +1,13 @@
-<div class="container-fluid bg-light " style="width: 100%; ">
-  <img src="../../../assets/pleca_tecnm.jpg" alt="..." class="img-thumbnail">
+<div class="container-fluid example-container bg-light " >
+  <img src="../../../assets/pleca_tecnm.jpg" alt="..." class="img-fluid">
 
-  <img src="../../../assets/pleca-gob1.png" alt="..." class="img-thumbnail">
+  <img src="../../../assets/pleca-gob1.png" alt="..." class="img-fluid">
 
-  <img src="../../../assets/pleca-gob2.png" alt="..." class="img-thumbnail">
+  <img src="../../../assets/pleca-gob2.png" alt="..." class="img-fluid"  height="100">
 
-  <img src="../../../assets/Logo_ITSTE.png" alt="..." class="img-thumbnail" height="80" width="80">
+  <img src="../../../assets/Logo_ITSTE.png" alt="..." class="img-fluid" height="80" width="80">
 </div>
-<nav class="navbar navbar-expand-lg " style="background: #1B396A;">
+<nav class="navbar navbar-expand-lg" style="background: #1B396A;">
   <img width="80" alt="Angular Logo"
   src="../../../assets/divisiones/ITSTE.png" />
   <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,18 +30,13 @@
 
       <li class="nav-item">
         <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class="active1 nav-link" routerLink="/usuarios">Usuarios</a>
+      </li>      
+      <li class="nav-item">
+        <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class="active1 nav-link" routerLink="/usuarios/url-secret/lvb4/admin/itste">Codigos</a>
       </li>
     </ul>
 
-    <img src="../../../assets/divisiones/isc.png" alt="..." class="img-thumbnail mx-auto" width="100" >
-
-    <img src="../../../assets/divisiones/idc.png" alt="..." class="img-thumbnail mx-auto" width="100" >
-  
-    <img src="../../../assets/divisiones/Log.png" alt="..." class="img-thumbnail mx-auto" width="100">
-
-    <img src="../../../assets/divisiones/admin.png" alt="..." class="img-thumbnail mx-auto" width="100" >
-
-    <img src="../../../assets/divisiones/descarga.png" alt="..." class="img-thumbnail mx-auto" width="100">
+    
 
     <form class="form-inline my-2 my-lg-0 ml-auto">
       <ul class="navbar-nav mr-auto">
@@ -68,7 +63,19 @@
     </form>
   </div>
 </nav>
-
 <div class=" bg-light mx-auto p-1">
+
+<div class="text-center  p-1 example-container" style="background: #1B396A;">
+  <img src="../../../assets/divisiones/isc.png" alt="..." class="img-fluid mx-1" width="80">
+
+    <img src="../../../assets/divisiones/idc.png" alt="..." class="img-fluid mx-1" width="80">
+  
+    <img src="../../../assets/divisiones/Log.png" alt="..." class="img-fluid mx-1" width="80">
+
+    <img src="../../../assets/divisiones/admin.png" alt="..." class="img-fluid mx-1" width="80">
+
+    <img src="../../../assets/divisiones/descarga.png" alt="..." class="img-fluid mx-1" width="80">
+</div>
+
 </div>
 

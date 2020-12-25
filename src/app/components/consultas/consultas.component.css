@@ -7,13 +7,13 @@
 
   .example-container-s {
     height:300px;
-    width: 1350px;
-    max-width: 100%;
+    width: 500px;
+    max-width: 95%;
     overflow: auto;
   }
   
   table {
-    width: 1300px;
+    width: 800px;
   }
   
   .mat-form-field {

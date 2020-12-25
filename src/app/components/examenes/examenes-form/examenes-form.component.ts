@@ -20,7 +20,7 @@ extends CommonFormComponent<Examen, ExamenService> implements OnInit {
     router: Router,
     route: ActivatedRoute) {
       super(service, router, route);
-      this.titulo = 'Crear Examen';
+      this.titulo = 'Crear Evaluacion';
       this.model = new Examen();
       this.nombreModel = Examen.name;
       this.redirect = '/examenes';
