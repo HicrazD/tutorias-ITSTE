@@ -1,7 +1,7 @@
 
 <div class="container" *ngIf="alumno?.promAsistencia > 79">    
 
-<mat-card class="p-2 my-5 container w-75" style="background:#1B396A ;">
+<mat-card class="p-2 my-5 container w-100" style="background:#1B396A ;">
     <mat-card-header *ngIf="docente" class="mat-elevation-z8 my-1 p-1 bg-light">
         <mat-card-title class="p-1">
             Evaluacion del docente {{docente.nombre}}
@@ -9,8 +9,10 @@
     </mat-card-header>
 
     <mat-card-content>
-
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 m-3" style="width: 75%;">
+        <div class="example-container">
+            
+       
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 m-3">
 
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -52,10 +54,10 @@
             <tr mat-header-row *matHeaderRowDef="mostrarColumnasExamenes"></tr>
             <tr mat-row *matRowDef="let examen; columns: mostrarColumnasExamenes;"></tr>
         </table>
-
+        </div>
         <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons class="left mx-2">
         </mat-paginator>
-
+    
     </mat-card-content>
 </mat-card>
 </div>

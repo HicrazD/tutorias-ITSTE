@@ -13,7 +13,8 @@
                 </div>
             </div>
          
-            <button (click)="agregarPregunta()" class="btn btn-light btn-lg my-3">
+            <button mat-raised-button color="primary" (click)="agregarPregunta()" 
+            class="btn-lg my-3">
                 Agregar Pregunta
             </button>
 
@@ -40,7 +41,7 @@
             </div>
 
             <div class="form-group">
-                <button type="button" class="btn btn-primary" 
+                <button mat-raised-button color="accent"
                 (click)="model.id? editar(): crear()">
                     {{ model.id? 'Editar': 'Crear' }}
                 </button>

@@ -1,6 +1,6 @@
 <div class="card bg-light mb-3 mt-5">
   <div class="card-header">{{titulo}}</div>
-  <div class="card-body example-container">
+  <div class="card-body example-container" style="background: rgba(1, 112, 103, 0.705);">
     <button class="btn btn-primary my-2" routerLink="/examenes/form">Crear</button>
     <div class="alert alert-info" *ngIf="listar?.length==0">
       No hay evaluaciones en el sistema.
@@ -20,7 +20,7 @@
           <td>{{examen.id}}</td>
           <td>{{examen.nombre}} - {{examen.enabled}}</td>
           <td>{{examen.preguntas.length}}</td>
-          <td><button class="btn btn-secondary btn-sm" [routerLink]="['/examenes/form', examen.id]">
+          <td><button mat-raised-button color="accent" class="btn-sm" [routerLink]="['/examenes/form', examen.id]">
               editar
             </button></td>
           <td><button mat-raised-button class="btn btn-danger btn-sm" (click)="eliminar(examen)">
