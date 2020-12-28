@@ -24,7 +24,7 @@ export class ResponderExamenComponent implements OnInit {
   alumno: Alumno;
   docente: Docente;
   examenes: Examen[] = [];
-
+  suma:number = 0
   mostrarColumnasExamenes = ['id', 'nombre', 'preguntas', 'responder', 'ver'];
 
   pageSizeOptions = [3, 5, 10, 20, 30, 50];
@@ -76,9 +76,25 @@ export class ResponderExamenComponent implements OnInit {
             'success'
           );
           console.log(rs);
+          if(rs.length > 0 ){this.resultado(rs,0)}
         });
       }
     });
+  }
+
+  resultado(respuestas:Respuesta[],i:number){
+     let numeros = respuestas.map(r => r.numero)
+     console.log(numeros.length)
+     if(i < numeros.length)
+    {this.suma += numeros[i]
+    console.log('suma: ' + this.suma)
+    this.resultado(respuestas,i+1)
+  }
+    else{
+      console.log('suma final: ' + this.suma)
+      console.log(i + '--' + (numeros.length))
+    }
+
   }
 
   verExamen(examen: Examen): void {
