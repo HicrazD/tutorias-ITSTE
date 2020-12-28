@@ -46,6 +46,7 @@ export class AsignarExamenesComponent implements OnInit {
       this.docenteService.ver(id).subscribe(c => {
         this.docente = c;
         this.examenes = this.docente.examenes;
+        console.log(c)
         this.iniciarPaginador();
 
       });

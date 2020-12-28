@@ -1,7 +1,8 @@
 <h1 mat-dialog-title>Docente {{docente.nombre}}</h1>
 <div mat-dialog-content>
   <p>Examen {{examen.nombre}}</p>
-
+ <!-- Se cambia respuesta.texto por numero para usar numeros(number)
+  ) en ves de texto o string-->
   <mat-expansion-panel *ngFor="let pregunta of examen.preguntas">
     <mat-expansion-panel-header>
       <mat-panel-title>

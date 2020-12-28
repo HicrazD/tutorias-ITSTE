@@ -45,11 +45,12 @@ export class ResponderExamenComponent implements OnInit {
         this.alumno = alumno;
         this.docenteService.obtenerDocentePorAlumnoId(this.alumno).subscribe(
           docente => {
+            console.log(docente)
             this.docente = docente;
             this.examenes = (docente && docente.examenes)? docente.examenes: [];
             this.dataSource = new MatTableDataSource<Examen>(this.examenes);
             this.dataSource.paginator = this.paginator;
-            this.paginator._intl.itemsPerPageLabel = 'Registros por página:';
+            //this.paginator._intl.itemsPerPageLabel = 'Registros por página:';
           }
         );
       });
@@ -83,6 +84,7 @@ export class ResponderExamenComponent implements OnInit {
   verExamen(examen: Examen): void {
     this.respuestaService.obtenerRespuestasPorAlumnoPorExamen(this.alumno, examen)
     .subscribe(rs => {
+      console.log(rs)
       const modalRef = this.dialog.open(VerExamenModalComponent, {
         width: '750px',
         data: {docente: this.docente, examen: examen, respuestas: rs}

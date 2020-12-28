@@ -31,9 +31,9 @@ export class ResponderExamenModalComponent implements OnInit {
   cancelar(): void{
     this.modalRef.close();
   }
-
-  responder(pregunta: Pregunta, event): void {
-    const texto = event.target.value as string;
+  
+  responder(pregunta: Pregunta, event): void { // Cambiar texto para utilisar datos numericos
+    const numero = event.target.value as number;
     const respuesta  = new Respuesta();
     respuesta.alumno = this.alumno;
     respuesta.pregunta = pregunta;
@@ -43,7 +43,7 @@ export class ResponderExamenModalComponent implements OnInit {
     examen.nombre = this.examen.nombre;
 
     respuesta.pregunta.examen = examen;
-    respuesta.texto = texto;
+    respuesta.numero = numero;
 
     this.respuestas.set(pregunta.id, respuesta);
     console.log(this.respuestas);
