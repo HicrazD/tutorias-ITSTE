@@ -7,9 +7,11 @@ import { Alumno } from 'src/app/models/alumno';
 import { Docente } from 'src/app/models/docente';
 import { Examen } from 'src/app/models/examen';
 import { Respuesta } from 'src/app/models/respuesta';
+import { Resultado } from 'src/app/models/resultado';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { DocenteService } from 'src/app/services/docente.service';
 import { RespuestaService } from 'src/app/services/respuesta.service';
+import { ResultadoService } from 'src/app/services/resultado.service';
 import Swal from 'sweetalert2';
 import { ResponderExamenModalComponent } from '../responder-examen-modal/responder-examen-modal.component';
 import { VerExamenModalComponent } from '../ver-examen-modal/ver-examen-modal.component';
@@ -20,8 +22,9 @@ import { VerExamenModalComponent } from '../ver-examen-modal/ver-examen-modal.co
   styleUrls: ['./responder-examen.component.css']
 })
 export class ResponderExamenComponent implements OnInit {
-
+  resultadoRespuesta: Resultado
   alumno: Alumno;
+  error:any
   docente: Docente;
   examenes: Examen[] = [];
   suma:number = 0
@@ -36,7 +39,10 @@ export class ResponderExamenComponent implements OnInit {
     private alumnoService: AlumnoService,
     private docenteService: DocenteService,
     private respuestaService: RespuestaService,
-    public dialog: MatDialog) { }
+    private resultadoService: ResultadoService,
+    public dialog: MatDialog) { 
+      this.resultadoRespuesta = new Resultado()
+    }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -93,6 +99,21 @@ export class ResponderExamenComponent implements OnInit {
     else{
       console.log('suma final: ' + this.suma)
       console.log(i + '--' + (numeros.length))
+      let ex = respuestas.map(r => r.pregunta.examen)
+      let indice = ex[0]
+      console.log(indice)
+      this.resultadoRespuesta.resultado = this.suma
+      this.resultadoRespuesta.alumno = this.alumno
+      this.resultadoRespuesta.docente = this.docente
+      this.resultadoRespuesta.examen  = indice
+      console.log(this.resultadoRespuesta)
+      this.resultadoService.crear(this.resultadoRespuesta).subscribe(results =>{
+         this.resultadoRespuesta = results
+         console.log(results)
+        },err =>{
+            this.error = err
+            console.log(this.error)
+          })
     }
 
   }
