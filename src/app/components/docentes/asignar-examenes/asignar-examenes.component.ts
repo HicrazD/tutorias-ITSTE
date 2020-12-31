@@ -11,6 +11,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Docente } from 'src/app/models/docente';
 import { DocenteService } from 'src/app/services/docente.service';
+import { ResultadoService } from 'src/app/services/resultado.service';
+import { VerResultadosModalComponent } from '../ver-resultados-modal/ver-resultados-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Resultado } from 'src/app/models/resultado';
 
 @Component({
   selector: 'app-asignar-examenes',
@@ -23,7 +27,7 @@ export class AsignarExamenesComponent implements OnInit {
   docentes:Docente[]
   autocompleteControl = new FormControl();
   examenesFiltrados: Examen[] = [];
-
+  resultados:Resultado[] = []
   examenesAsignar: Examen[] = [];
   examenes: Examen[] = [];
 
@@ -32,13 +36,15 @@ export class AsignarExamenesComponent implements OnInit {
   pageSizeOptions = [3, 5, 10, 20, 50];
 
   mostrarColumnas = ['nombre','eliminar'];
-  mostrarColumnasExamenes = ['id', 'nombre','eliminar'];
+  mostrarColumnasExamenes = ['id', 'nombre','resultado','eliminar'];
   tabIndex = 0;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private docenteService: DocenteService,
-    private examenService: ExamenService) { }
+    private examenService: ExamenService,
+    private resultadoService:ResultadoService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -67,6 +73,21 @@ export class AsignarExamenesComponent implements OnInit {
 
   mostrarNombre(examen?: Examen): string {
     return examen ? examen.nombre : '';
+  }
+
+  verResultados(examen: Examen): void {
+    this.resultadoService.findByResultadoByDocente(this.docente,examen)
+    .subscribe(rs => {
+      console.log(rs)
+      const modalRef = this.dialog.open(VerResultadosModalComponent, {
+        width: '750px',
+        data: {docente: this.docente, examen: examen,resultados:rs}
+      });
+
+      modalRef.afterClosed().subscribe(() => {
+        console.log('Modal ver resultados cerrado');
+      })
+    });
   }
 
   seleccionarExamen(event: MatAutocompleteSelectedEvent): void {
@@ -156,7 +177,7 @@ export class AsignarExamenesComponent implements OnInit {
         });    
 
       }
-    });
+    });    
 
   }
 

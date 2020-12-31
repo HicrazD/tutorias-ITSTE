@@ -53,6 +53,14 @@
               <th mat-header-cell *matHeaderCellDef> Nombre </th>
               <td mat-cell *matCellDef="let examen"> {{examen.nombre}} </td>
             </ng-container>
+
+            <ng-container matColumnDef="resultado">
+              <th mat-header-cell *matHeaderCellDef> Resultados </th>
+              <td mat-cell *matCellDef="let examen">
+                <button mat-mini-fab color="accent" (click)="verResultados(examen)">
+                  <mat-icon>visibility</mat-icon>
+                </button> </td>
+            </ng-container>
   
             <ng-container matColumnDef="eliminar">
               <th mat-header-cell *matHeaderCellDef> Eliminar </th>
@@ -103,6 +111,8 @@
               <th mat-header-cell *matHeaderCellDef> Nombre </th>
               <td mat-cell *matCellDef="let examen"> {{examen.nombre}} </td>
             </ng-container>
+
+
     
             <ng-container matColumnDef="eliminar">
               <th mat-header-cell *matHeaderCellDef> Eliminar </th>

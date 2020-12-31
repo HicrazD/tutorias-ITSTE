@@ -9,6 +9,8 @@ import { CodigoService } from 'src/app/services/codigo.service';
 import { RoleService } from 'src/app/services/role.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 
 interface Tipo {
   value: string;
@@ -22,7 +24,7 @@ interface Tipo {
 })
 export class UsuarioAdminComponent implements OnInit {
   code: Codigo
-  codigosDb:Codigo[]
+  codigosDb: Codigo[]
   codigo: string = 'xtr92%ITSTE.'
   codigo2: string = '$%rolesdzc#&.'
   titulo: string = 'Administrador'
@@ -33,10 +35,10 @@ export class UsuarioAdminComponent implements OnInit {
   error: any;
   role: Roles[]
   codigoRol: boolean = true
-  usuario:Usuario;
-  usuarioDb:Usuario
-  userContra:Usuario
-  newContr:string
+  usuario: Usuario;
+  usuarioDb: Usuario
+  userContra: Usuario
+  newContr: string
   tipos: Tipo[] = [
     { value: 'DOCENTE', viewValue: 'DOCENTE' },
     { value: 'ADMIN', viewValue: 'ADMIN' },
@@ -44,11 +46,11 @@ export class UsuarioAdminComponent implements OnInit {
   ];
 
   displayedColumns: string[] = ['codigo', 'tipo', 'eliminar'];
-  
+
   dataSource: MatTableDataSource<Codigo>;
-  constructor(private router: Router,public authService: AuthService,
-    private roleService: RoleService,private usuarioService:UsuarioService,
-    private codigoService: CodigoService,private route: ActivatedRoute) {
+  constructor(private router: Router, public authService: AuthService,
+    private roleService: RoleService, private usuarioService: UsuarioService,
+    private codigoService: CodigoService, private route: ActivatedRoute) {
     this.code = new Codigo()
     this.codigosDb = []
     this.usuario = new Usuario()
@@ -58,10 +60,10 @@ export class UsuarioAdminComponent implements OnInit {
   ngOnInit(): void {
     this.roleService.listar().subscribe(r => this.role = r)
     this.codigoService.listar().subscribe(codigo => {
-      this.codigosDb = codigo  
-      this.dataSource = new MatTableDataSource<Codigo>(this.codigosDb);    
+      this.codigosDb = codigo
+      this.dataSource = new MatTableDataSource<Codigo>(this.codigosDb);
     })
-   
+
     this.route.paramMap.subscribe(params => {
       const id: number = +params.get('id')
       if (id)
@@ -72,20 +74,20 @@ export class UsuarioAdminComponent implements OnInit {
 
   }
 
-  editarUsuario(contra:string,nuevaContra:string):void{
-    if(contra === nuevaContra){
-         this.usuarioDb.password = nuevaContra
-        this.usuarioService.editar(this.usuarioDb).subscribe(m => {
-          //console.log(m);
-          Swal.fire('Modificado:', `Usuario actualizado con éxito`, 'success');
-          this.router.navigate(['/home']);
-        }, err => {
-          if(err.status === 400 || err.status === 500){
-            this.error = err.error;
-            console.log(this.error);
-          }
-        });
-      
+  editarUsuario(contra: string, nuevaContra: string): void {
+    if (contra === nuevaContra) {
+      this.usuarioDb.password = nuevaContra
+      this.usuarioService.editar(this.usuarioDb).subscribe(m => {
+        //console.log(m);
+        Swal.fire('Modificado:', `Usuario actualizado con éxito`, 'success');
+        this.router.navigate(['/home']);
+      }, err => {
+        if (err.status === 400 || err.status === 500) {
+          this.error = err.error;
+          console.log(this.error);
+        }
+      });
+
     }
   }
   applyFilter(event: Event) {
@@ -141,7 +143,7 @@ export class UsuarioAdminComponent implements OnInit {
         title: 'Exito!',
         text: 'Roles Creados!',
       })
-     },
+    },
       err => {
         if (err.status == 400) {
           this.error = err.error;
@@ -157,7 +159,17 @@ export class UsuarioAdminComponent implements OnInit {
           })
           console.log(this.error);
         }
-      })    
-    
+      })
+  }
+
+  exportexcel(): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.dataSource.data)
+    const workbook: XLSX.WorkBook = {
+      Sheets: { 'data': worksheet },
+      SheetNames: ['data']
+    }
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+    const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+    FileSaver.saveAs(data, 'Codigos' + '_export_' + '.xlsx')
   }
 }

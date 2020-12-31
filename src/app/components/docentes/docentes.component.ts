@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Docente } from 'src/app/models/docente';
 import { DocenteService } from 'src/app/services/docente.service';
-import { CommonListarComponent } from '../alumnos/common-listar.component';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-docentes',
@@ -34,6 +34,19 @@ export class DocentesComponent implements OnInit {  // extends CommonListarCompo
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  exportexcel(): void {
+    let element = document.getElementById('docentesTable');
+ //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(element.d)
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const workbook: XLSX.WorkBook = {
+      Sheets: { 'data': worksheet },
+      SheetNames: ['data']
+    }
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+    const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+    FileSaver.saveAs(data, 'Docentes_Tabla' + '_export_' + '.xlsx')
   }
 
 }

@@ -12,7 +12,7 @@
         </mat-form-field>
       </mat-card>
       <div class="example-container mat-elevation-z8  w-100" *ngIf="listar?.length>0">
-        <table mat-table [dataSource]="dataSource">
+        <table mat-table [dataSource]="dataSource" id="docentesTable">
 
           <ng-container matColumnDef="id" sticky>
             <th mat-header-cell *matHeaderCellDef> Clave</th>
@@ -95,6 +95,8 @@
       <button class="btn btn-info btn-sm my-1" [routerLink]="['/examenes/asignar-examenes']">
         asignar Todos
       </button>
+
+      <button mat-raised-button (click)="exportexcel()" color="accent">Exportar Excel</button>
       <br>
     </div>
   </mat-card-content>

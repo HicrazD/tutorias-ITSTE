@@ -8,6 +8,8 @@ import { Docente } from 'src/app/models/docente';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { DocenteService } from 'src/app/services/docente.service';
 import Swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-asignar-alumnos',
@@ -134,9 +136,21 @@ export class AsignarAlumnosComponent implements OnInit {
         });    
 
       }
-    });
+   });
+   
+  }
 
-
+  exportexcel(): void {
+    let element = document.getElementById('alumnosTable');
+ //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(element.d)
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const workbook: XLSX.WorkBook = {
+      Sheets: { 'data': worksheet },
+      SheetNames: ['data']
+    }
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+    const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+    FileSaver.saveAs(data, this.docente.nombre +'_alumnos_asignados' + '_export_' + '.xlsx')
   }
 
 }

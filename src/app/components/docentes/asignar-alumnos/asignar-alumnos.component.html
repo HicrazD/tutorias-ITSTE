@@ -62,7 +62,7 @@
 
       <mat-tab label="Alumnos">
         <div class="container example-container">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-3">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mx-3" id="alumnosTable">
 
             <ng-container matColumnDef="id" sticky>
               <th mat-header-cell *matHeaderCellDef> Matricula</th>
@@ -101,8 +101,9 @@
             <tr mat-header-row *matHeaderRowDef="mostrarColumnasAlumnos"></tr>
             <tr mat-row *matRowDef="let alumno; columns: mostrarColumnasAlumnos;">
             </tr>
-          </table>
+          </table>          
         </div>
+        <button mat-raised-button (click)="exportexcel()" color="accent">Exportar Excel</button>
         <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons class="float-left mx-2">
         </mat-paginator>
       </mat-tab>

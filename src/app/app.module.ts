@@ -51,6 +51,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ResponderExamenModalComponent } from './components/alumnos/responder-examen-modal/responder-examen-modal.component';
 import { VerExamenModalComponent } from './components/alumnos/ver-examen-modal/ver-examen-modal.component';
 import { FooterComponent } from './footer/footer.component';
+import { VerResultadosModalComponent } from './components/docentes/ver-resultados-modal/ver-resultados-modal.component';
 
 
 
@@ -83,8 +84,9 @@ import { FooterComponent } from './footer/footer.component';
     ResponderExamenModalComponent,
     VerExamenModalComponent,
     FooterComponent,
+    VerResultadosModalComponent,
   ],
-  entryComponents: [ResponderExamenModalComponent,VerExamenModalComponent],
+  entryComponents: [ResponderExamenModalComponent,VerExamenModalComponent,VerResultadosModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
