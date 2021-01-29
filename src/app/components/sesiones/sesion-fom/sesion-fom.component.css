@@ -1,0 +1,22 @@
+.colorFondo{
+    background: rgba(0, 92, 72, 0.596);
+}
+
+.fondoCrear{
+    background: rgb(238, 131, 0);
+    color: white;
+    width: 100%;
+}
+.fondoCard{
+    background-size: cover;
+    width: 900px;
+    max-width: 100%;
+}
+
+  .example-full-width {
+    width: 100%;
+  }
+
+  .mat-form-field{
+      max-width: 100%;
+  }

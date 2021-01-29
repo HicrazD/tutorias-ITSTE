@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Alumno } from 'src/app/models/alumno';
 import { Docente } from 'src/app/models/docente';
 import { Examen } from 'src/app/models/examen';
+import { Pregunta } from 'src/app/models/pregunta';
 import { Respuesta } from 'src/app/models/respuesta';
 import { Resultado } from 'src/app/models/resultado';
 import { AlumnoService } from 'src/app/services/alumno.service';
@@ -23,6 +24,7 @@ import { VerExamenModalComponent } from '../ver-examen-modal/ver-examen-modal.co
 })
 export class ResponderExamenComponent implements OnInit {
   resultadoRespuesta: Resultado
+  preguntas:Pregunta[] = []
   alumno: Alumno;
   error:any
   docente: Docente;
@@ -51,7 +53,7 @@ export class ResponderExamenComponent implements OnInit {
         this.alumno = alumno;
         this.docenteService.obtenerDocentePorAlumnoId(this.alumno).subscribe(
           docente => {
-            console.log(docente)
+           // console.log(docente)
             this.docente = docente;
             this.examenes = (docente && docente.examenes)? docente.examenes: [];
             this.dataSource = new MatTableDataSource<Examen>(this.examenes);
@@ -71,9 +73,9 @@ export class ResponderExamenComponent implements OnInit {
     });
 
     modalRef.afterClosed().subscribe((respuestasMap: Map<number, Respuesta>) => {
-      console.log('modal responder examen ha sido enviado y cerrado');
-      console.log(respuestasMap);
-      if(respuestasMap){
+    //  console.log('modal responder examen ha sido enviado y cerrado');
+    //  console.log(respuestasMap);
+      if(respuestasMap && respuestasMap?.size == examen.preguntas.length){
         const respuestas: Respuesta[] = Array.from(respuestasMap.values());
         this.respuestaService.crear(respuestas).subscribe(rs =>{
           Swal.fire(
@@ -81,13 +83,61 @@ export class ResponderExamenComponent implements OnInit {
             'Preguntas enviadas con éxito',
             'success'
           );
-          console.log(rs);
-          if(rs.length > 0 ){this.resultado(rs,0)}
+         // console.log(rs);
+         // console.log(rs.filter(r => r.respuesta == 'frecuentemente'))
+         if(rs.length > 0 ) this.resultado(rs)
         });
+      }
+      if(respuestasMap?.size < examen.preguntas.length){
+        Swal.fire('Error¡','No debe dejar respuestas vacias','error')
       }
     });
   }
+  resultado(respuestas:Respuesta[]){
+    let siempre = respuestas.filter(r => r.respuesta == 'Siempre')
+    let frecuentemente = respuestas.filter(r => r.respuesta == 'Frecuentemente')
+    let pocasVeces = respuestas.filter(r => r.respuesta == 'Pocas veces')
+    let nunca = respuestas.filter(r => r.respuesta == 'Nunca')
+    let si = respuestas.filter(r => r.respuesta == 'Si')
+    let no = respuestas.filter(r => r.respuesta == 'No')
+    /*
+    console.log('siempre: ' + siempre.length)
+    console.log('frecuentemente: ' + frecuentemente.length)
+    console.log('pocasVeces: ' + pocasVeces.length)
+    console.log('nunca: ' + nunca.length)
+    console.log('si: ' + si.length)
+    console.log('no: ' + no.length)
+*/
 
+   this.preguntas = respuestas.map(resP => resP.pregunta)
+   console.log('respuestas.map')
+   console.log(this.preguntas)
+   let multipleTexto = this.preguntas.filter(p => p.tipo == 'Multiple Texto')
+   let multipleSn = this.preguntas.filter(p => p.tipo == 'Multiple Si/No')
+   let puntajeMax = (multipleTexto.length * 5) + (multipleSn.length * 5)
+    let puntajeOptenido = (siempre.length * 5) + (frecuentemente.length * 4) + (pocasVeces.length * 3)
+    + (nunca.length * 2) + (si.length * 5) + (no.length * 2);
+
+    let resultadoFinal = (puntajeOptenido * 100) / (puntajeMax)
+
+   // console.log(resultadoFinal)
+    let ex = respuestas.map(r => r.pregunta.examen)
+    let indice = ex[0]
+
+    const result = new Resultado()
+    result.resultado = +resultadoFinal
+    result.docente = this.docente
+    result.examen = indice
+    result.alumno = this.alumno
+
+    this.resultadoService.crear(result).subscribe(results =>{
+      console.log(results)
+     },err =>{
+         this.error = err
+         console.log(this.error)
+       })
+  }
+  /*
   resultado(respuestas:Respuesta[],i:number){
      let numeros = respuestas.map(r => r.numero)
      console.log(numeros.length)
@@ -117,18 +167,19 @@ export class ResponderExamenComponent implements OnInit {
     }
 
   }
+  */
 
   verExamen(examen: Examen): void {
     this.respuestaService.obtenerRespuestasPorAlumnoPorExamen(this.alumno, examen)
     .subscribe(rs => {
-      console.log(rs)
+    //  console.log(rs)
       const modalRef = this.dialog.open(VerExamenModalComponent, {
         width: '750px',
         data: {docente: this.docente, examen: examen, respuestas: rs}
       });
 
       modalRef.afterClosed().subscribe(() => {
-        console.log('Modal ver examen cerrado');
+      //  console.log('Modal ver examen cerrado');
       })
     });
   }

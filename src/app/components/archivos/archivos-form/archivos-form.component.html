@@ -52,7 +52,7 @@
               </mat-progress-bar>
             </div>
 
-            <span *ngIf="!archivoSelected" class="my-5">Archivo Seleccionado
+            <span *ngIf="archivoSelected" class="my-5">Archivo Seleccionado
 
               <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-check2-circle" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@
 
         </mat-tab>
 
-        <mat-tab label="Editar Perfil" *ngIf="archivo.id">
+        <mat-tab label="Editar archivo" *ngIf="archivo.id">
 
           <mat-form-field appearance="outline" class="mx-3" style="width: 450px;max-width: 70%;">
             <label for="nombre">Nombre</label>

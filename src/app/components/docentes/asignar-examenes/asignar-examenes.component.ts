@@ -52,7 +52,7 @@ export class AsignarExamenesComponent implements OnInit {
       this.docenteService.ver(id).subscribe(c => {
         this.docente = c;
         this.examenes = this.docente.examenes;
-        console.log(c)
+        //console.log(c)
         this.iniciarPaginador();
 
       });
@@ -78,14 +78,14 @@ export class AsignarExamenesComponent implements OnInit {
   verResultados(examen: Examen): void {
     this.resultadoService.findByResultadoByDocente(this.docente,examen)
     .subscribe(rs => {
-      console.log(rs)
+     // console.log(rs)
       const modalRef = this.dialog.open(VerResultadosModalComponent, {
         width: '750px',
         data: {docente: this.docente, examen: examen,resultados:rs}
       });
 
       modalRef.afterClosed().subscribe(() => {
-        console.log('Modal ver resultados cerrado');
+      //  console.log('Modal ver resultados cerrado');
       })
     });
   }
@@ -100,7 +100,7 @@ export class AsignarExamenesComponent implements OnInit {
     } else {
       Swal.fire(
         'Error:',
-        `El examen ${examen.nombre} ya está asignado al curso`,
+        `La evaluacion ${examen.nombre} ya está asignada al curso`,
         'error'
       );
     }
@@ -137,7 +137,7 @@ export class AsignarExamenesComponent implements OnInit {
 
       Swal.fire(
         'Asignados:',
-        `Examenes asignado con éxito al curso ${docente.nombre}`,
+        `Evaluaciones asignadas con éxito al curso ${docente.nombre}`,
         'success'
       );
       this.tabIndex = 2;
@@ -146,7 +146,7 @@ export class AsignarExamenesComponent implements OnInit {
   asignarTodos(){
     this.docenteService.asignarExamenesTodos(this.examenesAsignar).subscribe(docentes =>
       {this.docentes=docentes
-      console.log(this.docentes)},e=>{console.log(e.status)
+     // console.log(this.docentes)},e=>{console.log(e.status)
       Swal.fire('Asigar Evaluaciones',` Evaluaciones agregadas`,'success')
       this.router.navigate(['/docentes'])
       }
@@ -156,7 +156,7 @@ export class AsignarExamenesComponent implements OnInit {
   eliminarExamenDelCurso(examen: Examen): void {
     Swal.fire({
       title: 'Cuidado:',
-      text: `¿Seguro que desea eliminar a ${examen.nombre} ?`,
+      text: `¿Seguro que desea eliminar  ${examen.nombre} ?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -171,7 +171,7 @@ export class AsignarExamenesComponent implements OnInit {
           this.iniciarPaginador();
           Swal.fire(
             'Eliminado:',
-            `Examen ${examen.nombre} eliminado con éxito del curso ${curso.nombre}.`,
+            `Evaluacion ${examen.nombre} eliminada con éxito del curso ${curso.nombre}.`,
             'success'
           );
         });    

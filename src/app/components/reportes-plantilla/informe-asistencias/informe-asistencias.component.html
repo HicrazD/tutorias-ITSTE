@@ -1,0 +1,81 @@
+<div class="container-fluid overflow-auto bg-secondary" style="width: 1300px; height: 500px; max-width: 100%; ">
+  <div class="container-fluid overflow-auto" id="element-to-print">
+    <mat-card class="container-fluid example-card" style="width: 21.30cm; height: 27.94cm;">
+      <div class="container p-2 ml-3">
+        <app-header></app-header>
+      </div>
+      <mat-card-content>
+        <br>
+        <div class="container-fluid overflow-auto lados pr-5" style="margin-right: 20px;">
+          <div class="container-fluid">
+            <br>
+          </div>
+
+          <div class="container-fluid">
+            <p class="text-right tam9">San Pedro y San Pablo Teposcolula, Oaxaca,<input type="text"
+                class="sinborde inputRight tam9" value="2/Diciembre/2019"></p>
+            <p class="text-right tam9">Asunto: Informe del porcentaje de asistencia de tutorados</p>
+          </div>
+          <br>
+          <div class="container-fluid">
+            <p class="text-left tam10 font-weight-bold">LIC. ANA LAURA ORTIZ GALINDO <br> JEFA DEL DEPARTAMENTO
+              DESARROLLO ACADÉMICO <br>
+              PRESENTE</p>
+          </div>
+          <br>
+          <div class="container-fluid ">
+            <p class="text-justify tam10" style="width: 99%;">
+              {{txtArea}}
+            </p>
+            <p class="text-justify">Sin más por el momento, agradezco la atención que brinde al presente.</p>
+          </div>
+
+          <div class="container" style="margin-top: 5%;">
+
+            <table class="table table-sm">
+              <thead>
+                <tr class="font-weight-bold">
+                  <td scope="col">Matricula</td>
+                  <td scope="col" style="width: 30%;">Nombre del tutorado (a)</td>
+                  <td scope="col" style="width: 20%;">Semestre y grupo</td>
+                  <td scope="col">Número de sesiones a que fue convocado</td>
+                  <td scope="col">Número de sesiones a que asistió</td>
+                  <td scope="col">Porcentaje alcanzado</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of alumnos">
+                  <td>{{item.matricula}}</td>
+                  <td>{{item.nombre}} {{item.apellido}} </td>
+                  <td>{{item.semestre}} {{item.grupo}}</td>
+                  <td>{{docente?.sesiones.length}}</td>
+                  <td>{{item.asistenciaPresente}}</td>
+                  <td>{{item.promAsistencia}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+
+          <div class="container-fluid">           
+          
+          <p class="text-left tam10 font-weight-bold">A T E N T A M E N T E </p>
+          <p class="text-left tam8 font-italic font-weight-bold">Innovación Tecnológica y Desarrollo Regional
+            Sustentable</p>
+          </div>
+        </div>
+      </mat-card-content>
+      <div class="container-fluid" style="bottom: 0%; position: absolute;">
+        <app-footer-resportes></app-footer-resportes>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<div class="container bg-light">
+   <br>
+  <textarea name="textarea" [(ngModel)]="txtArea" cols="50" rows="8" class=""></textarea>
+
+  <button mat-raised-button color="warn" (click)="exportPdf()" class="w-100">PDF</button>
+
+</div>

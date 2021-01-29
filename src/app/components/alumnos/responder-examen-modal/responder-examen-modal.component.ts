@@ -16,48 +16,65 @@ import Swal from 'sweetalert2';
   styleUrls: ['./responder-examen-modal.component.css']
 })
 export class ResponderExamenModalComponent implements OnInit {
-  enabled:boolean = false
-  error:any
-  resultado:Resultado
+  multiple = [
+    { valor: 'Siempre', muestraValor: 'Siempre' },
+    { valor: 'Frecuentemente', muestraValor: 'Frecuentemente' },
+    { valor: 'Pocas veces', muestraValor: 'Pocas veces' },
+    { valor: 'Nunca', muestraValor: 'Nunca' }
+  ];
+
+  siNo =
+    [
+      { valor: 'Si', muestraValor: 'Si' },
+      { valor: 'No', muestraValor: 'No' }
+    ]
+    ;
+
+  saveR: string;
+  enabled: boolean = false
+  error: any
+  resultado: Resultado
   docente: Docente;
   alumno: Alumno;
   examen: Examen;
-
+  namelistA = new Array(20);
   respuestas: Map<number, Respuesta> = new Map<number, Respuesta>();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-  public modalRef: MatDialogRef<ResponderExamenModalComponent>,private resultadoService:ResultadoService)
-  {
-   this.resultado = new Resultado()
+    public modalRef: MatDialogRef<ResponderExamenModalComponent>, private resultadoService: ResultadoService) {
+    this.resultado = new Resultado()
   }
 
   ngOnInit(): void {
     this.docente = this.data.docente as Docente;
     this.alumno = this.data.alumno as Alumno;
     this.examen = this.data.examen as Examen;
-    this.resultadoService.findByResultadoAttribIds(this.docente,this.alumno,this.examen)
-    .subscribe(r => {
-      this.resultado = r
-      if(r){
-        this.enabled = true
-      }
-      console.log(r)
-    },err =>{
-      this.error = err
-      console.log(this.error)
-      if(err.status = 400){
-        console.log('not found results')
-      }
-    })
+   // console.log(this.alumno.id, this.examen.id, this.docente.id)
+    this.resultadoService.findByResultadoAttribIds(this.docente, this.alumno, this.examen)
+      .subscribe(r => {
+        this.resultado = r
+       // console.log(this.resultado)
+        if (r) {
+          this.enabled = true
+        }
+       // console.log(r)
+      }, err => {
+        this.error = err
+        // console.log(this.error)
+        if (err.status = 400) {
+        //  console.log('not found results')
+        }
+      })
   }
 
-  cancelar(): void{
+  cancelar(): void {
     this.modalRef.close();
   }
-  
+
   responder(pregunta: Pregunta, event): void { // Cambiar texto para utilisar datos numericos
-    const numero = event.target.value as number;
-    const respuesta  = new Respuesta();
+    const texto = event.target.value as string;
+   // console.log(texto + ' Resp:v')
+    const respuesta = new Respuesta();
     respuesta.alumno = this.alumno;
     respuesta.pregunta = pregunta;
 
@@ -66,11 +83,29 @@ export class ResponderExamenModalComponent implements OnInit {
     examen.nombre = this.examen.nombre;
 
     respuesta.pregunta.examen = examen;
-    respuesta.numero = numero;
+    respuesta.respuesta = texto;
 
     this.respuestas.set(pregunta.id, respuesta);
-    console.log(this.respuestas);  
-}
+   // console.log(this.respuestas);
+  }
+
+  guardarSelect(pregunta: Pregunta, respuesta: string) {
+ //   console.log(respuesta)
+
+    const respuestaSelect = new Respuesta();
+    respuestaSelect.alumno = this.alumno;
+    respuestaSelect.pregunta = pregunta;
+
+    const examen = new Examen();
+    examen.id = this.examen.id;
+    examen.nombre = this.examen.nombre;
+
+    respuestaSelect.pregunta.examen = examen;
+    respuestaSelect.respuesta = respuesta;
+
+    this.respuestas.set(pregunta.id, respuestaSelect);
+    console.log(this.respuestas);
+  }
 
 }
 

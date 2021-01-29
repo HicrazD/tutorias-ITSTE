@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="container formx Max my-3 p-2" style="background:#026b3f8c ; width: 450px;overflow: auto; max-width: 75%;">
+<div class="container formx Max my-3 p-2" style="background:#026b3f8c ; width: 450px;overflow: auto; max-width: 100%;">
   <mat-card class="mat-elevation-z8 w-100" style="background:#ff9101fb ;">
     <h1 class="text-light">
       {{titulo}}
@@ -8,25 +8,22 @@
     </h1>
   </mat-card>
   <br>
-  <mat-card class="mat-elevation-z8 w-100">
+  <mat-card class="mat-elevation-z8 w-100" style="background: url(../../../../assets/Resporte/background_main.png); background-size: cover;">
     <form class="">
-      <div class="input-group flex-nowrap mat-elevation-z8">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="addon-wrapping"><i class="material-icons prefix">person</i></span>
-        </div>
-        <input type="text" required class="form-control" name="username" placeholder="username" aria-label="username"
-          aria-describedby="addon-wrapping" [(ngModel)]="usuario.username">
-        
-      </div>
-      <br>
-      <div class="input-group flex-nowrap mat-elevation-z8">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="addon-wrapping"><i class="material-icons prefix">lock</i></span>
-        </div>
-        <input type="password" required class="form-control" name="password" placeholder="password"
-          aria-label="password" aria-describedby="addon-wrapping" [(ngModel)]="usuario.password">
-        
-      </div>
+      <mat-form-field appearance="outline"class="mat-elevation-z8">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="Usuario" name="username" [(ngModel)]="usuario.username" required>
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mat-elevation-z8">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="hide2 ? 'password' : 'text'" [(ngModel)]="usuario.password" name="password"  required>
+        <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
       <div class="alert alert-danger" *ngIf="error?.username">
         {{ error.username }}
       </div>
@@ -36,7 +33,7 @@
       <br>
     </form>
     <mat-card-actions class="container">      
-      <mat-form-field appearance="fill" class="bg-light w-75 mx-1">
+      <mat-form-field appearance="outline" class="bg-light w-75 mx-1">
         <mat-label>Ingresar codigo</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" 
           (keyup)="Codigo($event.target.value)">
@@ -46,7 +43,7 @@
         </button>
         <span></span>
       </mat-form-field>
-      <button mat-button color="primary" (click)="createRol()">Crear</button>
+      <button mat-button color="primary" (click)="createRol()" [disabled]='estatus'>Crear</button>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -7,7 +7,7 @@
   
     <mat-card-content>
       <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
-        <mat-tab label="Asignar Exámenes">
+        <mat-tab label="Asignar Evaluación">
   
           <mat-form-field>
             <input matInput placeholder="Añadir examen" [formControl]="autocompleteControl"
@@ -41,7 +41,7 @@
             [disabled]="examenesAsignar.length === 0">Asignar</button>
   
         </mat-tab>
-        <mat-tab label="Exámenes del curso">
+        <mat-tab label="Evaluaciones del curso">
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 m-3" style="width: 75%;">
   
             <ng-container matColumnDef="id">

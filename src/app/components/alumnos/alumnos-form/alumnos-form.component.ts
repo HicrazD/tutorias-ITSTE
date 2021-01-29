@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alumno } from 'src/app/models/alumno';
 import { Archivo } from 'src/app/models/archivo';
+import { Asistencia } from 'src/app/models/asistencia';
 import { Usuario } from 'src/app/models/usuario';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { ArchivoService } from 'src/app/services/archivo.service';
+import { AsistenciaService } from 'src/app/services/asistencia.service';
 import Swal from 'sweetalert2';
 import { CommonFormComponent } from '../../common-form.component';
 
@@ -20,7 +22,8 @@ export class AlumnosFormComponent
   usuario: Usuario = new Usuario()
   tabIndex = 0;
   archivo: Archivo = new Archivo()
-
+  asistencias:Asistencia[] = []
+  presente:Asistencia[] = []
   archivoSelected: File
   semestre = [
     {valor:'PRIMERO',muestraValor:'PRIMERO'},
@@ -48,14 +51,14 @@ export class AlumnosFormComponent
   ];
   mostrarColumnasArchivos: string[] = ['id', 'nombre', 'comentario', 'tipo', 'archivo','editar', 'eliminar'];
   constructor(service: AlumnoService, public archivoService: ArchivoService,
-    router: Router,
+    router: Router,private asistenciaService:AsistenciaService,
     route: ActivatedRoute) {
 
     super(service, router, route);
     this.titulo = 'Crear Alumnos';
     this.model = new Alumno();
     this.usuario = this.model.usuario
-    this.redirect = '/alumnos';
+    this.redirect = '/home';
     this.nombreModel = Alumno.name;
 
   }
@@ -125,8 +128,20 @@ export class AlumnosFormComponent
     this.service.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => {
       if(au)
       this.archivos = au
-
     })
+  }
+
+  asistenciasAlumno() {
+    this.asistenciaService.encontrarAsistenciaPorAlumno(this.model).subscribe(asistencias => {
+
+      this.asistencias = asistencias
+      this.presente = asistencias.filter(a => a.statusAsistencia)
+     // console.log('presente {' + this.presente.length + '}')
+     // console.log('asistencias {' + this.asistencias.length + '}')
+      this.model.promAsistencia = (this.presente.length * 100)/( this.asistencias.length)
+      this.model.asistenciaPresente = (this.presente.length)
+    })
+
   }
 
 }

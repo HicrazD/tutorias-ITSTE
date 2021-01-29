@@ -1,51 +1,62 @@
-<div class="card bg-light mb-3 mt-5">
-    <div class="card-header">{{titulo}}</div>
-    <div class="card-body">
-        <button class="btn btn-secondary my-2" routerLink="/examenes">volver</button>
+<div class="card bg-light mb-3 mt-5 overflow-auto">
+  <div class="card-header">{{titulo}}</div>
+  <div class="card-body">
+    <button class="btn btn-secondary my-2" routerLink="/examenes">volver</button>
 
-        <form>
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" class="form-control" id="nombre" 
-                [(ngModel)]="model.nombre">
-                <div class="alert alert-danger" *ngIf="error?.nombre">
-                  {{ error.nombre }}
-                </div>
-            </div>
-         
-            <button mat-raised-button color="primary" (click)="agregarPregunta()" 
-            class="btn-lg my-3">
-                Agregar Pregunta
+    <form>
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" class="form-control" id="nombre" [(ngModel)]="model.nombre">
+        <div class="alert alert-danger" *ngIf="error?.nombre">
+          {{ error.nombre }}
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo Respuesta</mat-label>
+        <mat-select [(ngModel)]="type" name="t">
+          <mat-option *ngFor="let t of tipo" [value]="t.valor">
+            {{t.muestraValor}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="agregarPregunta()" class="btn-lg my-3">
+        Agregar Pregunta
+      </button>
+
+      <div class="form-group" *ngFor="let pregunta of model.preguntas; let i = index">
+
+        <div class="row">
+          <div class="col-sm-2">
+            <label>Pregunta {{i+1}}:</label>
+          </div>
+          <div class="col-sm-6">
+            <input type="text" value="{{pregunta.texto}}" class="form-control"
+              (change)="asignarTexto(pregunta, $event)">
+
+
+          </div>
+          <div class="col-sm-2">
+            <label for="">{{pregunta.tipo}}</label>
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-danger btn-sm" (click)="eliminarPregunta(pregunta)">
+              x
             </button>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-danger" *ngIf="errorPreguntas">
+        {{ errorPreguntas }}
+      </div>
 
-            <div class="form-group" *ngFor="let pregunta of model.preguntas; let i = index">
-
-                <div class="row">
-                    <div class="col-sm-2">
-                      <label>Pregunta {{i+1}}:</label>
-                    </div>
-                    <div class="col-sm-6">
-                       <input type="text" value="{{pregunta.texto}}" class="form-control"
-                       (change)="asignarTexto(pregunta, $event)">
-                    </div>
-                    <div class="col-sm-1">
-                        <button class="btn btn-danger btn-sm"
-                        (click)="eliminarPregunta(pregunta)">
-                        x
-                    </button>
-                    </div>
-                </div>
-            </div>
-            <div class="alert alert-danger" *ngIf="errorPreguntas">
-                {{ errorPreguntas }}
-            </div>
-
-            <div class="form-group">
-                <button mat-raised-button color="accent"
-                (click)="model.id? editar(): crear()">
-                    {{ model.id? 'Editar': 'Crear' }}
-                </button>
-            </div>
-        </form>
-    </div>
+      <div class="form-group">
+        <button mat-raised-button color="accent" (click)="model.id? editar(): crear()">
+          {{ model.id? 'Editar': 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

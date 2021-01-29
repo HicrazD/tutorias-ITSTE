@@ -1,6 +1,6 @@
-<div class="container my-5">
+<div class="container my-5 p-3 overflow-auto" style="background: rgba(0, 105, 70, 0.548); height: 750px;">
 
-  <mat-card>
+  <mat-card style="background: url(../../../../assets/Resporte/background_main.png);background-size: cover;">
     <mat-card-header *ngIf="model">
       <mat-card-title>
         Alumno {{model.nombre}}
@@ -68,7 +68,8 @@
                 {{ error.promAsistencia }}
               </div>
             </mat-form-field>
-            
+
+            <button mat-raised-button class="btn-info" (click)="asistenciasAlumno()">Asistencias</button>
             <br>
 
             <mat-form-field appearance="fill" style="width: 350px;max-width: 60%;" class="mx-3">
@@ -238,8 +239,8 @@
       </mat-tab-group>
 
     </mat-card-content>
-    <button mat-raised-button color="primary" class="m-4" [routerLink]="['/alumnos']">
-      Regresar
+    <button mat-raised-button color="primary" class="m-4" [routerLink]="['/home']">
+      Home
 
       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-return-left" fill="currentColor"
         xmlns="http://www.w3.org/2000/svg">

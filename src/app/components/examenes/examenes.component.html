@@ -1,6 +1,6 @@
-<div class="card bg-light mb-3 mt-5">
+<div class="card  mb-3 mt-5" style="background: rgba(1, 155, 142, 0.555);">
   <div class="card-header">{{titulo}}</div>
-  <div class="card-body example-container" style="background: rgba(1, 112, 103, 0.705);">
+  <div class="card-body example-container" style="background: rgba(235, 235, 235, 0.87);">
     <button class="btn btn-primary my-2" routerLink="/examenes/form">Crear</button>
     <div class="alert alert-info" *ngIf="listar?.length==0">
       No hay evaluaciones en el sistema.
@@ -8,16 +8,15 @@
     <table class="table table-hover table-striped" *ngIf="listar?.length>0">
       <thead>
         <tr>
-          <th>id</th>
-          <th>nombre</th>
-          <th>preguntas</th>
-          <th>editar</th>
-          <th>eliminar</th>
+          <th>Mombre</th>
+          <th>Preguntas</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+          <th>Resultados</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let examen of listar">
-          <td>{{examen.id}}</td>
           <td>{{examen.nombre}} - {{examen.enabled}}</td>
           <td>{{examen.preguntas.length}}</td>
           <td><button mat-raised-button color="accent" class="btn-sm" [routerLink]="['/examenes/form', examen.id]">
@@ -32,6 +31,9 @@
             <button mat-raised-button class="btn btn-danger btn-sm" [disabled]="!examen.enabled" (click)="disabledButton(examen)">
               desactivar
             </button></td>
+            <td>
+              <button mat-button class="btn-info" [routerLink]="['/resultados/details/evaluacion/',examen.id]"><mat-icon>visibility</mat-icon></button>
+            </td>
         </tr>
       </tbody>
     </table>

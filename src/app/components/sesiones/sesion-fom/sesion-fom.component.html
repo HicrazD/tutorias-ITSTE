@@ -1,0 +1,87 @@
+<div class="container p-2 my-5 colorFondo">
+  <div class="container-fluid">
+      <mat-card class="container fondoCard"
+        style="background: url(../../../../assets/Resporte/background_main.png); background-size: cover;">
+        <mat-card-header>
+          <mat-card-title>{{title}}</mat-card-title>
+          <mat-card-subtitle>Docente: -> {{docente?.nombre}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field color="accent" appearance="outline" class="mat-elevation-z8 mx-2 my-1">
+            <mat-label>No. Sesion</mat-label>
+            <input matInput type="number" #postalCode maxlength="2" placeholder="Ex. 1" [(ngModel)]="sesion.numSesion">
+            <mat-hint align="end">{{postalCode.value.length}} / 2</mat-hint>
+            <div class="alert alert-danger" *ngIf="error?.numSesion">
+              {{ error.numSesion }}
+            </div>
+          </mat-form-field>
+
+          <mat-form-field color="accent" appearance="outline" class="mat-elevation-z8 mx-1 my-1">
+            <mat-label>Tema</mat-label>
+            <input matInput [(ngModel)]="sesion.tema">
+            <div class="alert alert-danger" *ngIf="error?.tema">
+              {{ error.tema }}
+            </div>
+          </mat-form-field>
+
+          <mat-form-field color="accent" appearance="outline" class="mat-elevation-z8 mx-1 my-1">
+            <mat-label>Modalidad</mat-label>
+            <mat-select [(ngModel)]="sesion.modalidad" name="modalidad">
+              <mat-option *ngFor="let m of modalidad" [value]="m.valor">
+                {{m.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-label>{{sesion.modalidad}}</mat-label>
+            <div class="alert alert-danger" *ngIf="error?.modalidad">
+              {{ error.modalidad }}
+            </div>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" hintLabel="Max 10 caracteres" color="accent" class="mat-elevation-z8 mx-1 my-1" style="width: 300px;">
+            <mat-label>Descripcion</mat-label>
+            <textarea matInput #input maxlength="240" [(ngModel)]="sesion.descripcion"></textarea>
+            <mat-hint align="end">{{input.value?.length || 0}}/240</mat-hint>
+            <div class="alert alert-danger" *ngIf="error?.descripcion">
+              {{ error.descripcion }}
+            </div>
+          </mat-form-field>
+
+          <mat-form-field color="accent" appearance="outline" class="mat-elevation-z8 mx-2 my-3 p-2">
+            <mat-label>Inherited calendar color</mat-label>
+            <input matInput [matDatepicker]="picker1" [(ngModel)]="sesion.createAt">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+
+            <div class="alert alert-danger" *ngIf="error?.createAt">
+              {{ error.createAt }}
+            </div>
+          </mat-form-field>          
+
+          <mat-form-field color="accent" class="example-full-width" appearance="outline"
+            class="mat-elevation-z8 mx-1 my-3 p-2">
+            <mat-label>Hora entrada</mat-label>
+            <input matInput type="datetime-local" [(ngModel)]="sesion.horaEntrada">
+            <div class="alert alert-danger" *ngIf="error?.horaEntrada">
+              {{ error.horaEntrada }}
+            </div>
+          </mat-form-field>
+
+          <mat-form-field color="accent" class="example-full-width" appearance="outline"
+            class="mat-elevation-z8 mx-1 my-3 p-2">
+            <mat-label>Hora Salida</mat-label>
+            <input matInput type="datetime-local" [(ngModel)]="sesion.horaSalida">
+            <div class="alert alert-danger" *ngIf="error?.horaSalida">
+              {{ error.horaSalida }}
+            </div>
+          </mat-form-field>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button class="mat-elevation-z8 fondoCrear"
+                (click)="sesion.id? editar(): crearYAsignarSesion()">
+                    {{ sesion.id? 'Editar': 'Crear' }}
+                </button>
+        </mat-card-actions>
+      </mat-card>
+  </div>
+</div>

@@ -26,9 +26,9 @@ export class VerResultadosModalComponent implements OnInit {
   private service:ResultadoService) { }
 
   ngOnInit(): void {
-    this.docente = this.data.docente as Docente;
-    this.examen = this.data.examen as Examen;
-    this.resultados = this.data.resultados as Resultado[]
+    this.docente = this.data.docente ;
+    this.examen = this.data.examen ;
+    this.resultados = this.data.resultados 
     //console.log(this.resultados)
    // this.resultadoFinal(this.resultados,0)
   }

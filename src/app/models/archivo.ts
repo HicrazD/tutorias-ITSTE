@@ -7,5 +7,6 @@ export class Archivo implements Generic{
     comentario:string
     tipo:string
     archivoHashCode:number
+    createAt: string;
     usuario:Usuario[]
 }

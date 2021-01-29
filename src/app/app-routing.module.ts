@@ -13,9 +13,13 @@ import { AsignarExamenesComponent } from './components/docentes/asignar-examenes
 import { DocenteFormComponent } from './components/docentes/docente-form/docente-form.component';
 import { DocentePerfilComponent } from './components/docentes/docente-perfil/docente-perfil.component';
 import { DocentesComponent } from './components/docentes/docentes.component';
+import { SesionesComponent } from './components/docentes/sesiones/sesiones.component';
 import { ExamenesFormComponent } from './components/examenes/examenes-form/examenes-form.component';
 import { ExamenesComponent } from './components/examenes/examenes.component';
+import { ResultadosEvaluacionComponent } from './components/examenes/resultados-evaluacion/resultados-evaluacion.component';
 import { HomeComponent } from './components/home/home.component';
+import { ResaComponent } from './components/reportes-plantilla/resa/resa.component';
+import { SesionFomComponent } from './components/sesiones/sesion-fom/sesion-fom.component';
 import { AuthGuard } from './components/usuarios/guards/auth.guard';
 import { RoleGuard } from './components/usuarios/guards/role.guard';
 import { LoginAdminComponent } from './components/usuarios/login-admin/login-admin.component';
@@ -51,7 +55,12 @@ const routes: Routes = [
   {path: 'examenes/asignar-examenes', component: AsignarExamenesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
   {path: 'examenes/form/:id', component:ExamenesFormComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
   {path: 'examenes/form', component:ExamenesFormComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
-  {path: 'examenes', component:ExamenesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }}
+  {path: 'examenes', component:ExamenesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
+  {path: 'reportes/resa',component:ResaComponent},
+  {path: 'sesiones/form',component:SesionFomComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
+  {path: 'sesiones/form/:id',component:SesionFomComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
+  {path: 'sesiones-ver/:term', component: SesionesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
+  {path: 'resultados/details/evaluacion/:id',component:ResultadosEvaluacionComponent},
 ];
 
 @NgModule({

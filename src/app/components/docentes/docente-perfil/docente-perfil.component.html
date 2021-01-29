@@ -1,6 +1,6 @@
-<div class="container my-5 p-3" style="background-color: #0061598c;">
+<div class="container my-5 p-3" style="background: #1B396A;">
 
-  <mat-card style="background: rgb(235, 228, 228);">
+  <mat-card style="background: url(../../../../assets/Resporte/background_main.png); background-size: cover;">
     <mat-card-header *ngIf="usuario">
       <mat-card-title class="mat-elevation-z8 p-3" style="background: #ff9101fb;">
         Docente del Usuario {{usuario.username}}
@@ -127,9 +127,7 @@
             <mat-form-field appearance="outline" class="mx-3" style="width: 350px;max-width: 70%;">
               <mat-label for="comentario">Comentario</mat-label>
               <input matInput name="comentario" [(ngModel)]="archivo.comentario">
-              <div class="alert alert-danger" *ngIf="error?.comentario">
-                {{ error.comentario }}
-              </div>
+              <mat-error *ngIf="error?.comentario">{{ error.comentario }}</mat-error>
             </mat-form-field>
 
             <div class="input-group">
@@ -230,6 +228,12 @@
         <path fill-rule="evenodd"
           d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z" />
       </svg>
+    </button>
+
+    <button mat-raised-button [routerLink]="['/sesiones-ver/',authService.usuario.username]">Ver sesiones</button>
+
+    <button mat-raised-button class="btn-info mx-2" [routerLink]="['/docentes/asignar-alumnos', docente?.id]" >
+      añadir alumnos ({{docente?.alumnos.length}})
     </button>
   </mat-card>
 </div>

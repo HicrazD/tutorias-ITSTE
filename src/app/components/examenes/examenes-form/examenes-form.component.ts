@@ -13,9 +13,14 @@ import { CommonFormComponent } from '../../common-form.component';
 export class ExamenesFormComponent 
 extends CommonFormComponent<Examen, ExamenService> implements OnInit {
 
+  tipo = [
+    { valor: 'Multiple Texto', muestraValor: 'Multiple Texto' },
+    { valor: 'Multiple Si/No', muestraValor: 'Multiple Si/No' },
+    { valor: 'Abierta', muestraValor: 'Abierta' }
+  ];
+  type:string;
 
   errorPreguntas: string;
-
   constructor(service: ExamenService,
     router: Router,
     route: ActivatedRoute) {
@@ -24,7 +29,6 @@ extends CommonFormComponent<Examen, ExamenService> implements OnInit {
       this.model = new Examen();
       this.nombreModel = Examen.name;
       this.redirect = '/examenes';
-
      }
 
      ngOnInit() {
@@ -38,12 +42,11 @@ extends CommonFormComponent<Examen, ExamenService> implements OnInit {
         }
       });
 
-
     }
 
     public crear(): void {
       if(this.model.preguntas.length === 0){
-        this.errorPreguntas = 'Examen debe tener preguntas';
+        this.errorPreguntas = 'Evaluacion debe tener preguntas';
         //Swal.fire('Error Preguntas', 'Examen debe tener preguntas', 'error');
         return;
       }
@@ -54,7 +57,7 @@ extends CommonFormComponent<Examen, ExamenService> implements OnInit {
 
     public editar(): void {
       if(this.model.preguntas.length === 0){
-        this.errorPreguntas = 'Examen debe tener preguntas';
+        this.errorPreguntas = 'Evaluacion debe tener preguntas';
         //Swal.fire('Error Preguntas', 'Examen debe tener preguntas', 'error');
         return;
       }
@@ -64,7 +67,10 @@ extends CommonFormComponent<Examen, ExamenService> implements OnInit {
     }
 
     agregarPregunta(): void {
-      this.model.preguntas.push(new Pregunta());
+     let  pregunta:Pregunta
+      pregunta = new Pregunta()
+      pregunta.tipo = this.type
+      this.model.preguntas.push(pregunta);
     }
 
     asignarTexto(pregunta: Pregunta, event: any):void {

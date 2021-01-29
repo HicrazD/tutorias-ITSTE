@@ -20,8 +20,8 @@ export class NavbarComponent{
   logout(): void {
     let username = this.authService.usuario.username;
     this.usuarioService.sessionLogOut(this.authService.usuario).subscribe(isLog => {
-      console.log('Metodo sesionnLogOut en spring')
-      console.log(isLog)
+    //  console.log('Metodo sesionnLogOut en spring')
+    //  console.log(isLog)
     })
     this.authService.logout();
     Swal.fire('Logout', `Hola ${username}, has cerrado sesión con éxito!`, 'success');

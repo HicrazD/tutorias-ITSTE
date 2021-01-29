@@ -6,6 +6,7 @@ import { Alumno } from '../models/alumno';
 import { Archivo } from '../models/archivo';
 import { Docente } from '../models/docente';
 import { Examen } from '../models/examen';
+import { Sesion } from '../models/sesion';
 import { CommonService } from './common.service';
 
 @Injectable({
@@ -28,6 +29,18 @@ export class DocenteService extends CommonService<Docente>{
   asignarAlumnos(docente: Docente, alumnos: Alumno[]): Observable<Docente>{
     return this.http.put<Docente>(`${this.baseEndpoint}/${docente.id}/asignar-alumnos`,
      alumnos,
+     {headers: this.cabecera});
+  }
+
+  eliminarSesion(id: number,sesion: Sesion): Observable<Docente>{
+    return this.http.put<Docente>(`${this.baseEndpoint}/sesion/${id}/eliminar-sesion`,
+     sesion,
+     {headers: this.cabecera});
+  }
+
+  crearYAsignarSesion(docente: Docente, sesion:Sesion):Observable<Docente>{
+    return this.http.put<Docente>(`${this.baseEndpoint}/crear-sesion/docente/${docente.id}`,
+     sesion,
      {headers: this.cabecera});
   }
 

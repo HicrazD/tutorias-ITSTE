@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +30,18 @@ import { AsignarExamenesComponent } from './components/docentes/asignar-examenes
 import { ExamenesComponent } from './components/examenes/examenes.component';
 import { ExamenesFormComponent } from './components/examenes/examenes-form/examenes-form.component';
 import { ResponderExamenComponent } from './components/alumnos/responder-examen/responder-examen.component';
+import { ResponderExamenModalComponent } from './components/alumnos/responder-examen-modal/responder-examen-modal.component';
+import { VerExamenModalComponent } from './components/alumnos/ver-examen-modal/ver-examen-modal.component';
+import { FooterComponent } from './footer/footer.component';
+import { VerResultadosModalComponent } from './components/docentes/ver-resultados-modal/ver-resultados-modal.component';
+import { FooterResportesComponent } from './footer/footer-resportes/footer-resportes.component';
+import { HeaderComponent } from './components/reportes-plantilla/header/header.component';
+import { ResaComponent } from './components/reportes-plantilla/resa/resa.component';
+import { InformeAsistenciasComponent } from './components/reportes-plantilla/informe-asistencias/informe-asistencias.component';
+import { SesionFomComponent } from './components/sesiones/sesion-fom/sesion-fom.component';
+import { SesionesComponent } from './components/docentes/sesiones/sesiones.component';
 
+import {MatRadioModule} from '@angular/material/radio';
 import { MatIconModule } from "@angular/material/icon";
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
@@ -48,12 +59,14 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSortModule} from '@angular/material/sort';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { ResponderExamenModalComponent } from './components/alumnos/responder-examen-modal/responder-examen-modal.component';
-import { VerExamenModalComponent } from './components/alumnos/ver-examen-modal/ver-examen-modal.component';
-import { FooterComponent } from './footer/footer.component';
-import { VerResultadosModalComponent } from './components/docentes/ver-resultados-modal/ver-resultados-modal.component';
-
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatMomentDateModule} from '@angular/material-moment-adapter'
+import { registerLocaleData } from '@angular/common';
+import LocaleES from '@angular/common/locales/es';
+import { PatComponent } from './components/reportes-plantilla/pat/pat.component';
+import { AsistenciasModelComponent } from './components/asistencias/asistencias-model/asistencias-model.component';
+import { ResultadosEvaluacionComponent } from './components/examenes/resultados-evaluacion/resultados-evaluacion.component'
+registerLocaleData(LocaleES,'es');
 
 
 @NgModule({
@@ -85,8 +98,23 @@ import { VerResultadosModalComponent } from './components/docentes/ver-resultado
     VerExamenModalComponent,
     FooterComponent,
     VerResultadosModalComponent,
+    FooterResportesComponent,
+    HeaderComponent,
+    ResaComponent,
+    InformeAsistenciasComponent,
+    SesionFomComponent,
+    SesionesComponent,
+    PatComponent,
+    AsistenciasModelComponent,
+    ResultadosEvaluacionComponent
+    
   ],
-  entryComponents: [ResponderExamenModalComponent,VerExamenModalComponent,VerResultadosModalComponent],
+  entryComponents: [ResponderExamenModalComponent,
+    VerExamenModalComponent,
+    VerResultadosModalComponent,
+    InformeAsistenciasComponent,
+    PatComponent,
+    AsistenciasModelComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -111,11 +139,15 @@ import { VerResultadosModalComponent } from './components/docentes/ver-resultado
     MatAutocompleteModule,
     MatDialogModule,
     MatExpansionModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatRadioModule
 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'es'},
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })

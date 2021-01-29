@@ -3,5 +3,6 @@ import { Examen } from "./examen";
 export class Pregunta {
     id: number;
     texto: string;
+    tipo:string;
     examen: Examen;
 }

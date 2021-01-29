@@ -1,12 +1,12 @@
 .example-container {
-  height:180px;
+  height:300px;
   width: 1300px;
   max-width: 100%;
   overflow: auto;
 }
 
 table {
-  width: 700px;
+  width: 900px;
 }
 .mat-form-field {
   font-size: 14px;

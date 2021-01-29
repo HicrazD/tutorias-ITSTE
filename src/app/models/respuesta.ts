@@ -3,8 +3,7 @@ import { Pregunta } from "./pregunta";
 
 export class Respuesta {
     id: number;
-    numero:number
-   // texto: string;
+    respuesta: string;
     alumno: Alumno;
     pregunta: Pregunta;
 }

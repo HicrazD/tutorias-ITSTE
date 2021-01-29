@@ -18,6 +18,7 @@ export class ArchivosFormComponent implements OnInit {
   archivoSelected: File
   error: any
   tipo = [
+    { valor: 'PDF', muestraValor: 'PDF' },
     { valor: 'WORD', muestraValor: 'WORD' },
     { valor: 'EXCEL', muestraValor: 'EXCEL' },
     { valor: 'PDF FORMATO', muestraValor: 'PDF FORMATO' },

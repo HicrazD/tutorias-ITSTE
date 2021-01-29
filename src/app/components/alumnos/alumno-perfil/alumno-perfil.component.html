@@ -1,4 +1,5 @@
-<div class="container my-5 p-2" style="background:#1B396A ;">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container my-5 p-2 ov" style="background:#1B396A ;">
 
   <mat-card>
     <mat-card-header class="w-100" *ngIf="usuario">
@@ -69,6 +70,19 @@
               </mat-label>
             </mat-form-field>
 
+            <mat-form-field appearance="fill" style="width: 450px;max-width: 70%;" class="mx-3">
+              <mat-select required [(ngModel)]="alumnos.grupo">
+                <mat-option>-- None --</mat-option>
+                <mat-option required *ngFor="let s of grupo" [value]="s.valor">{{s.muestraValor}}</mat-option>
+              </mat-select>
+              <div class="alert alert-danger" *ngIf="error?.grupo">
+                {{ error.grupo }}
+              </div>
+              <mat-label>
+                <b> Grupo</b>
+              </mat-label>
+            </mat-form-field>
+
             <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
               <mat-label for="telefono">Telefono</mat-label>
               <input matInput required name="telefono" [(ngModel)]="alumnos.telefono">
@@ -87,7 +101,7 @@
         <!--    *******************     Editar Perfil    ************************-->
         <mat-tab label="Editar Perfil" *ngIf="alumno">
           <div class="container example-container my-1">
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
+            <mat-form-field class="mx-3" style="width: 450px;max-width: 100%;" appearance="outline">
               <mat-label for="matricula">Matricula</mat-label>
               <input matInput required name="matricula" [(ngModel)]="alumno.matricula">
               <div class="alert alert-danger" *ngIf="error?.matricula">
@@ -95,7 +109,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
+            <mat-form-field class="mx-3" style="width: 450px;max-width: 75%;" appearance="outline">
               <mat-label for="nombre">Nombre</mat-label>
               <input matInput required name="nombre" [(ngModel)]="alumno.nombre">
               <div class="alert alert-danger" *ngIf="error?.nombre">
@@ -121,7 +135,7 @@
 
             <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
               <mat-label for="promAsistencia">Asistencia</mat-label>
-              <input matInput type="number" required name="promAsistencia" [(ngModel)]="alumno.promAsistencia">
+              <input matInput type="number" required name="promAsistencia" [(ngModel)]="alumno.promAsistencia" disabled="true">
               <div class="alert alert-danger" *ngIf="error?.promAsistencia">
                 {{ error.promAsistencia }}
               </div>
@@ -152,6 +166,19 @@
               </mat-label>
             </mat-form-field>
 
+            <mat-form-field appearance="fill" style="width: 450px;max-width: 70%;" class="mx-3">
+              <mat-select required [(ngModel)]="alumno.grupo">
+                <mat-option>-- None --</mat-option>
+                <mat-option required *ngFor="let s of grupo" [value]="s.valor">{{s.muestraValor}}</mat-option>
+              </mat-select>
+              <div class="alert alert-danger" *ngIf="error?.grupo">
+                {{ error.grupo }}
+              </div>
+              <mat-label>
+                <b> Grupo</b>
+              </mat-label>
+            </mat-form-field>
+
             <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
               <mat-label for="telefono">Telefono</mat-label>
               <input matInput required type="number" name="telefono" [(ngModel)]="alumno.telefono">
@@ -160,11 +187,13 @@
               </div>
             </mat-form-field>
 
-            <mat-card class="w-25 border border-primary" *ngIf="docente">
+            <mat-card class="border border-primary" *ngIf="docente" style="width: 400px; max-width: 100%;">
               {{docente.nombre}}
-              <button mat-raised-button color="accent" *ngIf="alumno?.promAsistencia > 79" [routerLink]="['/alumnos/responder-examen/',alumno.id]">
+              <button mat-raised-button color="accent" class="mx-2" *ngIf="alumno?.promAsistencia > 79" [routerLink]="['/alumnos/responder-examen/',alumno.id]">
                 Evaluación
               </button>
+
+              <button mat-raised-button (click)="asistenciasAlumno()">Asistencias</button>
             </mat-card>
 
             <button mat-raised-button color="primary" class="m-4" (click)="editar()">

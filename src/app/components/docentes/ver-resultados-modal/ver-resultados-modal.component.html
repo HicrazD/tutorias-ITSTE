@@ -1,18 +1,18 @@
-<div class="mat-elevation-z8" style="background: #007461b4;" >
-  <mat-card style="background: #018871b4;" id="element-to-print">
+<div class="mat-elevation-z8" >
+  <mat-card style="background: #005f4fb9;" id="element-to-print">
     <mat-card-header>
-      <mat-card-title mat-dialog-title class="mat-elevation-z8 p-2" style="background: #f79d28fb;">
+      <mat-card-title mat-dialog-title class="mat-elevation-z8 p-2" style="background: #ffffff;">
         Docente: {{docente.nombre}}
       </mat-card-title>
-      <mat-card-subtitle style="color: cornsilk;">{{examen.nombre}}</mat-card-subtitle>
+      <mat-card-subtitle style="color: cornsilk;">Nombre de la Evaluacion: {{examen.nombre}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content mat-dialog-content>
-      <div class="container mat-elevation-z8 p-2" style="height: 150px; overflow: auto;">
+      <div class="container mat-elevation-z8 p-2" style="height: 250px; overflow: auto;">
         <table mat-table #table [dataSource]="resultados" class="w-100" id="resultadosTable">
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> Id Resultado </th>
-            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-            <td mat-footer-cell *matFooterCellDef> Promedio </td>
+            <th mat-header-cell *matHeaderCellDef> Alumno que realizó la evaluación</th>
+            <td mat-cell *matCellDef="let row"> {{row.alumno.nombre}} </td>
+            <td mat-footer-cell *matFooterCellDef> Puntaje Total </td>
           </ng-container>
           <ng-container matColumnDef="resultado">
             <th mat-header-cell *matHeaderCellDef> Resultado </th>
@@ -31,4 +31,4 @@
     </mat-card-actions>
   </mat-card>
 </div>
-<button mat-raised-button (click)="exportPdf()">Exportar PDF</button>
+

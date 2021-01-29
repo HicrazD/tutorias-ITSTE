@@ -25,4 +25,8 @@ export class ResultadoService extends CommonService<Resultado>{
     return this.http.get<Resultado[]>(`${this.baseEndpoint}/buscar-por-ids/docente/${docente.id}/examen/${examen.id}`);
   }
 
+  public findByEvaluacionId(id:number): Observable<Resultado[]>{
+    return this.http.get<Resultado[]>(`${this.baseEndpoint}/evaluacion/${id}`);
+  }
+
 }

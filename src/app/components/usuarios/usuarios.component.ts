@@ -25,7 +25,7 @@ export class UsuariosComponent implements OnInit { //extends CommonListarCompone
   tabIndex = 0;
   mostrarColumnasUsuarios: string[] = ['id', 'username', 'editar'];
   mostrarColumnasUsuarios2: string[] = ['id', 'username', 'roles'];
-  mostrarColumnasRoles: string[] = ['id', 'nombre'];
+  mostrarColumnasRoles: string[] = ['nombre'];
 
   constructor(private service: UsuarioService, public authService: AuthService, private router: Router) { }
 
@@ -80,13 +80,13 @@ export class UsuariosComponent implements OnInit { //extends CommonListarCompone
           if (err.status == 400) {
             this.error = err.error;
             Swal.fire('Oops...:', `No se completo la peticion`, 'question');
-            console.log(this.error);
+           // console.log(this.error);
           }
 
           if (err.status == 500) {
             this.error = err.error;
             Swal.fire('Oops...:500', `Problemas en el servidor, Contactar al servio técnico`, 'question');
-            console.log(this.error);
+            //console.log(this.error);
           }
         });
       }

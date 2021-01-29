@@ -1,0 +1,13 @@
+.example-container{
+    width:100%;
+}
+
+p {
+    line-height: 100%;
+    font-family: 'Montserrat Medium';
+    font-size: 8pt;
+}
+
+.sinborde {
+    border: 0;
+  }

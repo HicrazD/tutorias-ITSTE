@@ -19,38 +19,41 @@ export class UsuariosFormComponent
 
   usuario: Usuario = new Usuario();
   role: Roles
-  nombreRol:string
+  nombreRol: string
   codigo: Codigo
   hide = true;
+  hide2 = true;
+  estatus: boolean = true
   constructor(router: Router, service: UsuarioService,
-     private serviceRole: RoleService,
-     private route: ActivatedRoute,
-     private codigoService:CodigoService) {
+    private serviceRole: RoleService,
+    private route: ActivatedRoute,
+    private codigoService: CodigoService) {
     super(service, router)
     this.titulo = "Crear de Usuarios"
     this.codigo = new Codigo()
   }
 
-  ngOnInit() { 
-    
+  ngOnInit() {
+
   }
 
-buscarRole(nombre:string){
-  this.serviceRole.filtrarRole(nombre).subscribe(rn => {
-   // console.log(rn)
-    this.role = rn
-  })
-}
+  buscarRole(nombre: string) {
+    this.serviceRole.filtrarRole(nombre).subscribe(rn => {
+      // console.log(rn)
+      this.role = rn
+      this.estatus = false
+    })
+  }
 
   Codigo(code: string) {
     code = code !== undefined ? code.trim() : '';
     if (code.length > 10) {
-      console.log(code)
+     // console.log(code)
       this.codigoService.verCodigo(code).subscribe(codigo => {
         this.codigo = codigo
-        if(codigo.tipo === 'ALUMNO'){this.nombreRol = 'ROLE_ALUMNO'}
-        if(codigo.tipo === 'DOCENTE'){this.nombreRol = 'ROLE_DOCENTE'}
-        this.buscarRole(this.nombreRol)
+        if (codigo.tipo === 'ALUMNO') { this.nombreRol = 'ROLE_ALUMNO' }
+        if (codigo.tipo === 'DOCENTE') { this.nombreRol = 'ROLE_DOCENTE' }
+        this.buscarRole(this.nombreRol)        
       }, err => {
         if (err.status == 404) {
           this.error = err.error;
@@ -59,7 +62,7 @@ buscarRole(nombre:string){
             title: 'No encontrado!',
             text: 'El codigo no existe en el sistema',
           })
-          console.log(this.error);
+        //  console.log(this.error);
         }
 
         if (err.status == 401) {
@@ -69,31 +72,31 @@ buscarRole(nombre:string){
             title: 'Oh no!',
             text: 'No tienes acceso',
           })
-          console.log(this.error);
+        //  console.log(this.error);
         }
       })
     }
   }
 
   public createRol(): void {
+    if (!this.estatus) {
+      this.service.createRol(this.usuario, this.role.id).subscribe(usuario => {
+      //  console.log(usuario);
 
-          this.service.createRol(this.usuario, this.role.id).subscribe(usuario => {
-            console.log(usuario);
-
-            if (this.role.nombre == 'ROLE_ALUMNO') {
-              Swal.fire('Create', `ALUMNO ${usuario.username} creado con exito!`, 'success');
-              this.router.navigate(['/login'])
-            }
-            if (this.role.nombre == 'ROLE_DOCENTE') {
-              Swal.fire('Create', `DOCENTE ${usuario.username} creado con exito!`, 'success');
-              this.router.navigate(['/login'])
-            }
-          }, err => {
-            if (err.status == 400) {
-              this.error = err.error;
-              console.log(this.error);
-            }
-          })
-
+        if (this.role.nombre == 'ROLE_ALUMNO') {
+          Swal.fire('Create', `ALUMNO ${usuario.username} creado con exito!`, 'success');
+          this.router.navigate(['/login'])
+        }
+        if (this.role.nombre == 'ROLE_DOCENTE') {
+          Swal.fire('Create', `DOCENTE ${usuario.username} creado con exito!`, 'success');
+          this.router.navigate(['/login'])
+        }
+      }, err => {
+        if (err.status == 400) {
+          this.error = err.error;
+         // console.log(this.error);
+        }
+      })
+    }
   }
 }

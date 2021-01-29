@@ -38,7 +38,7 @@ export class AuthService {
   login(usuario: Usuario): Observable<any> {
     const urlEndpoint = URL_BAKEND + '/oauth/token';
 
-    const credenciales = btoa('angularapp' + ':' + '12345');
+    const credenciales = btoa('itsteapp' + ':' + 'nsdigsiunhysSDSD42323');
 
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',

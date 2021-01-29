@@ -10,6 +10,8 @@ import { DocenteService } from 'src/app/services/docente.service';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
+import { AsistenciaService } from 'src/app/services/asistencia.service';
+import { Asistencia } from 'src/app/models/asistencia';
 
 @Component({
   selector: 'app-asignar-alumnos',
@@ -18,9 +20,9 @@ import * as FileSaver from 'file-saver';
 })
 export class AsignarAlumnosComponent implements OnInit {
   docente: Docente
+  filtro:string = 'alumno'
   alumnosAsignar: Alumno[] = []
   alumnos: Alumno[] = []
-
   dataSource: MatTableDataSource<Alumno>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   pageSizeOptions: number[] = [3, 5, 10, 20, 50];
@@ -28,11 +30,11 @@ export class AsignarAlumnosComponent implements OnInit {
   tabIndex = 0;
 
   mostrarColumnas: string[] = ['nombre', 'apellido','carrera','seleccion'];
-  mostrarColumnasAlumnos: string[] = ['id','nombre', 'apellido', 'correo', 'carrera','eliminar'];
+  mostrarColumnasAlumnos: string[] = ['id','nombre', 'apellido', 'correo', 'carrera','semestre','detalles','eliminar'];
   seleccion: SelectionModel<Alumno> = new SelectionModel<Alumno>(true, []);
   
   constructor(private route: ActivatedRoute,
-    private docenteService: DocenteService,
+    private docenteService: DocenteService,private asistenciaService:AsistenciaService,
     private alumnoService: AlumnoService) { }
 
   ngOnInit(){
@@ -86,9 +88,10 @@ export class AsignarAlumnosComponent implements OnInit {
     this.docenteService.asignarAlumnos(this.docente, this.seleccion.selected)
     .subscribe(c => {
       this.tabIndex = 2;
+      this.filtro = ''
       Swal.fire(
         'Asignados:',
-        `Alumnos Asignados con éxito al curso ${this.docente.nombre}`,
+        `Alumnos Asignados con éxito al docente ${this.docente.nombre}`,
         'success'
       );
       this.alumnos = this.alumnos.concat(this.seleccion.selected);

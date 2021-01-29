@@ -4,10 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { URL_BAKEND } from 'src/app/config/config';
 import { Alumno } from 'src/app/models/alumno';
 import { Archivo } from 'src/app/models/archivo';
+import { Asistencia } from 'src/app/models/asistencia';
 import { Docente } from 'src/app/models/docente';
 import { Usuario } from 'src/app/models/usuario';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { ArchivoService } from 'src/app/services/archivo.service';
+import { AsistenciaService } from 'src/app/services/asistencia.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -26,6 +28,8 @@ export class AlumnoPerfilComponent implements OnInit {
   archivos: Archivo
   alumnos: Alumno = new Alumno()
   alumno: Alumno
+  asistencias: Asistencia[] = []
+  presente: Asistencia[]
   error: any
   tabIndex = 0;
   semestre = [
@@ -35,10 +39,13 @@ export class AlumnoPerfilComponent implements OnInit {
     { valor: 'CUARTO', muestraValor: 'CUARTO' },
     { valor: 'QUINTO', muestraValor: 'QUINTO' },
     { valor: 'SEXTO', muestraValor: 'SEXTO' },
-    { valor: 'SEPTIMO', muestraValor: 'SEPTIMO' },
-    { valor: 'OCTAVO', muestraValor: 'OCTAVO' },
-    { valor: 'NOVENO', muestraValor: 'NOVENO' },
-    { valor: 'DECIMO', muestraValor: 'DECIMO' },
+  ];
+
+  grupo = [
+    { valor: 'A', muestraValor: 'A' },
+    { valor: 'B', muestraValor: 'B' },
+    { valor: 'C', muestraValor: 'C' },
+    { valor: 'D', muestraValor: 'D' },
   ];
 
   carrera = [
@@ -57,7 +64,8 @@ export class AlumnoPerfilComponent implements OnInit {
     private router: Router,
     private alumnoService: AlumnoService,
     private usuarioService: UsuarioService,
-    private archivoService: ArchivoService) { }
+    private archivoService: ArchivoService,
+    private asistenciaService: AsistenciaService) { }
 
   ngOnInit() {
 
@@ -65,7 +73,7 @@ export class AlumnoPerfilComponent implements OnInit {
       const username: string = params.get('term')
       if (username)
         this.usuarioService.filtrarUsernambre(username).subscribe(u => {
-          // console.log(u)
+         //  console.log(u)
           this.usuario = u
         })
     })
@@ -87,7 +95,7 @@ export class AlumnoPerfilComponent implements OnInit {
               }
             )
           }
-          this.alumnoService.filtrarArchivosByUsuarioId(this.alumno.usuario.id).subscribe(au => {
+          this.alumnoService.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => {
             if (au) { this.archivos = au }
           })
         })
@@ -103,9 +111,10 @@ export class AlumnoPerfilComponent implements OnInit {
       if (username) {
         this.alumnoService.crearPorUsuarioId(this.alumnos, username)
           .subscribe(alumno => {
-            console.log(alumno);
-            alert(`Alumno ${alumno.nombre} creado con exito`);
+           // console.log(alumno);
+          //  alert(`Alumno ${alumno.nombre} creado con exito`);            
             this.router.navigate(['/home']);
+            Swal.fire('Exito!',`${alumno.nombre} Tu perfil fue creado exitosamente`,'success')
           }, err => {
             if (err.status === 400) {
               this.error = err.error;
@@ -118,9 +127,9 @@ export class AlumnoPerfilComponent implements OnInit {
 
   public editar(): void {
     this.alumnoService.editar(this.alumno).subscribe(m => {
-      console.log(m + 'usuario actualisado segun');
+    //  console.log(m + 'usuario actualisado segun');
       Swal.fire('Modificado:', `Alumno actualizado con éxito`, 'success');
-      this.router.navigate(['/home']);
+      this.router.navigate([`/alumnos/form/${this.alumno.id}`]);
     }, err => {
       if (err.status == 400) {
         this.error = err.error;
@@ -158,16 +167,26 @@ export class AlumnoPerfilComponent implements OnInit {
 
   mostrarArchivos() {
     this.usuario = this.alumno.usuario
-    console.log(this.usuario)
+   // console.log(this.usuario)
     this.alumnoService.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => {
       if (au) { this.archivos = au }
     })
+  }
 
+  asistenciasAlumno() {
+    this.asistenciaService.encontrarAsistenciaPorAlumno(this.alumno).subscribe(asistencias => {
+
+      this.asistencias = asistencias
+      this.presente = asistencias.filter(a => a.statusAsistencia)
+     // console.log('presente {' + this.presente.length + '}')
+     // console.log('asistencias {' + this.asistencias.length + '}')
+      this.alumno.promAsistencia = (this.presente.length * 100)/( this.asistencias.length)
+    })
   }
 
   redireccion(archivo: Archivo) {
-    console.log('redireccion')
-    console.log(archivo)
+   // console.log('redireccion')
+   // console.log(archivo)
     if (archivo.tipo === 'PDF') {
       window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
     }

@@ -1,0 +1,116 @@
+<div class="container-fluid overflow-auto bg-secondary" style="width: 1300px; height: 500px; max-width: 100%; ">
+  <div class="container-fluid overflow-auto" id="element-to-print" >
+    <mat-card class="container-fluid example-card" style="width: 27.94cm; height: 21.30cm;">
+      <div class="container p-2">
+        <app-header></app-header>
+      </div>
+      <mat-card-content>
+        <br>
+        <div class="container-fluid pl-5 pr-5 overflow-auto">
+          <div class="container-fluid">
+            <br>
+          </div>
+
+          <div class="container">
+            <table class="table table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Semestre</th>
+                  <th scope="col">Nombre y firma del tutor</th>
+                  <th scope="col">Division de adscripcion</th>
+                  <th scope="col">Num. de horas asignadas</th>
+                  <th scope="col">Fecha de elaboracion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 20%;" ><input type="text" name="" id="semestre" class="sinborde w-100" style="text-align: center;"></td>
+                  <td style="width: 27%;" ><input type="text" name="" id="tutor" class="sinborde" style="width:.7cm; text-align: center;" value="Lic." > {{docente.nombre}} {{docente.apellido}}</td>
+                  <td style="width: 27%;" ><input type="text" name="" id="division" class="sinborde w-100"  style="text-align: center;" value="Ingenieria en sistemas comutacionales"></td>
+                  <td> <input type="number" name="" id="horas" style="width:1cm; text-align: center;"  class="sinborde"></td>
+                  <td> <input type="text" name="" id="Fecha" style="width:2.5cm; text-align: center;" class="sinborde" value="dd/mm/yy"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="table table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 12%;">No. De sesión</th>
+                  <th scope="col" style="width: 13%;">Fecha</th>
+                  <th scope="col" style="width: 14%;">Modalidad</th>
+                  <th scope="col" style="width: 24%;">Tema</th>
+                  <th scope="col">Descripción de la actividad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sesion of bloque1">
+                  <td class="pt-3">{{sesion.numSesion}}</td>
+                  <td class="pt-3">{{sesion.createAt | date:'shortDate'}}</td>
+                  <td class="pt-3">{{sesion.modalidad}}</td>
+                  <td class="pt-3">{{sesion.tema}}</td>
+                  <td>
+                    <div class="container">
+                      <p class="text-justify">{{sesion.descripcion}}</p>
+                    </div>                    
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <br>
+        </div>
+      </mat-card-content>
+      <div class="container-fluid" style="bottom: 0%; position: absolute;">
+        <app-footer-resportes></app-footer-resportes>
+      </div>
+    </mat-card>
+
+    <mat-card class="container-fluid example-card" style="width: 27.94cm; height: 21.35cm;" *ngIf="bloque2?.length > 0">
+      <div class="container p-2">
+        <app-header></app-header>
+      </div>
+      <mat-card-content>
+        <br>
+        <div class="container-fluid pl-5 pr-5">
+          <div class="container-fluid">
+            <br>
+          </div>
+
+          <div class="container">
+            <table class="table table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">No. De sesión</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Modalidad</th>
+                  <th scope="col">Tema</th>
+                  <th scope="col">Descripción de la actividad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sesion of bloque2">
+                  <td>{{sesion.numSesion}}</td>
+                  <td>{{sesion.createAt}}</td>
+                  <td>{{sesion.modalidad}}</td>
+                  <td>{{sesion.tema}}</td>
+                  <td>{{sesion.descripcion}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <br>
+        </div>
+      </mat-card-content>
+      <div class="container-fluid" style="bottom: 0%; position: absolute;">
+        <app-footer-resportes></app-footer-resportes>
+      </div>
+    </mat-card>
+  </div>  
+</div>
+
+<div class="container bg-light">
+  <button mat-raised-button color="warn" (click)="exportPdf()" class="w-100">PDF</button>
+</div>

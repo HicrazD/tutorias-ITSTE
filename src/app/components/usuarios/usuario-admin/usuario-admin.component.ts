@@ -41,7 +41,6 @@ export class UsuarioAdminComponent implements OnInit {
   newContr: string
   tipos: Tipo[] = [
     { value: 'DOCENTE', viewValue: 'DOCENTE' },
-    { value: 'ADMIN', viewValue: 'ADMIN' },
     { value: 'ALUMNO', viewValue: 'ALUMNO' }
   ];
 
@@ -128,7 +127,7 @@ export class UsuarioAdminComponent implements OnInit {
             title: 'Oh no!',
             text: `La operacion no se pudo acompletar!`,
           })
-          console.log(this.error);
+          //console.log(this.error);
         }
       }
       )
@@ -147,7 +146,7 @@ export class UsuarioAdminComponent implements OnInit {
       err => {
         if (err.status == 400) {
           this.error = err.error;
-          console.log(this.error);
+        //  console.log(this.error);
         }
 
         if (err.status == 500) {
@@ -157,7 +156,7 @@ export class UsuarioAdminComponent implements OnInit {
             title: 'Error!',
             text: 'No puedes crear mas roles!',
           })
-          console.log(this.error);
+         // console.log(this.error);
         }
       })
   }

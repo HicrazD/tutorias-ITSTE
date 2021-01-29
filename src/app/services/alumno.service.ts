@@ -5,6 +5,7 @@ import { URL_BAKEND } from '../config/config';
 import { Alumno } from '../models/alumno';
 import { Archivo } from '../models/archivo';
 import { Docente } from '../models/docente';
+import { Sesion } from '../models/sesion';
 import { CommonService } from './common.service';
 
 @Injectable({
@@ -48,5 +49,11 @@ export class AlumnoService extends CommonService<Alumno>{
     formData.append('comentario', a.comentario);
     formData.append('tipo', a.tipo);
     return this.http.post<Archivo>(`${this.baseEndpoint}/${id}/crear-archivo`,formData);
+  }
+
+  crearYAsignarAsistencia(sesion:Sesion, alumnos:Alumno[]): Observable<Alumno[]>{
+    return this.http.put<Alumno[]>(`${this.baseEndpoint}/crear-asistencia/sesion/${sesion.id}`,
+    alumnos,
+     {headers: this.cabecera});
   }
 }
