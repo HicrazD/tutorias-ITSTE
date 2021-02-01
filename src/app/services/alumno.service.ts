@@ -33,8 +33,8 @@ export class AlumnoService extends CommonService<Alumno>{
     return this.http.get<Archivo>(`${this.baseEndpoint}/ver-archivo/${id}`)
   }
 
-  public filtrarAlumnoByMatricula(matricula:number):Observable<Alumno>{
-    return this.http.get<Alumno>(`${this.baseEndpoint}/matricula/${matricula}`)
+  public filtrarAlumnoByMatricula(matricula:number):Observable<Alumno[]>{
+    return this.http.get<Alumno[]>(`${this.baseEndpoint}/matricula/${matricula}`)
   }
 
 

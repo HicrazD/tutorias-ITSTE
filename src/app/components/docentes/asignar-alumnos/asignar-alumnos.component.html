@@ -10,9 +10,15 @@
       <mat-tab label="Asignar alumnos">
 
         <mat-form-field class="mx-3" style="width: 350px;max-width: 50%;">
-          <mat-label>Seleccionar alumnos</mat-label>
+          <mat-label>Nombre o apellido</mat-label>
           <input matInput placeholder="Buscar alumnos" (keyup)="filtrar($event.target.value)" [(ngModel)]="filtro">
         </mat-form-field>
+
+        <mat-form-field class="mx-3" style="width: 350px;max-width: 50%;">
+          <mat-label>Seleccionar por Matricula</mat-label>
+          <input matInput placeholder="Buscar alumnos" (keyup)="filtrarMatricula($event.target.value)" [(ngModel)]="filtro">
+        </mat-form-field>
+
         <div class="container example-container">
           <table mat-table [dataSource]="alumnosAsignar" class="mat-elevation-z8 mx-3">
 

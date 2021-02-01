@@ -8,6 +8,7 @@ export class Alumno implements Generic{
     correo:string
     carrera:string
     semestre:string
+    periodoSemestral:string
     grupo:string
     telefono:number
     promAsistencia:number

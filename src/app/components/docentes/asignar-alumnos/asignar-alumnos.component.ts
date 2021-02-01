@@ -83,6 +83,22 @@ export class AsignarAlumnosComponent implements OnInit {
     }
   }
 
+  filtrarMatricula(matricula: number):void {
+    matricula = matricula !== undefined? matricula:0
+    if(matricula){
+      this.alumnoService.filtrarAlumnoByMatricula(matricula)
+      .subscribe(alumnos => this.alumnosAsignar = alumnos.filter(a => {
+        let filtrar = true;
+        this.alumnos.forEach(ca => {
+          if(a.id === ca.id){
+            filtrar = false;
+          }
+        });
+        return filtrar;
+      }));
+    }
+  }
+
   asignar(): void {
     //console.log(this.seleccion.selected);
     this.docenteService.asignarAlumnos(this.docente, this.seleccion.selected)

@@ -79,10 +79,13 @@ export class ArchivosFormComponent implements OnInit {
     if (!this.archivoSelected) {
       Swal.fire('Error Upload: ', 'Debe seleccionar un archivo', 'error');
     } else {
-      console.log('Imprimiendo alumno, usuario y archivo')
-      console.log(this.archivoCreate)
-      console.log(this.archivoSelected)
+     // console.log('Imprimiendo alumno, usuario y archivo')
+     // console.log(this.archivoCreate)
+     // console.log(this.archivoSelected)
 
+     if(this.archivoCreate.comentario === undefined){
+      this.archivo.comentario = ""
+    }
       this.service.crearConArchivo(this.archivoCreate, this.archivoSelected)
         .subscribe(event => {
           if (event.type === HttpEventType.UploadProgress) {
@@ -108,9 +111,13 @@ export class ArchivosFormComponent implements OnInit {
     if (!this.archivoSelected || this.archivo.tipo == undefined) {
       Swal.fire('Error Upload: ', 'Faltan por rellenar campos(Posible causa:nombre,tipo,archivo)', 'error');
     } else {
-      console.log('Imprimiendo alumno y archivo')
-      console.log(this.archivo)
-      console.log(this.archivoSelected)
+    //  console.log('Imprimiendo alumno y archivo')
+    //  console.log(this.archivo)
+    //  console.log(this.archivoSelected)
+
+      if(this.archivo.comentario === undefined){
+        this.archivo.comentario = ""
+      }
 
       this.service.editarArchivo(this.archivo, this.archivoSelected)
         .subscribe(event => {
@@ -139,6 +146,9 @@ export class ArchivosFormComponent implements OnInit {
   }
 
   public editar(): void {
+    if(this.archivo.comentario === undefined){
+      this.archivo.comentario = ""
+    }
     this.service.editar(this.archivo).subscribe(m => {
       console.log(m);
       Swal.fire('Modificado:', `Archivo ${this.archivo.nombre} actualizado con éxito`, 'success');
