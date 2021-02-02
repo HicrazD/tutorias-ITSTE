@@ -49,7 +49,7 @@ export class ConsultasComponent implements OnInit {
       archivo => this.archivosExcel = archivo)
   }
 
-
+/*
   filtrar(matricula: number): void {
     let m: number = matricula
     let mString: string = m.toString()
@@ -71,7 +71,7 @@ export class ConsultasComponent implements OnInit {
       })
     }
   }
-
+*/
   fieldDivision(div: string) {
     div = div !== undefined ? div.trim() : '';
     if (div !== '') {

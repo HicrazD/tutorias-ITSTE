@@ -16,10 +16,10 @@
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 ">
 
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> No. </th>
-              <td mat-cell *matCellDef="let element"> {{element.id}}
+              <th mat-header-cell *matHeaderCellDef> Cambiar contraseña</th>
+              <td mat-cell *matCellDef="let element"> 
                 <button mat-raised-button color="primary"
-                  [routerLink]="['/usuarios/url-secret/lvb4/admin/itste',element.id]">Editar</button>
+                  [routerLink]="['/usuarios/url-secret/lvb4/admin/itste',element.id]">Avanzado</button>
               </td>
 
 
@@ -87,10 +87,10 @@
 
             <!-- id Column -->
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> Id </th>
-              <td mat-cell *matCellDef="let element"> {{element.id}}
+              <th mat-header-cell *matHeaderCellDef> Cambiar contraseña </th>
+              <td mat-cell *matCellDef="let element"> 
                 <button mat-raised-button color="primary"
-                  [routerLink]="['/usuarios/url-secret/lvb4/admin/itste/',element.id]">Editar</button>
+                  [routerLink]="['/usuarios/url-secret/lvb4/admin/itste/',element.id]">Avanzado</button>
               </td>
             </ng-container>
 

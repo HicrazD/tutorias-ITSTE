@@ -87,7 +87,7 @@
 
             <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
               <mat-label for="periodoSemestral">Periodo Semestral</mat-label>
-              <input matInput required name="periodoSemestral" [(ngModel)]="alumno.periodoSemestral"
+              <input matInput required name="periodoSemestral" [(ngModel)]="model.periodoSemestral"
                 placeholder="Ejemplo: Enero 2020- Junio 2020">
               <div class="alert alert-danger" *ngIf="error?.periodoSemestral">
                 {{ error.periodoSemestral }}

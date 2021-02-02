@@ -21,6 +21,7 @@ import { Asistencia } from 'src/app/models/asistencia';
 export class AsignarAlumnosComponent implements OnInit {
   docente: Docente
   filtro:string = 'alumno'
+  filtroMatricula:number = 0
   alumnosAsignar: Alumno[] = []
   alumnos: Alumno[] = []
   dataSource: MatTableDataSource<Alumno>;
@@ -84,8 +85,8 @@ export class AsignarAlumnosComponent implements OnInit {
   }
 
   filtrarMatricula(matricula: number):void {
-    matricula = matricula !== undefined? matricula:0
-    if(matricula){
+    matricula = +matricula
+    if(matricula > 0){
       this.alumnoService.filtrarAlumnoByMatricula(matricula)
       .subscribe(alumnos => this.alumnosAsignar = alumnos.filter(a => {
         let filtrar = true;
@@ -105,6 +106,7 @@ export class AsignarAlumnosComponent implements OnInit {
     .subscribe(c => {
       this.tabIndex = 2;
       this.filtro = ''
+      this.filtroMatricula = 0
       Swal.fire(
         'Asignados:',
         `Alumnos Asignados con éxito al docente ${this.docente.nombre}`,
