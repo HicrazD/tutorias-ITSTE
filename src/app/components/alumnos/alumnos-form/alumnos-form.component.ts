@@ -131,17 +131,4 @@ export class AlumnosFormComponent
     })
   }
 
-  asistenciasAlumno() {
-    this.asistenciaService.encontrarAsistenciaPorAlumno(this.model).subscribe(asistencias => {
-
-      this.asistencias = asistencias
-      this.presente = asistencias.filter(a => a.statusAsistencia)
-     // console.log('presente {' + this.presente.length + '}')
-     // console.log('asistencias {' + this.asistencias.length + '}')
-      this.model.promAsistencia = (this.presente.length * 100)/( this.asistencias.length)
-      this.model.asistenciaPresente = (this.presente.length)
-    })
-
-  }
-
 }

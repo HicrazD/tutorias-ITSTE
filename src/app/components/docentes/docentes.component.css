@@ -39,3 +39,6 @@
     color: black;
   }
   
+  .zoom:hover {
+    box-shadow: 0 4px 16px rgb(125, 207, 240);
+  }

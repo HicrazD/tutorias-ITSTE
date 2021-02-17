@@ -1,5 +1,5 @@
 table {
-    width:900px;
+    width:1000px;
     max-width: 100%;
   }
   
@@ -8,13 +8,20 @@ table {
     width: 100%;
   }
   
-  td, th {
-    font-size: 10pt;
-  }
-
   .div-table{
     width: 1300px;
     height: 200px;
     max-width: 100%;
   }
    
+
+  .zoom {
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    box-shadow: 0 4px 16px rgb(50, 132, 165);
+    text-shadow: 2px 2px 2px rgb(209, 208, 208);
+  }

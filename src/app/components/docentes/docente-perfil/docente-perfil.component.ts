@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 export class DocentePerfilComponent implements OnInit {
   urlBackend = URL_BAKEND
   usuario: Usuario
-  docentes: Docente = new Docente()
+  docentes: Docente
   docente: Docente
   error: any
   tabIndex = 0;
@@ -45,7 +45,10 @@ export class DocentePerfilComponent implements OnInit {
     private router: Router,
     private docenteService: DocenteService,
     private usuarioService: UsuarioService,
-    private archivoService: ArchivoService) { }
+    private archivoService: ArchivoService) {
+      this.docentes = new Docente()
+      this.docente = new Docente()
+     }
 
   ngOnInit() {
 
@@ -71,11 +74,11 @@ export class DocentePerfilComponent implements OnInit {
    // console.log(this.archivo)
   }
 
-  public createDocente(): void {
+  public crear(): void {
     this.route.paramMap.subscribe(params => {
       const username: string = params.get('term');
       if (username) {
-        this.docenteService.crearPorUsuarioUsername(this.docentes, username).subscribe(docente => {
+        this.docenteService.crearPorUsuarioUsername(this.docente, username).subscribe(docente => {
         //  console.log(docente + 'docente creado');
           Swal.fire('Crear docente', `Docente ${docente.nombre} creado con exito`, 'success')
           this.tabIndex = 1

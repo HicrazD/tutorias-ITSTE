@@ -1,25 +1,22 @@
 .example-container {
     height:300px;
-    width: 100%;
+    width: 1100px;
     max-width: 100%;
     overflow: auto;
   }
 
+  .zoom {
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    box-shadow: 0 4px 16px rgb(18, 124, 128);
+  }
   
   table {
     width: 1000px;
   }
-  
-    
-  td.mat-column-star {
-    width: 20px;
-    padding-right: 8px;
-  }
-  
-  th.mat-column-position, td.mat-column-position {
-    padding-left: 8px;
-  }
-  
-  .mat-table-sticky:first-child {
-    border-right: 1px solid #b81818;
-  }
+   
+ 

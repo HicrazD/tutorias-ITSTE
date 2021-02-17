@@ -1,7 +1,19 @@
 .fondo{
-    background: rgba(0, 105, 70, 0.555);
+    background: rgba(0, 105, 70, 0.315);
 }
 
+.btn-agregar{
+    background-color: rgb(27, 70, 110);
+    color: white;
+}
 .fondoBlanco{
     background: white;
+}
+.fondoVolver{
+    background-color: rgb(27, 70, 110);
+    color: white;
+}
+
+button:hover{
+    box-shadow: 0 5px 19px rgb(146, 245, 235);
 }

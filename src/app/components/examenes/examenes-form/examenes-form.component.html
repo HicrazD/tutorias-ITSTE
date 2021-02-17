@@ -1,3 +1,5 @@
+<div class="container">  
+
 <div class="card bg-light mb-3 mt-5 overflow-auto">
   <div class="card-header p-2"></div>
 </div>
@@ -12,7 +14,7 @@
       <form>
 
         <mat-form-field color="accent" class="fondoBlanco w-100">
-          <input matInput placeholder="Nombre" required name="nombre" id="nombre" [(ngModel)]="model.nombre">
+          <input matInput placeholder="Nombre de la Evalucacion" required name="nombre" id="nombre" [(ngModel)]="model.nombre">
           <mat-hint>
             <div style="color: red;" *ngIf="error?.nombre">{{ error.nombre }}</div>
           </mat-hint>
@@ -28,7 +30,7 @@
             </mat-select>
           </mat-form-field>
 
-          <button mat-raised-button color="primary" (click)="agregarPregunta()" class="btn-lg my-3">
+          <button mat-raised-button  (click)="agregarPregunta()" class="btn-lg my-3 ml-2 btn-agregar">
             Agregar Pregunta
           </button>
 
@@ -44,10 +46,10 @@
 
 
               </div>
-              <div class="col-sm-2">
+              <div class="col">
                 <label>{{pregunta.tipo}}</label>
               </div>
-              <div class="col-sm-1">
+              <div class="col">
                 <button class="btn btn-danger btn-sm" (click)="eliminarPregunta(pregunta)">
                   x
                 </button>
@@ -67,6 +69,8 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button class="w-100" routerLink="/examenes">volver</button>
+    <button mat-raised-button class="w-100 fondoVolver" routerLink="/examenes">volver</button>
   </mat-card-actions>
 </mat-card>
+
+</div>

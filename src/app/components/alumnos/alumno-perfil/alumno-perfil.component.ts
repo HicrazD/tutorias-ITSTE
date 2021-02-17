@@ -198,5 +198,5 @@ export class AlumnoPerfilComponent implements OnInit {
     if (archivo.tipo === 'EXCEL') {
       window.open(`${this.urlBackend}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
     }
-  }
+  }  
 }

@@ -10,6 +10,7 @@ import { Docente } from 'src/app/models/docente';
 import { Sesion } from 'src/app/models/sesion';
 import { Usuario } from 'src/app/models/usuario';
 import { AlumnoService } from 'src/app/services/alumno.service';
+import { AsistenciaService } from 'src/app/services/asistencia.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocenteService } from 'src/app/services/docente.service';
 import { SesionService } from 'src/app/services/sesion.service';
@@ -31,15 +32,17 @@ export class SesionesComponent implements OnInit {
   sesiones: Sesion[] = []
   docente: Docente
   asistencias: Asistencia[]
+  alumnosAsistencias:Asistencia[]
   alumnos: Alumno[] = []
   displayedColumns: string[] = ['numSesion', 'tema', 'modalidad', 'fecha', 'asistencias','asignar', 'editar', 'eliminar'];
   dataSource: MatTableDataSource<Sesion>;
+  presente: Asistencia[]
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private route: ActivatedRoute, public authService: AuthService,
-    private router: Router, private alumnoService: AlumnoService,
+    private router: Router, private alumnoService: AlumnoService, private asistenciaService: AsistenciaService,
     private docenteService: DocenteService, private sesionService: SesionService,
     private usuarioService: UsuarioService,public dialog: MatDialog) {
 
@@ -175,6 +178,28 @@ export class SesionesComponent implements OnInit {
         //  console.log(this.sesiones)
           this.IniciarPaginador()
         })
+    })
+  }
+
+  asistenciasAlumno(alumno:Alumno) {
+    this.asistenciaService.encontrarAsistenciaPorAlumno(alumno).subscribe(asistencias => {
+
+      this.alumnosAsistencias = asistencias
+      this.presente = asistencias.filter(a => a.statusAsistencia)
+     // console.log('presente {' + this.presente.length + '}')
+     // console.log('asistencias {' + this.asistencias.length + '}')
+      alumno.promAsistencia = (this.presente.length * 100)/( this.alumnosAsistencias.length)
+
+      this.alumnoService.editar(alumno).subscribe(alumno =>{
+        this.docenteEndPoint()
+        Swal.fire('Exito¡',`${alumno.nombre}: asistencia total modificada ${alumno.promAsistencia} `,'success')
+      },err =>{
+        this.error = err.error
+        console.log(this.error)
+        if(err.status == 400){
+          Swal.fire('Uups','No se pudo modificar la sistencia','error')
+        }
+      })
     })
   }
 }

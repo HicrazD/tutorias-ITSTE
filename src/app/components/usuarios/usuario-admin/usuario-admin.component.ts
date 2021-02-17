@@ -24,7 +24,7 @@ interface Tipo {
 })
 export class UsuarioAdminComponent implements OnInit {
   code: Codigo
-  codigosDb: Codigo[]
+  codigosDb: Codigo[] = []
   codigo: string = 'xtr92%ITSTE.'
   codigo2: string = '$%rolesdzc#&.'
   titulo: string = 'Administrador'
@@ -58,11 +58,8 @@ export class UsuarioAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.roleService.listar().subscribe(r => this.role = r)
-    this.codigoService.listar().subscribe(codigo => {
-      this.codigosDb = codigo
-      this.dataSource = new MatTableDataSource<Codigo>(this.codigosDb);
-    })
-
+    this.listarCodigos()
+    
     this.route.paramMap.subscribe(params => {
       const id: number = +params.get('id')
       if (id)
@@ -73,6 +70,20 @@ export class UsuarioAdminComponent implements OnInit {
 
   }
 
+  listarCodigos(){
+    this.codigoService.listar().subscribe(codigo => {
+      this.codigosDb = codigo
+      //this.updateData()
+    })
+  }
+  acceso(){
+    if(this.authService.hasRole('ROLE_ADMIN')) return true
+    else return false
+  }
+
+  updateData(){
+    this.dataSource = new MatTableDataSource<Codigo>(this.codigosDb);
+  }
   editarUsuario(contra: string, nuevaContra: string): void {
     if (contra === nuevaContra) {
       this.usuarioDb.password = nuevaContra
@@ -91,6 +102,7 @@ export class UsuarioAdminComponent implements OnInit {
   }
   applyFilter(event: Event) {
     this.dataSource = new MatTableDataSource<Codigo>(this.codigosDb);
+   //this.updateData()
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -114,6 +126,8 @@ export class UsuarioAdminComponent implements OnInit {
       Swal.fire('Campo Vacio', 'El campo esta vacio', 'warning')
     } else {
       this.codigoService.create(this.code).subscribe(c => {
+        this.listarCodigos()
+        //this.updateData()
         Swal.fire({
           icon: 'success',
           title: 'Exito!',
@@ -170,5 +184,40 @@ export class UsuarioAdminComponent implements OnInit {
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
     const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
     FileSaver.saveAs(data, 'Codigos' + '_export_' + '.xlsx')
+  }
+
+  public eliminar(codigo: Codigo): void {
+
+    Swal.fire({
+      title: 'Cuidado:',
+      text: `¿Seguro que desea eliminar?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+      if (result.value) {
+        this.codigoService.eliminar(codigo.id).subscribe(() => {
+          // this.listar = this.listar.filter(a => a !== e);
+          
+          this.listarCodigos()
+          Swal.fire('Eliminado:', `Codigo eliminado con éxito`, 'success');
+        }, err => {
+          if (err.status == 400) {
+            this.error = err.error;
+            Swal.fire('Oops...:', `No se completo la peticion`, 'error');
+           // console.log(this.error);
+          }
+
+          if (err.status == 500) {
+            this.error = err.error;
+            Swal.fire('Oops...:500', `Problemas en el servidor, Contactar al servio técnico`, 'error');
+            //console.log(this.error);
+          }
+        });
+      }
+    });
+
   }
 }

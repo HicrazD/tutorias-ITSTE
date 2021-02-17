@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="">
   <div class="container-fluid example-container bg-light ">
     <img src="../../../assets/pleca_tecnm.jpg" alt="..." class="img-fluid">
 
@@ -8,7 +8,7 @@
 
     <img src="../../../assets/Logo_ITSTE.png" alt="..." class="img-fluid" height="80" width="80">
   </div>
-  <nav class="navbar navbar-expand-lg" style="background: #1B396A;">
+  <nav class="navbar navbar-expand-lg" style="background: #1b396a;">
     <img width="80" alt="Angular Logo" src="../../../assets/divisiones/ITSTE.png" />
     <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@
       <form class="form-inline my-2 my-lg-0 ml-auto">
         <ul class="navbar-nav mr-auto">
           <li *ngIf="!authService.isAuthenticated()">
-            <a href="#" class="active nav-link" routerLink="/login">Login</a>
+            <a href="#" class="active nav-link" routerLink="/login">Iniciar Sesion</a>
           </li>
 
           <li *ngIf="authService.isAuthenticated()" class="dropdown">
@@ -60,7 +60,7 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <button (click)="logout()" class="dropdown-item" type="submit">Sign Out</button>
+              <button (click)="logout()" class="dropdown-item" type="submit">Cerrar Sesion</button>
               <div class="container" *ngIf="!authService.hasRole('ROLE_ADMIN')">
                 <button *ngIf="authService.hasRole('ROLE_ALUMNO')"
                   [routerLink]="['/alumnos/form/alumno-perfil/',authService.usuario.username]" class="dropdown-item"
@@ -82,9 +82,9 @@
       </form>
     </div>
   </nav>
-  <div class=" bg-light mx-auto p-1">
+  <div class="mx-auto p-1">
 
-    <div class="text-center  p-1 example-container" style="background: #1B396A;">
+    <div class="text-center  p-1 example-container" style="background: #1b396a8a;">
       <img src="../../../assets/divisiones/isc.png" alt="..." class="img-fluid mx-1" width="80">
 
       <img src="../../../assets/divisiones/idc.png" alt="..." class="img-fluid mx-1" width="80">
