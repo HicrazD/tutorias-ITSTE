@@ -1,0 +1,47 @@
+.container {
+  width: 600px;
+}
+
+.mat-card {
+  background-image: url('../../../../assets/form/notepad.jpg');
+  background-size: cover;
+}
+
+.mat-card-content {
+  padding: 15px;
+}
+
+span,
+label,
+.mat-card-subtitle,
+.mat-card-title {
+  color: white;
+  text-shadow: 0 2px 2px white;
+}
+
+button {
+  background-color: rgb(252, 113, 0);
+  color: white;
+}
+
+input:hover,textarea:hover {
+  box-shadow: 0 4px 16px white;
+}
+
+.zoom {
+  transition: transform .2s;
+  /* Animation */
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(1.2);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  box-shadow: 0 4px 16px white;
+}
+
+@media only screen and (max-width: 769px) {
+  .container {
+    width: 100%;
+  }
+}

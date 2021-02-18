@@ -7,6 +7,8 @@ import { ResponderExamenModalComponent } from './components/alumnos/responder-ex
 import { ResponderExamenComponent } from './components/alumnos/responder-examen/responder-examen.component';
 import { ArchivosFormComponent } from './components/archivos/archivos-form/archivos-form.component';
 import { ArchivosComponent } from './components/archivos/archivos/archivos.component';
+import { AvisosFormComponent } from './components/avisos/avisos-form/avisos-form.component';
+import { AvisosComponent } from './components/avisos/avisos.component';
 import { ConsultasComponent } from './components/consultas/consultas.component';
 import { AsignarAlumnosComponent } from './components/docentes/asignar-alumnos/asignar-alumnos.component';
 import { AsignarExamenesComponent } from './components/docentes/asignar-examenes/asignar-examenes.component';
@@ -61,6 +63,9 @@ const routes: Routes = [
   {path: 'sesiones/form/:id',component:SesionFomComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
   {path: 'sesiones-ver/:term', component: SesionesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
   {path: 'resultados/details/evaluacion/:id',component:ResultadosEvaluacionComponent},
+  {path: 'avisos/form/noticia',component:AvisosFormComponent},
+  {path: 'avisos/form/noticia/:id',component:AvisosFormComponent},
+  {path: 'avisos/list',component:AvisosComponent}
 ];
 
 @NgModule({

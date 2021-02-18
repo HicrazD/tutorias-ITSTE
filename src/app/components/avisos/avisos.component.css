@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+  background-color: rgba(255, 166, 0, 0.603);
+}
+
+th {
+  background-color: rgb(255, 167, 5);  
+}
+
+td,th {
+  font-size: 16px;
+  width: 25%;  
+  color: rgb(0, 0, 0);
+  text-shadow: 0 1px 1px white;
+}
+td:hover {
+  background-color: rgb(221, 188, 2);
+  color: black;
+}
+
+

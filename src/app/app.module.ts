@@ -65,7 +65,9 @@ import { registerLocaleData } from '@angular/common';
 import LocaleES from '@angular/common/locales/es';
 import { PatComponent } from './components/reportes-plantilla/pat/pat.component';
 import { AsistenciasModelComponent } from './components/asistencias/asistencias-model/asistencias-model.component';
-import { ResultadosEvaluacionComponent } from './components/examenes/resultados-evaluacion/resultados-evaluacion.component'
+import { ResultadosEvaluacionComponent } from './components/examenes/resultados-evaluacion/resultados-evaluacion.component';
+import { AvisosComponent } from './components/avisos/avisos.component';
+import { AvisosFormComponent } from './components/avisos/avisos-form/avisos-form.component';
 registerLocaleData(LocaleES,'es');
 
 
@@ -106,8 +108,9 @@ registerLocaleData(LocaleES,'es');
     SesionesComponent,
     PatComponent,
     AsistenciasModelComponent,
-    ResultadosEvaluacionComponent
-    
+    ResultadosEvaluacionComponent,
+    AvisosComponent,
+    AvisosFormComponent 
   ],
   entryComponents: [ResponderExamenModalComponent,
     VerExamenModalComponent,
