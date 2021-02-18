@@ -19,7 +19,7 @@ label,
   text-shadow: 0 2px 2px white;
 }
 
-button {
+.btn-crear {
   background-color: rgb(252, 113, 0);
   color: white;
 }

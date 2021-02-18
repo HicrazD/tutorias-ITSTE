@@ -1,76 +1,73 @@
-<div class="container">  
+<div class="container">
 
-<div class="card bg-light mb-3 mt-5 overflow-auto">
-  <div class="card-header p-2"></div>
-</div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="fondoBlanco  p-2">{{titulo}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
 
+      <mat-form-field color="accent" class="fondoBlanco w-100">
+        <input matInput placeholder="Nombre de la Evalucacion" required name="nombre" id="nombre"
+          [(ngModel)]="model.nombre">
+        <mat-hint>
+          <div style="color: red;" *ngIf="error?.nombre">{{ error.nombre }}</div>
+        </mat-hint>
+      </mat-form-field>
 
-<mat-card class="fondo">
-  <mat-card-header>
-    <mat-card-title class="fondoBlanco w-100 p-2">{{titulo}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="container">
-      <form>
+      <div class="fondoBlanco p-1 ">
 
-        <mat-form-field color="accent" class="fondoBlanco w-100">
-          <input matInput placeholder="Nombre de la Evalucacion" required name="nombre" id="nombre" [(ngModel)]="model.nombre">
-          <mat-hint>
-            <div style="color: red;" *ngIf="error?.nombre">{{ error.nombre }}</div>
-          </mat-hint>
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo Respuesta</mat-label>
+          <mat-select [(ngModel)]="type" name="t">
+            <mat-option *ngFor="let t of tipo" [value]="t.valor">
+              {{t.muestraValor}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-        <div class="container fondoBlanco p-1 my-3">
 
-          <mat-form-field appearance="outline">
-            <mat-label>Tipo Respuesta</mat-label>
-            <mat-select [(ngModel)]="type" name="t">
-              <mat-option *ngFor="let t of tipo" [value]="t.valor">
-                {{t.muestraValor}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <button mat-raised-button (click)="agregarPregunta()" class="btn-lg zoom btn-agregar ">
+          Agregar Pregunta
+        </button>
 
-          <button mat-raised-button  (click)="agregarPregunta()" class="btn-lg my-3 ml-2 btn-agregar">
-            Agregar Pregunta
-          </button>
+        <div class="form-group" *ngFor="let pregunta of model?.preguntas; let i = index">
 
-          <div class="form-group" *ngFor="let pregunta of model?.preguntas; let i = index">
-
-            <div class="row">
-              <div class="col-sm-2">
-                <label>Pregunta {{i+1}}:</label>
-              </div>
-              <div class="col-sm-6">
-                <input type="text" value="{{pregunta?.texto}}" class="form-control"
-                  (change)="asignarTexto(pregunta, $event)">
+          <div class="row">
+            <div class="col-sm-2">
+              <label>Pregunta {{i+1}}:</label>
+            </div>
+            <div class="col-sm-6">
+              <input type="text" value="{{pregunta?.texto}}" class="form-control"
+                (change)="asignarTexto(pregunta, $event)">
 
 
-              </div>
-              <div class="col">
-                <label>{{pregunta.tipo}}</label>
-              </div>
-              <div class="col">
-                <button class="btn btn-danger btn-sm" (click)="eliminarPregunta(pregunta)">
-                  x
-                </button>
-              </div>
+            </div>
+            <div class="col">
+              <label>{{pregunta.tipo}}</label>
+            </div>
+            <div class="col">
+              <button class="btn btn-danger btn-sm" (click)="eliminarPregunta(pregunta)">
+                x
+              </button>
             </div>
           </div>
-          <div class="alert alert-danger" *ngIf="errorPreguntas">
-            {{ errorPreguntas }}
-          </div>
         </div>
-        <div class="form-group">
-          <button mat-raised-button (click)="model.id? editar(): crear()" class="w-100" style="background: #ff9101fb; color: white;">
-            {{ model.id? 'Editar': 'Crear' }}
-          </button>
+        <div class="alert alert-danger" *ngIf="errorPreguntas">
+          {{ errorPreguntas }}
         </div>
-      </form>
-    </div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button class="w-100 fondoVolver" routerLink="/examenes">volver</button>
-  </mat-card-actions>
-</mat-card>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <div>
+        <button mat-raised-button (click)="model.id? editar(): crear()" class="w-100 zoom"
+          style="background: #ff9101fb; color: white;">
+          {{ model.id? 'Editar': 'Crear' }}
+        </button>
+      </div>
+      <div>
+        <button mat-raised-button class="w-100 fondoVolver zoom" routerLink="/examenes">volver</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
 
 </div>

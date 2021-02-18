@@ -1,52 +1,54 @@
-<h1 mat-dialog-title>Docente {{docente.nombre}}</h1>
-<div mat-dialog-content>
-  <p>Evaluacion {{examen.nombre}}</p>
- <!-- Se cambia respuesta.texto por numero para usar numeros(number)
-  ) en ves de texto o string-->
-  <mat-expansion-panel *ngFor="let pregunta of examen.preguntas; let i = index">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{pregunta.texto}}
-      </mat-panel-title>
-      <mat-panel-description></mat-panel-description>
-    </mat-expansion-panel-header>
-    <div class="container-fluid" *ngIf="pregunta?.tipo == 'Abierta'">
-      <mat-form-field style="width: 95%;">
-        <textarea matInput (change)="responder(pregunta, $event)" 
-        placeholder="Deja tu respuesta"></textarea>
-      </mat-form-field>
-    </div>
-    
+<div class="container">
 
-    <div class="container-fluid" *ngIf="pregunta?.tipo == 'Multiple Texto'">
-      <mat-form-field appearance="fill">
-        <mat-label>Respuesta</mat-label>
-        
-        <mat-select [(ngModel)]="namelistA[i]"  (ngModelChange)="guardarSelect(pregunta, $event)" id="i">
-          <mat-option *ngFor="let m of multiple" [value]="m.valor">
-            {{m.muestraValor}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+  <h1 mat-dialog-title>Docente {{docente.nombre}}</h1>
+  <div mat-dialog-content class="caja-shadow">
+    <p>Evaluacion {{examen.nombre}}</p>
+    <!-- Se cambia respuesta.texto por numero para usar numeros(number)
+     ) en ves de texto o string-->
+    <mat-expansion-panel *ngFor="let pregunta of examen.preguntas; let i = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{pregunta.texto}}
+        </mat-panel-title>
+        <mat-panel-description></mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="container-fluid" *ngIf="pregunta?.tipo == 'Abierta'">
+        <mat-form-field style="width: 95%;">
+          <textarea matInput (change)="responder(pregunta, $event)" placeholder="Deja tu respuesta"></textarea>
+        </mat-form-field>
+      </div>
 
-    <div class="container-fluid" *ngIf="pregunta?.tipo == 'Multiple Si/No'">
-      <mat-form-field appearance="fill">
-        <mat-label>Respuesta</mat-label>
-        
-        <mat-select [(ngModel)]="namelistA[i]"  (ngModelChange)="guardarSelect(pregunta, $event)" id="i">
-          <mat-option *ngFor="let sn of siNo" [value]="sn.valor">
-            {{sn.muestraValor}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    
-  
-  </mat-expansion-panel>
 
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="cancelar()">Cancelar</button>
-    <button mat-button [mat-dialog-close]="respuestas" [disabled] = 'enabled'>Enviar</button>
+      <div class="container-fluid" *ngIf="pregunta?.tipo == 'Multiple Texto'">
+        <mat-form-field appearance="fill">
+          <mat-label>Respuesta</mat-label>
+
+          <mat-select [(ngModel)]="namelistA[i]" (ngModelChange)="guardarSelect(pregunta, $event)" id="i">
+            <mat-option *ngFor="let m of multiple" [value]="m.valor">
+              {{m.muestraValor}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="container-fluid" *ngIf="pregunta?.tipo == 'Multiple Si/No'">
+        <mat-form-field appearance="fill">
+          <mat-label>Respuesta</mat-label>
+
+          <mat-select [(ngModel)]="namelistA[i]" (ngModelChange)="guardarSelect(pregunta, $event)" id="i">
+            <mat-option *ngFor="let sn of siNo" [value]="sn.valor">
+              {{sn.muestraValor}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+    </mat-expansion-panel>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="cancelar()" color="warn">Cancelar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="respuestas" [disabled]='enabled'>Enviar</button>
+  </div>
 </div>

@@ -1,19 +1,39 @@
-.fondo{
-    background: rgba(0, 105, 70, 0.315);
+.container{
+    width: 800px;
 }
-
 .btn-agregar{
     background-color: rgb(27, 70, 110);
     color: white;
 }
 .fondoBlanco{
-    background: white;
+    background: rgba(255, 255, 255, 0.945);
 }
 .fondoVolver{
     background-color: rgb(27, 70, 110);
     color: white;
 }
 
-button:hover{
-    box-shadow: 0 5px 19px rgb(146, 245, 235);
-}
+/*style="background: rgba(2, 128, 117, 0.788);"*/
+.mat-card {
+    background-image: url('../../../../assets/form/evaluacion.jpg');
+    background-size: cover;
+  }
+  
+  @media only screen and (max-width: 767px) {
+  
+    .container{
+      width: 100%;
+    }
+  }
+
+  .zoom {
+    transition: transform .2s;
+    /* Animation */
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.2);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    box-shadow: 0 4px 16px white;
+  }

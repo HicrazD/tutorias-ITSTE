@@ -1,10 +1,9 @@
 table {
   width: 100%;
-  background-color: rgba(255, 166, 0, 0.603);
 }
 
 th {
-  background-color: rgb(255, 167, 5);  
+  background-color: #ff9101fb;  
 }
 
 td,th {
@@ -14,8 +13,8 @@ td,th {
   text-shadow: 0 1px 1px white;
 }
 td:hover {
-  background-color: rgb(221, 188, 2);
-  color: black;
+  background-color: rgba(31, 73, 129, 0.733);
+  color: rgb(255, 255, 255);
 }
 
 

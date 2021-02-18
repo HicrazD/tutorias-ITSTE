@@ -1,0 +1,13 @@
+.mat-card {
+  background-image: url('../../../../assets/form/file.jpg');
+  background-size: cover;
+}
+
+.mat-card-content {
+  background-color: rgba(255, 255, 255, 0.938);
+}
+
+.mat-form-field {
+  color: black;
+  box-shadow: 0 4px 16px rgb(33, 103, 124);
+}

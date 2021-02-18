@@ -1,22 +1,28 @@
 <div class="container mt-5">
-<mat-card>
+  <mat-card>
     <mat-card-header>
-        <mat-card-title>{{titulo}}</mat-card-title>
-        <mat-card-subtitle>{{ model.id? 'Editar': 'Crear' }}</mat-card-subtitle>
+      <mat-card-title>{{titulo}}</mat-card-title>
+      <mat-card-subtitle>{{ model.id? 'Editar': 'Crear' }}</mat-card-subtitle>
     </mat-card-header>
+
     <mat-card-content>
-        <div class="mb-3">
-            <label for="" class="form-label">Tema del aviso</label>
-            <input type="text" class="form-control" id="tema" placeholder="Tema del aviso/noticia" [(ngModel)]="model.tema">
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">aviso</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="model.aviso"></textarea>
-          </div>
-          <span>Caracteres {{model.aviso?.length}}</span>
+      <div class="mb-3">
+        <label for="" class="form-label">Tema del aviso</label>
+        <input type="text" class="form-control" id="tema" placeholder="Tema del aviso/noticia" [(ngModel)]="model.tema">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">aviso</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="model.aviso"></textarea>
+      </div>
+      <span>Caracteres {{model.aviso?.length}}</span>
     </mat-card-content>
+    
     <mat-card-actions>
-        <button mat-raised-button class="w-100 zoom" (click)="crear()" >{{ model.id? 'Editar': 'Crear' }}</button>
+      <div><button mat-raised-button class="w-100 btn-crear zoom"
+          (click)="crear()">{{ model.id? 'Editar': 'Crear' }}</button></div>
+      <div><button mat-raised-button class="w-100 zoom" color="primary" [routerLink]="['/home']">Ir Home</button></div>
+      <div><button mat-raised-button class="w-100 btn-info zoom" [routerLink]="['/avisos/list']">Ver avisos</button>
+      </div>
     </mat-card-actions>
-</mat-card>
+  </mat-card>
 </div>
