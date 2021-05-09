@@ -29,3 +29,29 @@
   .mat-table-sticky:last-child {
     border-left: 1px solid #e0e0e0;
   }
+
+  .sobre {
+    background-color: rgba(49, 138, 172, 1);
+    color: white;
+  }
+  
+  .sobre:hover {
+    color: rgba(255, 255, 255, 1) !important;
+    border: 1px solid rgb(151, 250, 240);
+    box-shadow: 0 4px 16px rgb(39, 110, 138);
+    transition: all 0.2s ease;
+  }
+
+  .tab-tres{
+    width: 600px;
+    background-color: rgba(114, 113, 113, 0.137);
+  }
+  .container{
+    width: 700px;
+    padding: 5px;
+  }
+  @media only screen and (max-width: 759px){
+    .container{
+      width:100%;
+    }
+  }

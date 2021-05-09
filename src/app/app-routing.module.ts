@@ -51,7 +51,7 @@ const routes: Routes = [
   {path: 'usuarios/form/crear/usuario-admin/secret/2de6',component:LoginAdminComponent},
   {path: 'usuarios/url-secret/lvb4/admin/itste',component:UsuarioAdminComponent},// ir primero si eres Admin
   {path: 'usuarios/url-secret/lvb4/admin/itste/:id',component:UsuarioAdminComponent},
-  {path: 'rol-usuario', component: RolUsuarioComponent},
+  {path: 'rol-usuario/:id', component: RolUsuarioComponent},
   {path: 'consultas', component:ConsultasComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
   {path: 'examenes/asignar-examenes/:id', component: AsignarExamenesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},// id docente
   {path: 'examenes/asignar-examenes', component: AsignarExamenesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},

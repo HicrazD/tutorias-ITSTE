@@ -176,7 +176,7 @@ export class UsuarioAdminComponent implements OnInit {
   }
 
   exportexcel(): void {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.dataSource.data)
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.codigosDb)
     const workbook: XLSX.WorkBook = {
       Sheets: { 'data': worksheet },
       SheetNames: ['data']

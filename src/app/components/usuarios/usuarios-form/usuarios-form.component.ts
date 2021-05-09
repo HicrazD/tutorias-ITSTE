@@ -29,7 +29,7 @@ export class UsuariosFormComponent
     private route: ActivatedRoute,
     private codigoService: CodigoService) {
     super(service, router)
-    this.titulo = "Crear de Usuarios"
+    this.titulo = "Crear Usuarios"
     this.codigo = new Codigo()
   }
 

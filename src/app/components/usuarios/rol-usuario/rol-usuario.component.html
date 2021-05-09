@@ -1,33 +1,26 @@
-<div class="container mx-5">
-
-<section>
-    <div class="container-fluid">
-      <div class="container">
-        <div class="row">
-          <!-- END Col one -->
-          <div class="col-sm-7">
-            <div class="card text-center">
-              <div class="title">
-                <i class="fa fa-user-o" aria-hidden="true"></i>
-                <h2>{{docenteT}}</h2>
-              </div>
-              <a href="#" [routerLink]="['/usuarios/form/crear']">Crear Docente </a>
-            </div>
-          </div>
-          <!-- END Col two -->
-          <div class="col-sm-5">
-            <div class="card text-center">
-              <div class="title">
-                <i class="fa fa-user-o" aria-hidden="true"></i>
-                <h2>{{alumnoT}}</h2>
-              </div>
-              <a href="#" [routerLink]="['/usuarios/form/crear']">Crear Alumno</a>
-            </div>
-          </div>
-          <!-- END Col three -->
+<div class="container my-5">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{title}}</mat-card-title>
+      <mat-card-subtitle>{{usuario.id ? usuario.username: ''}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mb-3 row">
+        <label for="inputPassword1" class="col-sm-2 col-form-label">Nueva contraseña</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="inputPassword1" nombre="contra1 "[(ngModel)]="contra1">
         </div>
       </div>
-    </div>
-  </section>
+      <div class="mb-3 row">
+        <label for="inputPassword2" class="col-sm-2 col-form-label">Repetir contraseña</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="inputPassword2" nombre="contra2 "[(ngModel)]="contra2">
+        </div>
+      </div>
 
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button class="w-100 btn-success sobre" (click)="editarUsuario()">Guardar Cambios</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

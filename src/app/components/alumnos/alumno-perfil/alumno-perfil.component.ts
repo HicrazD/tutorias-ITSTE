@@ -10,6 +10,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import { ArchivoService } from 'src/app/services/archivo.service';
 import { AsistenciaService } from 'src/app/services/asistencia.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -23,8 +24,11 @@ import Swal from 'sweetalert2';
 export class AlumnoPerfilComponent implements OnInit {
   urlBackend = URL_BAKEND
   docente: Docente
+  title:string='Cambiar Contraseña'
   selected = 'None';
   usuario: Usuario
+  contra1:string=''
+  contra2:string=''
   archivos: Archivo
   alumnos: Alumno = new Alumno()
   alumno: Alumno
@@ -60,12 +64,14 @@ export class AlumnoPerfilComponent implements OnInit {
     'id', 'nombre', 'comentario',
     'tipo', 'archivo', 'editar', 'eliminar'
   ];
-  constructor(private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,public authService: AuthService,
     private router: Router,
     private alumnoService: AlumnoService,
     private usuarioService: UsuarioService,
     private archivoService: ArchivoService,
-    private asistenciaService: AsistenciaService) { }
+    private asistenciaService: AsistenciaService) {
+      this.alumno = new Alumno()
+     }
 
   ngOnInit() {
 
@@ -105,20 +111,21 @@ export class AlumnoPerfilComponent implements OnInit {
   }
 
 
-  public createAlumno(): void {
+  public crear(): void {
     this.route.paramMap.subscribe(params => {
       const username: string = params.get('term');
       if (username) {
-        this.alumnoService.crearPorUsuarioId(this.alumnos, username)
+        this.alumnoService.crearPorUsuarioId(this.alumno, username)
           .subscribe(alumno => {
+            this.alumno = alumno
            // console.log(alumno);
           //  alert(`Alumno ${alumno.nombre} creado con exito`);            
-            this.router.navigate(['/home']);
+          this.router.navigate([`/alumnos/form/alumno-perfil/${this.authService.usuario.username}`]);
             Swal.fire('Exito!',`${alumno.nombre} Tu perfil fue creado exitosamente`,'success')
           }, err => {
             if (err.status === 400) {
               this.error = err.error;
-              console.log(this.error);
+              //console.log(this.error);
             }
           })
       }
@@ -129,11 +136,11 @@ export class AlumnoPerfilComponent implements OnInit {
     this.alumnoService.editar(this.alumno).subscribe(m => {
     //  console.log(m + 'usuario actualisado segun');
       Swal.fire('Modificado:', `Alumno actualizado con éxito`, 'success');
-      this.router.navigate([`/alumnos/form/${this.alumno.id}`]);
+      this.router.navigate([`/alumnos/form/alumno-perfil/${this.authService.usuario.username}`]);
     }, err => {
       if (err.status == 400) {
         this.error = err.error;
-        console.log(this.error);
+        //console.log(this.error);
       }
     });
   }
@@ -157,7 +164,7 @@ export class AlumnoPerfilComponent implements OnInit {
         }, err => {
           if (err.status == 400) {
             this.error = err.error;
-            console.log(this.error);
+          //  console.log(this.error);
           }
         });
       }
@@ -198,5 +205,26 @@ export class AlumnoPerfilComponent implements OnInit {
     if (archivo.tipo === 'EXCEL') {
       window.open(`${this.urlBackend}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
     }
-  }  
+  } 
+  
+  acceso():boolean{
+    if(this.authService.hasRole('ROLE_ALUMNO')) return false
+    else return true
+  }
+
+  editarUsuario(): void {
+    if (this.contra1 === this.contra2 && this.contra1.length > 6  && this.contra2.length > 6) {
+      this.usuario.password = this.contra2 
+      this.usuarioService.editar(this.usuario).subscribe(m => {
+        //console.log(m);
+        Swal.fire('Modificado:', `Contraseña actualizada con éxito`, 'success');
+        this.router.navigate(['/home']);
+      }, err => {
+        if (err.status === 400 || err.status === 500) {
+          this.error = err.error;
+          //console.log(this.error);
+        }
+      });
+    }else  Swal.fire('Error:', `1) Los campos no coinciden 2) La contraseña debe ser mayor a 6 caracteres`, 'error');
+  }
 }

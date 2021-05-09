@@ -10,107 +10,10 @@
 
     <mat-card-content class="mat-elevation-z8 p-1">
       <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
-        <!--    *******************     Crear Perfil    ************************-->
-        <mat-tab label="Crear Perfil" *ngIf="!alumno">
-          <div class="container example-container my-5 p-10">
-
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
-              <mat-mat-label for="id">Matricula</mat-mat-label>
-              <input matInput required name="id" [(ngModel)]="alumnos.matricula">
-              <div class="alert alert-danger" *ngIf="error?.matricula">
-                {{ error.matricula }}
-              </div>
-            </mat-form-field>
-
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
-              <mat-mat-label for="nombre">Nombre</mat-mat-label>
-              <input matInput required name="nombre" [(ngModel)]="alumnos.nombre">
-              <div class="alert alert-danger" *ngIf="error?.nombre">
-                {{ error.nombre }}
-              </div>
-            </mat-form-field>
-
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
-              <mat-label for="apellido">Apellido</mat-label>
-              <input matInput required name="apellido" [(ngModel)]="alumnos.apellido">
-              <div class="alert alert-danger" *ngIf="error?.apellido">
-                {{ error.apellido }}
-              </div>
-            </mat-form-field>
-
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
-              <mat-label for="correo">Correo</mat-label>
-              <input matInput required name="correo" [(ngModel)]="alumnos.correo">
-              <div class="alert alert-danger" *ngIf="error?.correo">
-                {{ error.correo }}
-              </div>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" style="width: 350px;max-width: 70%;" class="mx-3">
-              <mat-label>Seleccionar Carrera</mat-label>
-              <mat-select [(ngModel)]="alumnos.carrera">
-                <mat-option>None</mat-option>
-                <mat-option required *ngFor="let c of carrera" [value]="c.valor">{{c.muestraValor}}</mat-option>
-              </mat-select>
-              <div class="alert alert-danger" *ngIf="error?.carrera">
-                {{ error.carrera }}
-              </div>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" style="width: 350px;max-width: 70%;" class="mx-3">
-              <mat-select required [(ngModel)]="alumnos.semestre">
-                <mat-option>-- None --</mat-option>
-                <mat-option required *ngFor="let s of semestre" [value]="s.valor">{{s.muestraValor}}</mat-option>
-              </mat-select>
-              <div class="alert alert-danger" *ngIf="error?.semestre">
-                {{ error.semestre }}
-              </div>
-              <mat-label>
-                <b> SEMESTRE</b>
-              </mat-label>
-            </mat-form-field>
-
-
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
-              <mat-label for="periodoSemestral">Periodo Semestral</mat-label>
-              <input matInput required name="periodoSemestral" [(ngModel)]="alumnos.periodoSemestral" placeholder="Ejemplo: Enero 2020- Junio 2020">
-              <div class="alert alert-danger" *ngIf="error?.periodoSemestral">
-                {{ error.periodoSemestral }}
-              </div>
-            </mat-form-field>
-            
-            <mat-form-field appearance="fill" style="width: 450px;max-width: 70%;" class="mx-3">
-              <mat-select required [(ngModel)]="alumnos.grupo">
-                <mat-option>-- None --</mat-option>
-                <mat-option required *ngFor="let s of grupo" [value]="s.valor">{{s.muestraValor}}</mat-option>
-              </mat-select>
-              <div class="alert alert-danger" *ngIf="error?.grupo">
-                {{ error.grupo }}
-              </div>
-              <mat-label>
-                <b> Grupo</b>
-              </mat-label>
-            </mat-form-field>
-
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
-              <mat-label for="telefono">Telefono</mat-label>
-              <input matInput required name="telefono" [(ngModel)]="alumnos.telefono">
-              <div class="alert alert-danger" *ngIf="error?.telefono">
-                {{ error.telefono }}
-              </div>
-            </mat-form-field>
-
-
-
-            <button mat-raised-button color="primary" class="m-4" (click)="createAlumno()">
-              Crear
-            </button>
-          </div>
-        </mat-tab>
         <!--    *******************     Editar Perfil    ************************-->
-        <mat-tab label="Editar Perfil" *ngIf="alumno">
+        <mat-tab label="Perfil">
           <div class="container example-container my-1">
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 100%;" appearance="outline">
+            <mat-form-field class="mx-3 w-100" appearance="outline">
               <mat-label for="matricula">Matricula</mat-label>
               <input matInput required name="matricula" [(ngModel)]="alumno.matricula">
               <div class="alert alert-danger" *ngIf="error?.matricula">
@@ -118,7 +21,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 75%;" appearance="outline">
+            <mat-form-field class="mx-3 w-100" appearance="outline">
               <mat-label for="nombre">Nombre</mat-label>
               <input matInput required name="nombre" [(ngModel)]="alumno.nombre">
               <div class="alert alert-danger" *ngIf="error?.nombre">
@@ -126,7 +29,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
+            <mat-form-field class="mx-3 w-100"  appearance="outline">
               <mat-label for="apellido">Apellido</mat-label>
               <input matInput required name="apellido" [(ngModel)]="alumno.apellido">
               <div class="alert alert-danger" *ngIf="error?.apellido">
@@ -134,7 +37,7 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
+            <mat-form-field class="mx-3 w-100" appearance="outline">
               <mat-label for="correo">Correo</mat-label>
               <input matInput required name="correo" [(ngModel)]="alumno.correo">
               <div class="alert alert-danger" *ngIf="error?.correo">
@@ -142,9 +45,10 @@
               </div>
             </mat-form-field>
 
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
+            <mat-form-field class="mx-3 w-100" appearance="outline">
               <mat-label for="promAsistencia">Asistencia</mat-label>
-              <input matInput type="number" required name="promAsistencia" [(ngModel)]="alumno.promAsistencia" disabled="true">
+              <input matInput type="number" required name="promAsistencia" [(ngModel)]="alumno.promAsistencia"
+                disabled="!acceso()">
               <div class="alert alert-danger" *ngIf="error?.promAsistencia">
                 {{ error.promAsistencia }}
               </div>
@@ -177,7 +81,8 @@
 
             <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;" appearance="outline">
               <mat-label for="periodoSemestral">Periodo Semestral</mat-label>
-              <input matInput required name="periodoSemestral" [(ngModel)]="alumno.periodoSemestral" placeholder="Ejemplo: Enero 2020- Junio 2020">
+              <input matInput required name="periodoSemestral" [(ngModel)]="alumno.periodoSemestral"
+                placeholder="Ejemplo: Enero 2020- Junio 2020">
               <div class="alert alert-danger" *ngIf="error?.periodoSemestral">
                 {{ error.periodoSemestral }}
               </div>
@@ -206,20 +111,21 @@
 
             <mat-card class="border border-primary" *ngIf="docente" style="width: 400px; max-width: 100%;">
               {{docente.nombre}}
-              <button mat-raised-button color="accent" class="mx-2" *ngIf="alumno?.promAsistencia > 79" [routerLink]="['/alumnos/responder-examen/',alumno.id]">
+              <button mat-raised-button color="accent" class="mx-2" *ngIf="alumno?.promAsistencia > 79"
+                [routerLink]="['/alumnos/responder-examen/',alumno.id]">
                 Evaluación
               </button>
 
-              <button mat-raised-button (click)="asistenciasAlumno()">Asistencias</button>
+              <button mat-raised-button (click)="asistenciasAlumno()" *ngIf="acceso()">Asistencias</button>
             </mat-card>
 
-            <button mat-raised-button color="primary" class="m-4" (click)="editar()">
-              Editar
+            <button mat-raised-button class="w-100 my-5 sobre" (click)="alumno.id? editar(): crear()">
+              {{ alumno.id? 'Editar': 'Crear' }}
             </button>
           </div>
         </mat-tab>
         <!--    *******************     Ver archivos    ************************-->
-        <mat-tab label="Ver archivos" *ngIf="alumno">
+        <mat-tab label="Ver archivos" [(selectedIndex)]="tabIndex" *ngIf="alumno">
           <div class="container example-container my-1 p-2" style="background: #1B396A ;">
 
             <button type="button" class="btn btn-primary" (click)="mostrarArchivos()">Mostrar archivo(s)</button>
@@ -303,6 +209,36 @@
                 </div>
                 <br>
               </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-tab>
+        <mat-tab label="Cambiar Contraseña" [(selectedIndex)]="tabIndex" *ngIf="alumno">
+          <div class="mx-1 my-5">
+            <mat-card class="tab-tres">
+              <mat-card-header>
+                <mat-card-title>{{title}}</mat-card-title>
+                <mat-card-subtitle>{{usuario.id ? usuario.username: ''}}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="mb-3 row">
+                  <label for="inputPassword1" class="col-sm-2 col-form-label">Nueva contraseña</label>
+                  <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword1" nombre="contra1 "
+                      [(ngModel)]="contra1">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label for="inputPassword2" class="col-sm-2 col-form-label">Repetir contraseña</label>
+                  <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword2" nombre="contra2 "
+                      [(ngModel)]="contra2">
+                  </div>
+                </div>
+
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button class="w-100 btn-success sobre" (click)="editarUsuario()">Guardar Cambios</button>
+              </mat-card-actions>
             </mat-card>
           </div>
         </mat-tab>
