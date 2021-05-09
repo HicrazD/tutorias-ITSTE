@@ -1,9 +1,9 @@
-<mat-card class="my-3" style="background: #1b6a598a;">
+<mat-card class="my-3" style="background: rgba(95, 158, 160, 0.205);"> <!--style="background: #1b6a598a;"-->
   <mat-card-header *ngIf="listar">
-    <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
+    <mat-card-title class="mx-5" style="color: black;">{{titulo}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="container p-2" style="background: #FF9800;">
+    <div class="container p-2" ><!--style="background: #FF9800;"-->
 
       <mat-card class="w-100 ">
         <mat-form-field >
@@ -92,8 +92,8 @@
           <tr mat-row *matRowDef="let row; columns: mostrarColumnasDocentes;"></tr>
         </table>        
       </div>
-      <button mat-raised-button class="btn-info my-1 zoom" [routerLink]="['/examenes/asignar-examenes']">asignar Todos</button>
-      <button mat-raised-button (click)="exportexcel()" color="accent" class="zoom">Exportar Excel</button>
+      <button mat-raised-button class="colorBtn my-1 zoom" [routerLink]="['/examenes/asignar-examenes']">asignar Todos</button>
+      <button mat-raised-button (click)="exportexcel()"  class="zoom colorBtn">Exportar Excel</button>
       <br>
     </div>
   </mat-card-content>

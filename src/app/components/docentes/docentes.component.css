@@ -42,3 +42,7 @@
   .zoom:hover {
     box-shadow: 0 4px 16px rgb(125, 207, 240);
   }
+  .colorBtn{
+    background:#1B396AE6;
+    color:#fff;
+ }

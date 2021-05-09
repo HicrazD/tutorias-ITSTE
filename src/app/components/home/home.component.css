@@ -66,3 +66,8 @@ h1 a{color:#131313; font-weight:bold;}
 .btn-shadow:hover{
     box-shadow: 0 2px 2px rgb(46, 37, 121);
 }
+
+.colorBtn{
+   background:#1B396AE6;
+   color:#fff;
+}
