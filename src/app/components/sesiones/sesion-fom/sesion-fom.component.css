@@ -1,9 +1,9 @@
 .colorFondo{
-    background: rgba(0, 92, 72, 0.596);
+    background: rgba(106, 121, 117, 0.335); /*background: rgba(0, 92, 72, 0.596);*/
 }
 
 .fondoCrear{
-    background: rgb(238, 131, 0);
+    background: #1B396AE6;
     color: white;
     width: 100%;
 }
@@ -20,3 +20,4 @@
   .mat-form-field{
       max-width: 100%;
   }
+

@@ -44,12 +44,21 @@
 
   .tab-tres{
     width: 600px;
-    background-color: rgba(114, 113, 113, 0.137);
+    background-color: rgba(226, 226, 226, 0.137);
   }
   .container{
     width: 700px;
     padding: 5px;
   }
+  .colorBtn{
+    background:#1B396AE6;
+    color:#fff;
+ }
+ .newPass{
+   color: #1B396AE6;
+   text-decoration: solid;
+ }
+
   @media only screen and (max-width: 759px){
     .container{
       width:100%;

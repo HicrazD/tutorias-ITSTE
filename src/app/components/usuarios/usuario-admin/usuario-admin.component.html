@@ -1,10 +1,10 @@
 <div class="container contenedor my-5" >
-  <mat-tab-group dynamicHeight style="background: #fffffff5;" backgroundColor="accent">
+  <mat-tab-group dynamicHeight style="background: #fff;" backgroundColor="primary">
     <mat-tab label="Codigos" *ngIf="acceso()">
       <div class="example-small-box mat-elevation-z4 mx-auto my-1">
         <div class="container">
 
-          <div class="container-fluid p-3" style="background:#ff9101fb ; overflow: auto;">
+          <div class="container-fluid p-3" style="overflow: auto;">
             <mat-card class="container-fluid w-100">
               <mat-form-field appearance="fill" class="w-100">
                 <mat-label>Tipo de usuario</mat-label>
@@ -16,7 +16,7 @@
               </mat-form-field>
               <p> Seleccionado: {{code.tipo}} </p>
 
-              <button mat-button color="primary" (click)="createCode()">Nuevo codigo</button>
+              <button mat-button (click)="createCode()" class="colorBtn">Nuevo codigo</button>
             </mat-card>
           </div>
         </div>
@@ -65,14 +65,14 @@
           </table>
         </div>
       </div>
-      <button mat-raised-button (click)="exportexcel()" color="accent">Exportar Excel</button>
+      <button mat-raised-button (click)="exportexcel()" class="colorBtn">Exportar Excel</button>
     </mat-tab>
     <mat-tab label="Crear Roles">
       <div class="example-large-box mat-elevation-z4 mx-auto my-1">
 
         <div class="container">
 
-          <div class="container-fluid p-3 my-5" style="background:#ff9101fb; overflow: auto;">
+          <div class="container-fluid p-3 my-5" style=" overflow: auto;">
             <mat-card class="container-fluid w-100">
               <h2>Crear Role ({{role?.length}}/3) <i class="fa fa-user-o" aria-hidden="true"></i></h2>
               <mat-form-field appearance="fill" class="container-fluid " style="width: 500px; max-width: 80%;">

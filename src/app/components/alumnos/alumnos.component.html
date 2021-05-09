@@ -1,6 +1,6 @@
-<div class="container mt-5 " *ngIf="listar?.length>0" style="background: #1B396A;">
+<div class="container  " *ngIf="listar?.length>0" >
 
-  <mat-card class="mt-3 " style="background: #FF9800;">
+  <mat-card class="mt-3 " style="background: rgba(119, 134, 134, 0.205);">
     <mat-card-header *ngIf="listar">
       <mat-card-title class=" bg-light p-4 mat-elevation-z8" style="color: rgb(4, 24, 43);">{{titulo}}</mat-card-title>
     </mat-card-header>
@@ -82,12 +82,10 @@
         </table>
 
       </div>
-      <button mat-raised-button (click)="exportexcel()" color="accent">Exportar Excel</button>
+      <button mat-raised-button (click)="exportexcel()" class="colorBtn">Exportar Excel</button>
     </mat-card-content>
   </mat-card>
-
-</div>
-
-<div class="mat-elevation-z8 my-2">
-  <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+  <div class="mat-elevation-z8 my-2">
+    <mat-paginator [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+  </div>
 </div>

@@ -6,7 +6,7 @@
   <div class="row m-5">
     <div class="col-lg-2 tam-height p-2">
       <div class="d-flex flex-column">
-        <div class=""><button mat-raised-button class="w-100 zoom" [routerLink]="['/home']" style="background-color: rgb(0, 85, 25); color: white;">
+        <div class=""><button mat-raised-button class="w-100 zoom colorBtn" [routerLink]="['/home']" >
           Regresar Home   
           <!--
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-return-left" fill="currentColor"
@@ -16,11 +16,11 @@
           </svg>
           --> 
         </button></div>
-        <div class=""><button mat-raised-button class="w-100 zoom" [routerLink]="['/sesiones-ver/',authService.usuario.username]" style="background-color: rgb(128, 0, 0); color: white;">Ver sesiones</button></div>
-        <div class=""><button mat-raised-button class="btn-info w-100 zoom" [routerLink]="['/docentes/asignar-alumnos', docente?.id]" >
+        <div class=""><button mat-raised-button class="w-100 zoom colorBtn" [routerLink]="['/sesiones-ver/',authService.usuario.username]" style="background-color: #1B396AE6; color: white;">Ver sesiones</button></div>
+        <div class=""><button mat-raised-button class="colorBtn w-100 zoom" [routerLink]="['/docentes/asignar-alumnos', docente?.id]" >
           añadir alumnos ({{docente?.alumnos.length}})
         </button></div>
-        <button mat-raised-button class="w-100 zoom" [routerLink]="['/rol-usuario/',usuario.id]" style="background-color: rgb(187, 1, 103); color: white;">Cambiar contraseña</button>
+        <button mat-raised-button class="w-100 zoom colorBtn" [routerLink]="['/rol-usuario/',usuario.id]" >Cambiar contraseña</button>
       </div>
     </div>
     <div class="col-lg-10 tam-height">
@@ -30,14 +30,14 @@
    <!--***********************           Formulario                 ****************************-->
       <mat-card style="background: url(../../../../assets/Resporte/background_main.png); background-size: cover;">
         <mat-card-header *ngIf="usuario">
-          <mat-card-title class="mat-elevation-z8 p-3" style="background: #ff9101fb;">
+          <mat-card-title class="mat-elevation-z8 p-3 colorBtn" >
             Docente del Usuario {{usuario.username}}
           </mat-card-title>
         </mat-card-header>
     
         <mat-card-content class="mat-elevation-z8 p-3">
           <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
-            <!-- ****************************   Perfil  *************************-->
+             ****************************   Perfil  *************************-->
             <mat-tab label="Perfil">
               <div class="container my-5 p-10">
     
@@ -140,8 +140,8 @@
             </mat-tab>
             <!-- ****************************  Ver archivos  *************************-->
             <mat-tab label="Ver archivos">
-              <button type="button" class="btn btn-primary" (click)="mostrarArchivos()">Mostrar archivo(s)</button>
-              <mat-card class="my-3" style="background: #1B396A;">
+              <button type="button" class="btn colorBtn" (click)="mostrarArchivos()">Mostrar archivo(s)</button>
+              <mat-card class="my-3" ><!--style="background: #1B396A;"-->
                 <mat-card-header *ngIf="archivos">
                   <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
                 </mat-card-header>

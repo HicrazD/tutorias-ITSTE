@@ -1,9 +1,9 @@
-<mat-card class="container my-3" style="background: #1B396A;">
+<mat-card class="container my-3" style="background: rgba(127, 150, 151, 0.205);">
   <mat-card-header>
-    <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
+    <mat-card-title class="mx-5" style="color: black;">{{titulo}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-tab-group dynamicHeight backgroundColor="primary" [(selectedIndex)]="tabIndex" style="background:#FF9800;">
+    <mat-tab-group dynamicHeight backgroundColor="primary" [(selectedIndex)]="tabIndex">
       <mat-tab label="Usuarios" color="white">
 
         <mat-card>
@@ -18,15 +18,15 @@
             <ng-container matColumnDef="id" style="width: 400px;">
               <th mat-header-cell *matHeaderCellDef> Cambiar contraseña</th>
               <td mat-cell *matCellDef="let element">
-                <button mat-raised-button color="primary"
-                  [routerLink]="['/usuarios/url-secret/lvb4/admin/itste',element.id]" class="zoom">Avanzado</button>
+                <button mat-raised-button c
+                  [routerLink]="['/usuarios/url-secret/lvb4/admin/itste',element.id]" class="zoom colorBtn">Avanzado</button>
               </td>
             </ng-container>
 
             <ng-container matColumnDef="username">
               <th mat-header-cell *matHeaderCellDef> Nombre </th>
               <td mat-cell *matCellDef="let element">
-                <button mat-raised-button class="btn-info zoom" [routerLink]="['/alumnos/form/alumno-perfil/',element.username]">{{element.username}}</button>
+                <button mat-raised-button class="colorBtn zoom" [routerLink]="['/alumnos/form/alumno-perfil/',element.username]">{{element.username}}</button>
               </td>
             </ng-container>
 
@@ -38,11 +38,11 @@
                     <tr *ngFor="let rol of element.roles">
                       <td *ngIf="rol.nombre === 'ROLE_ALUMNO'">
                         <button mat-raised-button [routerLink]="['/alumnos/form/alumno-perfil/',element.username]"
-                          class="btn-info zoom">ALUMNO</button>
+                          class="colorBtn zoom">ALUMNO</button>
                       </td>
                       <td *ngIf="rol.nombre === 'ROLE_DOCENTE'">
                         <button mat-raised-button [routerLink]="['/docentes/form/docente-perfil/',element.username]"
-                          class="btn-info zoom">DOCENTE</button>
+                          class="colorBtn zoom">DOCENTE</button>
                       </td>
                     </tr>
                   </tbody>
@@ -70,7 +70,7 @@
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> Cambiar contraseña </th>
               <td mat-cell *matCellDef="let element">
-                <button mat-raised-button color="primary"
+                <button mat-raised-button class="colorBtn"
                   [routerLink]="['/usuarios/url-secret/lvb4/admin/itste/',element.id]">Avanzado</button>
               </td>
             </ng-container>

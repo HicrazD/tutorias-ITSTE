@@ -28,4 +28,7 @@ table {
   .mat-table-sticky:last-child {
     border-left: 1px solid #e0e0e0;
   }
-  
+  .colorBtn{
+    background:#1B396AE6;
+    color:#fff;
+ }

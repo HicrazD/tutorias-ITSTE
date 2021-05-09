@@ -1,6 +1,6 @@
 .tam-height {
-  border: 1px solid cyan;
-  background-color: #1b396a6c;
+  border: 1px solid #1B396AE6;
+  background-color: #5c687a54;
 }
 
 .mat-form-field {
@@ -40,4 +40,9 @@
   .mat-form-field {
     width: 100%;
   }
+}
+
+.colorBtn{
+  background:#1B396AE6;
+  color:#fff;
 }

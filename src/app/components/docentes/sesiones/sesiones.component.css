@@ -25,3 +25,7 @@ table {
     box-shadow: 0 4px 16px rgb(50, 132, 165);
     text-shadow: 2px 2px 2px rgb(209, 208, 208);
   }
+  .colorBtn{
+    background:#1B396AE6;
+    color:#fff;
+ }
