@@ -68,6 +68,8 @@ import { AsistenciasModelComponent } from './components/asistencias/asistencias-
 import { ResultadosEvaluacionComponent } from './components/examenes/resultados-evaluacion/resultados-evaluacion.component';
 import { AvisosComponent } from './components/avisos/avisos.component';
 import { AvisosFormComponent } from './components/avisos/avisos-form/avisos-form.component';
+import { HojaCanalizacionComponent } from './components/reportes-plantilla/hoja-canalizacion/hoja-canalizacion.component';
+
 registerLocaleData(LocaleES,'es');
 
 
@@ -110,14 +112,16 @@ registerLocaleData(LocaleES,'es');
     AsistenciasModelComponent,
     ResultadosEvaluacionComponent,
     AvisosComponent,
-    AvisosFormComponent 
+    AvisosFormComponent,
+    HojaCanalizacionComponent
   ],
   entryComponents: [ResponderExamenModalComponent,
     VerExamenModalComponent,
     VerResultadosModalComponent,
     InformeAsistenciasComponent,
     PatComponent,
-    AsistenciasModelComponent],
+    AsistenciasModelComponent,
+    HojaCanalizacionComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

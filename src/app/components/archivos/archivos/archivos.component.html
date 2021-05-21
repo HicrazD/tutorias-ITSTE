@@ -1,9 +1,10 @@
-<mat-card class="my-3" style="background: #1B396A;">
+<div class="container">
+  <mat-card class="my-3" style="background: #8b919b63;">
   <mat-card-header *ngIf="listar">
-    <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
+    <mat-card-title class="mx-5" style="color: rgb(0, 10, 19);">{{titulo}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <button type="button" class="btn btn-primary mx-5" [routerLink]="['/archivos/form']">Nuevo
+    <button type="button" class="btn btn-azul mx-5" [routerLink]="['/archivos/form']">Nuevo
       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-plus-fill" fill="currentColor"
         xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd"
@@ -88,4 +89,5 @@
 
     </mat-paginator>
   </mat-card-content>
-</mat-card>
+  </mat-card>
+</div>

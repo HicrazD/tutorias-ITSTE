@@ -33,4 +33,13 @@ tr:hover {
   box-shadow: 0 6px 20px teal;
 }
 
+.titulo{
+  color:#000;
+  font-weight: bold;
+}
+.btn-azul{
+  background:#1b396a;
+  color:#ffff;
+}
+
 

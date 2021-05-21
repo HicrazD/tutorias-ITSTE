@@ -1,5 +1,5 @@
-<div class="container p-2 overflow-auto" style="background: rgba(0, 105, 70, 0.548);">
-  <mat-card style="background: #1B396A;" class="container my-5 w-100 p-10">
+<div class="container p-2 overflow-auto" ><!-- style="background: rgba(0, 105, 70, 0.548);" -->
+  <mat-card style="background: #e78b01;" class="container my-5 w-100 p-10">
     <mat-card-header>
       <mat-card-title style="color: aliceblue;">
         Consultas
@@ -11,8 +11,7 @@
         style="background:url(../../../assets/Resporte/background_main.png); background-size: cover;">
         <!--    *******************     Achivos    (keyup)="filtrarTipoArchivo($event.target.value)"************************-->
         <mat-tab label="Achivos" *ngIf="authService.hasRole('ROLE_DOCENTE')">
-          <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndexSub" class="p-10"
-            style="background: rgb(203, 233, 222);">
+          <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndexSub" class="p-10">
             <!--    *******************     Pdf    ************************-->
             <mat-tab label="PDF">
               <div class="example-container p-10">
@@ -236,16 +235,16 @@
 
           <div class="container example-container p-2">
             <mat-form-field class="mx-3" style="width: 250px;max-width: 60%;">
-              <mat-label>Division</mat-label>
+              <mat-label > Division</mat-label>
               <input matInput placeholder="Buscar division" (keyup)="fieldDivision($event.target.value)">
             </mat-form-field>
 
             <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;">
-              <mat-label>Nombre o Apellido</mat-label>
+              <mat-label >Nombre o Apellido</mat-label>
               <input matInput placeholder="Buscar por nombre o apellido" (keyup)="fieldNOrA($event.target.value)">
             </mat-form-field>
 
-            <button type="button" class="btn btn-primary" (click)="show()"> Show </button>
+            <button type="button" class="btn btn-primary" (click)="show()"> Mostrar </button>
             <br>
             <mat-label>Datos a Mostrar(para cambiar ingrese datos en los campos 'Division' y 'Nombre o Apellido')
             </mat-label>

@@ -1,0 +1,255 @@
+<div class="overflow-auto p-1 bg-secondary" style="width: 1400px; height: 850px; max-width: 100%; ">
+  <div class=" overflow-auto " id="element-to-print">
+
+    <mat-card class="container-fluid example-card" style="width: 27.94cm; height: 21.30cm;">
+      <div class="container p-2">
+        <app-header></app-header>
+      </div>
+      <mat-card-content>
+        <div class="container-fluid pl-5 pr-5 overflow-auto">
+
+          <section class="contenedor1">
+            <div class="container">
+              <h5 class="text-center titulo">HOJA DE CANALIZACIÓN</h5>
+              <div class="row">
+                <div class="col-3">
+                  <div class="row">
+                    <div class="col-md-12 section1">
+                      <p>Nombre y firma del tutor: </p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p>División: </p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p>Nombre del tutorado:</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name=""
+                        class="textarea-section1"></textarea></div>
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name=""
+                        class="textarea-section1" [(ngModel)]="division"></textarea></div>
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name=""
+                        class="textarea-section1" [(ngModel)]="NombreTutorado"></textarea></div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="row">
+                    <div class="col-md-12 section1">
+                      <p>Periodo semestral:</p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p>Semestre/Grupo:</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name=""
+                        class="textarea-section1" [(ngModel)]="periodoS"></textarea></div>
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name=""
+                        class="textarea-section1" [(ngModel)]="semestreGrupo"></textarea></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="contenedor2">
+            <div class="container ">
+              <button class="btn-pagina" (click)="pagina()">{{ agregarPage? 'Nueva Pagina': 'Quitar Pagina' }}</button>
+              <button class="btn-add" (click)="btnAdd()" >+</button>
+              <button class="btn-del" (click)=" btnDel()">-</button>
+              <table class="table-sm" BORDER="1" style="margin-left: 1.5px;">
+                <thead class="">
+                  <tr>
+                    <th style="width:445px;">Instancia a que se canalizó</th>
+                    <th style="width:76px;">Fecha en que se canalizó</th>
+                    <th style="width:149px;">Firma de enterado del tutorado</th>
+                    <th style="width:75px;">Fecha en que se atendió</th>
+                    <th>Nombre y firma de quien atendió</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="row px-3" *ngFor="let element of elements">
+                <div class="col-md-6 border-left border-right  border-bottom ">
+                  <div class="row  border-left border-right border-bottom border-dark">
+                    <div class="col-md-6  border-right border-dark">
+                      <div class="row">
+                        <div class="col-md-12  dimensiones">
+                          <label class="label-fila" style="margin-left: -10px;">Asesoría académica </label>
+                          <p class="sm-letras border" style="margin-left: -10px;">
+                            (Indispensable escribir de qué asignatura y el
+                            nombre del docente que imparte dicha asesoría):</p>
+                        </div>
+                        <div class="col-md-12 border-top border-dark dimensiones-fila2">
+                          <label class="label-fila">Enfermería:</label>
+                        </div>
+                        <div class="col-md-12 border-top border-dark col1" >
+                          <label class="label-fila">Psicología:</label>
+                        </div>
+                        <div class="col-md-12 border-top border-dark " style="margin-top: -4px;">
+                          <label class="label-fila">Jefatura de división:</label>
+                        </div>
+                        <div class="col-md-12 border-top border-dark " style="margin-top: -5px;">
+                          <label class="label-fila ">Otra (especifique):</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 border">
+                      <div class="row">
+                        <div class="col-md-12 dimensiones ">
+                          <textarea name="" id="asesoria" class="text-left textarea-col2"
+                            style="margin-left: -15px;"></textarea>
+                        </div>
+                        <div class="col-md-12 border-top border-dark dimensiones-col2">
+                          <textarea name="" id="enfermeria" class="text-left textarea-otra" style="margin-bottom: -3px;"></textarea>  
+                        </div>
+                        <div class="col-md-12 border-top border-dark" style="margin-top: -3px;margin-bottom: -3px;">
+                          <textarea name="" id="psicologia" class="text-left textarea-otra" ></textarea>
+                        </div>
+                        <div class="col-md-12 border-top border-dark" style="margin-top: -3px;margin-bottom: -3px;">
+                          <textarea name="" id="jefatura" class="text-left textarea-otra"></textarea>
+                        </div>
+                        <div class="col-md-12  border-top border-dark" style="margin-top: -4.8px;">
+                          <textarea name="" id="" class="text-left ultimo-texta " ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1 border-bottom border-right border-dark">
+                  <div>
+                    <textarea name="" id="" class="textarea-columnas text-center ">15/05/2021</textarea>
+                  </div>
+                </div>
+                <div class="col-md-2 border-bottom border-right border-dark">
+                </div>
+                <div class="col-md-1 border-bottom border-right border-dark">
+                  <div>
+                    <textarea name="" id="" class="textarea-columnas text-center ">15/05/2021</textarea>
+                  </div>
+                </div>
+                <div class="col-md-2 border-bottom border-right border-dark">
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--
+          <div *ngFor="let element of elements">
+            <h2>fsssssssssssssssssssssssssss</h2>
+            <h3>{{element?.length}}</h3>
+          </div>-->
+        </div>
+      </mat-card-content>
+      <div class="container-fluid" style="bottom: 0%; position: absolute;">
+        <app-footer-resportes></app-footer-resportes>
+      </div>
+    </mat-card>
+
+    <!--********************   Pagina 2  *********************************+-->
+
+    <mat-card class="container-fluid example-card" style="width: 27.94cm; height: 21.30cm;" *ngIf="agregarPage">
+      <div class="container p-2">
+        <app-header></app-header>
+      </div>
+      <mat-card-content>
+        <div class="container-fluid pl-5 pr-5 overflow-auto">
+          <section class="contenedor2">
+            <div class="container ">
+              <button class="btn-add" (click)="btnAdd2()">+</button>
+              <button class="btn-del" (click)=" btnDel2()">-</button>
+              <table class="table-sm" BORDER="1" style="margin-left: 1.5px;">
+                <thead class="">
+                  <tr>
+                    <th style="width:445px;">Instancia a que se canalizó</th>
+                    <th style="width:76px;">Fecha en que se canalizó</th>
+                    <th style="width:149px;">Firma de enterado del tutorado</th>
+                    <th style="width:75px;">Fecha en que se atendió</th>
+                    <th>Nombre y firma de quien atendió</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="row px-3" *ngFor="let element2 of elements2">
+                <div class="col-md-6 border-left border-right  border-bottom ">
+                  <div class="row  border-left border-right border-bottom border-dark">
+                    <div class="col-md-6  border-right border-dark">
+                      <div class="row">
+                        <div class="col-md-12  dimensiones">
+                          <label class="label-fila" style="margin-left: -10px;">Asesoría académica </label>
+                          <p class="sm-letras border" style="margin-left: -10px;">
+                            (Indispensable escribir de qué asignatura y el
+                            nombre del docente que imparte dicha asesoría):</p>
+                        </div>
+                        <div class="col-md-12 border-top border-dark dimensiones-fila2">
+                          <label class="label-fila">Enfermería:</label>
+                        </div>
+                        <div class="col-md-12 border-top border-dark col1" >
+                          <label class="label-fila">Psicología:</label>
+                        </div>
+                        <div class="col-md-12 border-top border-dark " style="margin-top: -4px;">
+                          <label class="label-fila">Jefatura de división:</label>
+                        </div>
+                        <div class="col-md-12 border-top border-dark " style="margin-top: -5px;">
+                          <label class="label-fila ">Otra (especifique):</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 border">
+                      <div class="row">
+                        <div class="col-md-12 dimensiones ">
+                          <textarea name="" id="asesoria" class="text-left textarea-col2"
+                            style="margin-left: -15px;"></textarea>
+                        </div>
+                        <div class="col-md-12 border-top border-dark dimensiones-col2">
+                          <textarea name="" id="enfermeria" class="text-left textarea-otra" style="margin-bottom: -3px;"></textarea>  
+                        </div>
+                        <div class="col-md-12 border-top border-dark" style="margin-top: -3px;margin-bottom: -3px;">
+                          <textarea name="" id="psicologia" class="text-left textarea-otra" ></textarea>
+                        </div>
+                        <div class="col-md-12 border-top border-dark" style="margin-top: -3px;margin-bottom: -3px;">
+                          <textarea name="" id="jefatura" class="text-left textarea-otra"></textarea>
+                        </div>
+                        <div class="col-md-12  border-top border-dark" style="margin-top: -4.8px;">
+                          <textarea name="" id="" class="text-left ultimo-texta " ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1 border-bottom border-right border-dark">
+                  <div>
+                    <textarea name="" id="" class="textarea-columnas text-center ">15/05/2021</textarea>
+                  </div>
+                </div>
+                <div class="col-md-2 border-bottom border-right border-dark">
+                </div>
+                <div class="col-md-1 border-bottom border-right border-dark">
+                  <div>
+                    <textarea name="" id="" class="textarea-columnas text-center ">15/05/2021</textarea>
+                  </div>
+                </div>
+                <div class="col-md-2 border-bottom border-right border-dark">
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--
+          <div *ngFor="let element of elements">
+            <h2>fsssssssssssssssssssssssssss</h2>
+            <h3>{{element?.length}}</h3>
+          </div>-->
+        </div>
+      </mat-card-content>
+      <div class="container-fluid" style="bottom: 0%; position: absolute;">
+        <app-footer-resportes></app-footer-resportes>
+      </div>
+    </mat-card>
+
+  </div>
+</div>
+<div class="container-fluid bg-light w-100">
+  <button mat-raised-button color="warn" (click)="exportPdf()" class="w-25" style="margin-left: 380px;">PDF</button>
+</div>

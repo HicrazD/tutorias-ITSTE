@@ -1,0 +1,154 @@
+.example-card {
+  background: url('../../../../assets/Resporte/background_main.png');
+  background-size: cover;
+}
+.textarea-section1{
+  width:270px;
+  height:20px;
+  margin-left:-15px;
+  margin-bottom: -7px;
+}
+th {
+  background: #e2b3b3;
+  font: sans-serif;
+  font-size: 11.6pt;
+  font-weight: bold;
+  text-align: center;
+}
+.label-fila{
+  font-size: 8.6pt;
+  margin-left: -15px;
+  margin-bottom: -5px;
+}
+
+.sm-letras{
+  font-size: 6pt;
+  margin-top: -6px;
+  margin-right: 5px;
+}
+
+p,.p-head,.sm-letras,.label-fila,.textarea-section1{
+  line-height: 90%;
+  font: sans-serif;
+}
+
+.p-head,.textarea-section1{
+  font-size: 12pt;
+  font-weight: bold;
+}
+.titulo{
+  font-family: sans-serif;
+  font-size: 12pt;
+  font-weight: bold;
+  margin-bottom: -2.6px;
+}
+.contenedor1{
+  margin-top: -2px;
+  margin-bottom: 10px;
+}
+.contenedor2{
+  margin-top: 1px;
+}
+.section1{
+  font-weight: bold;
+  font-size: 12pt;
+}
+.dimensiones{
+  margin-bottom:6.5px;
+}
+.col1{
+  margin-top: -3px;
+}
+
+.dimensiones-fila2{
+  margin-top:-.5px;
+}
+.dimensiones-col2{
+  margin-top:-15.5px;
+  margin-left: -2px;
+}
+
+.btn-add,
+.btn-del {
+  border-color: #e2b3b300;
+  background:#e2b3b3;
+  color:#e2b3b3;
+  font-size: 8pt;
+  font-weight: bold;
+  margin-top: 2px;
+  width:50px;
+  height:20px;
+  position:absolute;
+}
+.btn-add{
+  align-items: center;
+  margin-left: 90px;
+}
+.btn-del{
+  margin-left: 150px;
+}
+.btn-add:hover,.btn-pagina:hover {
+  background-color: #1B396AE6;
+  color: white;    
+}
+.btn-pagina{
+  border-color: #e2b3b300;
+  background:#e2b3b3;
+  color:#e2b3b3;
+  font-family: sans-serif;
+  font-size: 8pt;
+  position:absolute;
+  margin-left: 5px;
+  margin-top: 3px;
+}
+.btn-del:hover {
+  background-color: rgb(230, 3, 3);
+  color: white;
+}
+.inputs-row-col{
+  font-size:8.5pt;
+  font: sans-serif;
+  border-color: rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0);
+  margin-left: -15px;
+  width:220px;
+}
+.textarea-col2,.textarea-columnas,.textarea-otra,.textarea-section1{
+  line-height: 90%;
+  border-color: rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0);
+  resize: none;
+  font: sans-serif;  
+}
+
+.textarea-col2{
+  font-size: 8.1pt;
+  width:220px;
+  height:52px;
+  margin-top: -2px;
+}
+.textarea-columnas{
+  font-size: 9pt;
+  width:77px;
+  height:20px;
+  margin-left:-15px;
+  margin-top: 150%;
+}
+.textarea-otra{
+  font-size: 8.4pt;
+  width:220px;
+  height:18px;
+  margin-top: -2px;
+  margin-left: -15px;
+}
+.ultimo-texta{
+  line-height: 90%;
+  border-color: rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0);
+  resize: none;
+  font: sans-serif; 
+  font-size: 8.5pt;
+  width:220px;
+  height:18px;
+  margin-left: -15px;
+}

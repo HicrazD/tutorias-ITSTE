@@ -12,6 +12,8 @@ import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { AsistenciaService } from 'src/app/services/asistencia.service';
 import { Asistencia } from 'src/app/models/asistencia';
+import { MatDialog } from '@angular/material/dialog';
+import { HojaCanalizacionComponent } from '../../reportes-plantilla/hoja-canalizacion/hoja-canalizacion.component';
 
 @Component({
   selector: 'app-asignar-alumnos',
@@ -31,12 +33,13 @@ export class AsignarAlumnosComponent implements OnInit {
   tabIndex = 0;
 
   mostrarColumnas: string[] = ['nombre', 'apellido','carrera','seleccion'];
-  mostrarColumnasAlumnos: string[] = ['id','nombre', 'apellido', 'correo', 'carrera','semestre','detalles','eliminar'];
+  mostrarColumnasAlumnos: string[] = ['id','nombre', 'apellido', 'correo', 'carrera','semestre','hc','detalles','eliminar'];
   seleccion: SelectionModel<Alumno> = new SelectionModel<Alumno>(true, []);
   
   constructor(private route: ActivatedRoute,
     private docenteService: DocenteService,private asistenciaService:AsistenciaService,
-    private alumnoService: AlumnoService) { }
+    private alumnoService: AlumnoService,
+    public dialog: MatDialog) { }
 
   ngOnInit(){
 
@@ -174,4 +177,11 @@ export class AsignarAlumnosComponent implements OnInit {
     FileSaver.saveAs(data, this.docente.nombre +'_alumnos_asignados' + '_export_' + '.xlsx')
   }
 
+  btnHC(alumno:Alumno): void{
+    const modalRef = this.dialog.open(HojaCanalizacionComponent, {
+      width: '2000px',
+      height:'1500px',
+      data: {a:alumno}
+    });
+  }
 }

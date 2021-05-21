@@ -1,6 +1,5 @@
 .mat-card {
-  background-image: url('../../../../assets/form/file.jpg');
-  background-size: cover;
+  background:rgba(160, 159, 159, 0.404);
 }
 
 .mat-card-content {
