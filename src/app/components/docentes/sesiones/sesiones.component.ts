@@ -69,15 +69,15 @@ export class SesionesComponent implements OnInit {
 
   enviarTablaSesiones(): void{
     const modalRef = this.dialog.open(PatComponent, {
-      width: '1000px',
-      height:'1300px',
+      width: '2000px',
+      height:'1500px',
       data: {docente: this.docente, sesiones: this.sesiones}
     });
   }
 
   btnRIAT(): void{
     const modalRef = this.dialog.open(InformeAsistenciasComponent, {
-      width: '1000px',
+      width: '1500px',
       height:'1300px',
       data: {docente: this.docente, sesiones: this.sesiones}
     });
@@ -110,9 +110,9 @@ export class SesionesComponent implements OnInit {
 
   asignarAlumnos(sesion: Sesion) {
     
-    this.alumnoService.crearYAsignarAsistencia(sesion, this.alumnos).subscribe(() => {
-      this.encontrarSesionesPorDocente()
-      this.IniciarPaginador()
+    this.alumnoService.crearYAsignarAsistencia(sesion, this.alumnos).subscribe(() => {      
+      this.encontrarSesionesPorDocente()  
+      this.docenteEndPoint()   
     }, err => {
       this.error = err.error
     //  console.log(this.error)

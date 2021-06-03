@@ -65,6 +65,7 @@ export class SesionFomComponent implements OnInit {
   }
 
   crearYAsignarSesion() {
+   // console.log(typeof(this.sesion.horaEntrada))
 
     if (this.usuario.username === this.authService.usuario.username && this.sesion.numSesion > 0) {
       this.docenteService.crearYAsignarSesion(this.docente, this.sesion).subscribe(d => {
@@ -76,11 +77,11 @@ export class SesionFomComponent implements OnInit {
       //  console.log('errores')
       //  console.log(this.error)
         if (err.status == 400) {
-          Swal.fire('Error', ` No se pudo crear la sesion 400`, 'error')
+          Swal.fire('Error', ` No se pudo crear la sesion`, 'error')
         }
       })
     } else {
-      Swal.fire('Error', 'No se pudo completar crear la Sesion', 'error')
+      Swal.fire('Error', 'No se pudo crear la Sesion', 'error')
     }
   }
 

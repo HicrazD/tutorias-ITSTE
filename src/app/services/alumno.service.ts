@@ -52,8 +52,6 @@ export class AlumnoService extends CommonService<Alumno>{
   }
 
   crearYAsignarAsistencia(sesion:Sesion, alumnos:Alumno[]): Observable<Alumno[]>{
-    return this.http.put<Alumno[]>(`${this.baseEndpoint}/crear-asistencia/sesion/${sesion.id}`,
-    alumnos,
-     {headers: this.cabecera});
+    return this.http.put<Alumno[]>(`${this.baseEndpoint}/crear-asistencia/sesion/${sesion.id}`, alumnos,{headers: this.cabecera});
   }
 }

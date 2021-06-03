@@ -1,5 +1,5 @@
-<div class="container-fluid overflow-auto bg-secondary" style="width: 1300px; height: 500px; max-width: 100%; ">
-  <div class="container-fluid overflow-auto" id="element-to-print" >
+<div class="overflow-auto p-1 bg-secondary" style="width: 1400px; height: 850px; max-width: 100%; ">
+  <div class="overflow-auto" id="element-to-print" >
     <mat-card class="container-fluid example-card" style="width: 27.94cm; height: 21.30cm;">
       <div class="container p-2">
         <app-header></app-header>
@@ -7,9 +7,6 @@
       <mat-card-content>
         <br>
         <div class="container-fluid pl-5 pr-5 overflow-auto">
-          <div class="container-fluid">
-            <br>
-          </div>
 
           <div class="container">
             <table class="table table-sm table-bordered">
@@ -110,7 +107,6 @@
     </mat-card>
   </div>  
 </div>
-
-<div class="container bg-light">
-  <button mat-raised-button color="warn" (click)="exportPdf()" class="w-100">PDF</button>
+<div class="container-fluid bg-light w-100">
+  <button mat-raised-button color="warn" (click)="exportPdf()" class="w-25" style="margin-left: 380px;">PDF</button>
 </div>

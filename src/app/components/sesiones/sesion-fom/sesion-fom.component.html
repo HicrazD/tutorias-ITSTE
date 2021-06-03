@@ -60,7 +60,7 @@
           <mat-form-field color="accent" class="example-full-width" appearance="outline"
             class="mat-elevation-z8 mx-1 my-3 p-2">
             <mat-label>Hora entrada</mat-label>
-            <input matInput type="datetime-local" [(ngModel)]="sesion.horaEntrada">
+            <input matInput type="time" [(ngModel)]="sesion.horaEntrada">
             <div class="alert alert-danger" *ngIf="error?.horaEntrada">
               {{ error.horaEntrada }}
             </div>
@@ -69,7 +69,7 @@
           <mat-form-field color="accent" class="example-full-width" appearance="outline"
             class="mat-elevation-z8 mx-1 my-3 p-2">
             <mat-label>Hora Salida</mat-label>
-            <input matInput type="datetime-local" [(ngModel)]="sesion.horaSalida">
+            <input matInput type="time" [(ngModel)]="sesion.horaSalida">
             <div class="alert alert-danger" *ngIf="error?.horaSalida">
               {{ error.horaSalida }}
             </div>
