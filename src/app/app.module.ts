@@ -69,6 +69,7 @@ import { ResultadosEvaluacionComponent } from './components/examenes/resultados-
 import { AvisosComponent } from './components/avisos/avisos.component';
 import { AvisosFormComponent } from './components/avisos/avisos-form/avisos-form.component';
 import { HojaCanalizacionComponent } from './components/reportes-plantilla/hoja-canalizacion/hoja-canalizacion.component';
+import { ReacComponent } from './components/reportes-plantilla/reac/reac.component';
 
 registerLocaleData(LocaleES,'es');
 
@@ -113,7 +114,8 @@ registerLocaleData(LocaleES,'es');
     ResultadosEvaluacionComponent,
     AvisosComponent,
     AvisosFormComponent,
-    HojaCanalizacionComponent
+    HojaCanalizacionComponent,
+    ReacComponent
   ],
   entryComponents: [ResponderExamenModalComponent,
     VerExamenModalComponent,

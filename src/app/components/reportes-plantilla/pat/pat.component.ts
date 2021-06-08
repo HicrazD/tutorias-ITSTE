@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Docente } from 'src/app/models/docente';
 import { Sesion } from 'src/app/models/sesion';
 import * as html2pdf from 'html2pdf.js'
-import { Asistencia } from 'src/app/models/asistencia';
 @Component({
   selector: 'app-pat',
   templateUrl: './pat.component.html',
@@ -22,8 +21,8 @@ export class PatComponent implements OnInit {
   ngOnInit(): void {
     this.docente = this.data.docente as Docente
     this.sesiones = this.data.sesiones as Sesion[]
-    this.bloque1 = this.sesiones.filter(s => s.numSesion < 8)
-    this.bloque2 = this.sesiones.filter(s => s.numSesion >= 8)
+    this.bloque1 = this.sesiones.filter(s => s.numSesion < 7)
+    this.bloque2 = this.sesiones.filter(s => s.numSesion >= 7)
     console.log(this.bloque1)
     console.log(this.bloque2)
   }

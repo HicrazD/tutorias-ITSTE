@@ -19,6 +19,7 @@ import Swal from 'sweetalert2';
 import { AsistenciasModelComponent } from '../../asistencias/asistencias-model/asistencias-model.component';
 import { InformeAsistenciasComponent } from '../../reportes-plantilla/informe-asistencias/informe-asistencias.component';
 import { PatComponent } from '../../reportes-plantilla/pat/pat.component';
+import { ReacComponent } from '../../reportes-plantilla/reac/reac.component';
 
 
 @Component({
@@ -77,6 +78,13 @@ export class SesionesComponent implements OnInit {
 
   btnRIAT(): void{
     const modalRef = this.dialog.open(InformeAsistenciasComponent, {
+      width: '1500px',
+      height:'1300px',
+      data: {docente: this.docente, sesiones: this.sesiones}
+    });
+  }
+  btnReac(): void{
+    const modalRef = this.dialog.open(ReacComponent, {
       width: '1500px',
       height:'1300px',
       data: {docente: this.docente, sesiones: this.sesiones}

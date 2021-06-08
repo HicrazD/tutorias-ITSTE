@@ -47,7 +47,7 @@
                   <td class="pt-3">{{sesion.modalidad}}</td>
                   <td class="pt-3">{{sesion.tema}}</td>
                   <td>
-                    <div class="container">
+                    <div class="container" >
                       <p class="text-justify">{{sesion.descripcion}}</p>
                     </div>                    
                   </td>
@@ -79,11 +79,11 @@
             <table class="table table-sm table-bordered">
               <thead>
                 <tr>
-                  <th scope="col">No. De sesión</th>
-                  <th scope="col">Fecha</th>
-                  <th scope="col">Modalidad</th>
-                  <th scope="col">Tema</th>
-                  <th scope="col">Descripción de la actividad</th>
+                  <th scope="col" style="width: 12%;">No. De sesión</th>
+                  <th scope="col" style="width: 13%;">Fecha</th>
+                  <th scope="col" style="width: 14%;">Modalidad</th>
+                  <th scope="col" style="width: 24%;">Tema</th>
+                  <th scope="col" >Descripción de la actividad</th>
                 </tr>
               </thead>
               <tbody>
@@ -91,8 +91,12 @@
                   <td>{{sesion.numSesion}}</td>
                   <td>{{sesion.createAt}}</td>
                   <td>{{sesion.modalidad}}</td>
-                  <td>{{sesion.tema}}</td>
-                  <td>{{sesion.descripcion}}</td>
+                  <td >{{sesion.tema}}</td>
+                  <td >
+                    <div class="container" >
+                      <p class="text-justify">{{sesion.descripcion}}</p>
+                    </div> 
+                </td>
                 </tr>
               </tbody>
             </table>

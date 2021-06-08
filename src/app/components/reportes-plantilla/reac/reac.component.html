@@ -1,0 +1,420 @@
+<div class="overflow-auto p-1 bg-secondary" style="width: 1400px; height: 550px; max-width: 100%; ">
+  <div class="overflow-auto" id="element-to-print">
+    <mat-card class="container-fluid fondo-card" style="width: 27.94cm; height: 21.30cm;">
+      <div class="container p-2">
+        <app-header></app-header>
+      </div>
+      <mat-card-content>
+        <div class="container-fluid pl-5 pr-5 overflow-auto">
+
+          <section class="contenedor1">
+            <div class="container">
+              <h5 class="text-center titulo">REPORTE DE ACTIVIDADES (REAC)</h5>
+              <div class="row">
+                <div class="col-3">
+                  <div class="row">
+                    <div class="col-md-12 section1">
+                      <p class="datos">Nombre y firma del tutor: </p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p class="datos">División: </p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p class="datos" style="margin-top: 5%;">Núm. de tutorados :</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-md-12 border-bottom border-dark section1">
+                      <textarea class="textarea-section1" [(ngModel)]="docente.nombre"></textarea></div>
+                    <div class="col-md-12 border-bottom border-dark section1 div-division">
+                      <textarea class=" textarea-division"
+                        placeholder="Ingeniería en Sistemas Computacionales"></textarea></div>
+                    <div class="col-md-12 border-bottom border-dark section1 ">
+                      <textarea class="textarea-section1" [(ngModel)]="numTutorados"></textarea></div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-12 section1">
+                      <p class="datos">Fecha de entrega :</p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p class="datos">Semestre/Grupo:</p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p class="datos" style="margin-top: 5%;">Horas tutorías/semana :</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="row">
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name="" class="textarea-fila2"
+                        [(ngModel)]="fechaEntrega"></textarea></div>
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name=""
+                        class="textarea-fila2"></textarea></div>
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name=""
+                        class="textarea-fila2"></textarea></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="contenedor2">
+            <table class="table table-sm  border border-dark pt-1" *ngIf="compararMeses">
+              <tr class="text-center borde-t1">
+
+                <th rowspan="2" class="borde-t1">No. Sesión </th>
+
+                <th rowspan="2" class="th-w borde-t1">Fecha </th>
+
+                <th rowspan="2" class="th-w borde-t1">Hora de sesión </th>
+
+                <th colspan="2" class="th-modalidad borde-t1">Modalidad </th>
+
+                <th rowspan="2" class="borde-t1">Tema </th>
+
+              </tr>
+
+              <tr class="text-center">
+                <th class="borde-t1">Individual</th>
+                <th class="borde-t1">Grupal</th>
+              </tr>
+
+              <tr *ngFor="let sesion of bloque1">
+
+                <td class="align-middle text-center borde-t1">{{sesion.numSesion}}</td>
+
+                <td class="align-middle text-center borde-t1"><a
+                    (click)="primerMes()">{{sesion.createAt | date:'shortDate'}}</a></td>
+
+                <td class="align-middle text-center borde-t1"><a (click)="segundoMes()">{{sesion.horaEntrada}} -
+                    {{sesion.horaSalida}}</a></td>
+
+                <td class="align-middle text-center borde-t1">
+                  <ng-container *ngIf="sesion?.modalidad === gp; else individual">
+                    <div class="line">
+                      <img src="http://i.piccy.info/i7/c7a432fe0beb98a3a66f5b423b430423/1-5-1789/1066503/lol.png"
+                        class="me" />
+                    </div>
+                  </ng-container>
+                  <ng-template #individual>
+                    {{sesion.modalidad}}
+                  </ng-template>
+                </td>
+
+                <td class="align-middle text-center borde-t1">
+                  <ng-container *ngIf="sesion?.modalidad === ind; else grupal">
+                    <div class="line">
+                      <img src="http://i.piccy.info/i7/c7a432fe0beb98a3a66f5b423b430423/1-5-1789/1066503/lol.png"
+                        class="me" />
+                    </div>
+                  </ng-container>
+                  <ng-template #grupal>
+                    {{sesion.modalidad}}
+                  </ng-template>
+                </td>
+                <td class="borde-t1">
+                  <p class="text-justify ">{{sesion.tema}}</p>
+                </td>
+              </tr>
+
+            </table>
+          </section>
+        </div>
+      </mat-card-content>
+      <div class="container-fluid" style="bottom: 0%; position: absolute;">
+        <app-footer-resportes></app-footer-resportes>
+      </div>
+    </mat-card>
+
+    <!--********************   Pagina n d reac  *********************************+-->
+
+    <mat-card class="container-fluid fondo-card" style="width: 27.94cm; height: 21.30cm;" *ngIf="bloque2?.length > 0">
+      <div class="container p-2">
+        <app-header></app-header>
+      </div>
+      <mat-card-content>
+        <div class="container-fluid pl-5 pr-5 overflow-auto">
+          <section class="contenedor2">
+            <table class="table table-sm table-bordered ">
+              <tr class="text-center">
+
+                <th rowspan="2">No. Sesión </th>
+
+                <th rowspan="2" class="th-w align-middle">Fecha </th>
+
+                <th rowspan="2" class="th-w align-middle">Hora de sesión </th>
+
+                <th colspan="2" class="th-modalidad align-middle">Modalidad </th>
+
+                <th rowspan="2" class="align-middle">Tema </th>
+
+              </tr>
+
+              <tr class="text-center">
+                <th>Individual</th>
+                <th>Grupal</th>
+              </tr>
+
+              <tr *ngFor="let sesion of bloque2">
+
+                <td class="align-middle text-center">{{sesion.numSesion}}</td>
+
+                <td class="align-middle text-center">{{sesion.createAt | date:'shortDate'}}</td>
+
+                <td class="align-middle text-center">{{sesion.horaEntrada}} - {{sesion.horaSalida}}</td>
+
+                <td class="align-middle text-center">
+                  <ng-container *ngIf="sesion?.modalidad === gp; else individual">
+                    <div class="line">
+                      <img src="http://i.piccy.info/i7/c7a432fe0beb98a3a66f5b423b430423/1-5-1789/1066503/lol.png"
+                        class="me" />
+                    </div>
+                  </ng-container>
+                  <ng-template #individual>
+                    {{sesion.modalidad}}
+                  </ng-template>
+                </td>
+
+                <td class="align-middle text-center">
+                  <ng-container *ngIf="sesion?.modalidad === ind; else grupal">
+                    <div class="line">
+                      <img src="http://i.piccy.info/i7/c7a432fe0beb98a3a66f5b423b430423/1-5-1789/1066503/lol.png"
+                        class="me" />
+                    </div>
+                  </ng-container>
+                  <ng-template #grupal>
+                    {{sesion.modalidad}}
+                  </ng-template>
+                </td>
+                <td>
+                  <p class="text-justify">{{sesion.tema}}</p>
+                </td>
+              </tr>
+
+            </table>
+          </section>
+        </div>
+      </mat-card-content>
+      <div class="container-fluid" style="bottom: 0%; position: absolute;">
+        <app-footer-resportes></app-footer-resportes>
+      </div>
+    </mat-card>
+
+    <!--********************   Pagina n de Listas de asistencia  *********************************+-->
+
+    <mat-card class="container-fluid fondo-card" style="width: 27.94cm; height: 21.30cm;"
+      *ngFor="let alumno of alumnos">
+      <div class="container p-2">
+        <app-header></app-header>
+      </div>
+      <mat-card-content>
+        <div class="container-fluid pl-5 pr-5 overflow-auto">
+          <section class="contenedor1">
+            <div class="container">
+              <h5 class="text-center titulo">Lista de asistencia a tutorías</h5>
+              <div class="row">
+                <div class="col-3">
+                  <div class="row">
+                    <div class="col-md-12 section1">
+                      <p class="datos">Nombre y firma del tutor: </p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p class="datos">Lista del mes de: </p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p class="datos" style="margin-top: 5%;">Número de tutorados de seguimiento :</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-12 border-bottom border-dark section1">
+                      <textarea class="textarea-section1 textarea-nombreTutor" [(ngModel)]="docente.nombre"></textarea>
+                    </div>
+                    <div class="col-md-12 border-bottom border-dark section1 div-division">
+                      <textarea class="textarea-section1" [(ngModel)]="periodo"></textarea></div>
+                    <div class="col-md-12 border-bottom border-dark section1 ">
+                      <textarea class="textarea-section1"></textarea></div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-12 section1">
+                      <p class="datos">Division :</p>
+                    </div>
+                    <div class="col-md-12 section1">
+                      <p class="datos">Número de tutorados ordinarios:</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name=""
+                        class="textarea-fila2 textarea-division2" placeholder="Ing."></textarea></div>
+                    <div class="col-md-12 border-bottom border-dark section1"><textarea name="" class="textarea-fila2"
+                        [(ngModel)]="numTutorados"></textarea></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section *ngIf="sesionesTemp.length > 0">
+            <table class="table table-sm border border-dark">
+              <thead class="">
+                <tr>
+                  <th class="borde-t2 text-center align-middle">Nombre del tutorado</th>
+                  <th class="borde-t2 text-center align-middle">Semestre/Grupo</th>
+                  <th class=" text-center align-middle">Tema</th>
+                  <th class=" text-center align-middle">Hora de entrada</th>
+                  <th class=" text-center align-middle">Hora salida</th>
+                  <th class=" text-center align-middle">Fecha</th>
+                  <th class=" text-center align-middle">Firma</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td [attr.rowspan]="rowspan" class="align-middle text-center tam-letra-lista">{{alumno.nombre}}</td>
+                  <td [attr.rowspan]="rowspan" class="align-middle text-center tam-letra-lista">2 - {{alumno.grupo}}
+                  </td>
+                </tr>
+                <tr *ngFor="let sesion of sesionesTemp">
+                  <td class="align-middle tam-letra-lista text-justify align-middle">{{sesion.tema}}</td>
+                  <td class="align-middle tam-letra-lista text-center align-middle">{{sesion.horaEntrada}}</td>
+                  <td class="align-middle tam-letra-lista text-center align-middle">{{sesion.horaSalida}}</td>
+                  <td class="align-middle tam-letra-lista text-center align-middle">
+                    {{sesion.createAt | date:'shortDate'}}</td>
+                  <td class="align-middle tam-letra-lista ">
+                    <div class="firma-tam"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+      </mat-card-content>
+      <div class="container-fluid" style="bottom: 0%; position: absolute;">
+        <app-footer-resportes></app-footer-resportes>
+      </div>
+    </mat-card>
+
+    <!--********************   Pagina n de Listas de asistencia  *********************************+-->
+    <!--******************************************************************************************+-->
+
+    <mat-card class="container-fluid fondo-card" style="width: 27.94cm; height: 21.30cm;">
+      <div class="container p-2">
+        <app-header></app-header>
+      </div>
+      <mat-card-content>
+        <div class="container-fluid pl-5 pr-5 overflow-auto">
+          <section class="">
+            <div class="container">
+              <div class="row">
+                <div class="col-6 d-flex justify-content-center ">
+                  <div class="imagen">
+                    <img [src]="url" style="max-width:100%;width:10cm;height:6cm;">
+                  </div>
+                </div>
+                <div class="col-6 d-flex justify-content-center">
+                  <div class="imagen">
+                    <img [src]="url2" style="max-width:100%;width:10cm;height:6cm;">
+                  </div>
+                </div>
+                <div class="col-6  d-flex justify-content-center">
+                  <p class="text-justify pt-2 p-img">{{descrip1}}</p>
+                </div>
+                <div class="col-6  d-flex justify-content-center">
+                  <p class="text-justify pt-2 p-img">{{descrip2}}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </mat-card-content>
+      <div class="container-fluid" style="bottom: 0%; position: absolute;">
+        <app-footer-resportes></app-footer-resportes>
+      </div>
+    </mat-card>
+
+  </div>
+</div>
+<section>
+  <div class="container p-3 fondo-form">
+    <div class="row">
+      <div class="col-6">
+        <div class="form-inline">
+          <div class="input-group input-group-sm">
+            <label class="my-1 mr-2 color-tecnm" for="m1">Seleccionar meses</label>
+            <select class="form-control" id="m1" [(ngModel)]="mes1">
+              <option *ngFor="let m of select1" [value]="m.valor">{{m.muestraValor}}</option>
+            </select>
+          </div>
+          <div class="input-group input-group-sm">
+            <label class="my-1 mr-2" for="m2"> - </label>
+            <select class="form-control" id="m2" [(ngModel)]="mes2">
+              <option *ngFor="let m of select1" [value]="m.valor">{{m.muestraValor}}</option>
+            </select>
+          </div>
+          <button class="btn btn-aseptar" type="button"
+            (click)="btnAseptar()">Aseptar</button>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="input-group input-group-sm">
+          <label class="my-1 mr-2 color-tecnm " for="fechaEntrega">Fecha de entrega</label>
+          <input class="form-control" type="text" name="fechaEntrega" id="fechaEntrega" [(ngModel)]="fechaEntrega">
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-5">
+      <div class="col-6">
+        <form class="form-inline">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupFileAddon01">Captura</span>
+            </div>
+            <div class="custom-file">
+              <input (change)="seleccionaFoto1($event)" type="file" class="custom-file-input" id="inputGroupFile01"
+                aria-describedby="inputGroupFileAddon01">
+              <label class="custom-file-label" for="inputGroupFile01"> Evidencia 1</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-6">
+        <form class="form-inline">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupFileAddon02">Captura</span>
+            </div>
+            <div class="custom-file">
+              <input (change)="seleccionaFoto2($event)" type="file" class="custom-file-input" id="inputGroupFile02"
+                aria-describedby="inputGroupFileAddon02">
+              <label class="custom-file-label" for="inputGroupFile02"> Evidencia 2</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="my-textarea" class="color-tecnm">Descripcion 1</label>
+          <textarea id="my-textarea" class="form-control"  [(ngModel)]="descrip1"></textarea>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="my-textarea" class="color-tecnm">Descripcion 2</label>
+          <textarea id="my-textarea" class="form-control"  [(ngModel)]="descrip2"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
