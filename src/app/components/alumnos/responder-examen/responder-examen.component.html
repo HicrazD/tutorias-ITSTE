@@ -1,7 +1,7 @@
 
 <div class="container" *ngIf="alumno?.promAsistencia > 79">    
 
-<mat-card class="p-2 my-5 container w-100" style="background:#1B396A ;">
+<mat-card class="p-2 my-5 container w-100" style="background:#57595ca1 ;">
     <mat-card-header *ngIf="docente" class="mat-elevation-z8 my-1 p-1 bg-light">
         <mat-card-title class="p-1">
             Evaluacion del docente {{docente.nombre}}
@@ -34,7 +34,7 @@
             <ng-container matColumnDef="responder">
                 <th mat-header-cell *matHeaderCellDef> Responder </th>
                 <td mat-cell *matCellDef="let examen">
-                    <button mat-raised-button color="primary" [disabled]="examen.enabled"
+                    <button mat-raised-button color="primary" [disabled]="!examen.enabled"
                     (click)="responderExamen(examen)"> 
                       Responder
                     </button>

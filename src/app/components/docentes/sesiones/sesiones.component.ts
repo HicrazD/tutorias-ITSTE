@@ -65,7 +65,6 @@ export class SesionesComponent implements OnInit {
         })
     })
     this.docenteEndPoint()
-
   }
 
   enviarTablaSesiones(): void{
@@ -113,6 +112,7 @@ export class SesionesComponent implements OnInit {
   IniciarPaginador() {
     this.dataSource = new MatTableDataSource(this.sesiones)
     this.dataSource.paginator = this.paginator;
+    //console.log(this.sesiones)
     this.dataSource.sort = this.sort;
   }
 
@@ -146,7 +146,7 @@ export class SesionesComponent implements OnInit {
         }, err => {
           if (err.status == 400) {
             this.error = err.error;
-            console.log(this.error);
+          //  console.log(this.error);
           }
         });
         this.sesionService.eliminar(sesion.id).subscribe(s => {
@@ -154,7 +154,7 @@ export class SesionesComponent implements OnInit {
           Swal.fire('Eliminado:', `Sesion eliminada con éxito`, 'success');
         }, err => {
           this.error = err.error
-          console.log(this.error)
+        //  console.log(this.error)
         });
       }
     });
@@ -179,10 +179,7 @@ export class SesionesComponent implements OnInit {
             this.docente = u
           //  console.log(this.docente)
           this.sesiones = this.docente.sesiones
-          this.sesiones.map(s => {
-            this.alumnos = s.alumnos
-         //  console.log(this.alumnos)
-          })
+          this.alumnos = this.docente.alumnos
         //  console.log(this.sesiones)
           this.IniciarPaginador()
         })
@@ -200,10 +197,10 @@ export class SesionesComponent implements OnInit {
 
       this.alumnoService.editar(alumno).subscribe(alumno =>{
         this.docenteEndPoint()
-        Swal.fire('Exito¡',`${alumno.nombre}: asistencia total modificada ${alumno.promAsistencia} `,'success')
+        Swal.fire('Exito¡',`${alumno.nombre}: asistencia  modificada `,'success')
       },err =>{
         this.error = err.error
-        console.log(this.error)
+      //  console.log(this.error)
         if(err.status == 400){
           Swal.fire('Uups','No se pudo modificar la sistencia','error')
         }

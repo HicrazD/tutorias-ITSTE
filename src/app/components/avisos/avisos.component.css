@@ -1,20 +1,31 @@
+.container{
+  background: linear-gradient(#dfdfdf42, #e0e0e067), url(../../../assets/svg/aviso.svg);
+  background-position: center center;  
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: auto;
+}
 table {
   width: 100%;
+  background: #ffffff3f;
 }
 
 th {
-  background-color: #ff9101fb;  
+  background-color: #df8638e3;  
 }
 
 td,th {
   font-size: 16px;
   width: 25%;  
   color: rgb(0, 0, 0);
-  text-shadow: 0 1px 1px white;
 }
 td:hover {
   background-color: rgba(31, 73, 129, 0.733);
   color: rgb(255, 255, 255);
+}
+.btn-azul {
+  background: #1b396a;
+  color: white;
 }
 
 

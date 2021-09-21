@@ -1,25 +1,79 @@
 <!--
 
 -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<div class="container example-container my-3  p-2" style="background:#1B396A ;">
+<div class="" *ngIf="btnPulsado">
+  <div class="cssload-loader">
+    <div class="cssload-top">
+      <div class="cssload-square">
+        <div class="cssload-square">
+          <div class="cssload-square">
+            <div class="cssload-square">
+              <div class="cssload-square"><div class="cssload-square">
+    
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cssload-bottom">
+      <div class="cssload-square">
+        <div class="cssload-square">
+          <div class="cssload-square">
+            <div class="cssload-square">
+              <div class="cssload-square"><div class="cssload-square">
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cssload-left">
+      <div class="cssload-square">
+        <div class="cssload-square">
+          <div class="cssload-square">
+            <div class="cssload-square">
+              <div class="cssload-square"><div class="cssload-square">
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cssload-right">
+      <div class="cssload-square">
+        <div class="cssload-square">
+          <div class="cssload-square">
+            <div class="cssload-square">
+              <div class="cssload-square"><div class="cssload-square">
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+
+<div class="container example-container my-3  p-2" *ngIf="!btnPulsado">
   <mat-card class="container example-card">
     <div class="container example-card" >
 
-      <mat-card-header style="background:#ff9101fb ;" class=" p-2 mat-elevation-z8 w-100 ">
-        <mat-card-title class="text-light">Login Usuario</mat-card-title>
+      <mat-card-header  class=" p-2 mat-elevation-z8 w-100 ">
+        <mat-card-title class="text-dark font-weight-bolder" >Iniciar Sesion</mat-card-title>
         <mat-card-subtitle class="text-dark">Bienvenido</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content class="mat-elevation-z8 my-3 p-1 text-light border border-primary w-100" style="background:#007460 ;">
+      <mat-card-content class="mat-elevation-z8 my-3 p-1 text-light  w-100">
         <mat-form-field appearance="outline" color="accent">
-          <mat-label class="text-light">Usuario</mat-label>
-          <input matInput placeholder="Username" [(ngModel)]="usuario.username">
+          <mat-label class="text-dark font-weight-bolder">Usuario</mat-label>
+          <input matInput placeholder="Username" [(ngModel)]="usuario.username" class="text-dark font-weight-bolder">
           <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="outline" color="accent">
-          <mat-label class="text-light">Contraseña</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="usuario.password" class="text-light">
+          <mat-label class="text-dark font-weight-bolder">Contraseña</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="usuario.password" class="text-dark font-weight-bolder">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -28,9 +82,9 @@
 
       </mat-card-content>
 
-      <mat-card-actions class="container p-3" >
-        <button (click)="login()" mat-button class="btn btn-outline-primary">Entrar</button>
-        <button [routerLink]="['/usuarios/form/crear']" mat-button class="btn btn-outline-secondary">Crear Cuenta</button>
+      <mat-card-actions class="container p-1" >
+        <button (click)="login()" mat-button class="btn btn-outline-primary" [disabled]="btnPulsado">Entrar</button>
+        <button [routerLink]="['/usuarios/form/crear']" mat-button class="btn btn-outline-secondary" [disabled]="btnPulsado">Crear Cuenta</button>
       </mat-card-actions>
 
     </div>

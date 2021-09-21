@@ -45,7 +45,6 @@ export class AsistenciasModelComponent implements OnInit {
      // console.log(this.sesion)
     })
   }
-
   asistenciasAlumno(alumno:Alumno) {
     this.asistenciaService.encontrarAsistenciaPorAlumno(alumno).subscribe(asistencias => {
 

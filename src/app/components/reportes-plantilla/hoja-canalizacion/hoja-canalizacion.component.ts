@@ -23,7 +23,7 @@ export class HojaCanalizacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.n)
+    //console.log(this.n)
     this.semestreGrupo = this.alumno.semestre + " ".concat(this.alumno.grupo)
     this.periodoS = this.alumno.periodoSemestral
     this.division = "ISC"
@@ -62,10 +62,10 @@ export class HojaCanalizacionComponent implements OnInit {
     if(this.agregarPage) this.agregarPage = false;else this.agregarPage = true
   }
   cantidadN(){
-      console.log("n1")
+     /* console.log("n1")
       console.log(this.n)
       console.log("n2")
-      console.log(this.n2)
+      console.log(this.n2)*/
   }
   exportPdf(){
     let element = document.getElementById('element-to-print');

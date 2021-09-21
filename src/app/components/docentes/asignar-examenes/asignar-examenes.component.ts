@@ -137,7 +137,7 @@ export class AsignarExamenesComponent implements OnInit {
 
       Swal.fire(
         'Asignados:',
-        `Evaluaciones asignadas con éxito al curso ${docente.nombre}`,
+        `Evaluacion(es) asignada(s) con exito a : ${docente.nombre}`,
         'success'
       );
       this.tabIndex = 2;
@@ -153,10 +153,10 @@ export class AsignarExamenesComponent implements OnInit {
       )
   }
 
-  eliminarExamenDelCurso(examen: Examen): void {
+  eliminarExamenDelCurso(evaluacion: Examen): void {
     Swal.fire({
       title: 'Cuidado:',
-      text: `¿Seguro que desea eliminar  ${examen.nombre} ?`,
+      text: `¿Seguro que desea eliminar  ${evaluacion.nombre} ?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -165,13 +165,13 @@ export class AsignarExamenesComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
 
-        this.docenteService.eliminarExamen(this.docente, examen)
-        .subscribe(curso => {
-          this.examenes = this.examenes.filter(e => e.id !== examen.id);
+        this.docenteService.eliminarExamen(this.docente, evaluacion)
+        .subscribe(docente => {
+          this.examenes = this.examenes.filter(e => e.id !== evaluacion.id);
           this.iniciarPaginador();
           Swal.fire(
             'Eliminado:',
-            `Evaluacion ${examen.nombre} eliminada con éxito del curso ${curso.nombre}.`,
+            `Evaluacion ${evaluacion.nombre} eliminada con éxito del docente ${docente.nombre}.`,
             'success'
           );
         });    

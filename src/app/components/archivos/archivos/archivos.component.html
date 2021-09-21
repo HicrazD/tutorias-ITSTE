@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-card class="my-3" style="background: #8b919b63;">
+  <mat-card class="my-3" >
   <mat-card-header *ngIf="listar">
     <mat-card-title class="mx-5" style="color: rgb(0, 10, 19);">{{titulo}}</mat-card-title>
   </mat-card-header>
@@ -11,9 +11,31 @@
           d="M2 2a2 2 0 0 1 2-2h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm7.5 1.5v-2l3 3h-2a1 1 0 0 1-1-1zM8.5 7a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V11a.5.5 0 0 0 1 0V9.5H10a.5.5 0 0 0 0-1H8.5V7z" />
       </svg>
     </button>
-    <div class="example-container">
-
-
+    <div class="container" *ngIf="showFile">
+      <ul class="cssload-cssload-ballsncups">
+        <li>
+          <div class="cssload-circle"></div>
+          <div class="cssload-ball"></div>
+        </li>
+        <li>
+          <div class="cssload-circle"></div>
+          <div class="cssload-ball"></div>
+        </li>
+        <li>
+          <div class="cssload-circle"></div>
+          <div class="cssload-ball"></div>
+        </li>
+        <li>
+          <div class="cssload-circle"></div>
+          <div class="cssload-ball"></div>
+        </li>
+        <li>
+          <div class="cssload-circle"></div>
+          <div class="cssload-ball"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="example-container" *ngIf="!showFile">
       <table mat-table [dataSource]="listar" class="mat-elevation-z8 mx-5" style="width: 90%;">
 
         <ng-container matColumnDef="id" sticky>

@@ -19,11 +19,12 @@ extends CommonListarComponent<Archivo,ArchivoService> implements OnInit {
     super(service,router)
     this.titulo="Listado de Archivos"
     this.nombreModel = Archivo.name;
+    
   }
 
   redireccion(archivo: Archivo) {
-    console.log('redireccion')
-    console.log(archivo)
+    //console.log('redireccion')
+    //console.log(archivo)
     if (archivo.tipo === 'PDF' || archivo.tipo === 'PDF FORMATO') {
       window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
     }

@@ -1,22 +1,36 @@
 .container{
-    width: 800px;
+    width: 900px;
 }
-.btn-agregar{
-    background-color: rgb(27, 70, 110);
-    color: white;
+.btn-azul {
+  background: #1b396a;
+  color: white;
 }
-.fondoBlanco{
-    background: rgba(255, 255, 255, 0.945);
+.mat-form-field{
+  color:#000;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.596);
 }
-.fondoVolver{
-    background-color: rgb(27, 70, 110);
-    color: white;
+.btn-lg,label{
+color:#1b396a;
 }
-
+.mat-card-title{
+  font-size: 18pt;
+  color: #1b396a;
+  font-weight: bold;
+}
 /*style="background: rgba(2, 128, 117, 0.788);"*/
 .mat-card {
-    background-image: url('../../../../assets/form/evaluacion.jpg');
-    background-size: cover;
+  background: linear-gradient(#e0e0e07a, #dddddd75), url(../../../../assets/svg/crear-evaluacion.svg);
+  background-position: center center;  
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: auto;
+  }
+
+  .tam-index{
+    font-size: 12pt;
+    color:#000;
+    font-weight: bold;
   }
   
   @media only screen and (max-width: 767px) {

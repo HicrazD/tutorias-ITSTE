@@ -1,12 +1,17 @@
 .mat-card {
   background:rgba(160, 159, 159, 0.404);
 }
-
+.mat-card-title{
+  color:#1B396A;
+  font-size: 18pt;
+  font-weight: bold;
+  font-family: sans-serif;
+}
 .mat-card-content {
   background-color: rgba(255, 255, 255, 0.938);
 }
 
 .mat-form-field {
   color: black;
-  box-shadow: 0 4px 16px rgb(33, 103, 124);
+  /*box-shadow: 0 4px 16px rgb(33, 103, 124);*/
 }

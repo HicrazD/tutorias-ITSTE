@@ -16,11 +16,11 @@ import { CommonFormComponent } from '../../common-form.component';
 export class DocenteFormComponent
   extends CommonFormComponent<Docente, DocenteService> implements OnInit {
   urlBackend = URL_BAKEND
-  archivos: Archivo
+  archivos: Archivo []
   usuario: Usuario = new Usuario()
   archivo: Archivo = new Archivo()
   archivoSelected: File
-
+  showFile:boolean
   tabIndex = 0;
 
   division = [
@@ -34,23 +34,29 @@ export class DocenteFormComponent
   mostrarColumnasArchivos: string[] = ['nombre', 'comentario', 'tipo', 'archivo', 'eliminar'];
   constructor(service: DocenteService, private usuarioService: UsuarioService,
     router: Router,
-    route: ActivatedRoute) {
-
+    route: ActivatedRoute) {      
     super(service, router, route);
     this.titulo = 'Docentes';
     this.model = new Docente();
     this.usuario = this.model.usuario
     this.redirect = '/docentes';
+    this.archivos = []
     this.nombreModel = Docente.name;
-
+    this.showFile = false
   }
 
   mostrarArchivos() {
     this.usuario = this.model.usuario
-    console.log(this.usuario)
+    this.showFile = true
+    //console.log(this.usuario)
     this.service.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => { // au = archivo-usuario
       //console.log(au.id<0)
       this.archivos = au
+      this.showFile = false
+    },err=>{
+      if(err.status > 0 ){
+        this.showFile=false
+      }
     })
   }
 

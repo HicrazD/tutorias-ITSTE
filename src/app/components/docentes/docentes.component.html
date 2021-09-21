@@ -1,17 +1,25 @@
-<div class="container">
+<div class="d-flex align-items-center justify-content-center loading" *ngIf="loading">
+  <div class="cssload-preload-juggle">
+    <div class="cssload-ball"></div>
+    <div class="cssload-ball"></div>
+    <div class="cssload-ball"></div>
+  </div>
+</div>
 
-  <mat-card class="my-3" style="background: rgba(119, 134, 134, 0.205);">
+<div class="container" *ngIf="!loading">
+
+  <mat-card class="my-3">
     <!--style="background: #1b6a598a;"-->
     <mat-card-header *ngIf="listar">
-      <mat-card-title class="mx-5" style="color: black;">{{titulo}}</mat-card-title>
+      <mat-card-title >{{titulo}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="container p-2">
         <!--style="background: #FF9800;"-->
 
         <mat-card class="w-100 ">
-          <mat-form-field>
-            <mat-label class="text-dark">Buscar</mat-label>
+          <mat-form-field class="fondo-blanco">
+            <mat-label class="text-dark ">Buscar</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
           </mat-form-field>
         </mat-card>
@@ -46,19 +54,19 @@
             </ng-container>
 
             <ng-container matColumnDef="examenes">
-              <th mat-header-cell *matHeaderCellDef>asignar examenes</th>
+              <th mat-header-cell *matHeaderCellDef>Evaluaciones</th>
               <td mat-cell *matCellDef="let docente">
                 <button class="btn btn-info btn-sm zoom" [routerLink]="['/examenes/asignar-examenes', docente.id]">
-                  añadir ({{docente.examenes.length}})
+                  Configurar ({{docente.examenes.length}})
                 </button>
               </td>
             </ng-container>
 
             <ng-container matColumnDef="asignar">
-              <th mat-header-cell *matHeaderCellDef>asignar alumnos</th>
+              <th mat-header-cell *matHeaderCellDef>Alumnos</th>
               <td mat-cell *matCellDef="let docente">
                 <button class="btn btn-info btn-sm zoom" [routerLink]="['/docentes/asignar-alumnos', docente.id]">
-                  añadir ({{docente.alumnos.length}})
+                  Configurar ({{docente.alumnos.length}})
                 </button>
               </td>
             </ng-container>
@@ -98,8 +106,8 @@
             <tr mat-row *matRowDef="let row; columns: mostrarColumnasDocentes;"></tr>
           </table>
         </div>
-        <button mat-raised-button class="colorBtn my-1 zoom" [routerLink]="['/examenes/asignar-examenes']">asignar
-          Todos</button>
+        <button mat-raised-button class="colorBtn my-1 zoom" [routerLink]="['/examenes/asignar-examenes']">
+          Asignar Evaluacion</button>
         <button mat-raised-button (click)="exportexcel()" class="zoom colorBtn">Exportar Excel</button>
         <br>
       </div>

@@ -58,8 +58,8 @@ export class DocenteService extends CommonService<Docente>{
     return this.http.get<Docente>(`${this.baseEndpoint}/filtrar/docente-usuario/${username}`)
   }
   
-  public filtrarArchivosByUsuarioId(id:number):Observable<Archivo>{
-    return this.http.get<Archivo>(`${this.baseEndpoint}/ver-archivo/${id}`)
+  public filtrarArchivosByUsuarioId(id:number):Observable<Archivo[]>{
+    return this.http.get<Archivo[]>(`${this.baseEndpoint}/ver-archivo/${id}`)
   }
   
   public filtrarPorDivision(division: string,term:string): Observable<Docente[]>{

@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import * as html2pdf from 'html2pdf.js'
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Alumno } from 'src/app/models/alumno';
@@ -11,6 +11,9 @@ import { Sesion } from 'src/app/models/sesion';
   styleUrls: ['./reac.component.css']
 })
 export class ReacComponent implements OnInit {
+  numTutoradosSeg:string = ""
+  nombreCompleto:string=""
+  division:string = ""
   gp: string = "Grupal"
   ind: String = "Individual"
   docente: Docente;
@@ -49,8 +52,9 @@ export class ReacComponent implements OnInit {
 
   ngOnInit(): void {
     this.docente = this.data.docente as Docente
+    this.nombreCompleto = this.docente.nombre + " " + this.docente.apellido
     this.sesiones = this.data.sesiones as Sesion[]
-    console.log(this.sesionesTemp)
+   // console.log(this.sesionesTemp)
     this.alumnos = this.data.docente.alumnos as Alumno[]
     this.numTutorados = this.docente.alumnos.length
 
@@ -81,7 +85,7 @@ export class ReacComponent implements OnInit {
   primerMes() {
     //this.mes1 = this.mes1.toLowerCase(); // se convierte el mes a minusculas
     let numMes = this.meses.indexOf(this.mes1) // con el index se busca el numero k corresponde el mes
-    console.log()
+    //console.log()
     this.sesiones.map(s => {
       //const newDate = new Date(s.createAt)
       // console.log(s.createAt.slice(5, 7))
@@ -95,13 +99,12 @@ export class ReacComponent implements OnInit {
       // console.log(s.createAt.slice(5,7).replace('0',''))    
     }
     )
-    console.log(this.sesionesTemp)
+    //console.log(this.sesionesTemp)
   }
 
   segundoMes() {
     //this.mes2 = this.mes2.toLowerCase(); // se convierte el mes a minusculas
     let numMes = this.meses.indexOf(this.mes2) // con el index se busca el numero k corresponde el mes
-    console.log()
     this.sesiones.map(s => {
       //const  newDate = new Date(s.createAt)
       const posicion = s.createAt.slice(5, 7).indexOf('0')
@@ -113,7 +116,7 @@ export class ReacComponent implements OnInit {
       }
     }
     )
-    console.log(this.sesionesTemp)
+    //console.log(this.sesionesTemp)
   }
   
   btnAseptar(){
@@ -146,5 +149,17 @@ export class ReacComponent implements OnInit {
         this.url2 = event.target.result;
       }
     }
+  }
+
+  exportPdf(){
+    let element = document.getElementById('element-to-print');
+    const opt = {
+      margin:       0,
+      filename:     `rEAC_${this.docente.nombre}.pdf`,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'cm', format: 'letter', orientation: 'l',compress:'true' }
+    };
+    html2pdf().from(element).set(opt).save();
   }
 }

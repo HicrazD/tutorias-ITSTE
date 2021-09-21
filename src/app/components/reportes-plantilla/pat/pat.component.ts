@@ -23,8 +23,8 @@ export class PatComponent implements OnInit {
     this.sesiones = this.data.sesiones as Sesion[]
     this.bloque1 = this.sesiones.filter(s => s.numSesion < 7)
     this.bloque2 = this.sesiones.filter(s => s.numSesion >= 7)
-    console.log(this.bloque1)
-    console.log(this.bloque2)
+    //console.log(this.bloque1)
+    //console.log(this.bloque2)
   }
 
   exportPdf(){

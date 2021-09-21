@@ -1,24 +1,19 @@
 <div class="container p-2 overflow-auto" ><!-- style="background: rgba(0, 105, 70, 0.548);" -->
-  <mat-card style="background: #e78b01;" class="container my-5 w-100 p-10">
+  <mat-card class="container mt-5 mb-2 w-100 p-10">
     <mat-card-header>
-      <mat-card-title style="color: aliceblue;">
-        Consultas
+      <mat-card-title>
+        Plantillas
       </mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-      <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex" class="p-10"
-        style="background:url(../../../assets/Resporte/background_main.png); background-size: cover;">
+      <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex" class="p-10">
         <!--    *******************     Achivos    (keyup)="filtrarTipoArchivo($event.target.value)"************************-->
         <mat-tab label="Achivos" *ngIf="authService.hasRole('ROLE_DOCENTE')">
           <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndexSub" class="p-10">
             <!--    *******************     Pdf    ************************-->
             <mat-tab label="PDF">
               <div class="example-container p-10">
-                <mat-form-field class="mx-3" style="width: 45%;">
-                  <mat-label>TIPO</mat-label>
-                  <input matInput #postalCode [disabled]="true" maxlength="7" [value]="tpdf">
-                </mat-form-field>
 
                 <table mat-table [dataSource]="archivosPdf" class="mat-elevation-z8 mx-3 mb-3 container"
                   style="width: 85%;">
@@ -73,10 +68,6 @@
             <!--    *******************     Word    ************************-->
             <mat-tab label="WORD">
               <div class="container">
-                <mat-form-field class="mx-3" style="width: 45%;">
-                  <mat-label>TIPO</mat-label>
-                  <input matInput #postalCode [disabled]="true" maxlength="7" [value]="tipo">
-                </mat-form-field>
 
                 <table mat-table [dataSource]="archivosWord" class="mat-elevation-z8 mx-3 mb-3 container"
                   style="width: 80%;">
@@ -96,9 +87,9 @@
 
 
                   <ng-container matColumnDef="ver">
-                    <th mat-header-cell *matHeaderCellDef>Ver archivo </th>
+                    <th mat-header-cell *matHeaderCellDef>Descargar archivo </th>
                     <td mat-cell *matCellDef="let archivo">
-                      <a href="{{URL_BAKEND}}/api/archivos/uploads/file-word/{{archivo.id}}">
+                      <a (click)="redireccion(archivo)">
                         <button mat-mini-fab class="btn btn-info mx-3">
                           <mat-icon aria-hidden="false" aria-label="Example home icon">get_app</mat-icon>
                         </button>
@@ -131,14 +122,9 @@
             <!--    *******************     Excel    ************************-->
             <mat-tab label="EXCEL">
               <div class="container">
-                <mat-form-field class="mx-3" style="width: 45%;">
-                  <mat-label>TIPO</mat-label>
-                  <input matInput #postalCode [disabled]="true" maxlength="7" [value]="texcel">
-                </mat-form-field>
 
                 <table mat-table [dataSource]="archivosExcel" class="mat-elevation-z8 mx-3 mb-3 container"
                   style="width: 75%;">
-
 
                   <!-- nombre Column -->
                   <ng-container matColumnDef="nombre">
@@ -188,127 +174,6 @@
             </mat-tab>
           </mat-tab-group>
         </mat-tab>
-        
-        <!--
-        *******************     Alumnos    ************************
-      <mat-tab label="Alumnos" *ngIf="authService.hasRole('ROLE_DOCENTE')">
-        <div class="container">
-          <mat-form-field class="mx-3 p-10" style="width: 45%;">
-            <mat-label>Matricula</mat-label>
-            <input matInput #postalCode maxlength="7" placeholder="Ex. 94105" (keyup)="filtrar($event.target.value)">
-            <mat-hint align="end">{{postalCode.value.length}} / 7</mat-hint>
-          </mat-form-field>
-          <div class="shadow example-container-s container mb-5">
-            <mat-card class="example-card">
-              <mat-card-header style="background: #FF9800; color: rgb(1, 11, 20);">
-                <mat-card-title class="my-5">Alumno Perfil <mat-icon>assignment_ind</mat-icon>
-                </mat-card-title>
-                <mat-card-subtitle style="color: rgb(3, 27, 48);">Matricula {{alumnoMatricula.matricula}} alumno
-                  {{alumnoMatricula.nombre}}</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>
-                <mat-list>
-                  <mat-list-item>Matricula: {{alumnoMatricula.matricula}} </mat-list-item>
-                  <mat-list-item>Nombre: {{alumnoMatricula.nombre}} </mat-list-item>
-                  <mat-list-item>Apellido: {{alumnoMatricula.apellido}} </mat-list-item>
-                  <mat-list-item>Carrera: {{alumnoMatricula.carrera}} </mat-list-item>
-                  <mat-list-item>Semestre: {{alumnoMatricula.semestre}} </mat-list-item>
-                  <mat-list-item>Grupo: {{alumnoMatricula.grupo}} </mat-list-item>
-                </mat-list>
-              </mat-card-content>
-              <mat-card-actions>
-                <div class="example-button-container mx-3">
-                  <button mat-fab color="accent" *ngIf="alumnoMatricula.id"
-                    [routerLink]="['/alumnos/form/',alumnoMatricula.id]">
-                    <mat-icon>create</mat-icon>
-                  </button>
-                </div>
-
-              </mat-card-actions>
-            </mat-card>
-          </div>
-        </div>
-      </mat-tab>
--->
-        <!--    *******************     Docentes    ************************-->
-        <mat-tab label="Docentes" *ngIf="authService.hasRole('ROLE_ALUMNO')">
-
-          <div class="container example-container p-2">
-            <mat-form-field class="mx-3" style="width: 250px;max-width: 60%;">
-              <mat-label > Division</mat-label>
-              <input matInput placeholder="Buscar division" (keyup)="fieldDivision($event.target.value)">
-            </mat-form-field>
-
-            <mat-form-field class="mx-3" style="width: 450px;max-width: 70%;">
-              <mat-label >Nombre o Apellido</mat-label>
-              <input matInput placeholder="Buscar por nombre o apellido" (keyup)="fieldNOrA($event.target.value)">
-            </mat-form-field>
-
-            <button type="button" class="btn btn-primary" (click)="show()"> Mostrar </button>
-            <br>
-            <mat-label>Datos a Mostrar(para cambiar ingrese datos en los campos 'Division' y 'Nombre o Apellido')
-            </mat-label>
-            <mat-list>
-              <mat-list-item>Division: {{division}} </mat-list-item>
-              <mat-list-item>Nombre o Apellido: {{nombreOrApellido}} </mat-list-item>
-              <span>Coinsidencias {{docentesFind?.length}}</span>
-            </mat-list>
-
-            <div class="example-container">
-
-
-              <table mat-table [dataSource]="docentesFind" class="mat-elevation-z8 mx-3 my-3 "
-                *ngIf="docentesFind?.length > 0" style="width: 75%;">
-
-
-                <!-- nombre Column -->
-                <ng-container matColumnDef="nombre">
-                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                  <td mat-cell *matCellDef="let docente"> {{docente.nombre}} </td>
-                </ng-container>
-
-                <!-- apellido Column -->
-                <ng-container matColumnDef="apellido">
-                  <th mat-header-cell *matHeaderCellDef> apellido </th>
-                  <td mat-cell *matCellDef="let docente"> {{docente.apellido}} </td>
-                </ng-container>
-
-                <!-- correo Column -->
-                <ng-container matColumnDef="correo">
-                  <th mat-header-cell *matHeaderCellDef> Correo </th>
-                  <td mat-cell *matCellDef="let docente"> {{docente.correo}} </td>
-                </ng-container>
-
-                <!-- carrera Column -->
-                <ng-container matColumnDef="division">
-                  <th mat-header-cell *matHeaderCellDef> Division </th>
-                  <td mat-cell *matCellDef="let docente"> {{docente.division}} </td>
-                </ng-container>
-
-                <!-- carrera Column -->
-                <ng-container matColumnDef="detalles">
-                  <th mat-header-cell *matHeaderCellDef> Detalle </th>
-                  <td mat-cell *matCellDef="let docente">
-                    <button mat-mini-fab class="btn btn-info"
-                      [routerLink]="['/docentes/form/docente-archivo', docente.id]">
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                        <path fill-rule="evenodd"
-                          d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                      </svg>
-                    </button>
-                  </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="mostrarColumnas"></tr>
-                <tr mat-row *matRowDef="let docente; columns: mostrarColumnas;">
-                </tr>
-              </table>
-            </div>
-          </div>
-        </mat-tab>
-
       </mat-tab-group>
 
     </mat-card-content>

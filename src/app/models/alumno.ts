@@ -14,5 +14,4 @@ export class Alumno implements Generic{
     promAsistencia:number
     asistenciaPresente:number    
     usuario:Usuario
-
 }

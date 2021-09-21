@@ -19,4 +19,8 @@ export class AsistenciaService extends CommonService<Asistencia>{
   public encontrarAsistenciaPorAlumno(alumno:Alumno):Observable<Asistencia[]>{
     return this.http.get<Asistencia[]>(`${this.baseEndpoint}/filtrar/asistencias-alumno/${alumno.id}`)
   }
+
+  public eliminarListaAsistencia(asistencias:Asistencia[]):Observable<void>{
+    return this.http.put<void>(`${this.baseEndpoint}/eliminar-asistencias`,asistencias,{headers: this.cabecera})
+  }
 }

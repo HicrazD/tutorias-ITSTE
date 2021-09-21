@@ -110,8 +110,8 @@ export class ResponderExamenComponent implements OnInit {
 */
 
    this.preguntas = respuestas.map(resP => resP.pregunta)
-   console.log('respuestas.map')
-   console.log(this.preguntas)
+   //console.log('respuestas.map')
+   //console.log(this.preguntas)
    let multipleTexto = this.preguntas.filter(p => p.tipo == 'Multiple Texto')
    let multipleSn = this.preguntas.filter(p => p.tipo == 'Multiple Si/No')
    let puntajeMax = (multipleTexto.length * 5) + (multipleSn.length * 5)
@@ -131,7 +131,7 @@ export class ResponderExamenComponent implements OnInit {
     result.alumno = this.alumno
 
     this.resultadoService.crear(result).subscribe(results =>{
-      console.log(results)
+     // console.log(results)
      },err =>{
          this.error = err
          console.log(this.error)

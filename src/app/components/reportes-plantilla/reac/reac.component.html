@@ -27,7 +27,7 @@
                 <div class="col-md-4">
                   <div class="row">
                     <div class="col-md-12 border-bottom border-dark section1">
-                      <textarea class="textarea-section1" [(ngModel)]="docente.nombre"></textarea></div>
+                      <textarea class="textarea-section1" [(ngModel)]="nombreCompleto"></textarea></div>
                     <div class="col-md-12 border-bottom border-dark section1 div-division">
                       <textarea class=" textarea-division"
                         placeholder="Ingeniería en Sistemas Computacionales"></textarea></div>
@@ -66,15 +66,15 @@
             <table class="table table-sm  border border-dark pt-1" *ngIf="compararMeses">
               <tr class="text-center borde-t1">
 
-                <th rowspan="2" class="borde-t1">No. Sesión </th>
+                <th rowspan="2" class="borde-t1 align-middle">No. Sesión </th>
 
-                <th rowspan="2" class="th-w borde-t1">Fecha </th>
+                <th rowspan="2" class="th-w borde-t1 align-middle">Fecha </th>
 
-                <th rowspan="2" class="th-w borde-t1">Hora de sesión </th>
+                <th rowspan="2" class="th-w borde-t1 align-middle">Hora de sesión </th>
 
-                <th colspan="2" class="th-modalidad borde-t1">Modalidad </th>
+                <th colspan="2" class="th-modalidad borde-t1 align-middle">Modalidad </th>
 
-                <th rowspan="2" class="borde-t1">Tema </th>
+                <th rowspan="2" class="borde-t1 align-middle">Tema </th>
 
               </tr>
 
@@ -101,7 +101,7 @@
                     </div>
                   </ng-container>
                   <ng-template #individual>
-                    {{sesion.modalidad}}
+                    x
                   </ng-template>
                 </td>
 
@@ -113,7 +113,7 @@
                     </div>
                   </ng-container>
                   <ng-template #grupal>
-                    {{sesion.modalidad}}
+                    x
                   </ng-template>
                 </td>
                 <td class="borde-t1">
@@ -132,7 +132,7 @@
 
     <!--********************   Pagina n d reac  *********************************+-->
 
-    <mat-card class="container-fluid fondo-card" style="width: 27.94cm; height: 21.30cm;" *ngIf="bloque2?.length > 0">
+    <mat-card class="container-fluid fondo-card pt-2" style="width: 27.94cm; height: 21.30cm;" *ngIf="bloque2?.length > 0">
       <div class="container p-2">
         <app-header></app-header>
       </div>
@@ -175,7 +175,7 @@
                     </div>
                   </ng-container>
                   <ng-template #individual>
-                    {{sesion.modalidad}}
+                    x
                   </ng-template>
                 </td>
 
@@ -187,7 +187,7 @@
                     </div>
                   </ng-container>
                   <ng-template #grupal>
-                    {{sesion.modalidad}}
+                    x
                   </ng-template>
                 </td>
                 <td>
@@ -206,9 +206,9 @@
 
     <!--********************   Pagina n de Listas de asistencia  *********************************+-->
 
-    <mat-card class="container-fluid fondo-card" style="width: 27.94cm; height: 21.30cm;"
+    <mat-card class="container-fluid fondo-card pt-4" style="width: 27.94cm; height: 21.30cm;"
       *ngFor="let alumno of alumnos">
-      <div class="container p-2">
+      <div class="container p-2 mt-5">
         <app-header></app-header>
       </div>
       <mat-card-content>
@@ -233,12 +233,12 @@
                 <div class="col-md-3">
                   <div class="row">
                     <div class="col-md-12 border-bottom border-dark section1">
-                      <textarea class="textarea-section1 textarea-nombreTutor" [(ngModel)]="docente.nombre"></textarea>
+                      <textarea class="textarea-section1 textarea-nombreTutor" [(ngModel)]="nombreCompleto"></textarea>
                     </div>
                     <div class="col-md-12 border-bottom border-dark section1 div-division">
                       <textarea class="textarea-section1" [(ngModel)]="periodo"></textarea></div>
                     <div class="col-md-12 border-bottom border-dark section1 ">
-                      <textarea class="textarea-section1"></textarea></div>
+                      <textarea class="textarea-section1" [(ngModel)]="numTutoradosSeg"></textarea></div>
                   </div>
                 </div>
                 <div class="col-md-3">
@@ -254,7 +254,7 @@
                 <div class="col-md-3">
                   <div class="row">
                     <div class="col-md-12 border-bottom border-dark section1"><textarea name=""
-                        class="textarea-fila2 textarea-division2" placeholder="Ing."></textarea></div>
+                        class="textarea-fila2 textarea-division2" placeholder="Ing." [(ngModel)]="division"></textarea></div>
                     <div class="col-md-12 border-bottom border-dark section1"><textarea name="" class="textarea-fila2"
                         [(ngModel)]="numTutorados"></textarea></div>
                   </div>
@@ -305,13 +305,14 @@
     <!--********************   Pagina n de Listas de asistencia  *********************************+-->
     <!--******************************************************************************************+-->
 
-    <mat-card class="container-fluid fondo-card" style="width: 27.94cm; height: 21.30cm;">
-      <div class="container p-2">
+    <mat-card class="container-fluid fondo-card pt-5" style="width: 27.94cm; height: 21.30cm;">
+      <br>
+      <div class="container p-2 mt-5">
         <app-header></app-header>
       </div>
       <mat-card-content>
         <div class="container-fluid pl-5 pr-5 overflow-auto">
-          <section class="">
+          <section class="mt-5">
             <div class="container">
               <div class="row">
                 <div class="col-6 d-flex justify-content-center ">
@@ -360,7 +361,7 @@
             </select>
           </div>
           <button class="btn btn-aseptar" type="button"
-            (click)="btnAseptar()">Aseptar</button>
+            (click)="btnAseptar()">Aceptar</button>
         </div>
       </div>
       <div class="col-6">
@@ -413,6 +414,11 @@
         <div class="form-group">
           <label for="my-textarea" class="color-tecnm">Descripcion 2</label>
           <textarea id="my-textarea" class="form-control"  [(ngModel)]="descrip2"></textarea>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="container-fluid">
+          <button mat-raised-button color="warn" (click)="exportPdf()" class="w-50" style="margin-left: 380px;">PDF</button>
         </div>
       </div>
     </div>

@@ -1,16 +1,14 @@
-.example-container {
-    height: 350px;
-    width: 1050px;
-    max-width: 100%;
-    overflow: auto;
+  .mat-card-title{
+    font-size: 18pt;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: #1b396a;
   }
-  
   table {
     width: 1300px;
   }
   .mat-form-field {
     font-size: 16px;
-    width: 100%;
   }
   
   td.mat-column-star {
@@ -42,13 +40,8 @@
     transition: all 0.2s ease;
   }
 
-  .tab-tres{
-    width: 600px;
-    background-color: rgba(226, 226, 226, 0.137);
-  }
   .container{
-    width: 700px;
-    padding: 5px;
+    padding: 1px;
   }
   .colorBtn{
     background:#1B396AE6;

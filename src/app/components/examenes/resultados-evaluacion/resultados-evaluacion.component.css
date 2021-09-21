@@ -1,5 +1,13 @@
+.mat-card{
+  background: linear-gradient(#ffffff80, #ffffff73), url(../../../../assets/svg/resultados.svg);
+  background-position: center center;  
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: auto;
+}
 table {
     width: 100%;
+    background: #ebebeb3a;
   }
   
   .mat-form-field {

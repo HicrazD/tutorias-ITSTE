@@ -17,7 +17,7 @@ export class AlumnoService extends CommonService<Alumno>{
     super(http)
   }
 
-  public filtrarDocentePorAombre(alumno: Alumno): Observable<Docente>{
+  public filtrarDocentePorAlumno(alumno: Alumno): Observable<Docente>{
     return this.http.get<Docente>(`${this.baseEndpoint}/filtrar-docente/alumno/${alumno.id}`);
   }
 
@@ -29,15 +29,17 @@ export class AlumnoService extends CommonService<Alumno>{
     return this.http.get<Alumno>(`${this.baseEndpoint}/filtrar/alumno-usuario/${username}`)
   }
 
-  public filtrarArchivosByUsuarioId(id:number):Observable<Archivo>{
-    return this.http.get<Archivo>(`${this.baseEndpoint}/ver-archivo/${id}`)
+  public filtrarArchivosByUsuarioId(id:number):Observable<Archivo[]>{
+    return this.http.get<Archivo[]>(`${this.baseEndpoint}/ver-archivo/${id}`)
   }
 
   public filtrarAlumnoByMatricula(matricula:number):Observable<Alumno[]>{
     return this.http.get<Alumno[]>(`${this.baseEndpoint}/matricula/${matricula}`)
   }
 
-
+  public eliminarAlumno(id:number):Observable<Alumno>{
+    return this.http.delete<Alumno>(`${this.baseEndpoint}/eliminar-alumno/${id}`)
+  }
   public crearPorUsuarioId(alumno:Alumno,username:string):Observable<Alumno>{
     return this.http.post<Alumno>(`${this.baseEndpoint}/crear/alumno-usuario/${username}`, alumno, {headers: this.cabecera})
   }

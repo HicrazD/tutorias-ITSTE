@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container p-3 fondo-contenedor">
   <mat-card>
     <mat-card-header *ngIf="model">
       <mat-card-title>
@@ -64,10 +64,33 @@
           <button type="button" class="btn btn-primary" (click)="mostrarArchivos()">Mostrar archivo(s)</button>
           <mat-card class="my-3" >
             <mat-card-header *ngIf="archivos">
-              <mat-card-title class="mx-5" style="color: aliceblue;">{{titulo}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <div class="container example-container">
+              <div class="container" *ngIf="showFile">
+                <ul class="cssload-cssload-ballsncups">
+                  <li>
+                    <div class="cssload-circle"></div>
+                    <div class="cssload-ball"></div>
+                  </li>
+                  <li>
+                    <div class="cssload-circle"></div>
+                    <div class="cssload-ball"></div>
+                  </li>
+                  <li>
+                    <div class="cssload-circle"></div>
+                    <div class="cssload-ball"></div>
+                  </li>
+                  <li>
+                    <div class="cssload-circle"></div>
+                    <div class="cssload-ball"></div>
+                  </li>
+                  <li>
+                    <div class="cssload-circle"></div>
+                    <div class="cssload-ball"></div>
+                  </li>
+                </ul>
+              </div>
+              <div class="container example-container" *ngIf="!showFile">
                 <table mat-table [dataSource]="archivos" class="mat-elevation-z8 mx-5" style="width: 90%;">
 
                   <ng-container matColumnDef="id">

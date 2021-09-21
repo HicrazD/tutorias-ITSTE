@@ -24,4 +24,17 @@ export class RespuestaService {
   obtenerRespuestasPorAlumnoPorExamen(alumno: Alumno, examen: Examen): Observable<Respuesta[]>{
     return this.http.get<Respuesta[]>(`${this.baseEndpoint}/alumno/${alumno.id}/examen/${examen.id}`);
   }
+
+  obtenerRespuestasPorAlumno(id:number): Observable<number[]>{
+    return this.http.get<number[]>(`${this.baseEndpoint}/obtener-respuestas/alumno/${id}`)
+  }
+
+  eliminarRespuestasPorAlumno(ids:number[]):Observable<number[]>{
+    return this.http.put<number[]>(`${this.baseEndpoint}/eliminar-respuestas`,ids, {headers: this.cabeceras})
+  }
+
+  eliminarAllRespuestas():Observable<Respuesta[]>{
+    return this.http.delete<Respuesta[]>(`${this.baseEndpoint}/eliminar-todo`)
+  }
+
 }

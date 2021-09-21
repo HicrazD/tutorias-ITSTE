@@ -37,7 +37,7 @@ export class ResaComponent {
       const dataString = JSON.stringify(jsonData);
       document.getElementById('output').innerHTML = dataString.slice(0, 300).concat("...");
       this.setDownload(dataString);
-      console.log(dataString)
+     // console.log(dataString)
     }
     reader.readAsBinaryString(file);
   }

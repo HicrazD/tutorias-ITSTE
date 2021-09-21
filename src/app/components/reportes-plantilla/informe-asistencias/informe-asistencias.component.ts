@@ -2,18 +2,20 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as html2pdf from 'html2pdf.js'
 import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
 import { Docente } from 'src/app/models/docente';
-import { Sesion } from 'src/app/models/sesion';
 import { Alumno } from 'src/app/models/alumno';
+import { AsistenciaService } from 'src/app/services/asistencia.service';
 
 @Component({
   selector: 'app-informe-asistencias',
   templateUrl: './informe-asistencias.component.html',
   styleUrls: ['./informe-asistencias.component.css']
 })
+
 export class InformeAsistenciasComponent implements OnInit {
-  
+  line1:string = "LIC. ANA LAURA ORTIZ GALINDO"
+  line2:string = "JEFA DEL DEPARTAMENTO  DESARROLLO ACADÉMICO"
+  line3:string
   docente: Docente;
   alumnos: Alumno[] = []
   bloque1:Alumno[] = []
@@ -22,14 +24,25 @@ export class InformeAsistenciasComponent implements OnInit {
   txtArea:String = "Por este medio, me dirijo a usted para hacer de su conocimiento el porcentaje de asistencia de mis tutorados, obtenido del semestre Enero-Junio 2020, para considerar aquellos que alcanzaron el 80%, son quienes tienen derecho a recibir su constancia de cumplimiento de tutorías y a participar en el proceso de evaluación tutorial"
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(  public modalRef: MatDialogRef<InformeAsistenciasComponent>, @Inject(MAT_DIALOG_DATA) public data: any)
+  constructor(  public modalRef: MatDialogRef<InformeAsistenciasComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+  public asistenciaService:AsistenciaService)
    {
      this.docente = data.docente as Docente
      }
   
   ngOnInit(){
     this.alumnos = this.docente.alumnos
-    console.log(this.alumnos)
+    this.alumnos = this.alumnos.map(alumno => 
+     {
+      this.asistenciaService.encontrarAsistenciaPorAlumno(alumno).subscribe(asistencias => 
+        {          
+          alumno.asistenciaPresente = asistencias.filter(asistencia => asistencia.statusAsistencia).length
+        } 
+      )
+      return alumno
+     })
+     console.log(this.alumnos)
+   // console.log(this.alumnos)
   }
 
 

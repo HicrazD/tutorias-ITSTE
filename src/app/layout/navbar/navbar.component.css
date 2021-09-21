@@ -9,28 +9,11 @@
 ul {
   list-style-type: none;
   display: flex;
-  padding: 10px 0;
+  padding: 5px 0;
   background-size: 200% 200%;
-  /*background-image: linear-gradient(-45deg, #ff9900e7, #ff9101fb, #ffda05, #ff9101fb,#ff9900e7);*/
-  animation: 10s myGradient infinite;
   border-radius: 10px;
-  /*box-shadow: 3px 3px 20px #ff3352;*/
   border-top-left-radius: 0px;
   border-bottom-right-radius: 0px;
-}
-
-@keyframes myGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  
-  50%{
-    background-position: 100% 50%;
-  }
-  
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 

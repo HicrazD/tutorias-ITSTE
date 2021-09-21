@@ -8,7 +8,6 @@ import { Pregunta } from 'src/app/models/pregunta';
 import { Respuesta } from 'src/app/models/respuesta';
 import { Resultado } from 'src/app/models/resultado';
 import { ResultadoService } from 'src/app/services/resultado.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-responder-examen-modal',
@@ -53,7 +52,7 @@ export class ResponderExamenModalComponent implements OnInit {
     this.resultadoService.findByResultadoAttribIds(this.docente, this.alumno, this.examen)
       .subscribe(r => {
         this.resultado = r
-       // console.log(this.resultado)
+        console.log(this.resultado)
         if (r) {
           this.enabled = true
         }
@@ -104,7 +103,7 @@ export class ResponderExamenModalComponent implements OnInit {
     respuestaSelect.respuesta = respuesta;
 
     this.respuestas.set(pregunta.id, respuestaSelect);
-    console.log(this.respuestas);
+   // console.log(this.respuestas);
   }
 
 }

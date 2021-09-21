@@ -1,15 +1,19 @@
 <div class="container">
-  <div class="card mb-3 mt-5" style="background: #FF9800;">
-    <div class="card-header titulo">{{titulo}} <button class="btn btn-azul my-2 zoom" routerLink="/examenes/form">Crear</button></div>
-    <div class="card-body example-container" style="background: rgb(255, 251, 251);">
-      
+  <div class="card mb-3 mt-5 fondo-div" >
+    <div class="card-header titulo">{{titulo}} <button class="btn btn-azul my-2 zoom"
+        routerLink="/examenes/form">Crear</button></div>
+    <div class="card-body example-container" >
+
       <div class="alert alert-info" *ngIf="listar?.length==0">
         No hay evaluaciones en el sistema.
+      </div>
+      <div>
+        <button mat-button (click)="eliminarResultadosYRespuestas()">Limpiar Respuestas y Resultados</button>
       </div>
       <table class="table table-hover table-striped" *ngIf="listar?.length>0">
         <thead>
           <tr>
-            <th>Mombre</th>
+            <th>Nombre</th>
             <th>Preguntas</th>
             <th>Editar</th>
             <th>Eliminar</th>
@@ -20,18 +24,18 @@
           <tr *ngFor="let examen of listar">
             <td>{{examen.nombre}} - {{examen.enabled}}</td>
             <td>{{examen.preguntas.length}}</td>
-            <td><button mat-raised-button color="accent" class="btn-sm zoom" [routerLink]="['/examenes/form', examen.id]">
+            <td><button mat-raised-button class="btn-azul zoom" [routerLink]="['/examenes/form', examen.id]">
                 editar
               </button></td>
-            <td><button mat-raised-button class="btn btn-danger btn-sm zoom" (click)="eliminar(examen)">
+            <td><button mat-raised-button class="btn btn-danger  zoom" (click)="eliminar(examen)">
                 eliminar
               </button>
-              <button mat-raised-button class="btn btn-success btn-sm zoom" [disabled]="examen.enabled"
-                (click)="disabledButton(examen)" >
+              <button mat-raised-button class="btn btn-success  zoom" [disabled]="examen.enabled"
+                (click)="disabledButton(examen)">
                 activar
               </button>
               <button mat-raised-button class="btn btn-danger btn-sm zoom" [disabled]="!examen.enabled"
-                (click)="disabledButton(examen)" >
+                (click)="disabledButton(examen)">
                 desactivar
               </button></td>
             <td>

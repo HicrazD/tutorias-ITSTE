@@ -1,21 +1,8 @@
 .container {
-  background-image: url('../../../../assets/form/answer.jpg');
-  background-size: cover;
+  background: rgba(90, 89, 89, 0.308);
 }
 
 .caja-shadow:hover {
   box-shadow: 2px 2px 2px darkred;
 }
 
-
-.mat-expansion-panel:hover {
-  transition: transform .2s;
-  /* Animation */
-  margin: 0 auto;
-}
-
-.mat-expansion-panel:hover:hover {
-  transform: scale(1.1);
-  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-  box-shadow: 0 4px 16px rgb(172, 235, 240);
-}

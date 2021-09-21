@@ -29,4 +29,17 @@ export class ResultadoService extends CommonService<Resultado>{
     return this.http.get<Resultado[]>(`${this.baseEndpoint}/evaluacion/${id}`);
   }
 
+  buscarResultadoIdsPorAlumnoId(id:number):Observable<number[]>{
+    return this.http.get<number[]>(`${this.baseEndpoint}/buscar-resultadoIds/alumnoId/${id}`)
+  }
+
+  eliminarResultadoIdsPorAlumnoId(ids:number[]):Observable<number[]>{
+    return this.http.put<number[]>(`${this.baseEndpoint}/eliminar-resultadoIds`,ids,{headers: this.cabecera})
+  }
+
+  eliminarAllResultados():Observable<Resultado[]>{
+    return this.http.delete<Resultado[]>(`${this.baseEndpoint}/eliminar-todo`)
+  }
+
+
 }

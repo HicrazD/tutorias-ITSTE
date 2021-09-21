@@ -17,8 +17,12 @@
           <td>{{asistencia.alumno.nombre}}</td>
           <td>{{asistencia.alumno.apellido}}</td>
           <td>{{asistencia.statusAsistencia?'Presente':'Ausente'}}</td>
-          <td><button mat-mini-fab (click)="modificarEstado(asistencia)"><mat-icon>create</mat-icon></button></td>
-            <td><button mat-mini-fab class="btn-info" [routerLink]="['/alumnos/form',asistencia.alumno.id]" routerLinkActive="router-link-active"><mat-icon>visibility</mat-icon></button></td>
+          <td>
+              <button mat-raised-button (click)="modificarEstado(asistencia)" class="btn-azul">{{asistencia.statusAsistencia?'Quitar asistencia':'Tomar asistencia'}}</button>
+          
+           <!-- <button mat-mini-fab (click)="modificarEstado(asistencia)"><mat-icon>create</mat-icon></button>-->
+          </td>
+          <td><button mat-mini-fab class="btn-info" [routerLink]="['/alumnos/form',asistencia.alumno.id]" routerLinkActive="router-link-active"><mat-icon>visibility</mat-icon></button></td>
         </tr>
       </tbody>
     </table>

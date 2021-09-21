@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container fondo-contenedor">
   <mat-card>
     <mat-card-header *ngIf="docente">
       <mat-card-title>
-        Alumno del docente {{docente.nombre}}
+        Lista de alumnos agregados
       </mat-card-title>
     </mat-card-header>
 
@@ -62,8 +62,10 @@
               </tr>
             </table>
           </div>
-          <button mat-raised-button class="m-4 colorBtn" (click)="asignar()"
-            [disabled]="!seleccion.hasValue()">Asignar</button>
+          <div *ngIf="btnPulsado">
+            <button mat-raised-button class="m-4 colorBtn" (click)="asignar()"
+              [disabled]="!seleccion.hasValue()">Asignar</button>
+          </div>
         </mat-tab>
 
         <mat-tab label="Alumnos">

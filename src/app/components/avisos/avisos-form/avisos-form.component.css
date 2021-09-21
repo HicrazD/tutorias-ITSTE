@@ -1,10 +1,13 @@
 .container {
-  width: 600px;
+  width: 800px;
 }
 
 .mat-card {
-  background-image: url('../../../../assets/form/notepad.jpg');
-  background-size: cover;
+  background: linear-gradient(#cacaca33, #c7c6c688), url(../../../../assets/svg/crear-evaluacion.svg);
+  background-position: center center;  
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: auto;
 }
 
 .mat-card-content {
@@ -15,16 +18,31 @@ span,
 label,
 .mat-card-subtitle,
 .mat-card-title {
-  color: white;
+  color: rgb(3, 3, 3);
+  font-weight: bold;
   text-shadow: 0 2px 2px white;
 }
 
-.btn-crear {
-  background-color: rgb(252, 113, 0);
+.tam-form {
+  font-size: 12pt;
+  font-weight: bold;
+}
+.mat-card-title{
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+.color-texto {
+  color: #1b396a;
+}
+
+.btn-azul {
+  background: #1b396a;
   color: white;
 }
 
-input:hover,textarea:hover {
+input:hover,
+textarea:hover {
   box-shadow: 0 4px 16px white;
 }
 

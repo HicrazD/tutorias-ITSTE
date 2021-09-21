@@ -21,8 +21,9 @@ import { HojaCanalizacionComponent } from '../../reportes-plantilla/hoja-canaliz
   styleUrls: ['./asignar-alumnos.component.css']
 })
 export class AsignarAlumnosComponent implements OnInit {
+  btnPulsado:boolean = true
   docente: Docente
-  filtro:string = 'alumno'
+  filtro:string = ' '
   filtroMatricula:number = 0
   alumnosAsignar: Alumno[] = []
   alumnos: Alumno[] = []
@@ -42,7 +43,6 @@ export class AsignarAlumnosComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(){
-
     this.route.paramMap.subscribe(params => {
       const id: number = +params.get('id');
       this.docenteService.ver(id).subscribe(c => {
@@ -104,15 +104,17 @@ export class AsignarAlumnosComponent implements OnInit {
   }
 
   asignar(): void {
+    this.btnPulsado = false
     //console.log(this.seleccion.selected);
     this.docenteService.asignarAlumnos(this.docente, this.seleccion.selected)
     .subscribe(c => {
       this.tabIndex = 2;
       this.filtro = ''
       this.filtroMatricula = 0
+      this.btnPulsado = true
       Swal.fire(
         'Asignados:',
-        `Alumnos Asignados con éxito al docente ${this.docente.nombre}`,
+        `Alumnos Asignados con éxito :)`,
         'success'
       );
       this.alumnos = this.alumnos.concat(this.seleccion.selected);
@@ -121,7 +123,7 @@ export class AsignarAlumnosComponent implements OnInit {
       this.seleccion.clear();
     },
     e => {
-       
+       this.btnPulsado = true
       if(e.status === 500){
         const mensaje = e.error.message as string;
         if(mensaje.indexOf('ConstraintViolationException') > -1){

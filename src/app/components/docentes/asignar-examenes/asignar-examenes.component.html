@@ -1,5 +1,5 @@
-<div class="container">
-  <mat-card class="my-5" *ngIf="docente">
+<div class="container fondo-card pt-3 pb-3">
+  <mat-card class="" *ngIf="docente">
     <mat-card-header *ngIf="docente">
       <mat-card-title>
         Evaluacion del docente {{docente.nombre}}
@@ -11,7 +11,7 @@
         <mat-tab label="Asignar Evaluación">
 
           <mat-form-field>
-            <input matInput placeholder="Añadir examen" [formControl]="autocompleteControl"
+            <input matInput placeholder="Buscar evaluacion" [formControl]="autocompleteControl"
               [matAutocomplete]="autocomplete">
 
             <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="mostrarNombre"
@@ -83,7 +83,7 @@
   </mat-card>
 
 
-  <mat-card class="my-5">
+  <mat-card class="" *ngIf="!docente">
     <mat-card-header>
       <mat-card-title>
         Evaluacion: agregar a todos

@@ -23,6 +23,7 @@ interface Tipo {
   styleUrls: ['./usuario-admin.component.css']
 })
 export class UsuarioAdminComponent implements OnInit {
+  loading: Boolean
   code: Codigo
   codigosDb: Codigo[] = []
   codigo: string = 'xtr92%ITSTE.'
@@ -50,6 +51,7 @@ export class UsuarioAdminComponent implements OnInit {
   constructor(private router: Router, public authService: AuthService,
     private roleService: RoleService, private usuarioService: UsuarioService,
     private codigoService: CodigoService, private route: ActivatedRoute) {
+    this.loading = true
     this.code = new Codigo()
     this.codigosDb = []
     this.usuario = new Usuario()
@@ -59,7 +61,7 @@ export class UsuarioAdminComponent implements OnInit {
   ngOnInit(): void {
     this.roleService.listar().subscribe(r => this.role = r)
     this.listarCodigos()
-    
+
     this.route.paramMap.subscribe(params => {
       const id: number = +params.get('id')
       if (id)
@@ -70,39 +72,44 @@ export class UsuarioAdminComponent implements OnInit {
 
   }
 
-  listarCodigos(){
+  listarCodigos() {
     this.codigoService.listar().subscribe(codigo => {
       this.codigosDb = codigo
+      this.loading = false
       //this.updateData()
     })
   }
-  acceso(){
-    if(this.authService.hasRole('ROLE_ADMIN')) return true
+  acceso() {
+    if (this.authService.hasRole('ROLE_ADMIN')) return true
     else return false
   }
 
-  updateData(){
+  updateData() {
     this.dataSource = new MatTableDataSource<Codigo>(this.codigosDb);
   }
   editarUsuario(contra: string, nuevaContra: string): void {
     if (contra === nuevaContra) {
-      this.usuarioDb.password = nuevaContra
-      this.usuarioService.editar(this.usuarioDb).subscribe(m => {
-        //console.log(m);
-        Swal.fire('Modificado:', `Usuario actualizado con éxito`, 'success');
-        this.router.navigate(['/home']);
-      }, err => {
-        if (err.status === 400 || err.status === 500) {
-          this.error = err.error;
-          console.log(this.error);
-        }
-      });
-
+      if (contra.length > 5 || nuevaContra.length > 5) {
+        this.usuarioDb.password = nuevaContra
+        this.usuarioService.editar(this.usuarioDb).subscribe(m => {
+          //console.log(m);
+          Swal.fire('Modificado:', `Usuario actualizado con éxito`, 'success');
+          this.router.navigate(['/home']);
+        }, err => {
+          if (err.status === 400 || err.status === 500) {
+            this.error = err.error;
+            console.log(this.error);
+          }
+        });
+      } else { Swal.fire('Hay un problema:', 'las constraseñas deben tener mas de 5 caracteres', 'warning'); }
+    } else {
+      Swal.fire('Hay un problema:', `las contraseñas deben ser iguales`, 'warning');
     }
   }
+
   applyFilter(event: Event) {
     this.dataSource = new MatTableDataSource<Codigo>(this.codigosDb);
-   //this.updateData()
+    //this.updateData()
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -111,7 +118,7 @@ export class UsuarioAdminComponent implements OnInit {
   fieldCodigo2(code: string) {
     code = code !== undefined ? code.trim() : '';
     if (code === this.codigo2) {
-      console.log(code)
+      //console.log(code)
       this.codigoRol = false
       Swal.fire({
         icon: 'success',
@@ -160,7 +167,7 @@ export class UsuarioAdminComponent implements OnInit {
       err => {
         if (err.status == 400) {
           this.error = err.error;
-        //  console.log(this.error);
+          //  console.log(this.error);
         }
 
         if (err.status == 500) {
@@ -170,7 +177,7 @@ export class UsuarioAdminComponent implements OnInit {
             title: 'Error!',
             text: 'No puedes crear mas roles!',
           })
-         // console.log(this.error);
+          // console.log(this.error);
         }
       })
   }
@@ -200,14 +207,14 @@ export class UsuarioAdminComponent implements OnInit {
       if (result.value) {
         this.codigoService.eliminar(codigo.id).subscribe(() => {
           // this.listar = this.listar.filter(a => a !== e);
-          
+
           this.listarCodigos()
           Swal.fire('Eliminado:', `Codigo eliminado con éxito`, 'success');
         }, err => {
           if (err.status == 400) {
             this.error = err.error;
             Swal.fire('Oops...:', `No se completo la peticion`, 'error');
-           // console.log(this.error);
+            // console.log(this.error);
           }
 
           if (err.status == 500) {

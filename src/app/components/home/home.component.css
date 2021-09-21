@@ -2,12 +2,16 @@
 @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
 
 *:hover{
-    -webkit-transition: all 1s ease;
-    transition: all 1s ease;
+    -webkit-transition: all .6s ease;
+    transition: all .6s ease;
 }
 section{
     width:100%;
-    background: #fff;  /* fallback for old browsers */
+    background: linear-gradient(#ffffff7a, #ffffff54), url(../../../assets/svg/home.svg);
+    background-position: center center;  
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: auto;
     padding:30px ;
 }
 h1{float:left; width:100%; color:#232323; margin-bottom:30px; font-size: 14px;}
@@ -30,7 +34,7 @@ h1 a{color:#131313; font-weight:bold;}
 }
 .profile-card-2 h5{
     font-weight:600;
-    color:#6ab04c;
+    color:#1B396A ;
 }
 .profile-card-2 .card-text{
     font-weight:300;
@@ -43,31 +47,48 @@ h1 a{color:#131313; font-weight:bold;}
 .profile-card-2 .icon-block a{
     text-decoration:none;
 }
-.profile-card-2 i {
-  display: inline-block;
-    font-size: 16px;
-    color: #6ab04c;
-    text-align: center;
-    border: 1px solid #6ab04c;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 50%;
-    margin:0 5px;
-}
-.profile-card-2 i:hover {
-  background-color:#6ab04c;
-  color:#fff;
-}
 
-.fondo{
-    background-color: rgba(133, 157, 158, 0.205);
-}
+
 .btn-shadow:hover{
-    box-shadow: 0 2px 2px rgb(46, 37, 121);
+    box-shadow: 0 2px 2px rgb(238, 128, 2);
 }
 
 .colorBtn{
    background:#1B396AE6;
    color:#fff;
 }
+
+.altura{
+    height: 200px;
+}
+
+.fondo-archivo,.fondo-aviso,.fondo-evaluacion{
+    color:rgba(0, 0, 0, 0);
+}
+.fondo-archivo:hover,.fondo-aviso:hover,.fondo-evaluacion:hover{
+    color:rgb(255, 255, 255);
+    background: #1B396A;
+    transition: all 0.1s ;
+    
+}
+
+.fondo-archivo{
+    background: linear-gradient(#ffffff00, #ffffff00),url(../../../assets/home/archivos.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.fondo-aviso{    
+    background: linear-gradient(#ffffff00, #ffffff00),url(../../../assets/home/avisos.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.fondo-evaluacion{
+    background: linear-gradient(#ffffff18, #ffffff17),url(../../../assets/home/evaluacion.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
+
+

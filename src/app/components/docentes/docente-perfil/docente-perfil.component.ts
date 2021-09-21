@@ -22,9 +22,10 @@ export class DocentePerfilComponent implements OnInit {
   docente: Docente
   error: any
   tabIndex = 0;
-  archivos: Archivo
+  archivos: Archivo[]
   archivo: Archivo = new Archivo()
   archivoSelected: File
+  showFile:boolean
 
   tipo = [
     { valor: 'WORD', muestraValor: 'WORD' },
@@ -40,15 +41,18 @@ export class DocentePerfilComponent implements OnInit {
     { valor: 'IDC', muestraValor: 'IDC' },
   ];
 
-  mostrarColumnasArchivos: string[] = ['nombre', 'comentario', 'tipo', 'archivo', 'eliminar'];
-  constructor(private route: ActivatedRoute,public authService: AuthService,
+  mostrarColumnasArchivos: string[] = ['nombre', 'comentario', 'tipo', 'editar', 'archivo', 'eliminar'];
+  constructor(private route: ActivatedRoute, public authService: AuthService,
     private router: Router,
     private docenteService: DocenteService,
     private usuarioService: UsuarioService,
     private archivoService: ArchivoService) {
-      this.docentes = new Docente()
-      this.docente = new Docente()
-     }
+    this.docentes = new Docente()
+    this.docente = new Docente()
+    this.archivo.comentario = ""
+    this.archivos = []
+    this.showFile = true
+  }
 
   ngOnInit() {
 
@@ -56,22 +60,21 @@ export class DocentePerfilComponent implements OnInit {
       const username: string = params.get('term')
       if (username)
         this.usuarioService.filtrarUsernambre(username).subscribe(u => {
-      //    console.log(u)
+          //    console.log(u)
           this.usuario = u
+
+          this.docenteService.filtrarPorUsuarioUsername(username).subscribe(docente => {
+            // console.log(docente)
+            if (docente)
+              this.docente = docente
+            this.mostrarArchivos()
+          })
         })
     })
 
-    this.route.paramMap.subscribe(params => {
-      const username: string = params.get('term')
-      if (username)
-        this.docenteService.filtrarPorUsuarioUsername(username).subscribe(a => {
-        //  console.log(a)
-          if (a)
-            this.docente = a
-        })
-    })
-   // console.log('archivo inicial')
-   // console.log(this.archivo)
+
+    // console.log('archivo inicial')
+    // console.log(this.archivo)
   }
 
   public crear(): void {
@@ -79,18 +82,20 @@ export class DocentePerfilComponent implements OnInit {
       const username: string = params.get('term');
       if (username) {
         this.docenteService.crearPorUsuarioUsername(this.docente, username).subscribe(docente => {
-        //  console.log(docente + 'docente creado');
-          Swal.fire('Crear docente', `Docente ${docente.nombre} creado con exito`, 'success')
+          //  console.log(docente + 'docente creado');
+          Swal.fire('Perfil', `Actualizacion de datos correctamente`, 'success')
           this.tabIndex = 1
           this.router.navigate([`/home`]);
-        })
+        }, err => {
+          this.error = err.error
+        });
       }
     })
   }
 
   seleccionarArchivo(event) {
     this.archivoSelected = event.target.files[0]
-   // console.log(this.archivoSelected)
+    // console.log(this.archivoSelected)
     if (this.archivoSelected == null) {
       Swal.fire('Upload?: ', 'No selecciono nada', 'question');
     } else {
@@ -98,14 +103,14 @@ export class DocentePerfilComponent implements OnInit {
         this.archivoSelected.type.indexOf('application/vnd.openxmlformats-officedocument.word') >= 0) {
         Swal.fire('Success Upload: ', 'Archivo seleccionado', 'success');
         this.archivo.tipo = 'WORD'
-     //   console.log('condicion word')
-     //   console.log(this.archivo)
+        //   console.log('condicion word')
+        //   console.log(this.archivo)
       }
       else if (this.archivoSelected.type.indexOf('application/pdf') >= 0) {
         Swal.fire('Success Upload: ', 'Archivo seleccionado', 'success');
         this.archivo.tipo = 'PDF'
-      //  console.log('condicion pdf')
-      //  console.log(this.archivo)
+        //  console.log('condicion pdf')
+        //  console.log(this.archivo)
       }
       else if (this.archivoSelected.type.indexOf('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') >= 0) {
         Swal.fire('Success Upload: ', 'Archivo seleccionado', 'success');
@@ -115,7 +120,7 @@ export class DocentePerfilComponent implements OnInit {
       } else {
         Swal.fire('Error Upload: ', 'Debe seleccionar un archivo tipo pdf,word o excel', 'error');
         this.archivoSelected = null
-       // console.log('No es pdf word o excel')
+        // console.log('No es pdf word o excel')
       }
     }
   }
@@ -124,44 +129,54 @@ export class DocentePerfilComponent implements OnInit {
     if (!this.archivoSelected) {
       Swal.fire('Error Upload: ', 'Debe seleccionar un archivo', 'error');
     } else {
-     /* console.log('Imprimiendo alumno, usuario y archivo')
-      console.log(this.usuario)
-      console.log(this.archivo)
-      console.log(this.archivoSelected)
-*/
-      this.docenteService.crearConArchivo(this.archivo, this.archivoSelected, this.docente.id)
-        .subscribe(a => {
-          this.archivo = a
-          this.archivo.id = 50
-      //    console.log(a)
-          this.tabIndex = 3
-          this.router.navigate([`/docentes/form/docente-perfil/${this.docente.id}`]);
-          Swal.fire('Upload File', 'El archivo docente se subio correctamente', 'success')
-        }, err => {
-          if (err.status == 400) {
-            this.error = err.error;
-            console.log(this.error);
-          }
-        });
+      /* console.log('Imprimiendo alumno, usuario y archivo')
+       console.log(this.usuario)
+       console.log(this.archivo)
+       console.log(this.archivoSelected)
+ */
+      if (this.archivo.nombre === undefined) {
+        Swal.fire('Error', 'El campo nombre no debe estar vacio', 'warning')
+      } else {
+        this.docenteService.crearConArchivo(this.archivo, this.archivoSelected, this.docente.id)
+          .subscribe(a => {
+            this.archivo = a
+            this.archivo.id = 50
+            //    console.log(a)
+            this.mostrarArchivos()
+            this.tabIndex = 3
+            this.archivo.nombre = ""
+            this.archivo.tipo = ""
+            this.archivoSelected = null
+            this.router.navigate([`/docentes/form/docente-perfil/${this.usuario.username}`]);
+            Swal.fire('Upload File', 'El archivo docente se subio correctamente', 'success')
+          }, err => {
+            if (err.status == 400) {
+              this.error = err.error;
+              //  console.log(this.error);
+            }
+          });
+      }
     }
   }
 
   mostrarArchivos() {
-    if(this.docente === undefined) {
-      Swal.fire('Precauscion', 'No existe usuario asociado a un docente', 'warning')
+    this.showFile = true
+    if (this.docente === undefined) {
+      Swal.fire('Precaucion', 'No existe usuario asociado a un docente', 'warning')
     } else {
-      this.usuario = this.docente.usuario
+      //this.usuario = this.docente.usuario
       //console.log(this.usuario)
       this.docenteService.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => { // au = archivo-usuario
         this.archivos = au
-    //    console.log(au.id < 0)
+        this.showFile = false
+        //    console.log(au.id < 0)
       })
     }
   }
 
   redireccion(archivo: Archivo) {
-  //  console.log('redireccion')
-  //  console.log(archivo)
+    //  console.log('redireccion')
+    //  console.log(archivo)
     if (archivo.tipo === 'PDF') {
       window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
     }
@@ -190,12 +205,13 @@ export class DocentePerfilComponent implements OnInit {
         this.archivoService.eliminar(archivo.id).subscribe(() => {
           // this.listar = this.listar.filter(a => a !== e);
           Swal.fire('Eliminado:', `${this.archivo.nombre} eliminado con éxito`, 'success');
+          this.mostrarArchivos()
           this.tabIndex = 2
-          this.router.navigate([`/docentes/form/docente-perfil/${this.docente.id}`]);
+          this.router.navigate([`/docentes/form/docente-perfil/${this.usuario.username}`]);
         }, err => {
           if (err.status == 400) {
             this.error = err.error;
-            console.log(this.error);
+            // console.log(this.error);
           }
         });
       }
@@ -205,13 +221,13 @@ export class DocentePerfilComponent implements OnInit {
 
   public editar(): void {
     this.docenteService.editar(this.docente).subscribe(m => {
-   //   console.log(m);
+      //   console.log(m);
       Swal.fire('Modificado:', `${this.docente.nombre} actualizado con éxito`, 'success');
       this.router.navigate([`/docentes/form/docente-perfil/${this.usuario.username}`]);
     }, err => {
       if (err.status === 400 || err.status === 405) {
         this.error = err.error;
-        console.log(this.error);
+        //console.log(this.error);
       }
     });
   }

@@ -1,42 +1,53 @@
+.contenedor1 {
+  margin-bottom: 2%;
+}
 
-.contenedor1{
-    margin-bottom: 2%;
+.color-tecnm {
+  color: #17325c;
+  font-weight: bold;
 }
-.color-tecnm{
-    color: #17325c;
-    font-weight: bold;
+
+.fondo-form {
+  background: #c9c9c98c;
 }
-.fondo-form{
-    background:#c9c9c98c;
-}
+
 .fondo-card {
   background: url('../../../../assets/Resporte/background_main.png');
   background-size: cover;
 }
-.titulo{
-    font-family: sans-serif;
-    font-weight: bold;
-    font-size: 12pt;
+
+.titulo {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 12pt;
 }
+
 .th-w {
   width: 15%;
+}
+
+th {
+  background: #e2b3b3dc;
 }
 
 .th-modalidad {
   width: 30%;
 }
 
-.div-division{
-    margin-top: 1%;
+.div-division {
+  margin-top: 1%;
 }
-.firma-tam{
-    width:100px;
-    height:40px;
+
+.firma-tam {
+  width: 100px;
+  height: 40px;
 }
-.tam-letra-lista{
-    font-family: sans-serif;
-    font-size:10pt;
+
+.tam-letra-lista {
+  font-family: sans-serif;
+  font-size: 10pt;
 }
+
 textarea {
   line-height: 90%;
   border-color: rgba(255, 255, 255, 0);
@@ -60,19 +71,22 @@ textarea {
   margin-left: -15px;
   margin-bottom: -4.8px;
 }
-.textarea-division{
-    width: 320px;
-    height: 34px;
-    font-size: 12pt;
-    margin-left: -15px;
-    margin-bottom: -4.8px;
+
+.textarea-division {
+  width: 320px;
+  height: 34px;
+  font-size: 12pt;
+  margin-left: -15px;
+  margin-bottom: -4.8px;
 }
-.textarea-division2,.textarea-nombreTutor{
-    width: 240px;
-    height: 34px;
-    font-size: 12pt;
-    margin-left: -15px;
-    margin-bottom: -4.8px;
+
+.textarea-division2,
+.textarea-nombreTutor {
+  width: 240px;
+  height: 34px;
+  font-size: 12pt;
+  margin-left: -15px;
+  margin-bottom: -4.8px;
 }
 
 p {
@@ -103,33 +117,36 @@ p {
 }
 
 
-th,td{
-    border-top: 1px solid;
-    border-right: 1px solid;
-    border-color: black;
-}
-.borde-t1{
-    border-top: 1px solid;
-    border-right: 1px solid;
-    border-color: black;
-}
-.borde-t2{
-    border-bottom: 1px solid;
-    border-color: black;
+th,
+td {
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-color: black;
 }
 
-.imagen{
-   width: 10cm;
-   height: 6cm;
+.borde-t1 {
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-color: black;
 }
 
-.p-img{
- width: 10cm;
- font-family: sans-serif;
- font-size: 9pt;
+.borde-t2 {
+  border-bottom: 1px solid;
+  border-color: black;
 }
 
-.btn-aseptar{
+.imagen {
+  width: 10cm;
+  height: 6cm;
+}
+
+.p-img {
+  width: 10cm;
+  font-family: sans-serif;
+  font-size: 9pt;
+}
+
+.btn-aseptar {
   margin-left: 5px;
   color: white;
   background: #17325c;

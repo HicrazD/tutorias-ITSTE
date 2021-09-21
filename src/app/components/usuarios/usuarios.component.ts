@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class UsuariosComponent implements OnInit { //extends CommonListarComponent<Usuario,UsuarioService> se kito esta parte
   //para experimentar otra forma de poner paginacion con angular material
+  loading:boolean
   titulo = "Lista de usuarios"
   error:any
   usuarios: Usuario[]
@@ -27,7 +28,10 @@ export class UsuariosComponent implements OnInit { //extends CommonListarCompone
   mostrarColumnasUsuarios2: string[] = ['id', 'username', 'roles'];
   mostrarColumnasRoles: string[] = ['nombre'];
 
-  constructor(private service: UsuarioService, public authService: AuthService, private router: Router) { }
+  constructor(private service: UsuarioService, public authService: AuthService, private router: Router) { 
+    this.loading = true
+    this.usuarios = []
+  }
 
 
   ngOnInit() {
@@ -49,6 +53,7 @@ export class UsuariosComponent implements OnInit { //extends CommonListarCompone
   iniciarPaginador(): void{
     this.dataSource = new MatTableDataSource<Usuario>(this.usuarios);
     this.dataSource.paginator = this.paginator;
+    this.loading = false
   }
 
   applyFilter(event: Event) {
@@ -56,8 +61,9 @@ export class UsuariosComponent implements OnInit { //extends CommonListarCompone
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  /*
   public eliminar(usuario: Usuario): void {
-
+    this.loading = true
     Swal.fire({
       title: 'Cuidado:',
       text: `¿Seguro que desea eliminar?`,
@@ -75,6 +81,7 @@ export class UsuariosComponent implements OnInit { //extends CommonListarCompone
               if (u.roles.length > 1) { return true }
             })
           })
+          this.loading = false
           Swal.fire('Eliminado:', `Usuario eliminado con éxito`, 'success');
         }, err => {
           if (err.status == 400) {
@@ -93,5 +100,5 @@ export class UsuariosComponent implements OnInit { //extends CommonListarCompone
     });
 
   }
-
+*/
 }

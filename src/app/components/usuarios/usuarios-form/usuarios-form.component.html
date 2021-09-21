@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="container formx Max my-3 p-2" style="background:#026b3f8c ; width: 450px;overflow: auto; max-width: 100%;">
+<div class="container formx Max my-3 p-2" style="background:#026b3f7a ; width: 450px;overflow: auto; max-width: 100%;">
   <mat-card class="mat-elevation-z8 w-100" style="background:#ff9101fb ;">
     <h1 class="text-light">
       {{titulo}}
@@ -43,7 +43,9 @@
         </button>
         <span></span>
       </mat-form-field>
+      <div *ngIf="btnPulsado">
       <button mat-button color="primary" (click)="createRol()" [disabled]='estatus'>Crear</button>
+      </div>
     </mat-card-actions>
   </mat-card>
 </div>

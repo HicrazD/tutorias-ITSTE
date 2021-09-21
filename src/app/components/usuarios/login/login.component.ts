@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  btnPulsado:boolean = false
   hide = true;
   titulo:string = 'Iniciar sesion'
   usuario:Usuario
@@ -30,31 +31,20 @@ export class LoginComponent implements OnInit {
 
 
   login():void{
+    this.btnPulsado = true
     //console.log(this.usuario)
     if(this.usuario.username == null || this.usuario.password == null){
-      Swal.fire('Error login','Username o password vacías','error')
+      //Swal.fire('Error login','Username o password vacías','error')
     }
-
-    this.filterUser()     
-    
+    if(this.btnPulsado){
+      this.filterUser()
+     // console.log('pulsado')
+    }   
   }
 
   filterUser(){
     this.usuarioService.filtrarUsernambre(this.usuario.username).subscribe(u => {
-      this.u = u
-     // console.log(this.u)
-      if(this.u.isLog == false){
-        console.log('usuario no logeado ' + this.u.isLog)
-
-        this.usuarioService.sessionLogin(this.u).subscribe(isLog => {
-         // console.log('Metodo sesionnLogin en spring')
-          //console.log(isLog)
-          
-        })
-      }else if(this.u.isLog){
-       // console.log('Usuario logeado ' + this.u.isLog)
-       }
-      
+      this.u = u  
     })
     this.auth()
   }
@@ -62,18 +52,19 @@ export class LoginComponent implements OnInit {
   auth(){
     this.authService.login(this.usuario).subscribe(response =>{
       //console.log(response)
-
+    
       this.authService.guardarUsuario(response.access_token);
       this.authService.guardarToken(response.access_token);
       let usuario = this.authService.usuario;
       this.router.navigate(['/home'])
-      Swal.fire('Login',`Hola ${usuario.username} has iniciado sesion con exito :3`,'success')
-    },err => {
+      Swal.fire('Login',`Hola ${usuario.username} has iniciado sesion con exito`,'success')
+    },err => {      
+      this.btnPulsado = false
       if (err.status == 400) {
-        Swal.fire('Error Login', 'Usuario o clave incorrectas!', 'error');
+        Swal.fire('Error Iniciar Sesion', 'Usuario o clave incorrectas!', 'error');
       }
       if (err.status == 500) {
-        Swal.fire('Server?', 'No se pudo conectar con el servidor!', 'error');
+        Swal.fire('¿Servidor?', 'Hay problemas con el servidor!', 'error');
       }
 
     })

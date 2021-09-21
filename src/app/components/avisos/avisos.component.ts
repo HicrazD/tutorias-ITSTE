@@ -26,6 +26,10 @@ export class AvisosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.listAvisos()
+  }
+
+  listAvisos(): void {
     this.service.listar().subscribe(avisos => {
       this.avisos = avisos
       this.dataSource = new MatTableDataSource<Aviso>(this.avisos);
@@ -57,7 +61,7 @@ export class AvisosComponent implements OnInit {
 
         this.service.eliminar(id).subscribe(() => {
           // this.listar = this.listar.filter(a => a !== e);
-          this.iniciarPaginador();
+          this.listAvisos()
           Swal.fire('Eliminado:', `Aviso eliminado con éxito`, 'success');
         }, err => {
           if (err.status == 400) {
@@ -70,8 +74,8 @@ export class AvisosComponent implements OnInit {
 
   }
 
-  isAuth():boolean {
-    if(this.authService.hasRole('ROLE_ADMIN')) return true
+  isAuth(): boolean {
+    if (this.authService.hasRole('ROLE_ADMIN')) return true
     else return false
   }
 }

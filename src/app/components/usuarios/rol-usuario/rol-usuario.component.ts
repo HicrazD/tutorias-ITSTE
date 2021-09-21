@@ -13,38 +13,42 @@ import { CommonListarComponent } from '../../alumnos/common-listar.component';
   styleUrls: ['./rol-usuario.component.css']
 })
 export class RolUsuarioComponent implements OnInit {
-  title:string = 'Modificar contraseña'
-  error:any
+  title: string = 'Modificar contraseña'
+  error: any
   usuario: Usuario;
-  contra1:string=''
-  contra2:string=''
- constructor(private service: UsuarioService,private route: ActivatedRoute,
-  private router:Router) {
+  contra1: string = ''
+  contra2: string = ''
+  constructor(private service: UsuarioService, private route: ActivatedRoute,
+    private router: Router) {
     this.usuario = new Usuario()
   }
- ngOnInit(){
-  this.route.paramMap.subscribe(params => {
-    const id: number = +params.get('id')
-    if (id)
-      this.service.ver(id).subscribe(u => {
-        this.usuario = u
-      })
-  })
- }
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const id: number = +params.get('id')
+      if (id)
+        this.service.ver(id).subscribe(u => {
+          this.usuario = u
+        })
+    })
+  }
 
- editarUsuario(): void {
-  if (this.contra1 === this.contra2) {
-    this.usuario.password = this.contra2 
-    this.service.editar(this.usuario).subscribe(m => {
-      //console.log(m);
-      Swal.fire('Modificado:', `Contraseña actualizada con éxito`, 'success');
-      this.router.navigate(['/home']);
-    }, err => {
-      if (err.status === 400 || err.status === 500) {
-        this.error = err.error;
-        //console.log(this.error);
-      }
-    });
-  }else  Swal.fire('Error:', `Los campos no coinciden`, 'error');
-}
+  editarUsuario(): void {
+    if (this.contra1.length < 7 || this.contra2.length < 8) {
+      Swal.fire('Erorr:', `La contraseña ebe tener almenos 8 caracteres`, 'warning');
+    } else {
+      if (this.contra1 === this.contra2) {
+        this.usuario.password = this.contra2
+        this.service.editar(this.usuario).subscribe(m => {
+          //console.log(m);
+          Swal.fire('Modificado:', `Contraseña actualizada con éxito`, 'success');
+          this.router.navigate(['/home']);
+        }, err => {
+          if (err.status === 400 || err.status === 500) {
+            this.error = err.error;
+            //console.log(this.error);
+          }
+        });
+      } else Swal.fire('Error:', `Los campos no coinciden`, 'error');
+    }
+  }
 }

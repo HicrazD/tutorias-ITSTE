@@ -61,6 +61,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { registerLocaleData } from '@angular/common';
 import LocaleES from '@angular/common/locales/es';
 import { PatComponent } from './components/reportes-plantilla/pat/pat.component';
@@ -150,6 +151,7 @@ registerLocaleData(LocaleES,'es');
     MatExpansionModule,
     MatGridListModule,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
     MatMomentDateModule,
     MatRadioModule
 

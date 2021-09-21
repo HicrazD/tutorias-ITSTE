@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Docente } from 'src/app/models/docente';
 import { Sesion } from 'src/app/models/sesion';
 import { Usuario } from 'src/app/models/usuario';
+import { AlumnoService } from 'src/app/services/alumno.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocenteService } from 'src/app/services/docente.service';
 import { SesionService } from 'src/app/services/sesion.service';
@@ -18,6 +19,7 @@ import Swal from 'sweetalert2';
   encapsulation: ViewEncapsulation.None,
 })
 export class SesionFomComponent implements OnInit {
+  btnPulsado:boolean = true
   error: any
   usuario: Usuario
   docente: Docente
@@ -26,14 +28,13 @@ export class SesionFomComponent implements OnInit {
   title: string = 'Crear Sesion'
   modalidad = [
     { valor: 'Grupal', viewValue: 'Grupal' },
-    { valor: 'Individual', viewValue: 'Individual' },
-    { valor: 'Virtual', viewValue: 'Virtual' }
+    { valor: 'Individual', viewValue: 'Individual' }
   ];
 
   todayNumber: number = Date.now();
   todayString: string = new Date().toDateString();
   constructor(private route: ActivatedRoute, public authService: AuthService,
-    private router: Router, private sesionService: SesionService,
+    private router: Router, private sesionService: SesionService,public alumnoService:AlumnoService,
     private docenteService: DocenteService,
     private usuarioService: UsuarioService) {
     this.usuario = new Usuario()
@@ -66,32 +67,37 @@ export class SesionFomComponent implements OnInit {
 
   crearYAsignarSesion() {
    // console.log(typeof(this.sesion.horaEntrada))
-
+  this.btnPulsado = false
     if (this.usuario.username === this.authService.usuario.username && this.sesion.numSesion > 0) {
       this.docenteService.crearYAsignarSesion(this.docente, this.sesion).subscribe(d => {
       //  console.log(d.sesiones)
+       
         this.router.navigate([`/sesiones-ver/${this.authService.usuario.username}`])
         Swal.fire('Exito!',`Sesion creada con exito`,'success')
       }, err => {
+        this.btnPulsado = true
         this.error = err.error
       //  console.log('errores')
       //  console.log(this.error)
         if (err.status == 400) {
-          Swal.fire('Error', ` No se pudo crear la sesion`, 'error')
+          Swal.fire('Error', ` No se pudo crear la Sesion`, 'error')
         }
       })
     } else {
+      this.btnPulsado = true
       Swal.fire('Error', 'No se pudo crear la Sesion', 'error')
     }
   }
 
   editar() {
+    this.btnPulsado = true
     this.sesionService.editar(this.sesion).subscribe(sesion => {
       this.sesion = sesion
      //  console.log(this.sesion)
       this.router.navigate([`/sesiones-ver/${this.authService.usuario.username}`])
       Swal.fire('Exito',`Sesion edita y salvada`,'success')
     }, err => {
+      this.btnPulsado = true
       this.error = err.error
       // console.log('errores')
       // console.log(this.error)
@@ -100,4 +106,5 @@ export class SesionFomComponent implements OnInit {
     })
 
   }
+
 }

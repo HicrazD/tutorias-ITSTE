@@ -11,6 +11,10 @@ export class HomeComponent implements OnInit {
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
+
   }
 
+  estado():boolean{
+    if( this.authService.hasRole('ROLE_ADMIN'))  return true; else return false
+  }
 }

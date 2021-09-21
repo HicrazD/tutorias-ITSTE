@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { URL_BAKEND } from 'src/app/config/config';
 import { Alumno } from 'src/app/models/alumno';
 import { Archivo } from 'src/app/models/archivo';
 import { Asistencia } from 'src/app/models/asistencia';
@@ -17,14 +18,16 @@ import { CommonFormComponent } from '../../common-form.component';
 })
 export class AlumnosFormComponent
   extends CommonFormComponent<Alumno, AlumnoService> implements OnInit {
-
-  archivos: Archivo
+  href:string
+  archivos: Archivo []
   usuario: Usuario = new Usuario()
   tabIndex = 0;
   archivo: Archivo = new Archivo()
   asistencias:Asistencia[] = []
   presente:Asistencia[] = []
   archivoSelected: File
+  urlBackend = URL_BAKEND
+  showFile:boolean
   semestre = [
     {valor:'PRIMERO',muestraValor:'PRIMERO'},
     {valor:'SEGUNDO',muestraValor:'SEGUNDO'},
@@ -36,6 +39,7 @@ export class AlumnosFormComponent
     {valor:'OCTAVO',muestraValor:'OCTAVO'},
     {valor:'NOVENO',muestraValor:'NOVENO'},
     {valor:'DECIMO',muestraValor:'DECIMO'},
+    {valor:'ONCEAVO',muestraValor:'ONCEAVO'},
   ];
 
   carrera = [
@@ -58,9 +62,12 @@ export class AlumnosFormComponent
     this.titulo = 'Crear Alumnos';
     this.model = new Alumno();
     this.usuario = this.model.usuario
-    this.redirect = '/home';
+    this.redirect = `/alumnos/form/${this.model.id}`;
     this.nombreModel = Alumno.name;
-
+    this.archivo.comentario = ""
+    this.archivos = []
+    this.href = `${this.urlBackend}/api/archivos/uploads/file-pdf/`
+      this.showFile = false
   }
 
   seleccionarArchivo(event) {
@@ -82,7 +89,9 @@ export class AlumnosFormComponent
         .subscribe(a => {
           this.archivo = a
           //console.log(a)
+          this.router.navigate([this.redirect]);
           this.tabIndex = 0
+          this.archivo = new Archivo()
           Swal.fire('Upload File','El archivo se subio correctamente', `success`)
         },err => {
           if(err.status == 400 || err.status == 405 ){
@@ -93,6 +102,7 @@ export class AlumnosFormComponent
     }
   }
 
+  
 
   public eliminarArchivo(archivo:Archivo): void{
 
@@ -109,6 +119,7 @@ export class AlumnosFormComponent
         this.archivoService.eliminar(archivo.id).subscribe(() => {
          // this.listar = this.listar.filter(a => a !== e);
          Swal.fire('Eliminado:', `Archivo eliminado con éxito`, 'success');
+         this.router.navigate([this.redirect]);
          this.tabIndex = 0;
          this.archivos = null
         },err => {
@@ -125,9 +136,13 @@ export class AlumnosFormComponent
   mostrarArchivos() {
     this.usuario = this.model.usuario
     //console.log(this.usuario)
+    this.showFile = true
     this.service.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => {
-      if(au)
       this.archivos = au
+      this.showFile = false
+    },err =>{
+      if(err.status > 0)
+      this.showFile = false
     })
   }
 

@@ -43,7 +43,7 @@ export class LoginAdminComponent implements OnInit {
       .subscribe(
         rn => {
           // console.log('Filter by nombre')
-          console.log(rn)
+         // console.log(rn)
           this.role = rn
         },
         err => {

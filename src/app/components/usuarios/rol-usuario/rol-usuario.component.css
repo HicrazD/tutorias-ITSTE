@@ -1,8 +1,9 @@
 .mat-card{
-background-color: rgba(0, 128, 85, 0.671);
+background-color: rgba(136, 138, 137, 0.562);
 }
 .mat-card-title,.mat-card-subtitle,label{
-  color: white;
+  color: #1b396a;
+  font-weight: bold;
 }
 .container{
   width: 600px;
@@ -14,6 +15,10 @@ background-color: rgba(0, 128, 85, 0.671);
   }
 }
 
+button{
+  background:#1b396a;
+  color: white;
+}
 button:hover{
   box-shadow: 0 4px 16px white;
 }

@@ -4,7 +4,19 @@
     max-width: 100%;
     overflow: auto;
   }
-
+  .mat-card{
+    background: linear-gradient(#dadada94, #d4d4d4b2), url(../../../assets/svg/plantilla.svg);
+    background-position: center center;  
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: auto;
+  }
+.mat-card-title{
+  color: #1B396A;
+  font-size: 18pt;
+  font-weight: bold;
+  font-family: sans-serif;
+}
   .example-container-s {
     height:300px;
     width: 500px;
@@ -14,6 +26,7 @@
   
   table {
     width: 800px;
+    background: #fcfcfc50;
   }
   
   .mat-form-field {
@@ -29,24 +42,14 @@
   th.mat-column-position, td.mat-column-position {
     padding-left: 8px;
   }
-  
-  .mat-table-sticky:first-child {
-    border-right: 1px solid #b81818;
-  }
-  
+   
   .mat-table-sticky:last-child {
     border-left: 1px solid #e0e0e0;
   }
   
-  th.mat-sort-header-sorted {
-    color: rgb(146, 0, 0);
-  }
-  
-  th.mat-sort-header-sorted {
-    color: black;
-  }
 
   .mat-list-item{
     color:#1B396A;
     font-weight: bold
   }
+

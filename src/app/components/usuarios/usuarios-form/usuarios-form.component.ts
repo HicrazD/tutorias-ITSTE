@@ -16,7 +16,7 @@ import { CommonListarComponent } from '../../alumnos/common-listar.component';
 })
 export class UsuariosFormComponent
   extends CommonListarComponent<Usuario, UsuarioService> implements OnInit {
-
+  btnPulsado: boolean = true
   usuario: Usuario = new Usuario();
   role: Roles
   nombreRol: string
@@ -34,7 +34,8 @@ export class UsuariosFormComponent
   }
 
   ngOnInit() {
-
+   this.usuario.username = ""
+   this.usuario.password = ""
   }
 
   buscarRole(nombre: string) {
@@ -48,12 +49,12 @@ export class UsuariosFormComponent
   Codigo(code: string) {
     code = code !== undefined ? code.trim() : '';
     if (code.length > 10) {
-     // console.log(code)
+      // console.log(code)
       this.codigoService.verCodigo(code).subscribe(codigo => {
         this.codigo = codigo
         if (codigo.tipo === 'ALUMNO') { this.nombreRol = 'ROLE_ALUMNO' }
         if (codigo.tipo === 'DOCENTE') { this.nombreRol = 'ROLE_DOCENTE' }
-        this.buscarRole(this.nombreRol)        
+        this.buscarRole(this.nombreRol)
       }, err => {
         if (err.status == 404) {
           this.error = err.error;
@@ -62,7 +63,7 @@ export class UsuariosFormComponent
             title: 'No encontrado!',
             text: 'El codigo no existe en el sistema',
           })
-        //  console.log(this.error);
+          //  console.log(this.error);
         }
 
         if (err.status == 401) {
@@ -72,31 +73,43 @@ export class UsuariosFormComponent
             title: 'Oh no!',
             text: 'No tienes acceso',
           })
-        //  console.log(this.error);
+          //  console.log(this.error);
         }
       })
     }
   }
 
   public createRol(): void {
-    if (!this.estatus) {
-      this.service.createRol(this.usuario, this.role.id).subscribe(usuario => {
-      //  console.log(usuario);
+    this.btnPulsado = false
+    if (this.usuario.username.length < 6 || this.usuario.password.length < 6) {
+      Swal.fire('Error', `1.- usuario debe tener almenos 6 caracteres   2.- contraseña
+      debe tener almenos 6 caracteres `, 'warning');
+      this.btnPulsado = true
+    } else {
+      if (!this.estatus) {
+        this.service.createRol(this.usuario, this.role.id).subscribe(usuario => {
+          //  console.log(usuario);
 
-        if (this.role.nombre == 'ROLE_ALUMNO') {
-          Swal.fire('Create', `ALUMNO ${usuario.username} creado con exito!`, 'success');
-          this.router.navigate(['/login'])
-        }
-        if (this.role.nombre == 'ROLE_DOCENTE') {
-          Swal.fire('Create', `DOCENTE ${usuario.username} creado con exito!`, 'success');
-          this.router.navigate(['/login'])
-        }
-      }, err => {
-        if (err.status == 400) {
-          this.error = err.error;
-         // console.log(this.error);
-        }
-      })
+          if (this.role.nombre == 'ROLE_ALUMNO') {
+            Swal.fire('Create', `ALUMNO ${usuario.username} creado con exito!`, 'success');
+            this.router.navigate(['/login'])
+          }
+          if (this.role.nombre == 'ROLE_DOCENTE') {
+            Swal.fire('Create', `DOCENTE ${usuario.username} creado con exito!`, 'success');
+            this.router.navigate(['/login'])
+          }
+        }, err => {
+          this.btnPulsado = true
+          if (err.status == 400) {
+            this.error = err.error;
+            // console.log(this.error);
+          }
+          if(err.status == 500){
+            Swal.fire('Opss', `Probablemente ese alias no este disponible`, 'error');
+          }
+        })
+      }
     }
+
   }
 }

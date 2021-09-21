@@ -16,7 +16,6 @@ export class NavbarComponent{
     private usuarioService:UsuarioService) { 
 
     }
-  
   logout(): void {
     let username = this.authService.usuario.username;
     this.usuarioService.sessionLogOut(this.authService.usuario).subscribe(isLog => {

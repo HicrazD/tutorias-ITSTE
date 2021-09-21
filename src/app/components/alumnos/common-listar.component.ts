@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 export abstract class CommonListarComponent<E extends Generic, S extends CommonService<E>> implements OnInit {
   titulo: string;
   listar: E[]
+  showFile:boolean
   protected nombreModel: string;
   error: any;
   totalRegistros = 0;
@@ -16,7 +17,9 @@ export abstract class CommonListarComponent<E extends Generic, S extends CommonS
   pageSizeOptions: number[] = [3, 5, 10, 25, 100];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(protected service: S, protected router: Router) { }
+  constructor(protected service: S, protected router: Router) {
+    this.showFile = true
+   }
 
   ngOnInit() {
     this.calcularRangos();
@@ -34,6 +37,7 @@ export abstract class CommonListarComponent<E extends Generic, S extends CommonS
         this.listar = p.content as E[];
        // console.log(this.listar)
         this.totalRegistros = p.totalElements as number;
+        this.showFile = false
       });
   }
 
@@ -61,6 +65,5 @@ export abstract class CommonListarComponent<E extends Generic, S extends CommonS
         });
       }
     });
-
   }
 }

@@ -1,0 +1,9 @@
+.fondo-card {
+  background: rgba(196, 196, 196, 0.747);
+}
+
+.mat-card-title{
+    font-size: 18pt;
+    font-weight: bold;
+    color:#1B396A;
+}

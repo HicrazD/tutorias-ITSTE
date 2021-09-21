@@ -21,22 +21,18 @@ export class ConsultasComponent implements OnInit {
   archivosWord: Archivo[]
   archivosPdf: Archivo[]
   archivosExcel: Archivo[]
-  alumnoMatricula: Alumno = new Alumno()
-  docentesFind: Docente[]
+ // alumnoMatricula: Alumno = new Alumno()
+ // docentesFind: Docente[]
   tabIndex = 0;
   tabIndexSub = 0
-  division: string
-  nombreOrApellido: string
+ // division: string
+ // nombreOrApellido: string
   tipo = "WORD FORMATO"
   tpdf = "PDF FORMATO"
   texcel = "EXCEL FORMATO"
-  mostrarColumnas: string[] = ['nombre', 'apellido', 'correo', 'division', 'detalles'];
+ // mostrarColumnas: string[] = ['nombre', 'apellido', 'correo', 'division', 'detalles'];
   mostrarColumnasAchivo: string[] = ['nombre', 'tipo', 'ver', 'detalles'];
-  constructor(private route: ActivatedRoute,
-    private alumnoService: AlumnoService,
-    private docenteService: DocenteService,
-    private archivoService: ArchivoService,
-    public authService: AuthService) { }
+  constructor(private archivoService: ArchivoService,  public authService: AuthService) { }
 
   ngOnInit() {
     this.archivoService.filtrarTipoArchivoWord(this.tipo).subscribe(
@@ -49,6 +45,21 @@ export class ConsultasComponent implements OnInit {
       archivo => this.archivosExcel = archivo)
   }
 
+  redireccion(archivo: Archivo) {
+    //console.log('redireccion')
+    //console.log(archivo)
+    if (archivo.tipo === 'PDF' || archivo.tipo === 'PDF FORMATO') {
+      window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
+    }
+
+    if (archivo.tipo === 'WORD' || archivo.tipo === 'WORD FORMATO') {
+      window.open(`${this.urlBackend}/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
+    }
+
+    if (archivo.tipo === 'EXCEL' || archivo.tipo === 'EXCEL FORMATO') {
+      window.open(`${this.urlBackend}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
+    }
+  }
 /*
   filtrar(matricula: number): void {
     let m: number = matricula
@@ -72,6 +83,7 @@ export class ConsultasComponent implements OnInit {
     }
   }
 */
+/*
   fieldDivision(div: string) {
     div = div !== undefined ? div.trim() : '';
     if (div !== '') {
@@ -104,6 +116,6 @@ export class ConsultasComponent implements OnInit {
       //  console.log(this.docentesFind)
         });
     }
-  }
+  }*/
 
 }
