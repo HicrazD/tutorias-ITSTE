@@ -16,26 +16,25 @@ import { CommonListarComponent } from '../../alumnos/common-listar.component';
 })
 export class UsuariosFormComponent
   extends CommonListarComponent<Usuario, UsuarioService> implements OnInit {
+  rolA: boolean
+  rolD: boolean
   btnPulsado: boolean = true
-  usuario: Usuario = new Usuario();
   role: Roles
   nombreRol: string
   codigo: Codigo
-  hide = true;
-  hide2 = true;
   estatus: boolean = true
   constructor(router: Router, service: UsuarioService,
     private serviceRole: RoleService,
     private route: ActivatedRoute,
     private codigoService: CodigoService) {
     super(service, router)
-    this.titulo = "Crear Usuarios"
+    this.titulo = "Crear Usuario"
     this.codigo = new Codigo()
+    this.rolA = false
+    this.rolD = false
   }
 
   ngOnInit() {
-   this.usuario.username = ""
-   this.usuario.password = ""
   }
 
   buscarRole(nombre: string) {
@@ -52,8 +51,15 @@ export class UsuariosFormComponent
       // console.log(code)
       this.codigoService.verCodigo(code).subscribe(codigo => {
         this.codigo = codigo
-        if (codigo.tipo === 'ALUMNO') { this.nombreRol = 'ROLE_ALUMNO' }
-        if (codigo.tipo === 'DOCENTE') { this.nombreRol = 'ROLE_DOCENTE' }
+        if (codigo.tipo === 'ALUMNO') {
+          this.nombreRol = 'ROLE_ALUMNO'
+          this.rolA = true
+          this.rolD = false
+        } else if (codigo.tipo === 'DOCENTE') {
+          this.nombreRol = 'ROLE_DOCENTE'
+          this.rolD = true
+          this.rolA = false
+        }
         this.buscarRole(this.nombreRol)
       }, err => {
         if (err.status == 404) {
@@ -62,10 +68,8 @@ export class UsuariosFormComponent
             icon: 'question',
             title: 'No encontrado!',
             text: 'El codigo no existe en el sistema',
-          })
-          //  console.log(this.error);
+          })//  console.log(this.error);
         }
-
         if (err.status == 401) {
           this.error = err.error;
           Swal.fire({
@@ -77,39 +81,5 @@ export class UsuariosFormComponent
         }
       })
     }
-  }
-
-  public createRol(): void {
-    this.btnPulsado = false
-    if (this.usuario.username.length < 6 || this.usuario.password.length < 6) {
-      Swal.fire('Error', `1.- usuario debe tener almenos 6 caracteres   2.- contraseña
-      debe tener almenos 6 caracteres `, 'warning');
-      this.btnPulsado = true
-    } else {
-      if (!this.estatus) {
-        this.service.createRol(this.usuario, this.role.id).subscribe(usuario => {
-          //  console.log(usuario);
-
-          if (this.role.nombre == 'ROLE_ALUMNO') {
-            Swal.fire('Create', `ALUMNO ${usuario.username} creado con exito!`, 'success');
-            this.router.navigate(['/login'])
-          }
-          if (this.role.nombre == 'ROLE_DOCENTE') {
-            Swal.fire('Create', `DOCENTE ${usuario.username} creado con exito!`, 'success');
-            this.router.navigate(['/login'])
-          }
-        }, err => {
-          this.btnPulsado = true
-          if (err.status == 400) {
-            this.error = err.error;
-            // console.log(this.error);
-          }
-          if(err.status == 500){
-            Swal.fire('Opss', `Probablemente ese alias no este disponible`, 'error');
-          }
-        })
-      }
-    }
-
   }
 }

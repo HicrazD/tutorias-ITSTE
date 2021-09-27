@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class UsuariosComponent implements OnInit { //extends CommonListarComponent<Usuario,UsuarioService> se kito esta parte
   //para experimentar otra forma de poner paginacion con angular material
   loading:boolean
-  titulo = "Lista de usuarios"
+  titulo = "Usuarios"
   error:any
   usuarios: Usuario[]
   usuariosAdmin: Usuario[]

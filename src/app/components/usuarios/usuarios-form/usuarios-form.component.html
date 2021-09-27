@@ -1,51 +1,20 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="form-group">
+        <label for="codigo">Codigo <mat-icon> vpn_key</mat-icon></label>
+        <input type="text" class="form-control" id="codigo" (keyup)="Codigo($event.target.value)">
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="container formx Max my-3 p-2" style="background:#026b3f7a ; width: 450px;overflow: auto; max-width: 100%;">
-  <mat-card class="mat-elevation-z8 w-100" style="background:#ff9101fb ;">
-    <h1 class="text-light">
-      {{titulo}}
-      <mat-icon>account_circle</mat-icon>
-    </h1>
-  </mat-card>
-  <br>
-  <mat-card class="mat-elevation-z8 w-100" style="background: url(../../../../assets/Resporte/background_main.png); background-size: cover;">
-    <form class="">
-      <mat-form-field appearance="outline"class="mat-elevation-z8">
-        <mat-label>Usuario</mat-label>
-        <input matInput placeholder="Usuario" name="username" [(ngModel)]="usuario.username" required>
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-      </mat-form-field>
+<div class="container fondo-contenedor" *ngIf="false">
+  <app-uformulario-alumno ></app-uformulario-alumno>
+</div>
 
-      <mat-form-field appearance="outline" class="mat-elevation-z8">
-        <mat-label>Contraseña</mat-label>
-        <input matInput [type]="hide2 ? 'password' : 'text'" [(ngModel)]="usuario.password" name="password"  required>
-        <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
-      <div class="alert alert-danger" *ngIf="error?.username">
-        {{ error.username }}
-      </div>
-      <div class="alert alert-danger" *ngIf="error?.password">
-        {{ error.password }}
-      </div>
-      <br>
-    </form>
-    <mat-card-actions class="container">      
-      <mat-form-field appearance="outline" class="bg-light w-75 mx-1">
-        <mat-label>Ingresar codigo</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" 
-          (keyup)="Codigo($event.target.value)">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        <span></span>
-      </mat-form-field>
-      <div *ngIf="btnPulsado">
-      <button mat-button color="primary" (click)="createRol()" [disabled]='estatus'>Crear</button>
-      </div>
-    </mat-card-actions>
-  </mat-card>
+<div class="container fondo-contenedor" *ngIf="rolD">
+  <div>
+    <app-uformulario-docente ></app-uformulario-docente>
+  </div>
 </div>

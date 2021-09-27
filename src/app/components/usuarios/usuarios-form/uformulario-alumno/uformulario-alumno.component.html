@@ -1,0 +1,150 @@
+<div class="container p-5">
+  <div class="row">
+    <div class="row">
+      <form action="" method="post">
+        <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label for="username">Nombre de Usuario <mat-icon>account_circle</mat-icon></label>
+              <input type="text" class="form-control" id="username" name="username" [(ngModel)]="usuario.username"
+                required>
+                <span class="alert alert-danger" *ngIf="error?.username">
+                  {{ error.username }}
+                </span>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label for="password">Contraseña <mat-icon>lock</mat-icon></label>
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="usuario.password">
+              <span class="alert alert-danger" *ngIf="error?.password">
+                {{ error.password }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <div class="form-group">
+              <label for="password2">Repetir contraseña <mat-icon>lock</mat-icon></label>
+              <input type="password" class="form-control" id="password2" name="password2" [(ngModel)]="afirmacion"
+                required>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label for="nombre">Nombre <mat-icon>person</mat-icon></label>
+              <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="alumno.nombre" required>
+              <span class="alert alert-danger" *ngIf="error?.nombre">
+                {{ error.nombre }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label for="apellido">Apellidos <mat-icon>person</mat-icon></label>
+              <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="alumno.apellido"
+                required>
+                <span class="alert alert-danger" *ngIf="error?.apellido">
+                  {{ error.apellido }}
+                </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label for="correo">Correo <mat-icon>alternate_email</mat-icon></label>
+              <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="alumno.correo" required>
+              <span class="alert alert-danger" *ngIf="error?.correo">
+                {{ error.correo }}
+              </span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label for="tel">Telefono <mat-icon>phone_android</mat-icon></label>
+              <input type="number" class="form-control" id="tel" name="tel" [(ngModel)]="alumno.telefono" required>
+              <span class="alert alert-danger" *ngIf="error?.telefono">
+                {{ error.telefono }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label for="control">No. de Control <mat-icon>grid_on</mat-icon></label>
+              <input type="number" class="form-control" id="control" name="control" [(ngModel)]="alumno.matricula"
+                required>
+                <span class="alert alert-danger" *ngIf="error?.matricula">
+                  {{ error.matricula }}
+                </span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field appearance="fill" class="mx-3">
+              <mat-select required [(ngModel)]="alumno.carrera" name="carrera">
+                <mat-option required *ngFor="let s of carrera" [value]="s.valor">{{s.muestraValor}}</mat-option>
+              </mat-select>
+              <div class="alert alert-danger" *ngIf="error?.carrera">
+                {{ error.carrera }}
+              </div>
+              <mat-label>
+                <b> Carrera</b>
+              </mat-label>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field appearance="fill" class="mx-3">
+              <mat-select required [(ngModel)]="alumno.semestre" name="semestre">
+                <mat-option required *ngFor="let s of semestre" [value]="s.valor">{{s.muestraValor}}</mat-option>
+              </mat-select>
+              <div class="alert alert-danger" *ngIf="error?.semestre">
+                {{ error.semestre }}
+              </div>
+              <mat-label>
+                <b> SEMESTRE</b>
+              </mat-label>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field appearance="fill" class="mx-3">
+              <mat-select required [(ngModel)]="alumno.grupo" name="semestre">
+                <mat-option required *ngFor="let s of grupo" [value]="s.valor">{{s.muestraValor}}</mat-option>
+              </mat-select>
+              <div class="alert alert-danger" *ngIf="error?.grupo">
+                {{ error.grupo }}
+              </div>
+              <mat-label>
+                <b> Grupo</b>
+              </mat-label>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label for="periodoSemestral">Periodo Semestral</mat-label>
+              <input matInput required name="periodoSemestral" [(ngModel)]="alumno.periodoSemestral"
+                placeholder="Ejemplo: Enero 2020- Junio 2020">
+              <div class="alert alert-danger" *ngIf="error?.periodoSemestral">
+                {{ error.periodoSemestral }}
+              </div>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <button class="btn btn-small w-25 btn-crear" type="button" (click)="guardar()">Crear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

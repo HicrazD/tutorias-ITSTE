@@ -4,8 +4,8 @@
 
 
 <div class="row m-5">
-  <div class="col-lg-2 tam-height p-2">
-    <div class="d-flex flex-column">
+  <div class="col-lg-2 tam-height p-2" >
+    <div class="d-flex flex-column" *ngIf="docente.id">
       <div class=""><button mat-raised-button class="w-100 zoom colorBtn" [routerLink]="['/home']">
           Regresar Home
           <!--
@@ -88,7 +88,7 @@
                 </div>
               </div>
 
-              <button mat-raised-button class="w-25 sobre" (click)="docente.id? editar(): crear()">
+              <button mat-raised-button class="w-25 sobre" (click)="editar()">
                 {{ docente.id? 'Editar': 'Crear' }}
               </button>
             </div>

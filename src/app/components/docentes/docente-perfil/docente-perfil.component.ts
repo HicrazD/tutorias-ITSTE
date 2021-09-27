@@ -76,7 +76,7 @@ export class DocentePerfilComponent implements OnInit {
     // console.log('archivo inicial')
     // console.log(this.archivo)
   }
-
+/*
   public crear(): void {
     this.route.paramMap.subscribe(params => {
       const username: string = params.get('term');
@@ -92,7 +92,7 @@ export class DocentePerfilComponent implements OnInit {
       }
     })
   }
-
+*/
   seleccionarArchivo(event) {
     this.archivoSelected = event.target.files[0]
     // console.log(this.archivoSelected)

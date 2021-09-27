@@ -130,7 +130,7 @@ export class AlumnoPerfilComponent implements OnInit {
           //console.log(username)
           // this.alumno.id = 0
           // console.log(this.alumno)
-          this.alumnoService.crearPorUsuarioId(this.alumno, username)
+          this.alumnoService.crearAlumno(this.alumno)
             .subscribe(alumno => {
               this.btnPulsado = true
               this.alumno = alumno

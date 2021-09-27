@@ -8,3 +8,10 @@
 .mat-form-field{
     width: 100%;
 }
+.fondo-contenedor{    
+    background: linear-gradient(#dadada48, #d3d3d348), url(../../../../assets/svg/crear-usuario.svg);
+    background-position: center center;  
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: auto;
+  }

@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<div *ngIf="!loading">
+<div>
   <mat-card class="container my-3">
     <mat-card-header>
       <mat-card-title>{{titulo}}</mat-card-title>
@@ -21,7 +21,7 @@
               <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
             </mat-form-field>
           </mat-card>
-          <div class="container example-container my-1 mx-10">
+          <div class="container example-container my-1 mx-10" *ngIf="!loading">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 ">
 
               <ng-container matColumnDef="id" style="width: 400px;">
@@ -79,11 +79,8 @@
         <!--*********************** Usuarios Admin  *******************+-->
 
         <mat-tab label="Usuarios Admin">
-          <div class="container my-5">
+          <div class="container my-5" *ngIf="!loading">
             <table mat-table [dataSource]="usuariosAdmin" class="mat-elevation-z8 w-100">
-
-
-
               <!-- id Column -->
               <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> Cambiar contraseña </th>

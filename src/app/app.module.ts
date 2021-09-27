@@ -40,6 +40,15 @@ import { ResaComponent } from './components/reportes-plantilla/resa/resa.compone
 import { InformeAsistenciasComponent } from './components/reportes-plantilla/informe-asistencias/informe-asistencias.component';
 import { SesionFomComponent } from './components/sesiones/sesion-fom/sesion-fom.component';
 import { SesionesComponent } from './components/docentes/sesiones/sesiones.component';
+import { PatComponent } from './components/reportes-plantilla/pat/pat.component';
+import { AsistenciasModelComponent } from './components/asistencias/asistencias-model/asistencias-model.component';
+import { ResultadosEvaluacionComponent } from './components/examenes/resultados-evaluacion/resultados-evaluacion.component';
+import { AvisosComponent } from './components/avisos/avisos.component';
+import { AvisosFormComponent } from './components/avisos/avisos-form/avisos-form.component';
+import { HojaCanalizacionComponent } from './components/reportes-plantilla/hoja-canalizacion/hoja-canalizacion.component';
+import { ReacComponent } from './components/reportes-plantilla/reac/reac.component';
+import { UformularioAlumnoComponent } from './components/usuarios/usuarios-form/uformulario-alumno/uformulario-alumno.component';
+import { UformularioDocenteComponent } from './components/usuarios/usuarios-form/uformulario-docente/uformulario-docente.component';
 
 import {MatRadioModule} from '@angular/material/radio';
 import { MatIconModule } from "@angular/material/icon";
@@ -64,13 +73,6 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { registerLocaleData } from '@angular/common';
 import LocaleES from '@angular/common/locales/es';
-import { PatComponent } from './components/reportes-plantilla/pat/pat.component';
-import { AsistenciasModelComponent } from './components/asistencias/asistencias-model/asistencias-model.component';
-import { ResultadosEvaluacionComponent } from './components/examenes/resultados-evaluacion/resultados-evaluacion.component';
-import { AvisosComponent } from './components/avisos/avisos.component';
-import { AvisosFormComponent } from './components/avisos/avisos-form/avisos-form.component';
-import { HojaCanalizacionComponent } from './components/reportes-plantilla/hoja-canalizacion/hoja-canalizacion.component';
-import { ReacComponent } from './components/reportes-plantilla/reac/reac.component';
 
 registerLocaleData(LocaleES,'es');
 
@@ -116,7 +118,9 @@ registerLocaleData(LocaleES,'es');
     AvisosComponent,
     AvisosFormComponent,
     HojaCanalizacionComponent,
-    ReacComponent
+    ReacComponent,
+    UformularioAlumnoComponent,
+    UformularioDocenteComponent
   ],
   entryComponents: [ResponderExamenModalComponent,
     VerExamenModalComponent,
@@ -153,7 +157,8 @@ registerLocaleData(LocaleES,'es');
     MatDatepickerModule,
     MatProgressSpinnerModule,
     MatMomentDateModule,
-    MatRadioModule
+    MatRadioModule,
+    
 
   ],
   providers: [

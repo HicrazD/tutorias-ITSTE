@@ -40,8 +40,8 @@ export class AlumnoService extends CommonService<Alumno>{
   public eliminarAlumno(id:number):Observable<Alumno>{
     return this.http.delete<Alumno>(`${this.baseEndpoint}/eliminar-alumno/${id}`)
   }
-  public crearPorUsuarioId(alumno:Alumno,username:string):Observable<Alumno>{
-    return this.http.post<Alumno>(`${this.baseEndpoint}/crear/alumno-usuario/${username}`, alumno, {headers: this.cabecera})
+  public crearAlumno(alumno:Alumno):Observable<Alumno>{
+    return this.http.post<Alumno>(`${this.baseEndpoint}/crear/alumno-usuario`, alumno)
   }
 
   public crearConArchivo(a: Archivo, archivo: File,id:number): Observable<Archivo>{

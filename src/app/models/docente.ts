@@ -10,6 +10,7 @@ export class Docente implements Generic{
     apellido:string
     correo:string
     division:string
+    telefono:number
     usuario:Usuario
     alumnos:Alumno[] = []
     examenes:Examen[] = []

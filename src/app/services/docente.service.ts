@@ -40,8 +40,7 @@ export class DocenteService extends CommonService<Docente>{
 
   crearYAsignarSesion(docente: Docente, sesion:Sesion):Observable<Docente>{
     return this.http.put<Docente>(`${this.baseEndpoint}/crear-sesion/docente/${docente.id}`,
-     sesion,
-     {headers: this.cabecera});
+     sesion);
   }
 
   eliminarAlumno(docente: Docente, alumno: Alumno): Observable<Docente> {
@@ -50,8 +49,8 @@ export class DocenteService extends CommonService<Docente>{
     {headers: this.cabecera});
   }
 
-  public crearPorUsuarioUsername(docente:Docente,username:string):Observable<Docente>{
-    return this.http.post<Docente>(`${this.baseEndpoint}/crear/docente-usuario/${username}`, docente, {headers: this.cabecera})
+  public crearDocente(docente:Docente):Observable<Docente>{
+    return this.http.post<Docente>(`${this.baseEndpoint}/crear/docente-usuario`, docente)
   }
 
   public filtrarPorUsuarioUsername(username: string):Observable<Docente>{
