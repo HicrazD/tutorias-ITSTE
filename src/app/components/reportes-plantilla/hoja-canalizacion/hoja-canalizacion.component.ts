@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Alumno } from 'src/app/models/alumno';
 import * as html2pdf from 'html2pdf.js'
+import { Docente } from 'src/app/models/docente';
 @Component({
   selector: 'app-hoja-canalizacion',
   templateUrl: './hoja-canalizacion.component.html',
@@ -9,6 +10,8 @@ import * as html2pdf from 'html2pdf.js'
 })
 export class HojaCanalizacionComponent implements OnInit {
   alumno:Alumno
+  docente:Docente
+  nombreDocente:string
   semestreGrupo:string=""
   periodoS:string=""
   division:string=""
@@ -20,6 +23,8 @@ export class HojaCanalizacionComponent implements OnInit {
   agregarPage:boolean = false
   constructor( public modalRef: MatDialogRef<HojaCanalizacionComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { 
     this.alumno = data.a as Alumno
+    this.docente = data.docente as Docente
+    this.nombreDocente = this.docente.nombre + this.docente.apellido
   }
 
   ngOnInit(): void {

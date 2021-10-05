@@ -1,57 +1,68 @@
 <div class="container mt-1">
-  <div class="row">
-    <div class="col-12 p-3 bg-info text-white">
-      <h2>Importante: Antes de crear una nueva sesion, primero debe tener encuenta que
-        ya debe tener asignados a sus tutorados.</h2>      
-    </div>
-  </div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <div class="row">
-        <form action="" method="post">
-          b-input
-        </form>
+
+  <div class="container-fluid ">
+    <div class="row">
+      <div class="col-12 p-3 bg-info text-white">
+        <h2>Importante: Antes de crear una nueva sesion, primero debe tener encuenta que
+          ya debe tener asignados a sus tutorados.</h2>
       </div>
     </div>
-    <div class="col-md-6 col-sm-12"></div>
   </div>
-</div>
 
-<div class="container p-2 my-5 colorFondo">
-  <div class="container-fluid">
-    <mat-card class="container fondoCard"
-      style="background: url(../../../../assets/Resporte/background_main.png); background-size: cover;">
-      <mat-card-header>
-        <mat-card-title>{{title}}</mat-card-title>
-        <mat-card-subtitle>Docente: -> {{docente?.nombre}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>        
-        <div class="container-fluid">
+  <div class="container-fluid" *ngIf="mostrarList">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <mat-list>
+          <div mat-subheader>Tutorados de {{docente.nombre}}</div>
+          <mat-list-item class="efecto-h" (click)="btnAdd(alumno)" *ngFor="let alumno of docente.alumnos">
+            <mat-icon mat-list-icon>person</mat-icon>
+            <div mat-line> {{alumno.nombre}} {{alumno.apellido}}</div>
+            <div mat-line> {{alumno.matricula}} </div>
+          </mat-list-item>
+          <button mat-fab (click)="btnAddAll()">
+            <mat-icon>add</mat-icon>
+          </button> Agregar Todos
+        </mat-list>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <mat-list>
+          <div mat-subheader>Tutorados agregados</div>
+          <mat-list-item class="efecto-h" (click)="removeItem(alumno)" *ngFor="let alumno of alumnosAgregados">
+            <mat-icon mat-list-icon>person</mat-icon>
+            <div mat-line> {{alumno.nombre}} {{alumno.apellido}}</div>
+            <div mat-line> {{alumno.matricula}} </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid mt-5 p-2 border border-dark rounded" >
+    <div class="row">
+
+      <div class="col-12">
+        <form action="" method="post">
           <div class="row">
-            <div class="col-4">
-              <mat-form-field color="accent" appearance="outline" class="mat-elevation-z8  my-1">
+            <div class="col-md-4 col-sm-12">
+              <mat-form-field color="accent" appearance="outline" class="w-100">
                 <mat-label>No. Sesion</mat-label>
-                <input matInput type="number" #postalCode maxlength="2" placeholder="Ex. 1"
-                  [(ngModel)]="sesion.numSesion">
-                <mat-hint align="end">{{postalCode.value.length}} / 2</mat-hint>
+                <input matInput type="number" placeholder="Ex. 1" name="numSesion" [(ngModel)]="sesion.numSesion">
                 <div class="alert alert-danger" *ngIf="error?.numSesion">
                   {{ error.numSesion }}
                 </div>
               </mat-form-field>
             </div>
-            <div class="col-4">
-              <mat-form-field color="accent" appearance="outline" class="mat-elevation-z8 mx-1 my-1">
+            <div class="col-md-4 col-sm-12">
+              <mat-form-field color="accent" appearance="outline" class="w-100">
                 <mat-label>Tema</mat-label>
-                <input matInput [(ngModel)]="sesion.tema">
+                <input matInput name="tema" [(ngModel)]="sesion.tema">
                 <div class="alert alert-danger" *ngIf="error?.tema">
                   {{ error.tema }}
                 </div>
               </mat-form-field>
             </div>
-            <div class="col-4">
-              <mat-form-field color="accent" appearance="outline" class="mat-elevation-z8 mx-1 my-1">
+            <div class="col-md-4 col-sm-12">
+              <mat-form-field color="accent" appearance="outline" class="w-100">
                 <mat-label>Modalidad</mat-label>
                 <mat-select [(ngModel)]="sesion.modalidad" name="modalidad">
                   <mat-option *ngFor="let m of modalidad" [value]="m.valor">
@@ -64,11 +75,13 @@
                 </div>
               </mat-form-field>
             </div>
+          </div>
 
-            <div class="col-4">
-              <mat-form-field color="accent" appearance="outline" class="mat-elevation-z8  my-3">
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <mat-form-field color="accent" appearance="outline" class="w-100">
                 <mat-label>Inherited calendar color</mat-label>
-                <input matInput [matDatepicker]="picker1" [(ngModel)]="sesion.createAt">
+                <input matInput [matDatepicker]="picker1" name="createAt" [(ngModel)]="sesion.createAt">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
 
@@ -77,31 +90,31 @@
                 </div>
               </mat-form-field>
             </div>
-            <div class="col-4">
-              <mat-form-field color="accent" class="example-full-width" appearance="outline"
-                class="mat-elevation-z8 mx-1 my-3">
+            <div class="col-md-4 col-sm-12">
+              <mat-form-field color="accent" class="w-100" appearance="outline">
                 <mat-label>Hora entrada</mat-label>
-                <input matInput type="time" [(ngModel)]="sesion.horaEntrada">
+                <input matInput type="time" name="horaEntrada" [(ngModel)]="sesion.horaEntrada">
                 <div class="alert alert-danger" *ngIf="error?.horaEntrada">
                   {{ error.horaEntrada }}
                 </div>
               </mat-form-field>
             </div>
-            <div class="col-4">
-              <mat-form-field color="accent" class="example-full-width" appearance="outline"
-                class="mat-elevation-z8 mx-1 my-3">
+            <div class="col-md-4 col-sm-12">
+              <mat-form-field color="accent" class="w-100" appearance="outline">
                 <mat-label>Hora Salida</mat-label>
-                <input matInput type="time" [(ngModel)]="sesion.horaSalida">
+                <input matInput type="time" name="horaSalida" [(ngModel)]="sesion.horaSalida">
                 <div class="alert alert-danger" *ngIf="error?.horaSalida">
                   {{ error.horaSalida }}
                 </div>
               </mat-form-field>
             </div>
+          </div>
+          <div class="row">
             <div class="col-12">
-              <mat-form-field appearance="outline" hintLabel="Max 300 caracteres" color="accent"
-                class="mat-elevation-z8  my-1" style="width: 300px;">
+              <mat-form-field appearance="outline" class="w-100" hintLabel="Max 300 caracteres" color="accent">
                 <mat-label>Descripcion</mat-label>
-                <textarea matInput #input maxlength="240" [(ngModel)]="sesion.descripcion"></textarea>
+                <textarea matInput #input maxlength="240" name="descripcion"
+                  [(ngModel)]="sesion.descripcion"></textarea>
                 <mat-hint align="end">{{input.value?.length || 0}}/300</mat-hint>
                 <div class="alert alert-danger" *ngIf="error?.descripcion">
                   {{ error.descripcion }}
@@ -109,16 +122,21 @@
               </mat-form-field>
             </div>
           </div>
-        </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <div *ngIf="btnPulsado">
-          <button mat-raised-button class="mat-elevation-z8 fondoCrear"
-            (click)="sesion.id? editar(): crearYAsignarSesion()">
-            {{ sesion.id? 'Editar': 'Crear' }}
-          </button>
-        </div>
-      </mat-card-actions>
-    </mat-card>
+          <div class="row">
+            <div class="col-12">
+              <div *ngIf="btnPulsado">
+                <button mat-raised-button class="mat-elevation-z8 fondoCrear w-25"
+                  (click)="sesion.id? editar(): crearYAsignarSesion()">
+                  {{ sesion.id? 'Editar': 'Crear' }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
   </div>
+
 </div>

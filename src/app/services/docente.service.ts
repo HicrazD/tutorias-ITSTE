@@ -76,17 +76,17 @@ export class DocenteService extends CommonService<Docente>{
 
   asignarExamenes(docente: Docente, examenes: Examen[]): Observable<Docente>{
     return this.http.put<Docente>(`${this.baseEndpoint}/${docente.id}/asignar-examenes`,
-    examenes, {headers: this.cabecera})
+    examenes)
 
   }
 
   eliminarExamen(docente: Docente, examen: Examen):Observable<Docente>{
     return this.http.put<Docente>(`${this.baseEndpoint}/${docente.id}/eliminar-examen`,
-    examen, {headers: this.cabecera})
+    examen)
   }
 
-  asignarExamenesTodos(examenes: Examen[]): Observable<Docente[]>{
+  asignarExamenesTodos(evaluacion: Examen): Observable<Docente[]>{
     return this.http.put<Docente[]>(`${this.baseEndpoint}/asignar-examenes/all`,
-    examenes,{headers: this.cabecera});
+    evaluacion);
   }
 }

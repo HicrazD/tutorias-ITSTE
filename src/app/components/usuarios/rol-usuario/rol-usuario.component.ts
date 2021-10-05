@@ -33,15 +33,15 @@ export class RolUsuarioComponent implements OnInit {
   }
 
   editarUsuario(): void {
-    if (this.contra1.length < 7 || this.contra2.length < 8) {
-      Swal.fire('Erorr:', `La contraseña ebe tener almenos 8 caracteres`, 'warning');
+    if (this.contra1.length < 6 || this.contra2.length < 6) {
+      Swal.fire('Erorr:', `La contraseña debe tener almenos 6 caracteres`, 'warning');
     } else {
       if (this.contra1 === this.contra2) {
         this.usuario.password = this.contra2
         this.service.editar(this.usuario).subscribe(m => {
           //console.log(m);
           Swal.fire('Modificado:', `Contraseña actualizada con éxito`, 'success');
-          this.router.navigate(['/home']);
+          this.router.navigate([`/docentes/form/docente-perfil/${this.usuario.username}`]);
         }, err => {
           if (err.status === 400 || err.status === 500) {
             this.error = err.error;

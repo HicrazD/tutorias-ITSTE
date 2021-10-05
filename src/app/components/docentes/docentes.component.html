@@ -57,7 +57,7 @@
               <th mat-header-cell *matHeaderCellDef>Evaluaciones</th>
               <td mat-cell *matCellDef="let docente">
                 <button class="btn btn-info btn-sm zoom" [routerLink]="['/examenes/asignar-examenes', docente.id]">
-                  Configurar ({{docente.examenes.length}})
+                  Resultados ({{docente.examenes.length}})
                 </button>
               </td>
             </ng-container>

@@ -1,11 +1,13 @@
 
-
+/*
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 * {
   box-sizing: border-box;
   margin: 0;
 }
+*/
  /**/
+
 ul {
   list-style-type: none;
   display: flex;
@@ -30,14 +32,6 @@ a{
 }
 
 .example-container{
-  height: 100px;
   width: 100%;
-  overflow: auto;
 }
 
-@media screen and (max-width: 400px){
-  img{
-    background-size: 100% 100%;
-    width: 30%;
-  }
-}

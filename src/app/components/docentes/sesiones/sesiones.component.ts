@@ -118,7 +118,7 @@ export class SesionesComponent implements OnInit {
 
   asignarAlumnos(sesion: Sesion) {
     
-    this.alumnoService.crearYAsignarAsistencia(sesion, this.alumnos).subscribe(() => {      
+    this.alumnoService.crearYAsignarAsistencia(sesion, sesion.alumnos).subscribe(() => {      
       this.encontrarSesionesPorDocente()  
       this.docenteEndPoint()   
     }, err => {
@@ -179,6 +179,10 @@ export class SesionesComponent implements OnInit {
             this.docente = u
           //  console.log(this.docente)
           this.sesiones = this.docente.sesiones
+
+         this.sesiones = this.sesiones.sort(function (a, b){
+            return (a.numSesion - b.numSesion)
+        })
           this.alumnos = this.docente.alumnos
         //  console.log(this.sesiones)
           this.IniciarPaginador()

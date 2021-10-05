@@ -16,7 +16,9 @@ export class ExamenService extends CommonService<Examen>{
     super(http);
   }
 
-
+  public eliminarEvaluacion(id:number):Observable<void>{
+    return this.http.delete<void>(`${this.baseEndpoint}/eliminar-all/${id}`)
+  }
   public filtrarPorNombre(nombre: string): Observable<Examen[]>{
     return this.http.get<Examen[]>(`${this.baseEndpoint}/filtrar/${nombre}`);
   }

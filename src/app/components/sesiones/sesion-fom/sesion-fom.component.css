@@ -1,23 +1,26 @@
-.colorFondo{
-    background: rgba(106, 121, 117, 0.335); /*background: rgba(0, 92, 72, 0.596);*/
+.colorFondo {
+  background: rgba(106, 121, 117, 0.335);
+  /*background: rgba(0, 92, 72, 0.596);*/
 }
 
-.fondoCrear{
-    background: #1B396AE6;
-    color: white;
-    width: 100%;
-}
-.fondoCard{
-    background-size: cover;
-    width: 900px;
-    max-width: 100%;
+.fondoCrear {
+  background: #1B396AE6;
+  color: white;
+  width: 100%;
 }
 
-  .example-full-width {
-    width: 100%;
-  }
+.fondoCard {
+  background-size: cover;
+  width: 900px;
+  max-width: 100%;
+}
 
-  .mat-form-field{
-      width: 100%;
-  }
+.mat-form-field {
+  font-size: 12pt;
+}
 
+.efecto-h:hover {
+  cursor: pointer;
+  background: #ff6f0021;
+  transition: all 0.3s linear;
+}

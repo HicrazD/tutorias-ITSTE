@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
-@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
-
 *:hover{
     -webkit-transition: all .6s ease;
     transition: all .6s ease;
@@ -66,25 +63,25 @@ h1 a{color:#131313; font-weight:bold;}
     color:rgba(0, 0, 0, 0);
 }
 .fondo-archivo:hover,.fondo-aviso:hover,.fondo-evaluacion:hover{
-    color:rgb(255, 255, 255);
-    background: #1B396A;
-    transition: all 0.1s ;
+    color:rgb(0, 0, 0);
+    background: #ff6f0041 ;
+    transition: all 0.1s linear;
     
 }
 
 .fondo-archivo{
-    background: linear-gradient(#ffffff00, #ffffff00),url(../../../assets/home/archivos.png);
+    background: linear-gradient(#ffffff00, #ffffff00),url(../../../assets/home/archivos.webp);
     background-repeat: no-repeat;
     background-size: contain;
 }
 
 .fondo-aviso{    
-    background: linear-gradient(#ffffff00, #ffffff00),url(../../../assets/home/avisos.png);
+    background: linear-gradient(#ffffff00, #ffffff00),url(../../../assets/home/avisos.webp);
     background-repeat: no-repeat;
     background-size: contain;
 }
 .fondo-evaluacion{
-    background: linear-gradient(#ffffff18, #ffffff17),url(../../../assets/home/evaluacion.png);
+    background: linear-gradient(#ffffff18, #ffffff17),url(../../../assets/home/evaluacion.webp);
     background-repeat: no-repeat;
     background-size: contain;
 }

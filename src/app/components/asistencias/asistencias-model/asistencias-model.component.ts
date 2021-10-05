@@ -56,7 +56,7 @@ export class AsistenciasModelComponent implements OnInit {
 
       this.alumnoService.editar(alumno).subscribe(alumno =>{
         this.verSesion()
-        Swal.fire('Exito¡',`${alumno.nombre}: asistencia total modificada ${alumno.promAsistencia} `,'success')
+        Swal.fire('Exito¡',`Asistencia modificada `,'success')
       },err =>{
         this.error = err.error
         console.log(this.error)

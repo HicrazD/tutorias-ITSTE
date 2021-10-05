@@ -21,6 +21,12 @@ extends CommonListarComponent<Examen, ExamenService> implements OnInit{
     this.nombreModel = 'Evaluacion';
    }
 
+   eliminarEvaluacion(e:Examen){
+     this.service.eliminarEvaluacion(e.id).subscribe(()=>{
+       this.eliminar(e)
+     })
+   }
+
    disabledButton(examen:Examen){
      this.service.activarExamen(examen).subscribe(()=>{
       this.service.listar().subscribe(examenes => {this.listar = examenes})
@@ -35,7 +41,7 @@ extends CommonListarComponent<Examen, ExamenService> implements OnInit{
    eliminarResultadosYRespuestas(){
     Swal.fire({
       title: 'Cuidado:',
-      text: `Al hacer esto los resultados y respuestas en la base de datos se perderan`,
+      text: `Al hacer esto los resultados y respuestas en la base de datos se reiniciaran, esto ayuda a que se pueda utilizar de nuevo la evaluacion`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

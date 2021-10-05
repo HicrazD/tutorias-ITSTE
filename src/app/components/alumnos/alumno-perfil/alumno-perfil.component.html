@@ -230,44 +230,48 @@
           </div>
         </mat-tab>
         <mat-tab label="Cambiar Contraseña" [(selectedIndex)]="tabIndex" *ngIf="alumno">
-          <div class="my-5">
-            <mat-card>
-              <mat-card-header>
-                <mat-card-title>{{title}}</mat-card-title>
-                <mat-card-subtitle>{{usuario?.id? usuario.username: ''}}</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>
-                <div class="container">
-                  <div class="mb-3 row">
-                    <div class="col-4 mb-2">
-                      <label for="inputPassword1" class="form-label newPass">Nueva contraseña</label>
-                    </div>
-                    <div class="col-8 mb-2">
-                      <div class="input-group input-group-sm">
-                        <div class="">
-                          <input type="password" class="form-control" id="inputPassword1" nombre="contra1 "
-                            [(ngModel)]="contra1">
+          <div class="container">
+            <div class="d-flex justify-content-center align-items-center bg-light">
+              <div>
+                <mat-card >
+                  <mat-card-header>
+                    <mat-card-title>{{title}}</mat-card-title>
+                    <mat-card-subtitle>{{usuario?.id? usuario.username: ''}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="container">
+                      <div class="mb-3 row">
+                        <div class="col-4 mb-2">
+                          <label for="inputPassword1" class="form-label newPass">Nueva contraseña</label>
+                        </div>
+                        <div class="col-8 mb-2">
+                          <div class="input-group input-group-sm">
+                            <div class="">
+                              <input type="password" class="form-control border border-dark" id="inputPassword1" nombre="contra1 "
+                                [(ngModel)]="contra1">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <label for="inputPassword2" class="form-label newPass ">Repetir contraseña</label>
+                        </div>
+                        <div class="col-8">
+                          <div class="input-group input-group-sm">
+                            <div class="">
+                              <input type="password" class="form-control border border-dark" id="inputPassword2" nombre="contra2 "
+                                [(ngModel)]="contra2">
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-4">
-                      <label for="inputPassword2" class="form-label newPass">Repetir contraseña</label>
-                    </div>
-                    <div class="col-8">
-                      <div class="input-group input-group-sm">
-                        <div class="">
-                          <input type="password" class="form-control" id="inputPassword2" nombre="contra2 "
-                            [(ngModel)]="contra2">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </mat-card-content>
-              <mat-card-actions>
-                <button mat-raised-button class="w-25 colorBtn sobre" (click)="editarUsuario()">Guardar Cambios</button>
-              </mat-card-actions>
-            </mat-card>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-raised-button class="w-25 colorBtn sobre" (click)="editarUsuario()">Guardar Cambios</button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>            
+            </div>
           </div>
         </mat-tab>
       </mat-tab-group>

@@ -141,7 +141,7 @@ export class AlumnosComponent implements OnInit {
   }
   // ********             Borrar Alumno de sesiones, alumno de docentes y alumno
   borrarSesionesYDocente(docente: Docente, alumno: Alumno) {
-    console.log('entro en borrarSesionesYDocente ')
+   // console.log('entro en borrarSesionesYDocente ')
     this.sesiones = this.sesiones.map(sesion => {
       sesion.alumnos = sesion.alumnos.filter(alumno => alumno.id != alumno.id)
       sesion.asistencias = sesion.asistencias.filter(asistencia => asistencia.alumno.id != alumno.id)
@@ -158,7 +158,7 @@ export class AlumnosComponent implements OnInit {
   }
   // ********** Borrar Alumno de sesiones, Alumno de Docente, Asistencias de alumno y alumno
   borrarTodo(docente: Docente, alumno: Alumno) {
-    console.log('entro en borrarTodo ')
+   // console.log('entro en borrarTodo ')
     this.sesiones = this.sesiones.map(sesion => {
       sesion.alumnos = sesion.alumnos.filter(alumno => alumno.id != alumno.id)
       sesion.asistencias = sesion.asistencias.filter(asistencia => asistencia.alumno.id != alumno.id)
@@ -186,7 +186,7 @@ export class AlumnosComponent implements OnInit {
 
   // Eliminar si existe Respuestas y Resultados
   eliminarRespuestas(alumno:Alumno){
-    console.log('entro en eliminarRespuestas ')
+   // console.log('entro en eliminarRespuestas ')
     this.respuestaService.obtenerRespuestasPorAlumno(alumno.id).subscribe(respuestasId => {
       if(respuestasId.length > 0) {
        // console.log(respuestasId)
@@ -201,7 +201,7 @@ export class AlumnosComponent implements OnInit {
   }
 
   eliminarResultados(alumno:Alumno){
-    console.log('entro en eliminarResultados ')
+    // console.log('entro en eliminarResultados ')
     this.resultadoService.buscarResultadoIdsPorAlumnoId(alumno.id).subscribe(ids => {
       if(ids.length > 0){
         console.log(ids)

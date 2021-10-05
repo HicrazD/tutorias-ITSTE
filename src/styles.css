@@ -1,6 +1,5 @@
 body {
-    background-image: url('./assets/Resporte/background_main.png');
+    background-image: url('./assets/Resporte/background_main.webp');
     background-size: cover;
   }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

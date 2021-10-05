@@ -236,18 +236,24 @@ export class AlumnoPerfilComponent implements OnInit {
   }
 
   editarUsuario(): void {
-    if (this.contra1 === this.contra2 && this.contra1.length > 7 && this.contra2.length > 7) {
+    if (this.contra1 === this.contra2 && this.contra1.length > 6 && this.contra2.length > 6) {
       this.usuario.password = this.contra2
       this.usuarioService.editar(this.usuario).subscribe(m => {
         //console.log(m);
+        this.contra1 = ''
+        this.contra2 = ''
         Swal.fire('Modificado:', `Contraseña actualizada con éxito`, 'success');
-        this.router.navigate([`/alumnos/form/alumno-perfil/${this.authService.usuario.username}`]);
+        if(this.authService.hasRole('ROLE_ADMIN')){
+          this.router.navigate([`/alumnos/form/alumno-perfil/${this.usuario.username}`]);
+        }else{
+          this.router.navigate([`/alumnos/form/alumno-perfil/${this.authService.usuario.username}`]);
+        }        
       }, err => {
         if (err.status === 400 || err.status === 500) {
           this.error = err.error;
           //console.log(this.error);
         }
       });
-    } else Swal.fire('Error:', `1) Los campos no coinciden 2) La contraseña debe ser mayor a 8 caracteres`, 'error');
+    } else Swal.fire('Error:', `1) Los campos no coinciden 2) La contraseña es muy corta`, 'error');
   }
 }

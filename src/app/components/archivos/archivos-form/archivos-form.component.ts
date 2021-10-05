@@ -14,8 +14,7 @@ import Swal from 'sweetalert2';
 export class ArchivosFormComponent implements OnInit {
   btnPulsado: boolean = true
   btnPulsado2: boolean = false
-  archivo: Archivo = new Archivo()
-  archivoCreate: Archivo = new Archivo()
+  archivo: Archivo
   tabIndex = 0;
   archivoSelected: File
   error: any
@@ -32,17 +31,17 @@ export class ArchivosFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public authService: AuthService) {
+      this.archivo = new Archivo()
   }
 
   ngOnInit() {
-
+    
     this.route.paramMap.subscribe(params => {
       const id: number = +params.get('id')
       if (id)
         this.service.ver(id).subscribe(a => {
           //console.log(a)
           this.archivo = a
-          this.archivoCreate = a
         })
     })
   }
@@ -77,6 +76,10 @@ export class ArchivosFormComponent implements OnInit {
 
   }
 
+regresar(){
+  return this.router.navigate(['/archivos'])
+}
+
   subirArchivo(): void {
     this.btnPulsado = false
     if (!this.btnPulsado) {
@@ -85,21 +88,21 @@ export class ArchivosFormComponent implements OnInit {
         Swal.fire('Error Upload: ', 'Debe seleccionar un archivo', 'error');
       } else {
         // console.log('Imprimiendo alumno, usuario y archivo')
-        // console.log(this.archivoCreate)
+        // console.log(this.archivo)
         // console.log(this.archivoSelected)
-        if (this.archivoCreate.nombre !== undefined || this.archivoCreate.tipo !== undefined) {
-          if (this.archivoCreate.comentario === undefined) {
+        if (this.archivo.nombre !== undefined || this.archivo.tipo !== undefined) {
+          if (this.archivo.comentario === undefined) {
             this.archivo.comentario = ""
           }
-          this.service.crearConArchivo(this.archivoCreate, this.archivoSelected)
+          this.service.crearConArchivo(this.archivo, this.archivoSelected)
             .subscribe(event => {
               if (event.type === HttpEventType.UploadProgress) {
                 this.progreso = Math.round((event.loaded / event.total) * 100);
               } else if (event.type === HttpEventType.Response) {
                 let response: any = event.body;
-                //this.archivoCreate = response.archivoCreate as Archivo
+                //this.archivo = response.archivo as Archivo
                 this.router.navigate(['/archivos'])
-                // console.log(this.archivoCreate)
+                // console.log(this.archivo)
                 this.btnPulsado = true
                 Swal.fire('Actualizado!', `Archivo ${this.archivoSelected.name}`, 'success')
               }
@@ -113,7 +116,7 @@ export class ArchivosFormComponent implements OnInit {
         } else {
           this.btnPulsado = true
           Swal.fire('Error de datos: ', 'Faltan por rellenar campos(Posible causa:nombre,tipo,archivo)', 'error');
-          //console.log(this.archivoCreate.nombre)
+          //console.log(this.archivo.nombre)
         }
       }
     }

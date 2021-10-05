@@ -1,6 +1,12 @@
 .fondo-card {
   background: rgba(196, 196, 196, 0.747);
 }
+.mat-list-item:hover{
+  cursor: pointer;
+  background: #ff6f0046 ;
+  font-weight: bold;
+  transition: 0.2s linear;
+}
 
 .mat-card-title{
     font-size: 18pt;

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AlumnoPerfilComponent } from './components/alumnos/alumno-perfil/alumno-perfil.component';
 import { AlumnosFormComponent } from './components/alumnos/alumnos-form/alumnos-form.component';
 import { AlumnosComponent } from './components/alumnos/alumnos.component';
-import { ResponderExamenModalComponent } from './components/alumnos/responder-examen-modal/responder-examen-modal.component';
 import { ResponderExamenComponent } from './components/alumnos/responder-examen/responder-examen.component';
 import { ArchivosFormComponent } from './components/archivos/archivos-form/archivos-form.component';
 import { ArchivosComponent } from './components/archivos/archivos/archivos.component';
@@ -18,7 +17,6 @@ import { DocentesComponent } from './components/docentes/docentes.component';
 import { SesionesComponent } from './components/docentes/sesiones/sesiones.component';
 import { ExamenesFormComponent } from './components/examenes/examenes-form/examenes-form.component';
 import { ExamenesComponent } from './components/examenes/examenes.component';
-import { ResultadosEvaluacionComponent } from './components/examenes/resultados-evaluacion/resultados-evaluacion.component';
 import { HomeComponent } from './components/home/home.component';
 import { ResaComponent } from './components/reportes-plantilla/resa/resa.component';
 import { SesionFomComponent } from './components/sesiones/sesion-fom/sesion-fom.component';
@@ -62,7 +60,6 @@ const routes: Routes = [
   {path: 'sesiones/form',component:SesionFomComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
   {path: 'sesiones/form/:id',component:SesionFomComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
   {path: 'sesiones-ver/:term', component: SesionesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
-  {path: 'resultados/details/evaluacion/:id',component:ResultadosEvaluacionComponent},
   {path: 'avisos/form/noticia',component:AvisosFormComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
   {path: 'avisos/form/noticia/:id',component:AvisosFormComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
   {path: 'avisos/list',component:AvisosComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }}

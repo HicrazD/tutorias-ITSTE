@@ -25,7 +25,6 @@ import { UsuarioAdminComponent } from './components/usuarios/usuario-admin/usuar
 import { TokenInterceptor } from './components/usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './components/usuarios/interceptors/auth.interceptor';
 import { LoginAdminComponent } from './components/usuarios/login-admin/login-admin.component';
-import { SliderComponent } from './components/slider/slider.component';
 import { AsignarExamenesComponent } from './components/docentes/asignar-examenes/asignar-examenes.component';
 import { ExamenesComponent } from './components/examenes/examenes.component';
 import { ExamenesFormComponent } from './components/examenes/examenes-form/examenes-form.component';
@@ -42,7 +41,6 @@ import { SesionFomComponent } from './components/sesiones/sesion-fom/sesion-fom.
 import { SesionesComponent } from './components/docentes/sesiones/sesiones.component';
 import { PatComponent } from './components/reportes-plantilla/pat/pat.component';
 import { AsistenciasModelComponent } from './components/asistencias/asistencias-model/asistencias-model.component';
-import { ResultadosEvaluacionComponent } from './components/examenes/resultados-evaluacion/resultados-evaluacion.component';
 import { AvisosComponent } from './components/avisos/avisos.component';
 import { AvisosFormComponent } from './components/avisos/avisos-form/avisos-form.component';
 import { HojaCanalizacionComponent } from './components/reportes-plantilla/hoja-canalizacion/hoja-canalizacion.component';
@@ -97,7 +95,6 @@ registerLocaleData(LocaleES,'es');
     ConsultasComponent,
     UsuarioAdminComponent,
     LoginAdminComponent,
-    SliderComponent,
     AsignarExamenesComponent,
     ExamenesComponent,
     ExamenesFormComponent,
@@ -114,7 +111,6 @@ registerLocaleData(LocaleES,'es');
     SesionesComponent,
     PatComponent,
     AsistenciasModelComponent,
-    ResultadosEvaluacionComponent,
     AvisosComponent,
     AvisosFormComponent,
     HojaCanalizacionComponent,

@@ -8,13 +8,13 @@
 
     <mat-card-content class="mat-elevation-z8">
       <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
-        <mat-tab label="Crear archivos" *ngIf="!archivoCreate?.id">
+        <mat-tab label="Crear archivos" >
           <div class="container my-3 pl-5 pr-5">
             <div class="row">
               <div class="col-6">
                 <mat-form-field appearance="outline" class="w-75">
                   <mat-label for="nombre">Nombre</mat-label>
-                  <input required matInput name="nombre" placeholder="Placeholder" [(ngModel)]="archivoCreate.nombre">
+                  <input required matInput name="nombre" placeholder="Placeholder" [(ngModel)]="archivo.nombre">
                   <div class="alert alert-danger" *ngIf="error?.nombre">
                     {{ error.nombre }}
                   </div>
@@ -23,12 +23,12 @@
               <div class="col-6">
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-label>Comentario</mat-label>
-                  <textarea matInput name="comentario" [(ngModel)]="archivoCreate.comentario"></textarea>
+                  <textarea matInput name="comentario" [(ngModel)]="archivo.comentario"></textarea>
                 </mat-form-field>
               </div>
               <div class="col-6 mt-3">
                 <mat-form-field appearance="fill">
-                  <mat-select required [(ngModel)]="archivoCreate.tipo">
+                  <mat-select required [(ngModel)]="archivo.tipo">
                     <mat-option>-- None --</mat-option>
                     <mat-option *ngFor="let t of tipo" [value]="t.valor">{{t.muestraValor}}</mat-option>
                     <mat-error *ngIf="!archivo.tipo"> El campo tipo no puede ser vacio</mat-error>
@@ -43,12 +43,12 @@
                   <div class="custom-file">
                     <input (change)="seleccionarArchivo($event)" type="file" class="custom-file-input"
                       id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                    <label class="custom-file-label" for="inputGroupFile04">Click aqui</label>
                   </div>
                   <div class="input-group-append" *ngIf="btnPulsado">
-                    <button (click)="subirArchivo()" [disabled]="!archivoSelected" class="btn btn-outline-secondary"
-                      type="button" id="inputGroupFileAddon04">Subir</button>
-                  </div>
+                    <button (click)="archivo.id? editarArchivo(): subirArchivo()" [disabled]="!archivoSelected" class="btn btn-outline-secondary"
+                      type="button" id="inputGroupFileAddon04">{{ archivo.id? 'Editar': 'Subir' }}</button>
+                  </div>  
                 </div>
 
                 <div *ngIf="progreso > 0" class="container">
@@ -71,8 +71,8 @@
             </div>
           </div>
         </mat-tab>
-
-        <mat-tab label="Editar archivo" *ngIf="archivo?.id">
+<!--
+  <mat-tab label="Editar archivo" *ngIf="archivo?.id">
           <div class="container p-5">
             <div class="row">
               <div class="col-6">
@@ -130,6 +130,8 @@
             </div>
           </div>
         </mat-tab>
+-->
+        
 
       </mat-tab-group>
 
@@ -148,6 +150,11 @@
       <button mat-raised-button color="primary" class="m-4" (click)="editar()" *ngIf="archivo?.id" [disabled] = "btnPulsado2">
         Editar
         <mat-icon>create</mat-icon>
+      </button>      
+
+      <button mat-raised-button color="primary" class="m-4" (click)="regresar()" *ngIf="authService.hasRole('ROLE_ADMIN')" [disabled] = "btnPulsado2">
+        Lista de archivos
+        <mat-icon>keyboard_backspace</mat-icon>
       </button>
 
   </mat-card>

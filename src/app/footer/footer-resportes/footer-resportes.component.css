@@ -1,5 +1,5 @@
-.example-container {
-  width:100%;
+.main-content{
+  width:95%;
 }
 
 .div-left-footer {
@@ -36,6 +36,6 @@ p {
 }
 
 .img-itste {
-  width: 1cm;
-  height: 1.2cm;
+  width: 2cm;
+  height: 2cm;
 }

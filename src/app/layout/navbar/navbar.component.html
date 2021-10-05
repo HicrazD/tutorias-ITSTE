@@ -1,15 +1,16 @@
 <div class="">
-  <div class="container-fluid example-container bg-light ">
-    <img src="../../../assets/pleca_tecnm.jpg" alt="..." class="img-fluid">
-
-    <img src="../../../assets/pleca-gob1.png" alt="..." class="img-fluid">
-
-    <img src="../../../assets/pleca-gob2.png" alt="..." class="img-fluid" height="100">
-
-    <img src="../../../assets/Logo_ITSTE.png" alt="..." class="img-fluid" height="80" width="80">
+  <div class="container-fluid example-container">
+    <div class="d-flex align-items-center justify-content-around ">
+      <div><img src="../../../assets/pleca_tecnm.webp" alt="..." class="img-fluid"></div>
+      <div><img src="../../../assets/pleca-gob1.png" alt="..." class="img-fluid"></div>
+      <div><img src="../../../assets/pleca-gob2.png" alt="..." class="img-fluid" height="100"></div>
+      <div><img src="../../../assets/Logo_ITSTE.webp" alt="..." class="img-fluid" height="80" width="80"></div>
+    </div>
   </div>
-  <nav class="navbar navbar-light navbar-expand-lg " style="background: #ff6600;">
-    <img width="70" alt="img" src="../../../assets/divisiones/ITSTE.png" />
+  <nav class="navbar navbar-light navbar-expand-lg  " style="background: #ff6600;">
+    <a href="#" class="active nav-link" routerLink="/home">
+      <img width="70" alt="img" src="../../../assets/divisiones/ITSTE.png" />
+    </a>
     <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -18,30 +19,27 @@
       <ul class="navbar-nav ">
         <li class="nav-item">
           <a href="#" class="active nav-link" routerLink="/home">
-             Home
+            Inicio
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class="active1 nav-link"
-            routerLink="/alumnos">Alumnos</a>
+          <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class=" nav-link" routerLink="/alumnos">Alumnos</a>
         </li>
 
         <li class="nav-item">
-          <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class="active2 nav-link"
-            routerLink="/docentes">Docentes</a>
+          <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class=" nav-link" routerLink="/docentes">Docentes</a>
         </li>
 
         <li class="nav-item">
-          <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class="active1 nav-link"
-            routerLink="/usuarios">Usuarios</a>
+          <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class=" nav-link" routerLink="/usuarios">Usuarios</a>
         </li>
         <li class="nav-item">
-          <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class="active1 nav-link"
+          <a href="#" *ngIf="authService.hasRole('ROLE_ADMIN')" class=" nav-link"
             routerLink="/usuarios/url-secret/lvb4/admin/itste">Codigos</a>
         </li>
         <li class="nav-item">
-          <a href="#" *ngIf="!authService.hasRole('ROLE_ALUMNO')" class="active1 nav-link"
-          [routerLink]="['/sesiones-ver/',authService.usuario.username]">Sesiones</a>
+          <a href="#" *ngIf="!authService.hasRole('ROLE_ALUMNO')" class=" nav-link"
+            [routerLink]="['/sesiones-ver/',authService.usuario.username]">Sesiones</a>
         </li>
       </ul>
 
@@ -65,14 +63,13 @@
                 <button *ngIf="authService.hasRole('ROLE_ALUMNO')"
                   [routerLink]="['/alumnos/form/alumno-perfil/',authService.usuario.username]" class="dropdown-item"
                   type="button">Perfil</button>
-                  
+
                 <button *ngIf="authService.hasRole('ROLE_DOCENTE')"
                   [routerLink]="['/docentes/form/docente-perfil/',authService.usuario.username]" class="dropdown-item"
                   type="button">Perfil</button>
-                  
-                  <button *ngIf="authService.hasRole('ROLE_DOCENTE')"
-                  [routerLink]="['/sesiones/form']" class="dropdown-item"
-                  type="button">Crear Reunion</button>
+
+                <button *ngIf="authService.hasRole('ROLE_DOCENTE')" [routerLink]="['/sesiones/form']"
+                  class="dropdown-item" type="button">Crear Reunion</button>
               </div>
 
             </div>
@@ -83,19 +80,14 @@
     </div>
   </nav>
   <div class="mx-auto p-1">
-
-    <div class="text-center  p-1 example-container" > <!--style="background: #1b396a8a;"-->
-      <img src="../../../assets/divisiones/isc.png" alt="..." class="img-fluid mx-1" width="80">
-
-      <img src="../../../assets/divisiones/idc.png" alt="..." class="img-fluid mx-1" width="80">
-
-      <img src="../../../assets/divisiones/Log.png" alt="..." class="img-fluid mx-1" width="80">
-
-      <img src="../../../assets/divisiones/admin.png" alt="..." class="img-fluid mx-1" width="80">
-
-      <img src="../../../assets/divisiones/descarga.png" alt="..." class="img-fluid mx-1" width="80">
+    <div class="d-flex align-items-center justify-content-center w-100">
+      <!--style="background: #1b396a8a;"-->
+      <div><img src="../../../assets/divisiones/isc.webp" alt="..." class="img-fluid mx-1" width="80"></div>
+      <div><img src="../../../assets/divisiones/idc.webp" alt="..." class="img-fluid mx-1" width="80"></div>
+      <div><img src="../../../assets/divisiones/Log.webp" alt="..." class="img-fluid mx-1" width="80"></div>
+      <div><img src="../../../assets/divisiones/admin.webp" alt="..." class="img-fluid mx-1" width="80"></div>
+      <div><img src="../../../assets/divisiones/descarga.webp" alt="..." class="img-fluid mx-1" width="80"></div>      
     </div>
-
   </div>
 
 </div>

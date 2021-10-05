@@ -278,7 +278,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td [attr.rowspan]="rowspan" class="align-middle text-center tam-letra-lista">{{alumno.nombre}}</td>
+                  <td [attr.rowspan]="rowspan" class="align-middle text-center tam-letra-lista">{{alumno.nombre}} {{alumno.apellido}}</td>
                   <td [attr.rowspan]="rowspan" class="align-middle text-center tam-letra-lista">2 - {{alumno.grupo}}
                   </td>
                 </tr>
@@ -305,9 +305,9 @@
     <!--********************   Pagina n de Listas de asistencia  *********************************+-->
     <!--******************************************************************************************+-->
 
-    <mat-card class="container-fluid fondo-card pt-5" style="width: 27.94cm; height: 21.30cm;">
+    <mat-card class="container-fluid fondo-card " style="width: 27.94cm; height: 22.40cm;">
       <br>
-      <div class="container p-2 mt-5">
+      <div class="container mt-5">
         <app-header></app-header>
       </div>
       <mat-card-content>
@@ -343,6 +343,7 @@
 
   </div>
 </div>
+
 <section>
   <div class="container p-3 fondo-form">
     <div class="row">

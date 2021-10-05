@@ -62,7 +62,6 @@
 
       <mat-card-header  class=" p-2 mat-elevation-z8 w-100 ">
         <mat-card-title class="text-dark font-weight-bolder" >Iniciar Sesion</mat-card-title>
-        <mat-card-subtitle class="text-dark">Bienvenido</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="mat-elevation-z8 my-3 p-1 text-light  w-100">
         <mat-form-field appearance="outline" color="accent">
@@ -83,8 +82,8 @@
       </mat-card-content>
 
       <mat-card-actions class="container p-1" >
-        <button (click)="login()" mat-button class="btn btn-outline-primary" [disabled]="btnPulsado">Entrar</button>
-        <button [routerLink]="['/usuarios/form/crear']" mat-button class="btn btn-outline-secondary" [disabled]="btnPulsado">Crear Cuenta</button>
+        <button (click)="login()" mat-button class="btn " [disabled]="btnPulsado" class="btn-entrar">Entrar</button>
+        <button [routerLink]="['/usuarios/form/crear']" mat-button class="btn btn-outline-secondary" [disabled]="btnPulsado" class="btn-crear">Crear Cuenta</button>
       </mat-card-actions>
 
     </div>

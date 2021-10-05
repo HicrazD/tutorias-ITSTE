@@ -8,7 +8,7 @@
         No hay evaluaciones en el sistema.
       </div>
       <div>
-        <button mat-button (click)="eliminarResultadosYRespuestas()">Limpiar Respuestas y Resultados</button>
+        <button mat-button (click)="eliminarResultadosYRespuestas()" color="warn">Limpiar Respuestas y Resultados</button>
       </div>
       <table class="table table-hover table-striped" *ngIf="listar?.length>0">
         <thead>
@@ -17,7 +17,6 @@
             <th>Preguntas</th>
             <th>Editar</th>
             <th>Eliminar</th>
-            <th>Resultados</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +26,7 @@
             <td><button mat-raised-button class="btn-azul zoom" [routerLink]="['/examenes/form', examen.id]">
                 editar
               </button></td>
-            <td><button mat-raised-button class="btn btn-danger  zoom" (click)="eliminar(examen)">
+            <td><button mat-raised-button class="btn btn-danger  zoom" (click)="eliminarEvaluacion(examen)">
                 eliminar
               </button>
               <button mat-raised-button class="btn btn-success  zoom" [disabled]="examen.enabled"
@@ -38,11 +37,6 @@
                 (click)="disabledButton(examen)">
                 desactivar
               </button></td>
-            <td>
-              <button mat-button class="btn-info zoom" [routerLink]="['/resultados/details/evaluacion/',examen.id]">
-                <mat-icon>visibility</mat-icon>
-              </button>
-            </td>
           </tr>
         </tbody>
       </table>

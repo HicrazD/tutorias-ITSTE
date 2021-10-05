@@ -22,135 +22,161 @@ import { Resultado } from 'src/app/models/resultado';
   styleUrls: ['./asignar-examenes.component.css']
 })
 export class AsignarExamenesComponent implements OnInit {
-
+  loading:boolean
   docente: Docente;
-  docentes:Docente[]
+  //docentes: Docente[]
   autocompleteControl = new FormControl();
   examenesFiltrados: Examen[] = [];
-  resultados:Resultado[] = []
-  examenesAsignar: Examen[] = [];
+  resultados: Resultado[] = []
+  evaluacionSeleccionada: Examen
+  //examenesAsignar: Examen[] = [];
   examenes: Examen[] = [];
 
   dataSource: MatTableDataSource<Examen>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   pageSizeOptions = [3, 5, 10, 20, 50];
 
-  mostrarColumnas = ['nombre','eliminar'];
-  mostrarColumnasExamenes = ['id', 'nombre','resultado','eliminar'];
+  mostrarColumnas = ['nombre', 'eliminar'];
+  mostrarColumnasExamenes = ['id', 'nombre', 'resultado', 'eliminar'];
   tabIndex = 0;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private docenteService: DocenteService,
     private examenService: ExamenService,
-    private resultadoService:ResultadoService,
-    public dialog: MatDialog) { }
+    private resultadoService: ResultadoService,
+    public dialog: MatDialog) {
+    this.evaluacionSeleccionada = new Examen()
+    this.loading = false 
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id: number = +params.get('id');
-      this.docenteService.ver(id).subscribe(c => {
-        this.docente = c;
-        this.examenes = this.docente.examenes;
-        //console.log(c)
-        this.iniciarPaginador();
+      if (id) {
+        this.docenteService.ver(id).subscribe(c => {
+          this.docente = c;
+          this.examenes = this.docente.examenes;
+          //console.log(c)
+          this.iniciarPaginador();
 
-      });
+        });
+      }else{
+        this.examenService.listar().subscribe(e => this.examenesFiltrados = e)
+      }
 
-
+      
     });
-    this.autocompleteControl.valueChanges.pipe(
-      map(valor => typeof valor === 'string' ? valor : valor.nombre),
-      flatMap(valor => valor ? this.examenService.filtrarPorNombre(valor) : [])
-    ).subscribe(examenes => this.examenesFiltrados = examenes);
+    /*
+        this.autocompleteControl.valueChanges.pipe(
+          map(valor => typeof valor === 'string' ? valor : valor.nombre),
+          flatMap(valor => valor ? this.examenService.filtrarPorNombre(valor) : [])
+        ).subscribe(examenes => this.examenesFiltrados = examenes);*/
   }
 
-  private iniciarPaginador(){
+  private iniciarPaginador() {
     this.dataSource = new MatTableDataSource<Examen>(this.examenes);
     this.dataSource.paginator = this.paginator;
     //this.paginator._intl.itemsPerPageLabel = 'Registros por página';
   }
 
+  regresar(){
+    this.router.navigate(['/docentes'])
+  }
   mostrarNombre(examen?: Examen): string {
     return examen ? examen.nombre : '';
   }
 
   verResultados(examen: Examen): void {
-    this.resultadoService.findByResultadoByDocente(this.docente,examen)
-    .subscribe(rs => {
-     // console.log(rs)
-      const modalRef = this.dialog.open(VerResultadosModalComponent, {
-        width: '750px',
-        data: {docente: this.docente, examen: examen,resultados:rs}
+    this.resultadoService.findByResultadoByDocente(this.docente, examen)
+      .subscribe(rs => {
+        // console.log(rs)
+        const modalRef = this.dialog.open(VerResultadosModalComponent, {
+          width: '750px',
+          data: { docente: this.docente, examen: examen, resultados: rs }
+        });
+
+        modalRef.afterClosed().subscribe(() => {
+          //  console.log('Modal ver resultados cerrado');
+        })
       });
-
-      modalRef.afterClosed().subscribe(() => {
-      //  console.log('Modal ver resultados cerrado');
-      })
-    });
   }
-
-  seleccionarExamen(event: MatAutocompleteSelectedEvent): void {
-    const examen = event.option.value as Examen;
-
-    if (!this.existe(examen.id)) {
-      this.examenesAsignar = this.examenesAsignar.concat(examen);
-
-     // console.log(this.examenesAsignar);
-    } else {
-      Swal.fire(
-        'Error:',
-        `La evaluacion ${examen.nombre} ya está asignada al curso`,
-        'error'
+  /*
+    seleccionarExamen(event: MatAutocompleteSelectedEvent): void {
+      const evaluacion = event.option.value as Examen;
+      console.log(this.examenesAsignar);
+      
+      if (!this.existe(evaluacion.id)) {
+        this.examenesAsignar = this.examenesAsignar.concat(evaluacion);
+       // this.evaluacionSeleccionada = evaluacion
+       // console.log(this.examenesAsignar);
+      } else {
+        Swal.fire(
+          'Error:',
+          `La evaluacion ${evaluacion.nombre} ya está asignada al docente`,
+          'error'
+        );
+      }
+  
+      this.autocompleteControl.setValue('');
+      event.option.deselect();
+      event.option.focus();
+    }
+  */
+  /*
+    private existe(id: number): boolean {
+      let existe = false;
+      this.examenesAsignar.concat(this.examenes)
+        .forEach(e => {
+          if (id === e.id) {
+            existe = true;
+          }
+        });
+      return existe;
+    }
+  */
+  /*
+    eliminarDelAsignar(examen: Examen){
+      this.examenesAsignar = this.examenesAsignar.filter(
+        e=> examen.id !== e.id
       );
     }
-
-    this.autocompleteControl.setValue('');
-    event.option.deselect();
-    event.option.focus();
+    */
+  /*
+    asignar(): void {
+     // console.log(this.examenesAsignar);
+      this.docenteService.asignarExamenes(this.docente, this.examenesAsignar)
+      .subscribe(docente => {
+        this.examenes = this.examenes.concat(this.examenesAsignar);
+        this.iniciarPaginador();
+        this.examenesAsignar = [];
+  
+        Swal.fire(
+          'Asignados:',
+          `Evaluacion(es) asignada(s) con exito a : ${docente.nombre}`,
+          'success'
+        );
+        this.tabIndex = 2;
+      })
+    }
+    */
+  seleccionar(e: Examen) {
+    this.loading = true
+    this.evaluacionSeleccionada = e
   }
 
-  private existe(id: number): boolean {
-    let existe = false;
-    this.examenesAsignar.concat(this.examenes)
-      .forEach(e => {
-        if (id === e.id) {
-          existe = true;
-        }
-      });
-    return existe;
-  }
-
-  eliminarDelAsignar(examen: Examen){
-    this.examenesAsignar = this.examenesAsignar.filter(
-      e=> examen.id !== e.id
-    );
-  }
-
-  asignar(): void {
-   // console.log(this.examenesAsignar);
-    this.docenteService.asignarExamenes(this.docente, this.examenesAsignar)
-    .subscribe(docente => {
-      this.examenes = this.examenes.concat(this.examenesAsignar);
-      this.iniciarPaginador();
-      this.examenesAsignar = [];
-
-      Swal.fire(
-        'Asignados:',
-        `Evaluacion(es) asignada(s) con exito a : ${docente.nombre}`,
-        'success'
-      );
-      this.tabIndex = 2;
-    })
-  }
-  asignarTodos(){
-    this.docenteService.asignarExamenesTodos(this.examenesAsignar).subscribe(docentes =>
-      {this.docentes=docentes
-     // console.log(this.docentes)},e=>{console.log(e.status)
-      Swal.fire('Asigar Evaluaciones',` Evaluaciones agregadas`,'success')
+  asignarTodos() {    
+    this.docenteService.asignarExamenesTodos(this.evaluacionSeleccionada).subscribe(docentes => {
+     // this.docentes = docentes
+      //console.log(this.docentes)
+      this.loading = false
+      Swal.fire('Asigar Evaluaciones', ` Evaluaciones agregadas`, 'success')
       this.router.navigate(['/docentes'])
-      }
-      )
+    }, err => {
+      this.loading = false
+      console.log(err.error)
+    }
+    )
   }
 
   eliminarExamenDelCurso(evaluacion: Examen): void {
@@ -166,18 +192,18 @@ export class AsignarExamenesComponent implements OnInit {
       if (result.value) {
 
         this.docenteService.eliminarExamen(this.docente, evaluacion)
-        .subscribe(docente => {
-          this.examenes = this.examenes.filter(e => e.id !== evaluacion.id);
-          this.iniciarPaginador();
-          Swal.fire(
-            'Eliminado:',
-            `Evaluacion ${evaluacion.nombre} eliminada con éxito del docente ${docente.nombre}.`,
-            'success'
-          );
-        });    
+          .subscribe(docente => {
+            this.examenes = this.examenes.filter(e => e.id !== evaluacion.id);
+            this.iniciarPaginador();
+            Swal.fire(
+              'Eliminado:',
+              `Evaluacion ${evaluacion.nombre} eliminada con éxito del docente ${docente.nombre}.`,
+              'success'
+            );
+          });
 
       }
-    });    
+    });
 
   }
 

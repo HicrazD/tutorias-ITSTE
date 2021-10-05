@@ -5,15 +5,27 @@
 }
 
 .mat-card{
-  background: linear-gradient(#c0c0c0a4, #dddddda6), url(../../../../assets/svg/login.svg);
+  background: linear-gradient(#ffffff57, #ffffffa4), url(../../../../assets/svg/login.svg);
   background-size: contain;
   background-repeat: no-repeat;
 }
 .mat-card-content{
-  background:#00746100;
+  background:#ff6f004d;
 }
-.mat-card-header{
-  background: #ff910111 ;
+
+.mat-card-content:hover{
+	background:#ff6f000a;
+  }
+.mat-card-header{	
+  background: #1b396a13  ;
+}
+.mat-card-title {
+	font-size:18pt;
+	font-weight: bold;
+	color: #e4e4e4;
+}
+input{
+	font-size:13pt;
 }
 .example-card {
   width: 100%;
@@ -27,6 +39,19 @@
   max-width: 100%;
   min-width: 50%;
 }
+
+.btn-entrar{
+	font-weight: bold;
+	color:#ffffff;
+	background: #1B396A ;
+}
+
+.btn-crear{
+	font-weight: bold;
+	color:#ececec;
+	background: #FF6D00;
+}
+
 
 .cssload-loader{
   width:70vw;

@@ -183,7 +183,7 @@ export class AsignarAlumnosComponent implements OnInit {
     const modalRef = this.dialog.open(HojaCanalizacionComponent, {
       width: '2000px',
       height:'1500px',
-      data: {a:alumno}
+      data: {a:alumno,docente:this.docente}
     });
   }
 }
