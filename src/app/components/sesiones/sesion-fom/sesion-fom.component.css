@@ -3,10 +3,15 @@
   /*background: rgba(0, 92, 72, 0.596);*/
 }
 
+.text-12{
+  font-size: 16pt !important;
+  color: #1B396A !important;
+
+}
 .fondoCrear {
   background: #1B396AE6;
   color: white;
-  width: 100%;
+  margin-right: auto !important;
 }
 
 .fondoCard {

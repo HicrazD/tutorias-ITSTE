@@ -9,11 +9,11 @@
     </div>
   </div>
 
-  <div class="container-fluid" *ngIf="mostrarList">
+  <div class="container-fluid mt-3" *ngIf="mostrarList">
     <div class="row">
       <div class="col-md-6 col-sm-12">
         <mat-list>
-          <div mat-subheader>Tutorados de {{docente.nombre}}</div>
+          <div mat-subheader class="text-12">Tutorados de {{docente.nombre}}</div>
           <mat-list-item class="efecto-h" (click)="btnAdd(alumno)" *ngFor="let alumno of docente.alumnos">
             <mat-icon mat-list-icon>person</mat-icon>
             <div mat-line> {{alumno.nombre}} {{alumno.apellido}}</div>
@@ -26,7 +26,7 @@
       </div>
       <div class="col-md-6 col-sm-12">
         <mat-list>
-          <div mat-subheader>Tutorados agregados</div>
+          <div mat-subheader class="text-12">Tutorados agregados</div>
           <mat-list-item class="efecto-h" (click)="removeItem(alumno)" *ngFor="let alumno of alumnosAgregados">
             <mat-icon mat-list-icon>person</mat-icon>
             <div mat-line> {{alumno.nombre}} {{alumno.apellido}}</div>
@@ -124,8 +124,8 @@
           </div>
           <div class="row">
             <div class="col-12">
-              <div *ngIf="btnPulsado">
-                <button mat-raised-button class="mat-elevation-z8 fondoCrear w-25"
+              <div *ngIf="btnPulsado" >
+                <button mat-raised-button class="mat-elevation-z8 w-25 fondoCrear "
                   (click)="sesion.id? editar(): crearYAsignarSesion()">
                   {{ sesion.id? 'Editar': 'Crear' }}
                 </button>

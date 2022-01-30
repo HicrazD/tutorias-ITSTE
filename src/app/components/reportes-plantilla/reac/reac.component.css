@@ -2,6 +2,12 @@
   margin-bottom: 2%;
 }
 
+.overflow-content{
+  width: 1400px;
+  height: 550px;
+  max-width: 100%;
+}
+
 .color-tecnm {
   color: #17325c;
   font-weight: bold;
@@ -150,4 +156,16 @@ td {
   margin-left: 5px;
   color: white;
   background: #17325c;
+}
+::-webkit-scrollbar{
+  width: 10px;
+  background-color: #F5F5F5;
+}
+::-webkit-scrollbar-track{
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #F90; 
+  background-image: -webkit-linear-gradient(90deg,rgba(255, 255, 255, .2) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, .2) 50%,rgba(255, 255, 255, .2) 75%,transparent 75%,transparent)
 }

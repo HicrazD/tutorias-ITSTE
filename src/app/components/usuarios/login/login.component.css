@@ -5,7 +5,7 @@
 }
 
 .mat-card{
-  background: linear-gradient(#ffffff57, #ffffffa4), url(../../../../assets/svg/login.svg);
+  background: linear-gradient(#ffffffcb, #ffffffd7), url(../../../../assets/svg/login.svg);
   background-size: contain;
   background-repeat: no-repeat;
 }

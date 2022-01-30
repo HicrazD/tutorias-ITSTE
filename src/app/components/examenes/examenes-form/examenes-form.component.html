@@ -6,7 +6,7 @@
     </mat-card-header>
     <mat-card-content>
 
-      <mat-form-field color="accent" class="fondoBlanco w-100">
+      <mat-form-field color="accent" class="fondoBlanco w-100 mt-2">
         <input matInput placeholder="Nombre de la Evalucacion" required name="nombre" id="nombre"
           [(ngModel)]="model.nombre">
         <mat-hint>
@@ -34,13 +34,13 @@
             </div>
           </div>
         </div>
-        <div class="form-group my-2" *ngFor="let pregunta of model?.preguntas; let i = index">
+        <div class="form-group " *ngFor="let pregunta of model?.preguntas; let i = index">
 
           <div class="row">
             <div class="col-sm-1 col-md-1">
               <label class="tam-index">{{i+1}}:</label>
             </div>
-            <div class="col-sm-5 col-md-7">
+            <div class="col-sm-5 col-md-8">
               <input type="text" value="{{pregunta?.texto}}" class="form-control"
                 (change)="asignarTexto(pregunta, $event)">
 

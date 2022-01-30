@@ -34,7 +34,7 @@ export class AsistenciasModelComponent implements OnInit {
       },
      err =>{
        this.error = err.error
-       console.log(this.error)
+     //  console.log(this.error)
      })
   }
 
@@ -59,7 +59,7 @@ export class AsistenciasModelComponent implements OnInit {
         Swal.fire('Exito¡',`Asistencia modificada `,'success')
       },err =>{
         this.error = err.error
-        console.log(this.error)
+      //  console.log(this.error)
         if(err.status == 400){
           Swal.fire('Uups','No se pudo modificar la sistencia','error')
         }

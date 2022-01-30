@@ -1,5 +1,5 @@
 .container{
-  background: linear-gradient(#dfdfdf42, #e0e0e067), url(../../../assets/svg/aviso.svg);
+  background: linear-gradient(#ffffffa9, #ffffffb4), url(../../../assets/svg/aviso.svg);
   background-position: center center;  
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -7,7 +7,7 @@
 }
 table {
   width: 100%;
-  background: #ffffff3f;
+  background: #ffffff7a;
 }
 
 th {
@@ -15,14 +15,11 @@ th {
 }
 
 td,th {
-  font-size: 16px;
+  font-size: 12pt;
   width: 25%;  
   color: rgb(0, 0, 0);
 }
-td:hover {
-  background-color: rgba(31, 73, 129, 0.733);
-  color: rgb(255, 255, 255);
-}
+
 .btn-azul {
   background: #1b396a;
   color: white;

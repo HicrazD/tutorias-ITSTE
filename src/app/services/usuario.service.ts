@@ -9,10 +9,20 @@ import { URL_BAKEND } from '../config/config'
 })
 export class UsuarioService extends CommonService<Usuario> {
   protected baseEndpoint = URL_BAKEND + '/api/usuarios'
+  private _usuario:Usuario = new Usuario()
   constructor(protected http:HttpClient){
     super(http)
   }
   
+  public get usuario():Usuario{
+    if(this._usuario != null) return this._usuario;
+    return null
+  }
+
+  guardarUsuario(usuario:Usuario):void{
+    this._usuario = usuario
+  }
+
   public createRol(usuario:Usuario,id:number):Observable<Usuario>{
     return this.http.post<Usuario>(`${this.baseEndpoint}/usuario-role/${id}`,usuario, {headers: this.cabecera})
   }

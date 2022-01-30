@@ -1,5 +1,5 @@
 .container{
-  background: linear-gradient(#a1a1a154, #e0e0e067), url(../../../assets/svg/docente.svg);
+  background: linear-gradient(#ffffffd5, #ffffffcb), url(../../../assets/svg/docente.svg);
   background-position: center center;  
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -24,8 +24,8 @@
   .mat-form-field {
     background: rgba(255, 255, 255, 0.151);
   }
-  .text-dark{
-    font-size: 14pt;
+  .text-12{
+    font-size: 12pt;
   }
   table {
     width: 1300px;
@@ -35,14 +35,16 @@
     font-size: 14px;
     width: 100%;
   }
-  
+  td,th{
+	font-size: 12pt !important;
+  }
   td.mat-column-star {
     width: 20px;
     padding-right: 8px;
   }
   
   th.mat-column-position, td.mat-column-position {
-    padding-left: 8px;
+    padding-left: 8px;	
   }
   
   .mat-table-sticky:first-child {

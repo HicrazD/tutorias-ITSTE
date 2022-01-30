@@ -1,15 +1,15 @@
 <div class="">
   <div class="container-fluid example-container">
     <div class="d-flex align-items-center justify-content-around ">
-      <div><img src="../../../assets/pleca_tecnm.webp" alt="..." class="img-fluid"></div>
-      <div><img src="../../../assets/pleca-gob1.png" alt="..." class="img-fluid"></div>
-      <div><img src="../../../assets/pleca-gob2.png" alt="..." class="img-fluid" height="100"></div>
-      <div><img src="../../../assets/Logo_ITSTE.webp" alt="..." class="img-fluid" height="80" width="80"></div>
+      <div><img loading="lazy"  src="../../../assets/pleca_tecnm.webp" alt="..." class="img-fluid gob-img"></div>
+      <div><img loading="lazy"  src="../../../assets/pleca-gob1.png" alt="..." class="img-fluid gob-img"></div>
+      <div><img loading="lazy"  src="../../../assets/pleca-gob2.png" alt="..." class="img-fluid gob-img" ></div>
+      <div><img loading="lazy"  src="../../../assets/Logo_ITSTE.png" alt="..." class="img-fluid division-img{" ></div>
     </div>
   </div>
   <nav class="navbar navbar-light navbar-expand-lg  " style="background: #ff6600;">
     <a href="#" class="active nav-link" routerLink="/home">
-      <img width="70" alt="img" src="../../../assets/divisiones/ITSTE.png" />
+      <img width="65" alt="img" src="../../../assets/divisiones/ITSTE.png" />
     </a>
     <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
             routerLink="/usuarios/url-secret/lvb4/admin/itste">Codigos</a>
         </li>
         <li class="nav-item">
-          <a href="#" *ngIf="!authService.hasRole('ROLE_ALUMNO')" class=" nav-link"
+          <a href="#" *ngIf="isDocente()" class=" nav-link"
             [routerLink]="['/sesiones-ver/',authService.usuario.username]">Sesiones</a>
         </li>
       </ul>
@@ -80,13 +80,13 @@
     </div>
   </nav>
   <div class="mx-auto p-1">
-    <div class="d-flex align-items-center justify-content-center w-100">
+    <div class="d-flex align-items-center justify-content-around w-100">
       <!--style="background: #1b396a8a;"-->
-      <div><img src="../../../assets/divisiones/isc.webp" alt="..." class="img-fluid mx-1" width="80"></div>
-      <div><img src="../../../assets/divisiones/idc.webp" alt="..." class="img-fluid mx-1" width="80"></div>
-      <div><img src="../../../assets/divisiones/Log.webp" alt="..." class="img-fluid mx-1" width="80"></div>
-      <div><img src="../../../assets/divisiones/admin.webp" alt="..." class="img-fluid mx-1" width="80"></div>
-      <div><img src="../../../assets/divisiones/descarga.webp" alt="..." class="img-fluid mx-1" width="80"></div>      
+      <div><img loading="lazy" src="../../../assets/divisiones/isc.webp" alt="..." class="img-fluid division-img" ></div>
+      <div><img loading="lazy" src="../../../assets/divisiones/idc.webp" alt="..." class="img-fluid division-img" ></div>
+      <div><img loading="lazy" src="../../../assets/divisiones/Log.webp" alt="..." class="img-fluid division-img" ></div>
+      <div><img loading="lazy" src="../../../assets/divisiones/admin.webp" alt="..." class="img-fluid division-img"></div>
+      <div><img loading="lazy" src="../../../assets/divisiones/descarga.webp" alt="..." class="img-fluid division-img"></div>      
     </div>
   </div>
 

@@ -52,7 +52,7 @@ export class ResponderExamenModalComponent implements OnInit {
     this.resultadoService.findByResultadoAttribIds(this.docente, this.alumno, this.examen)
       .subscribe(r => {
         this.resultado = r
-        console.log(this.resultado)
+      //  console.log(this.resultado)
         if (r) {
           this.enabled = true
         }

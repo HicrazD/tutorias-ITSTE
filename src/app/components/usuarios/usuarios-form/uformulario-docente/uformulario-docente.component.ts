@@ -41,7 +41,7 @@ export class UformularioDocenteComponent implements OnInit {
     password = password.replace(/ /g, "")
     if (password.length > 5) {
       this.usuario.password = password
-      console.log(this.usuario.password)
+    //  console.log(this.usuario.password)
     }
   }
 
@@ -68,12 +68,14 @@ export class UformularioDocenteComponent implements OnInit {
         this.loading = false
         if (err.status === 400) {
           this.error = err.error
-          console.log(this.error)
+       //   console.log(this.error)
         } else {
-          console.log('problemas al crear usuario')
+         // console.log('problemas al crear usuario')
         }
       })
-    }    
+    } else{
+      return Swal.fire('Contraseña:', 'La contraseña debe tener 6 o mas caracteres', 'warning')
+    } 
   }
 
 }

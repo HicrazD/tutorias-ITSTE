@@ -1,5 +1,5 @@
 .mat-card{
-  background: linear-gradient(#a1a1a154, #e0e0e067), url(../../../assets/svg/usuario.svg);
+  background: linear-gradient(#ffffffc2, #ffffffab), url(../../../assets/svg/usuario.svg);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -38,7 +38,9 @@ table {
   width: 1000px;
   background: rgba(255, 255, 255, 0.103);
 }
-
+ts,th{
+	font-size: 12pt !important;
+}
 .colorBtn {
   background: #1B396AE6;
   color: #fff;
@@ -49,7 +51,7 @@ table {
   color: #dd8500;
 }
 
-
+.text-12{font-size: 12pt !important;}
 .loading{
   width:70vw;
   margin-left: auto;

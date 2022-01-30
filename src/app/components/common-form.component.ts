@@ -26,6 +26,7 @@ export abstract class CommonFormComponent<E extends Generic, S extends CommonSer
         this.service.ver(id).subscribe(m => {
           this.model = m;
           this.titulo = 'Editar ' + this.nombreModel;
+         // console.log(this.model)
         });
       }
     })
@@ -62,7 +63,7 @@ export abstract class CommonFormComponent<E extends Generic, S extends CommonSer
         this.btnPulsado = false
         if (err.status === 400 || err.status === 500) {
           this.error = err.error;
-          console.log(this.error);
+        //  console.log(this.error);
         }
       });
     }

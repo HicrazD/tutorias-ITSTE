@@ -6,7 +6,7 @@
 }
 
 .fondo-contenedor{
-  background: linear-gradient(#ffffff00, #b9b8b85b), url(../../../../assets/svg/agregar.svg);
+  background: linear-gradient(#eeeeeed5, #ffffffd0), url(../../../../assets/svg/agregar.svg);
   background-position: center center;  
   background-repeat: no-repeat;
   background-attachment: fixed;

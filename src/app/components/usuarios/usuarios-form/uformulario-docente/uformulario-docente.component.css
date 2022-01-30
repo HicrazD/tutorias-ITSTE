@@ -4,7 +4,12 @@ label{
     font-weight: bold;
 }
 
+
 .btn-crear{
     color:white;
     background: #1B396A;
+}
+
+input{
+    border-color: #FF6D00;
 }

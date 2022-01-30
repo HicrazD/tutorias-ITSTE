@@ -12,7 +12,7 @@ export class AuthService {
   private _usuario: Usuario;
   private _token: string;
 
-  constructor(private http: HttpClient,private usuarioService:UsuarioService) { }
+  constructor(private http: HttpClient) { }
 
   public get usuario(): Usuario {
     if (this._usuario != null) {

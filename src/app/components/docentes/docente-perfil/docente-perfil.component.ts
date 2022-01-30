@@ -59,17 +59,13 @@ export class DocentePerfilComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const username: string = params.get('term')
       if (username)
-        this.usuarioService.filtrarUsernambre(username).subscribe(u => {
-          //    console.log(u)
-          this.usuario = u
-
-          this.docenteService.filtrarPorUsuarioUsername(username).subscribe(docente => {
-            // console.log(docente)
-            if (docente)
-              this.docente = docente
-            this.mostrarArchivos()
-          })
-        })
+      this.docenteService.filtrarPorUsuarioUsername(username).subscribe(docente => {
+        
+        if (docente)
+          this.docente = docente
+          this.usuario = docente.usuario
+       // this.mostrarArchivos()
+      })
     })
 
 
@@ -167,9 +163,14 @@ export class DocentePerfilComponent implements OnInit {
       //this.usuario = this.docente.usuario
       //console.log(this.usuario)
       this.docenteService.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => { // au = archivo-usuario
-        this.archivos = au
+        
+        if(au.length > 0) this.archivos = au;
+        else Swal.fire('Todavia no tiene archivos registrados','','warning')
         this.showFile = false
         //    console.log(au.id < 0)
+      },err =>{
+        if(err.status > 0)
+        Swal.fire('Problemas al tratar de obtener sus archivos','','error')
       })
     }
   }

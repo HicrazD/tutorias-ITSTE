@@ -33,7 +33,7 @@ extends CommonListarComponent<Examen, ExamenService> implements OnInit{
      },err=>{
         this.error = err
         if(this.error.status == 500){
-          console.log('problema en el servidor')
+        //  console.log('problema en el servidor')
         }
      })    
      

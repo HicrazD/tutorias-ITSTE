@@ -1,4 +1,4 @@
-<div class="overflow-auto p-1 bg-secondary" style="width: 1400px; height: 550px; max-width: 100%; ">
+<div class="overflow-auto p-1 bg-secondary overflow-content">
   <div class="overflow-auto" id="element-to-print">
     <mat-card class="container-fluid fondo-card" style="width: 27.94cm; height: 21.30cm;">
       <div class="container p-2">
@@ -96,8 +96,8 @@
                 <td class="align-middle text-center borde-t1">
                   <ng-container *ngIf="sesion?.modalidad === gp; else individual">
                     <div class="line">
-                      <img src="http://i.piccy.info/i7/c7a432fe0beb98a3a66f5b423b430423/1-5-1789/1066503/lol.png"
-                        class="me" />
+                      <!-- <img src="http://i.piccy.info/i7/c7a432fe0beb98a3a66f5b423b430423/1-5-1789/1066503/lol.png"
+                        class="me" /> -->
                     </div>
                   </ng-container>
                   <ng-template #individual>
@@ -108,16 +108,16 @@
                 <td class="align-middle text-center borde-t1">
                   <ng-container *ngIf="sesion?.modalidad === ind; else grupal">
                     <div class="line">
-                      <img src="http://i.piccy.info/i7/c7a432fe0beb98a3a66f5b423b430423/1-5-1789/1066503/lol.png"
-                        class="me" />
+                     <!--  <img src="http://i.piccy.info/i7/c7a432fe0beb98a3a66f5b423b430423/1-5-1789/1066503/lol.png"
+                        class="me" /> -->
                     </div>
                   </ng-container>
                   <ng-template #grupal>
                     x
                   </ng-template>
                 </td>
-                <td class="borde-t1">
-                  <p class="text-justify ">{{sesion.tema}}</p>
+                <td class="borde-t1 text-justify">
+                  <p class=" ">{{sesion.tema}}</p>
                 </td>
               </tr>
 

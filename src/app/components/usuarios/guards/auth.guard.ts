@@ -9,17 +9,17 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService,
-    private router: Router,private usuarioService:UsuarioService) { }
+    private router: Router) { }
     
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.isAuthenticated()) {
       if (this.isTokenExpirado()) {
+        /*
         this.usuarioService.sessionLogOut(this.authService.usuario).subscribe(isLog => {
-         // console.log('Metodo sesionnLogOut en spring')
-         // console.log(isLog)
-        })
+
+        })*/
         this.authService.logout();
         this.router.navigate(['/login']);
         return false;

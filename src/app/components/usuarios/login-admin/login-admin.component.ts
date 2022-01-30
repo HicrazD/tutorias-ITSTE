@@ -49,7 +49,7 @@ export class LoginAdminComponent implements OnInit {
         err => {
           if (err.status == 400) {
             this.error = err.error;
-            console.log(this.error);
+           // console.log(this.error);
             Swal.fire(`ROLE: ${nombre}`, `No existe ningun rol con ese nombre!`, 'error');
             this.router.navigate(['/home'])
           }
@@ -78,7 +78,9 @@ export class LoginAdminComponent implements OnInit {
   */
   public createAdmin() {
     if (!this.block) {
-      this.service.createRol(this.usuario, this.role.id).subscribe(usuario => {
+      if(this.usuario.password.length > 5)
+     {
+        this.service.createRol(this.usuario, this.role.id).subscribe(usuario => {
         //console.log(usuario);
         if (this.role.nombre == 'ROLE_ADMIN') {
           Swal.fire('Create', `Usuario ADMIN ${usuario.username} creado con exito!`, 'success');
@@ -90,6 +92,10 @@ export class LoginAdminComponent implements OnInit {
           console.log(this.error);
         }
       })
+    }
+    else {
+      Swal.fire('La contraseña debe tener 6 caracteres o mas','','error')
+    }
     }
   }
 

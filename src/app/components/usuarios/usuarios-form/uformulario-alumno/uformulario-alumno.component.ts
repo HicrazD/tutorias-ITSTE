@@ -59,7 +59,7 @@ export class UformularioAlumnoComponent implements OnInit {
     password = password.replace(/ /g, "")
     if (password.length > 5) {
       this.usuario.password = password
-      console.log(this.usuario.password)
+    //  console.log(this.usuario.password)
     }
   }
 
@@ -87,7 +87,7 @@ export class UformularioAlumnoComponent implements OnInit {
         if (err.status === 400) {
           this.error = err.error
         } else {
-          console.log('problemas al crear alumno')
+        //  console.log('problemas al crear alumno')
         }
       })
     }    

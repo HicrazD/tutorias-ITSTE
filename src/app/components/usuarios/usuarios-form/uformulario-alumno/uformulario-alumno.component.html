@@ -1,11 +1,11 @@
-<div class="container p-5">
-  <div class="row">
+<div class="container p-5 ">
+  <div class="row justify-content-md-center">
     <div class="row">
       <form action="" method="post">
         <div class="row">
           <div class="col-md-4 col-sm-12">
             <div class="form-group">
-              <label for="username">Nombre de Usuario <mat-icon>account_circle</mat-icon></label>
+              <label for="username">Nombre de usuario <mat-icon>account_circle</mat-icon></label>
               <input type="text" class="form-control" id="username" name="username" [(ngModel)]="usuario.username"
                 required>
                 <span class="alert alert-danger" *ngIf="error?.username">
@@ -86,7 +86,7 @@
             </div>
           </div>
           <div class="col-md-6 col-sm-12">
-            <mat-form-field appearance="fill" class="mx-3">
+            <mat-form-field appearance="fill" >
               <mat-select required [(ngModel)]="alumno.carrera" name="carrera">
                 <mat-option required *ngFor="let s of carrera" [value]="s.valor">{{s.muestraValor}}</mat-option>
               </mat-select>
@@ -102,7 +102,7 @@
 
         <div class="row">
           <div class="col-md-6 col-sm-12">
-            <mat-form-field appearance="fill" class="mx-3">
+            <mat-form-field appearance="fill" >
               <mat-select required [(ngModel)]="alumno.semestre" name="semestre">
                 <mat-option required *ngFor="let s of semestre" [value]="s.valor">{{s.muestraValor}}</mat-option>
               </mat-select>
@@ -115,7 +115,7 @@
             </mat-form-field>
           </div>
           <div class="col-md-6 col-sm-12">
-            <mat-form-field appearance="fill" class="mx-3">
+            <mat-form-field appearance="fill" >
               <mat-select required [(ngModel)]="alumno.grupo" name="semestre">
                 <mat-option required *ngFor="let s of grupo" [value]="s.valor">{{s.muestraValor}}</mat-option>
               </mat-select>
@@ -131,7 +131,7 @@
 
         <div class="row">
           <div class="col-md-6 col-sm-12">
-            <mat-form-field class="w-100" appearance="outline">
+            <mat-form-field  appearance="outline">
               <mat-label for="periodoSemestral">Periodo Semestral</mat-label>
               <input matInput required name="periodoSemestral" [(ngModel)]="alumno.periodoSemestral"
                 placeholder="Ejemplo: Enero 2020- Junio 2020">

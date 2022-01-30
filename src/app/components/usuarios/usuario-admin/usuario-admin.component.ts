@@ -98,10 +98,11 @@ export class UsuarioAdminComponent implements OnInit {
         }, err => {
           if (err.status === 400 || err.status === 500) {
             this.error = err.error;
-            console.log(this.error);
+            Swal.fire('Error:', `No se pudo actualizar la contraseña`, 'error');
+           // console.log(this.error);
           }
         });
-      } else { Swal.fire('Hay un problema:', 'las constraseñas deben tener mas de 5 caracteres', 'warning'); }
+      } else { Swal.fire('Hay un problema:', 'la constraseña debe tener 6 caracteres o más', 'warning'); }
     } else {
       Swal.fire('Hay un problema:', `las contraseñas deben ser iguales`, 'warning');
     }
@@ -130,7 +131,7 @@ export class UsuarioAdminComponent implements OnInit {
 
   createCode() {
     if (this.code.tipo === null || this.code.tipo === undefined) {
-      Swal.fire('Campo Vacio', 'El campo esta vacio', 'warning')
+      Swal.fire('El campo vacío', '', 'warning')
     } else {
       this.codigoService.create(this.code).subscribe(c => {
         this.listarCodigos()
@@ -163,6 +164,7 @@ export class UsuarioAdminComponent implements OnInit {
         title: 'Exito!',
         text: 'Roles Creados!',
       })
+      this.router.navigate([`usuarios/form/crear/usuario-admin/secret/2de6`])
     },
       err => {
         if (err.status == 400) {
@@ -219,7 +221,7 @@ export class UsuarioAdminComponent implements OnInit {
 
           if (err.status == 500) {
             this.error = err.error;
-            Swal.fire('Oops...:500', `Problemas en el servidor, Contactar al servio técnico`, 'error');
+            Swal.fire('Oops...:500', `Problemas en el servidor, Contactar al soporte`, 'error');
             //console.log(this.error);
           }
         });

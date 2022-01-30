@@ -19,14 +19,14 @@
 
         <mat-card class="w-100 ">
           <mat-form-field class="fondo-blanco">
-            <mat-label class="text-dark ">Buscar</mat-label>
+            <mat-label class="text-12 ">Buscar</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
           </mat-form-field>
         </mat-card>
         <div class="example-container mat-elevation-z8  w-100" *ngIf="listar?.length>0">
           <table mat-table [dataSource]="dataSource" id="docentesTable">
 
-            <ng-container matColumnDef="id" sticky class="zoom">
+            <ng-container matColumnDef="id" >
               <th mat-header-cell *matHeaderCellDef> Clave</th>
               <td mat-cell *matCellDef="let docente"> {{docente.id}} </td>
             </ng-container>

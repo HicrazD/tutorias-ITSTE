@@ -8,3 +8,12 @@ label{
     color:white;
     background: #1B396A;
 }
+
+input{
+    width: 100%;
+    border-color: #FF6D00;
+}
+
+.mat-form-field{
+    width: 100%;
+}

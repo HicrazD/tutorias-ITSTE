@@ -79,16 +79,6 @@ export class AlumnoPerfilComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.route.paramMap.subscribe(params => {
-      const username: string = params.get('term')
-      if (username)
-        this.usuarioService.filtrarUsernambre(username).subscribe(u => {
-          //  console.log(u)
-          this.usuario = u
-        })
-    })
-
     this.route.paramMap.subscribe(params => {
       const username: string = params.get('term')
       if (username)
@@ -96,7 +86,9 @@ export class AlumnoPerfilComponent implements OnInit {
           // console.log(alumno)
           if (alumno) {
             this.alumno = alumno
-            // console.log(this.alumno)
+            this.usuario = this.alumno.usuario
+            this.archivos = this.usuario.archivos
+           //  console.log(this.usuario)
             this.alumnoService.filtrarDocentePorAlumno(alumno).subscribe(
               docente => {
                 this.docente = docente
@@ -109,9 +101,6 @@ export class AlumnoPerfilComponent implements OnInit {
                 }
               });
           }
-          this.alumnoService.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => {
-            this.archivos = au
-          })
         })
     })
 
@@ -236,13 +225,13 @@ export class AlumnoPerfilComponent implements OnInit {
   }
 
   editarUsuario(): void {
-    if (this.contra1 === this.contra2 && this.contra1.length > 6 && this.contra2.length > 6) {
+    if (this.contra1 === this.contra2 && this.contra1.length > 5 && this.contra2.length > 5) {
       this.usuario.password = this.contra2
       this.usuarioService.editar(this.usuario).subscribe(m => {
         //console.log(m);
         this.contra1 = ''
         this.contra2 = ''
-        Swal.fire('Modificado:', `Contraseña actualizada con éxito`, 'success');
+        Swal.fire('Contraseña modificada con éxito', ``, 'success');
         if(this.authService.hasRole('ROLE_ADMIN')){
           this.router.navigate([`/alumnos/form/alumno-perfil/${this.usuario.username}`]);
         }else{
@@ -251,9 +240,10 @@ export class AlumnoPerfilComponent implements OnInit {
       }, err => {
         if (err.status === 400 || err.status === 500) {
           this.error = err.error;
+          Swal.fire('Error:', `No se pudo cambiar la contraseña, intente mas tarde`, 'error');
           //console.log(this.error);
         }
       });
-    } else Swal.fire('Error:', `1) Los campos no coinciden 2) La contraseña es muy corta`, 'error');
+    } else Swal.fire('Error:', `1) Los campos no coinciden - 2) La contraseña debe tener almenos 6 caracteres`, 'error');
   }
 }

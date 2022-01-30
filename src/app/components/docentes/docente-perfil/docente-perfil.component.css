@@ -1,14 +1,16 @@
 .tam-height {
   border: 1px solid #1B396AE6;
-  background-color: #5c687a54;
+  background-color: #f0f0f011;
 }
 
 .mat-form-field {
   width: 100%;
+  font-size: 14pt !important;
 }
 
 .mat-label {
   color: darkred;
+  font-weight: bold;
 }
 
 .zoom {

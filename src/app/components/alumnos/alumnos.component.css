@@ -2,11 +2,10 @@
   height: 350px;
   width: 100%;
   max-width: 100%;
-  min-width: 40%;
   overflow: auto;
 }
 .mat-card{
-  background: linear-gradient(#81818142, #e0e0e067), url(../../../assets/svg/alumno.svg);
+  background: linear-gradient(#ffffffce, #fffefee7), url(../../../assets/svg/alumno.svg);
   background-position: center center;  
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -14,7 +13,7 @@
 }
 
 table {
-  width: 100%;
+  width: 1000px;
   background: #ffffff2c;
 }
 .mat-form-field {
@@ -26,7 +25,12 @@ table {
   font-weight: bold;
   color:#1B396AE6;
 }
-
+.text-12{
+    font-size: 12pt;
+  }
+td,th{
+	font-size: 12pt !important;
+  }
 td.mat-column-star {
   width: 100%;
   padding-right: 8px;
@@ -53,6 +57,15 @@ th.mat-column-position, td.mat-column-position {
  font-size: 14pt;
  color:#dd8500;
 }
+
+
+@media only screen and (max-width: 759px){
+    .table{
+      width:1300px;
+    }
+  }
+
+/**-----------------------------------------------------------------------------------------*/
 
 .loading{
   width:70vw;

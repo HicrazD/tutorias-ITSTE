@@ -1,16 +1,18 @@
 <div class="container p-5">
-  <div class="row">
-    <div class="row">
+  <div class="row justify-content-md-center">
+    <div class="row ">
       <form action="" method="post">
-        <div class="row">
+        <div class="row ">
           <div class="col-md-4 col-sm-12">
             <div class="form-group">
-              <label for="username">Nombre de Usuario <mat-icon>account_circle</mat-icon></label>
+              <label for="username">Nombre de usuario <mat-icon>account_circle</mat-icon></label>
               <input type="text" class="form-control" id="username" name="username" [(ngModel)]="usuario.username"
                 required>
-                <span class="alert alert-danger" *ngIf="error?.username">
-                  {{ error.username }}
-                </span>
+            </div>
+            <div>
+              <span class="alert alert-danger" *ngIf="error?.username">
+                {{ error.username }}
+              </span>
             </div>
           </div>
           <div class="col-md-4 col-sm-12">
@@ -46,9 +48,9 @@
               <label for="apellido">Apellidos <mat-icon>person</mat-icon></label>
               <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="docente.apellido"
                 required>
-                <span class="alert alert-danger" *ngIf="error?.apellido">
-                  {{ error.apellido }}
-                </span>
+              <span class="alert alert-danger" *ngIf="error?.apellido">
+                {{ error.apellido }}
+              </span>
             </div>
           </div>
         </div>
@@ -61,7 +63,7 @@
               <span class="alert alert-danger" *ngIf="error?.correo">
                 {{ error.correo }}
               </span>
-            </div>            
+            </div>
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
@@ -70,7 +72,7 @@
               <span class="alert alert-danger" *ngIf="error?.telefono">
                 {{ error.telefono }}
               </span>
-            </div>            
+            </div>
           </div>
         </div>
 

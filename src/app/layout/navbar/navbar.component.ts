@@ -16,6 +16,10 @@ export class NavbarComponent{
     private usuarioService:UsuarioService) { 
 
     }
+    isDocente():Boolean{
+      if(this.authService.usuario.roles.length == 1 && this.authService.hasRole('ROLE_DOCENTE')) return true;
+      return false
+    }
   logout(): void {
     let username = this.authService.usuario.username;
     this.usuarioService.sessionLogOut(this.authService.usuario).subscribe(isLog => {
@@ -23,7 +27,7 @@ export class NavbarComponent{
     //  console.log(isLog)
     })
     this.authService.logout();
-    Swal.fire('Logout', `Hola ${username}, has cerrado sesión con éxito!`, 'success');
+    Swal.fire(`Hola ${username}, has cerrado sesión con éxito!`, ``, 'success');
     this.router.navigate(['/login']);
   }
 

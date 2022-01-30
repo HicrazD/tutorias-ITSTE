@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./docentes.component.css']
 })
 export class DocentesComponent implements OnInit {  // extends CommonListarComponent<Docente,DocenteService> 
-  titulo: string = "Lista de Docentes"
+  titulo: string = "Docentes"
   listar: Docente[] = []
   error: any
   loading:boolean
@@ -31,11 +31,12 @@ export class DocentesComponent implements OnInit {  // extends CommonListarCompo
 
   listDocente():void {
     this.service.listar().subscribe(docente => {
+      this.loading = false
       this.listar = docente
       this.iniciarPaginador();
     },err => {
       if(err.name === 'HttpErrorResponse')
-      console.log(err.name)
+      this.error = err.error
     })
   }
 
@@ -63,6 +64,7 @@ export class DocentesComponent implements OnInit {  // extends CommonListarCompo
       if (result.value) {
         this.service.eliminar(docente.id).subscribe(() => {
           // this.listar = this.listar.filter(a => a !== e);
+          this.loading = true
           this.listDocente()
           Swal.fire('Eliminado:', `Docente eliminado con éxito`, 'success');
         }, err => {

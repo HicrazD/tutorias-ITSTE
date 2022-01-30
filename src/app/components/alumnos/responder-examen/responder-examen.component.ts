@@ -134,7 +134,7 @@ export class ResponderExamenComponent implements OnInit {
      // console.log(results)
      },err =>{
          this.error = err
-         console.log(this.error)
+        // console.log(this.error)
        })
   }
   /*

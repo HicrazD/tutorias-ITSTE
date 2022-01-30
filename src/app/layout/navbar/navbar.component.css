@@ -1,21 +1,8 @@
 
-/*
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
-*/
- /**/
-
 ul {
   list-style-type: none;
   display: flex;
-  padding: 5px 0;
-  background-size: 200% 200%;
-  border-radius: 10px;
-  border-top-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+  padding: 1px 0;
 }
 
 
@@ -33,5 +20,15 @@ a{
 
 .example-container{
   width: 100%;
+}
+
+.division-img{
+  width: 70px;
+  height:auto;
+}
+
+.gob-img{
+  width: 80%;
+  height:auto;
 }
 

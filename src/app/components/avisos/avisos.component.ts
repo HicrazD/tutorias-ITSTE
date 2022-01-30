@@ -66,7 +66,7 @@ export class AvisosComponent implements OnInit {
         }, err => {
           if (err.status == 400) {
             this.error = err.error;
-            console.log(this.error);
+          //  console.log(this.error);
           }
         });
       }

@@ -5,7 +5,7 @@
     overflow: auto;
   }
   .mat-card{
-    background: linear-gradient(#dadada94, #d4d4d4b2), url(../../../assets/svg/plantilla.svg);
+    background: linear-gradient(#ffffffc7, #ffffffd8), url(../../../assets/svg/plantilla.svg);
     background-position: center center;  
     background-repeat: no-repeat;
     background-attachment: fixed;

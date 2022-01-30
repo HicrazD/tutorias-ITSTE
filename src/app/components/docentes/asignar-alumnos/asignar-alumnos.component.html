@@ -10,12 +10,12 @@
       <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
         <mat-tab label="Asignar alumnos">
 
-          <mat-form-field class="mx-3" style="width: 350px;max-width: 50%;">
+          <mat-form-field class="mx-3 mt-5" style="width: 350px;max-width: 50%;">
             <mat-label>Nombre o apellido</mat-label>
             <input matInput placeholder="Buscar alumnos" (keyup)="filtrar($event.target.value)" [(ngModel)]="filtro">
           </mat-form-field>
 
-          <mat-form-field class="mx-3" style="width: 350px;max-width: 50%;">
+          <mat-form-field class="mx-3 mt-5" style="width: 350px;max-width: 50%;">
             <mat-label>Seleccionar por Matricula</mat-label>
             <input matInput placeholder="Buscar alumnos" (keyup)="filtrarMatricula($event.target.value)"
               [(ngModel)]="filtroMatricula">

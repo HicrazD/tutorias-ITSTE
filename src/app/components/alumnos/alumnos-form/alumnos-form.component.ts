@@ -90,13 +90,13 @@ export class AlumnosFormComponent
           this.archivo = a
           //console.log(a)
           this.router.navigate([this.redirect]);
-          this.tabIndex = 0
+          this.tabIndex = 2
           this.archivo = new Archivo()
           Swal.fire('Upload File','El archivo se subio correctamente', `success`)
         },err => {
           if(err.status == 400 || err.status == 405 ){
             this.error = err.error;
-            console.log(this.error);
+           // console.log(this.error);
           }
         });
     }
@@ -125,7 +125,7 @@ export class AlumnosFormComponent
         },err => {
           if(err.status === 400){
             this.error = err.error;
-            console.log(this.error);
+           // console.log(this.error);
           }
         });
       }
@@ -137,11 +137,20 @@ export class AlumnosFormComponent
     this.usuario = this.model.usuario
     //console.log(this.usuario)
     this.showFile = true
+    this.obtenerArchivos()
+  }
+
+  obtenerArchivos(){
     this.service.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => {
-      this.archivos = au
+      
+      if(au.length > 0) this.archivos = au;
+      else{
+        Swal.fire('Todavia no tienes archivos','','error')
+      }
       this.showFile = false
     },err =>{
       if(err.status > 0)
+      Swal.fire('Problemas al recuperar archivos','','error')
       this.showFile = false
     })
   }

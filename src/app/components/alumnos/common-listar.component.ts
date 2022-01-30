@@ -60,7 +60,7 @@ export abstract class CommonListarComponent<E extends Generic, S extends CommonS
         }, err => {
           if (err.status == 400) {
             this.error = err.error;
-            console.log(this.error);
+          //  console.log(this.error);
           }
         });
       }

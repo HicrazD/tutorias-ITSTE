@@ -3,7 +3,7 @@
 
 
 
-<div class="row m-5">
+<div class="row m-2">
   <div class="col-lg-2 tam-height p-2" >
     <div class="d-flex flex-column" *ngIf="docente.id">
       <div class=""><button mat-raised-button class="w-100 zoom colorBtn" [routerLink]="['/home']">
@@ -32,18 +32,18 @@
     <!--******************************************************************************************-->
 
     <!--***********************           Formulario                 ****************************-->
-    <mat-card style="background: url(../../../../assets/Resporte/background_main.png); background-size: cover;">
+    <mat-card style="background: url(../../../../assets/Resporte/background_main.webp); background-size: cover;">
       <mat-card-header *ngIf="usuario">
         <mat-card-title class="mat-elevation-z8 p-3 colorBtn">
           Usuario {{usuario?.username}}
         </mat-card-title>
       </mat-card-header>
 
-      <mat-card-content class="mat-elevation-z8 p-3">
+      <mat-card-content class="mat-elevation-z8 ">
         <mat-tab-group dynamicHeight [(selectedIndex)]="tabIndex">
           <!-- ****************************   Perfil  *************************-->
           <mat-tab label="Perfil">
-            <div class="container my-5 p-10">
+            <div class="container my-3 ">
               <div class="row">
                 <div class="col-md-6 col-sm-12">
                   <mat-form-field appearance="outline" class="mat-form-field">
@@ -147,7 +147,7 @@
           </mat-tab>
           <!-- ****************************  Ver archivos  *************************-->
           <mat-tab label="Ver archivos">
-            <button type="button" class="btn colorBtn" (click)="mostrarArchivos()">Actualizar</button>
+            <button type="button" class="btn colorBtn mx-5 mt-3" (click)="mostrarArchivos()">Actualizar</button>
             <mat-card class="my-3">
               <!--style="background: #1B396A;"-->
               <mat-card-header *ngIf="archivos">

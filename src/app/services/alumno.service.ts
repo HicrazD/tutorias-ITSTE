@@ -12,8 +12,8 @@ import { CommonService } from './common.service';
   providedIn: 'root'
 })
 export class AlumnoService extends CommonService<Alumno>{
-  protected baseEndpoint = URL_BAKEND + '/api/alumnos'
-  constructor(protected http:HttpClient){
+  baseEndpoint = URL_BAKEND + '/api/alumnos'
+  constructor(http:HttpClient){
     super(http)
   }
 

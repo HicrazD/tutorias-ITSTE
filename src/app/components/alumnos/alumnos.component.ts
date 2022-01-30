@@ -26,7 +26,7 @@ export class AlumnosComponent implements OnInit {
   loading:boolean
   filtrar: any
   error: any
-  titulo: string = "Lista de alumnos"
+  titulo: string = "Alumnos"
   listar: Alumno[] = []
   alumnosDoocente: Alumno = new Alumno()
   docente: Docente
@@ -204,7 +204,7 @@ export class AlumnosComponent implements OnInit {
     // console.log('entro en eliminarResultados ')
     this.resultadoService.buscarResultadoIdsPorAlumnoId(alumno.id).subscribe(ids => {
       if(ids.length > 0){
-        console.log(ids)
+       // console.log(ids)
         this.resultadoService.eliminarResultadoIdsPorAlumnoId(ids).subscribe(ids =>
           {
           //  console.log("Ids elminadas")
@@ -218,12 +218,15 @@ export class AlumnosComponent implements OnInit {
   //Borrar alumno
   borrarAlumno(alumno: Alumno) {
     this.service.eliminarAlumno(alumno.id).subscribe(() => {
+      this.loading = false
       this.listAlumnos()
       Swal.fire('Eliminado:', `Alumno eliminado con éxito`, 'success');
     }, err => {
-      if (err.status == 400) {
+      if (err.status >=  0) {
         this.error = err.error;
         //  console.log(this.error);
+        Swal.fire('Erorr:', `No se pudo eliminar el regitro`, 'error');
+        this.loading = false
       }
     });
   }
@@ -240,7 +243,7 @@ export class AlumnosComponent implements OnInit {
       confirmButtonText: 'Si, eliminar!'
     }).then((result) => {
       if (result.value) {
-
+        this.loading = true
         this.eliminarAlumnodeDocente(alumno)
 
       }
