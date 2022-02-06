@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Docente } from 'src/app/models/docente';
 import { Examen } from 'src/app/models/examen';
@@ -7,6 +7,7 @@ import { ResultadoService } from 'src/app/services/resultado.service';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import * as html2pdf from 'html2pdf.js'
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-ver-resultados-modal',
@@ -21,7 +22,7 @@ export class VerResultadosModalComponent implements OnInit {
   mostrarSuma:number = 0
   resultados:Resultado[] = []
   mostrarColumnas: string[] = ['id', 'resultado'];
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,@Inject(PLATFORM_ID) private platformId,
   public modalRef: MatDialogRef<VerResultadosModalComponent>,
   private service:ResultadoService) { }
 
@@ -54,7 +55,8 @@ console.log(this.suma)
   }*/
 
   exportexcel(): void {
-    let element = document.getElementById('resultadosTable');
+    if (isPlatformBrowser(this.platformId))
+    {let element = document.getElementById('resultadosTable');
  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(element.d)
     const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
     const workbook: XLSX.WorkBook = {
@@ -63,7 +65,7 @@ console.log(this.suma)
     }
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
     const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-    FileSaver.saveAs(data, this.docente.nombre+'_Resultados' + '_export_' + '.xlsx')
+    FileSaver.saveAs(data, this.docente.nombre+'_Resultados' + '_export_' + '.xlsx')}
   }
 
   exportPdf(){

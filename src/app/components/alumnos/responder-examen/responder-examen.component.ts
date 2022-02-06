@@ -68,7 +68,7 @@ export class ResponderExamenComponent implements OnInit {
 
   responderExamen(examen: Examen): void{
     const modalRef = this.dialog.open(ResponderExamenModalComponent, {
-      width: '750px',
+      width: '790px',
       data: {docente: this.docente, alumno: this.alumno, examen: examen}
     });
 

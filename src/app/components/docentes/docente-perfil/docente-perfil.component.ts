@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URL_BAKEND } from 'src/app/config/config';
 import { Archivo } from 'src/app/models/archivo';
@@ -25,7 +26,7 @@ export class DocentePerfilComponent implements OnInit {
   archivos: Archivo[]
   archivo: Archivo = new Archivo()
   archivoSelected: File
-  showFile:boolean
+  showFile: boolean
 
   tipo = [
     { valor: 'WORD', muestraValor: 'WORD' },
@@ -43,9 +44,8 @@ export class DocentePerfilComponent implements OnInit {
 
   mostrarColumnasArchivos: string[] = ['nombre', 'comentario', 'tipo', 'editar', 'archivo', 'eliminar'];
   constructor(private route: ActivatedRoute, public authService: AuthService,
-    private router: Router,
+    private router: Router, @Inject(PLATFORM_ID) private platformId,
     private docenteService: DocenteService,
-    private usuarioService: UsuarioService,
     private archivoService: ArchivoService) {
     this.docentes = new Docente()
     this.docente = new Docente()
@@ -59,36 +59,36 @@ export class DocentePerfilComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const username: string = params.get('term')
       if (username)
-      this.docenteService.filtrarPorUsuarioUsername(username).subscribe(docente => {
-        
-        if (docente)
-          this.docente = docente
+        this.docenteService.filtrarPorUsuarioUsername(username).subscribe(docente => {
+
+          if (docente)
+            this.docente = docente
           this.usuario = docente.usuario
-       // this.mostrarArchivos()
-      })
+          // this.mostrarArchivos()
+        })
     })
 
 
     // console.log('archivo inicial')
     // console.log(this.archivo)
   }
-/*
-  public crear(): void {
-    this.route.paramMap.subscribe(params => {
-      const username: string = params.get('term');
-      if (username) {
-        this.docenteService.crearPorUsuarioUsername(this.docente, username).subscribe(docente => {
-          //  console.log(docente + 'docente creado');
-          Swal.fire('Perfil', `Actualizacion de datos correctamente`, 'success')
-          this.tabIndex = 1
-          this.router.navigate([`/home`]);
-        }, err => {
-          this.error = err.error
-        });
-      }
-    })
-  }
-*/
+  /*
+    public crear(): void {
+      this.route.paramMap.subscribe(params => {
+        const username: string = params.get('term');
+        if (username) {
+          this.docenteService.crearPorUsuarioUsername(this.docente, username).subscribe(docente => {
+            //  console.log(docente + 'docente creado');
+            Swal.fire('Perfil', `Actualizacion de datos correctamente`, 'success')
+            this.tabIndex = 1
+            this.router.navigate([`/home`]);
+          }, err => {
+            this.error = err.error
+          });
+        }
+      })
+    }
+  */
   seleccionarArchivo(event) {
     this.archivoSelected = event.target.files[0]
     // console.log(this.archivoSelected)
@@ -163,14 +163,14 @@ export class DocentePerfilComponent implements OnInit {
       //this.usuario = this.docente.usuario
       //console.log(this.usuario)
       this.docenteService.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => { // au = archivo-usuario
-        
-        if(au.length > 0) this.archivos = au;
-        else Swal.fire('Todavia no tiene archivos registrados','','warning')
+
+        if (au.length > 0) this.archivos = au;
+        else Swal.fire('Todavia no tiene archivos registrados', '', 'warning')
         this.showFile = false
         //    console.log(au.id < 0)
-      },err =>{
-        if(err.status > 0)
-        Swal.fire('Problemas al tratar de obtener sus archivos','','error')
+      }, err => {
+        if (err.status > 0)
+          Swal.fire('Problemas al tratar de obtener sus archivos', '', 'error')
       })
     }
   }
@@ -178,16 +178,18 @@ export class DocentePerfilComponent implements OnInit {
   redireccion(archivo: Archivo) {
     //  console.log('redireccion')
     //  console.log(archivo)
-    if (archivo.tipo === 'PDF') {
-      window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
-    }
+    if (isPlatformBrowser(this.platformId)) {
+      if (archivo.tipo === 'PDF') {
+        window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
+      }
 
-    if (archivo.tipo === 'WORD') {
-      window.open(`${this.urlBackend}/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
-    }
+      if (archivo.tipo === 'WORD') {
+        window.open(`${this.urlBackend}/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
+      }
 
-    if (archivo.tipo === 'EXCEL') {
-      window.open(`${this.urlBackend}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
+      if (archivo.tipo === 'EXCEL') {
+        window.open(`${this.urlBackend}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
+      }
     }
   }
 

@@ -13,7 +13,24 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/TutoriasResidencia",
+            "allowedCommonJsDependencies": [
+              "core-js/modules/es.string.includes.js",
+              "core-js/modules/es.regexp.to-string.js",
+              "core-js/modules/es.array.reverse.js",
+              "core-js/modules/es.array.index-of.js",
+              "core-js/modules/es.string.split.js",
+              "core-js/modules/web.dom-collections.iterator.js",
+              "core-js/modules/es.string.starts-with.js",
+              "core-js/modules/es.array.reduce.js",
+              "core-js/modules/es.promise.js",
+              "core-js/modules/es.string.match.js",
+              "core-js/modules/es.array.iterator.js",
+              "core-js/modules/es.string.ends-with.js",
+              "core-js/modules/es.string.trim.js",
+              "core-js/modules/es.string.replace.js",
+              "raf"
+           ],
+            "outputPath": "dist/TutoriasResidencia/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -32,6 +49,7 @@
               "./node_modules/popper.js/dist/umd/popper.min.js",   
               "./node_modules/jquery/dist/jquery.slim.min.js",           
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/jspdf/dist/jspdf.umd.min.js",
               "./node_modules/html2pdf.js/dist/html2pdf.js"
             ]
           },
@@ -103,6 +121,7 @@
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/jquery/dist/jquery.slim.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/jspdf/dist/jspdf.umd.min.js",
               "./node_modules/html2pdf.js/dist/html2pdf.js"
             ]
           }
@@ -113,7 +132,8 @@
             "tsConfig": [
               "tsconfig.app.json",
               "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "e2e/tsconfig.json",
+              "tsconfig.server.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -130,6 +150,53 @@
             "production": {
               "devServerTarget": "TutoriasResidencia:serve:production"
             }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/TutoriasResidencia/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "TutoriasResidencia:build",
+            "serverTarget": "TutoriasResidencia:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "TutoriasResidencia:build:production",
+              "serverTarget": "TutoriasResidencia:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "TutoriasResidencia:build:production",
+            "serverTarget": "TutoriasResidencia:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }

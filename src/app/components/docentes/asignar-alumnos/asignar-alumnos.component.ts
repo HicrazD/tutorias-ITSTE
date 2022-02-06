@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { AsistenciaService } from 'src/app/services/asistencia.service';
 import { Asistencia } from 'src/app/models/asistencia';
 import { MatDialog } from '@angular/material/dialog';
 import { HojaCanalizacionComponent } from '../../reportes-plantilla/hoja-canalizacion/hoja-canalizacion.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-asignar-alumnos',
@@ -39,7 +40,7 @@ export class AsignarAlumnosComponent implements OnInit {
   
   constructor(private route: ActivatedRoute,
     private docenteService: DocenteService,private asistenciaService:AsistenciaService,
-    private alumnoService: AlumnoService,
+    private alumnoService: AlumnoService,@Inject(PLATFORM_ID) private platformId,
     public dialog: MatDialog) { }
 
   ngOnInit(){
@@ -167,6 +168,7 @@ export class AsignarAlumnosComponent implements OnInit {
   }
 
   exportexcel(): void {
+    if (isPlatformBrowser(this.platformId)){
     let element = document.getElementById('alumnosTable');
  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(element.d)
     const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
@@ -176,7 +178,7 @@ export class AsignarAlumnosComponent implements OnInit {
     }
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
     const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-    FileSaver.saveAs(data, this.docente.nombre +'_alumnos_asignados' + '_export_' + '.xlsx')
+    FileSaver.saveAs(data, this.docente.nombre +'_alumnos_asignados' + '_export_' + '.xlsx')}
   }
 
   btnHC(alumno:Alumno): void{

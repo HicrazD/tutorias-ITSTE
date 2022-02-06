@@ -1,9 +1,10 @@
 import * as html2pdf from 'html2pdf.js'
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Alumno } from 'src/app/models/alumno';
 import { Docente } from 'src/app/models/docente';
 import { Sesion } from 'src/app/models/sesion';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-reac',
@@ -11,9 +12,9 @@ import { Sesion } from 'src/app/models/sesion';
   styleUrls: ['./reac.component.css']
 })
 export class ReacComponent implements OnInit {
-  numTutoradosSeg:string = ""
-  nombreCompleto:string=""
-  division:string = ""
+  numTutoradosSeg: string = ""
+  nombreCompleto: string = ""
+  division: string = ""
   gp: string = "Grupal"
   ind: String = "Individual"
   docente: Docente;
@@ -36,13 +37,14 @@ export class ReacComponent implements OnInit {
   bloque1: Sesion[] = []
   bloque2: Sesion[] = []
   rowspan
-  url:any = '../../../../assets/form/evaluacion.jpg'
-  url2:any = '../../../../assets/form/evaluacion.jpg'
-  fechaEntrega:string='08/04/2021'
-  descrip1:string = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis placeat quasi'
-  descrip2:string = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis placeat quasi'
+  url: any = '../../../../assets/form/evaluacion.jpg'
+  url2: any = '../../../../assets/form/evaluacion.jpg'
+  fechaEntrega: string = '08/04/2021'
+  descrip1: string = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis placeat quasi'
+  descrip2: string = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis placeat quasi'
   meses = ["", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+  @Inject(PLATFORM_ID) private platformId) {
     this.alumnos = []
     this.sesiones = []
     this.sesionesTemp = []
@@ -54,27 +56,26 @@ export class ReacComponent implements OnInit {
     this.docente = this.data.docente as Docente
     this.nombreCompleto = this.docente.nombre + " " + this.docente.apellido
     this.sesiones = this.data.sesiones as Sesion[]
-   // console.log(this.sesionesTemp)
+    // console.log(this.sesionesTemp)
     this.alumnos = this.data.docente.alumnos as Alumno[]
     this.numTutorados = this.docente.alumnos.length
 
-        /* console.log(this.docente)
-     
-     console.log(this.alumnos)*/
+    /* console.log(this.docente)
+ 
+ console.log(this.alumnos)*/
   }
 
   bloques() {
     if (this.compararMeses) {
-      this.sesionesTemp.map((sesion,i = 0) =>
-        {
-          i++
-         if(i < 7) this.bloque1.push(sesion)
-          else this.bloque2.push(sesion)
-       // console.log(i)
+      this.sesionesTemp.map((sesion, i = 0) => {
+        i++
+        if (i < 7) this.bloque1.push(sesion)
+        else this.bloque2.push(sesion)
+        // console.log(i)
       }
       )
-//this.bloque1 = this.sesionesTemp.filter(s => s.numSesion < 7)
-//      this.bloque2 = this.sesionesTemp.filter(s => s.numSesion >= 7)
+      //this.bloque1 = this.sesionesTemp.filter(s => s.numSesion < 7)
+      //      this.bloque2 = this.sesionesTemp.filter(s => s.numSesion >= 7)
     }
   }
   tablaMostrar() {
@@ -118,8 +119,8 @@ export class ReacComponent implements OnInit {
     )
     //console.log(this.sesionesTemp)
   }
-  
-  btnAseptar(){
+
+  btnAseptar() {
     this.bloque1 = []
     this.bloque2 = []
     this.sesionesTemp = []
@@ -128,38 +129,40 @@ export class ReacComponent implements OnInit {
     this.rowspan = this.sesionesTemp.length + 1
   }
 
-  seleccionaFoto1(event):void{
+  seleccionaFoto1(event): void {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
-      reader.readAsDataURL(event.target.files[0]); 
+      reader.readAsDataURL(event.target.files[0]);
 
-      reader.onload = (event) => { 
+      reader.onload = (event) => {
         this.url = event.target.result;
       }
     }
   }
-  seleccionaFoto2(event):void{
+  seleccionaFoto2(event): void {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
-      reader.readAsDataURL(event.target.files[0]); 
+      reader.readAsDataURL(event.target.files[0]);
 
-      reader.onload = (event) => { 
+      reader.onload = (event) => {
         this.url2 = event.target.result;
       }
     }
   }
 
-  exportPdf(){
-    let element = document.getElementById('element-to-print');
-    const opt = {
-      margin:       0,
-      filename:     `rEAC_${this.docente.nombre}.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'cm', format: 'letter', orientation: 'l',compress:'true' }
-    };
-    html2pdf().from(element).set(opt).save();
+  exportPdf() {
+    if (isPlatformBrowser(this.platformId)) {
+      let element = document.getElementById('element-to-print');
+      const opt = {
+        margin: 0,
+        filename: `rEAC_${this.docente.nombre}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'cm', format: 'letter', orientation: 'l', compress: 'true' }
+      };
+      html2pdf().from(element).set(opt).save();
+    }
   }
 }

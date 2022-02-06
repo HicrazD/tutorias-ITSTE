@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Docente } from 'src/app/models/docente';
 import { Sesion } from 'src/app/models/sesion';
 import * as html2pdf from 'html2pdf.js'
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-pat',
   templateUrl: './pat.component.html',
@@ -12,10 +13,10 @@ export class PatComponent implements OnInit {
 
   docente: Docente;
   sesiones: Sesion[]
-  bloque1:Sesion[] = []
-  bloque2:Sesion[] = []
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any)
-  {
+  bloque1: Sesion[] = []
+  bloque2: Sesion[] = []
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+  @Inject(PLATFORM_ID) private platformId) {
   }
 
   ngOnInit(): void {
@@ -27,16 +28,18 @@ export class PatComponent implements OnInit {
     //console.log(this.bloque2)
   }
 
-  exportPdf(){
-    let element = document.getElementById('element-to-print');
-    const opt = {
-      margin:       0,
-      filename:     `Pat_${this.docente.nombre}.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'cm', format: 'letter', orientation: 'l',compress:'true' }
-    };
-    html2pdf().from(element).set(opt).save();
+  exportPdf() {
+    if (isPlatformBrowser(this.platformId)) {
+      let element = document.getElementById('element-to-print');
+      const opt = {
+        margin: 0,
+        filename: `Pat_${this.docente.nombre}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'cm', format: 'letter', orientation: 'l', compress: 'true' }
+      };
+      html2pdf().from(element).set(opt).save();
+    }
   }
 
 }

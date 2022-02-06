@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Docente } from 'src/app/models/docente';
@@ -6,6 +6,7 @@ import { DocenteService } from 'src/app/services/docente.service';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import Swal from 'sweetalert2';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-docentes',
@@ -16,12 +17,12 @@ export class DocentesComponent implements OnInit {  // extends CommonListarCompo
   titulo: string = "Docentes"
   listar: Docente[] = []
   error: any
-  loading:boolean
+  loading: boolean
   dataSource: MatTableDataSource<Docente>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   pageSizeOptions: number[] = [4, 5, 10, 20, 50];
   mostrarColumnasDocentes: string[] = ['id', 'nombre', 'apellido', 'correo', 'division', 'examenes', 'asignar', 'edit', 'eliminar'];
-  constructor(private service: DocenteService) { 
+  constructor(private service: DocenteService, @Inject(PLATFORM_ID) private platformId) {
     this.loading = true
   }
 
@@ -29,14 +30,14 @@ export class DocentesComponent implements OnInit {  // extends CommonListarCompo
     this.listDocente()
   }
 
-  listDocente():void {
+  listDocente(): void {
     this.service.listar().subscribe(docente => {
       this.loading = false
       this.listar = docente
       this.iniciarPaginador();
-    },err => {
-      if(err.name === 'HttpErrorResponse')
-      this.error = err.error
+    }, err => {
+      if (err.name === 'HttpErrorResponse')
+        this.error = err.error
     })
   }
 
@@ -70,7 +71,7 @@ export class DocentesComponent implements OnInit {  // extends CommonListarCompo
         }, err => {
           if (err.status == 400) {
             this.error = err.error;
-          //  console.log(this.error);
+            //  console.log(this.error);
           }
         });
       }
@@ -79,16 +80,18 @@ export class DocentesComponent implements OnInit {  // extends CommonListarCompo
   }
 
   exportexcel(): void {
-    let element = document.getElementById('docentesTable');
-    //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(element.d)
-    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-    const workbook: XLSX.WorkBook = {
-      Sheets: { 'data': worksheet },
-      SheetNames: ['data']
+    if (isPlatformBrowser(this.platformId)) {
+      let element = document.getElementById('docentesTable');
+      //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(element.d)
+      const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+      const workbook: XLSX.WorkBook = {
+        Sheets: { 'data': worksheet },
+        SheetNames: ['data']
+      }
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
+      const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+      FileSaver.saveAs(data, 'Docentes_Tabla' + '_export_' + '.xlsx')
     }
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' })
-    const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-    FileSaver.saveAs(data, 'Docentes_Tabla' + '_export_' + '.xlsx')
   }
 
 }

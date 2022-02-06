@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URL_BAKEND } from 'src/app/config/config';
 import { Alumno } from 'src/app/models/alumno';
@@ -30,7 +31,7 @@ export class AlumnoPerfilComponent implements OnInit {
   usuario: Usuario
   contra1: string = ''
   contra2: string = ''
-  archivos: Archivo []
+  archivos: Archivo[]
   alumno: Alumno
   asistencias: Asistencia[] = []
   presente: Asistencia[]
@@ -72,7 +73,9 @@ export class AlumnoPerfilComponent implements OnInit {
     private alumnoService: AlumnoService,
     private usuarioService: UsuarioService,
     private archivoService: ArchivoService,
-    private asistenciaService: AsistenciaService) {
+    private asistenciaService: AsistenciaService,
+    @Inject(PLATFORM_ID) private platformId
+  ) {
     this.alumno = new Alumno()
     this.docente = new Docente()
     this.usuario = new Usuario()
@@ -88,7 +91,7 @@ export class AlumnoPerfilComponent implements OnInit {
             this.alumno = alumno
             this.usuario = this.alumno.usuario
             this.archivos = this.usuario.archivos
-           //  console.log(this.usuario)
+            //  console.log(this.usuario)
             this.alumnoService.filtrarDocentePorAlumno(alumno).subscribe(
               docente => {
                 this.docente = docente
@@ -188,7 +191,7 @@ export class AlumnoPerfilComponent implements OnInit {
     this.usuario = this.alumno.usuario
     // console.log(this.usuario)
     this.alumnoService.filtrarArchivosByUsuarioId(this.usuario.id).subscribe(au => {
-      this.archivos = au 
+      this.archivos = au
     })
   }
 
@@ -206,16 +209,18 @@ export class AlumnoPerfilComponent implements OnInit {
   redireccion(archivo: Archivo) {
     // console.log('redireccion')
     // console.log(archivo)
-    if (archivo.tipo === 'PDF') {
-      window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
-    }
+    if (isPlatformBrowser(this.platformId)) {
+      if (archivo.tipo === 'PDF') {
+        window.open(`${this.urlBackend}/api/archivos/uploads/file-pdf/${archivo.id}`, "_blank")
+      }
 
-    if (archivo.tipo === 'WORD') {
-      window.open(`${this.urlBackend}/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
-    }
+      if (archivo.tipo === 'WORD') {
+        window.open(`${this.urlBackend}/api/archivos/uploads/file-word/${archivo.id}`, "_blank")
+      }
 
-    if (archivo.tipo === 'EXCEL') {
-      window.open(`${this.urlBackend}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
+      if (archivo.tipo === 'EXCEL') {
+        window.open(`${this.urlBackend}/api/archivos/uploads/file-excel/${archivo.id}`, "_blank")
+      }
     }
   }
 
@@ -232,11 +237,11 @@ export class AlumnoPerfilComponent implements OnInit {
         this.contra1 = ''
         this.contra2 = ''
         Swal.fire('Contraseña modificada con éxito', ``, 'success');
-        if(this.authService.hasRole('ROLE_ADMIN')){
+        if (this.authService.hasRole('ROLE_ADMIN')) {
           this.router.navigate([`/alumnos/form/alumno-perfil/${this.usuario.username}`]);
-        }else{
+        } else {
           this.router.navigate([`/alumnos/form/alumno-perfil/${this.authService.usuario.username}`]);
-        }        
+        }
       }, err => {
         if (err.status === 400 || err.status === 500) {
           this.error = err.error;

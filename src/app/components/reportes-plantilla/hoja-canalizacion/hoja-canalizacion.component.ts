@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Alumno } from 'src/app/models/alumno';
 import * as html2pdf from 'html2pdf.js'
 import { Docente } from 'src/app/models/docente';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-hoja-canalizacion',
   templateUrl: './hoja-canalizacion.component.html',
@@ -21,7 +22,9 @@ export class HojaCanalizacionComponent implements OnInit {
   elements = Array(this.n)
   elements2 = Array(this.n2)
   agregarPage:boolean = false
-  constructor( public modalRef: MatDialogRef<HojaCanalizacionComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { 
+  constructor( public modalRef: MatDialogRef<HojaCanalizacionComponent>,
+    @Inject(PLATFORM_ID) private platformId,
+     @Inject(MAT_DIALOG_DATA) public data: any) { 
     this.alumno = data.a as Alumno
     this.docente = data.docente as Docente
     this.nombreDocente = this.docente.nombre + this.docente.apellido
@@ -73,7 +76,8 @@ export class HojaCanalizacionComponent implements OnInit {
       console.log(this.n2)*/
   }
   exportPdf(){
-    let element = document.getElementById('element-to-print');
+    if (isPlatformBrowser(this.platformId))
+    {let element = document.getElementById('element-to-print');
     const opt = {
       margin:       0.0,
       filename:     `Hoja_canalizacion_${this.alumno.nombre}_.pdf`,
@@ -81,7 +85,7 @@ export class HojaCanalizacionComponent implements OnInit {
       html2canvas:  { scale: 2 },
       jsPDF:        { unit: 'cm', format: 'letter', orientation: 'l',compress:'true' }
     };
-    html2pdf().from(element).set(opt).save();
+    html2pdf().from(element).set(opt).save();}
   }
 
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { InformeAsistenciasComponent } from '../informe-asistencias/informe-asistencias.component';
 import { MatDialog } from '@angular/material/dialog';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-resa',
   templateUrl: './resa.component.html',
@@ -10,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ResaComponent {
   name = 'This is XLSX TO JSON CONVERTER';
   willDownload = false;
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, @Inject(PLATFORM_ID) private platformId) { }
 
   ngOnInit() {
   }
@@ -18,38 +19,42 @@ export class ResaComponent {
     const modalRef = this.dialog.open(InformeAsistenciasComponent, {
       width: '1300px'
     });
-  }  
+  }
 
 
   onFileChange(ev) {
-    let workBook = null;
-    let jsonData = null;
-    const reader = new FileReader();
-    const file = ev.target.files[0];
-    reader.onload = (event) => {
-      const data = reader.result;
-      workBook = XLSX.read(data, { type: 'binary' });
-      jsonData = workBook.SheetNames.reduce((initial, name) => {
-        const sheet = workBook.Sheets[name];
-        initial[name] = XLSX.utils.sheet_to_json(sheet);
-        return initial;
-      }, {});
-      const dataString = JSON.stringify(jsonData);
-      document.getElementById('output').innerHTML = dataString.slice(0, 300).concat("...");
-      this.setDownload(dataString);
-     // console.log(dataString)
+    if (isPlatformBrowser(this.platformId)) {
+      let workBook = null;
+      let jsonData = null;
+      const reader = new FileReader();
+      const file = ev.target.files[0];
+      reader.onload = (event) => {
+        const data = reader.result;
+        workBook = XLSX.read(data, { type: 'binary' });
+        jsonData = workBook.SheetNames.reduce((initial, name) => {
+          const sheet = workBook.Sheets[name];
+          initial[name] = XLSX.utils.sheet_to_json(sheet);
+          return initial;
+        }, {});
+        const dataString = JSON.stringify(jsonData);
+        document.getElementById('output').innerHTML = dataString.slice(0, 300).concat("...");
+        this.setDownload(dataString);
+        // console.log(dataString)
+      }
+      reader.readAsBinaryString(file);
     }
-    reader.readAsBinaryString(file);
   }
 
 
   setDownload(data) {
-    this.willDownload = true;
-    setTimeout(() => {
-      const el = document.querySelector("#download");
-      el.setAttribute("href", `data:text/json;charset=utf-8,${encodeURIComponent(data)}`);
-      el.setAttribute("download", 'xlsxtojson.json');
-    }, 1000)
+    if (isPlatformBrowser(this.platformId)) {
+      this.willDownload = true;
+      setTimeout(() => {
+        const el = document.querySelector("#download");
+        el.setAttribute("href", `data:text/json;charset=utf-8,${encodeURIComponent(data)}`);
+        el.setAttribute("download", 'xlsxtojson.json');
+      }, 1000)
+    }
   }
 
 }
