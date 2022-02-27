@@ -157,7 +157,7 @@ export class ReacComponent implements OnInit {
       let element = document.getElementById('element-to-print');
       const opt = {
         margin: 0,
-        filename: `rEAC_${this.docente.nombre}.pdf`,
+        filename: `REAC_${this.docente.nombre}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'cm', format: 'letter', orientation: 'l', compress: 'true' }
