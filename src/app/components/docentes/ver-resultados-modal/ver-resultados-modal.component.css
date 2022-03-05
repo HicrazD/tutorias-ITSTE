@@ -1,11 +1,17 @@
 .mat-table-sticky {
     border-top: 1px solid #e0e0e0de;
   }
+  .mat-card-subtitle{
+    font-size: 14pt !important;
+  }
 .mat-card-title,table {
   background: #ffffff75;
 }
+th,td{
+  font-size: 12pt !important;
+}
   .mat-card {
-  background: linear-gradient(#ffffff42, #ffffff2c), url(../../../../assets/svg/resultados.svg);
+  background: linear-gradient(#ffffffb2, #ffffffd7), url(../../../../assets/svg/resultados.svg);
   background-position: center center;  
   background-repeat: no-repeat;
   background-attachment: fixed;

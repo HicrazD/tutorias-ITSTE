@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8" >
+<div class="" >
   <mat-card  id="element-to-print">
     <mat-card-header>
       <mat-card-title mat-dialog-title class="mat-elevation-z8 p-2" >
@@ -7,7 +7,7 @@
       <mat-card-subtitle class="p-3 ">Nombre de la Evaluacion: {{examen.nombre}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content mat-dialog-content>
-      <div class="container mat-elevation-z8 p-2" style="height: 250px; overflow: auto;">
+      <div class="overflow-auto mat-elevation-z8 " >
         <table mat-table #table [dataSource]="resultados" class="w-100" id="resultadosTable">
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Alumno que realizó la evaluación</th>

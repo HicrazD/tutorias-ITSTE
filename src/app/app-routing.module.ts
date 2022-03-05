@@ -62,11 +62,13 @@ const routes: Routes = [
   {path: 'sesiones-ver/:term', component: SesionesComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }},
   {path: 'avisos/form/noticia',component:AvisosFormComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
   {path: 'avisos/form/noticia/:id',component:AvisosFormComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_ADMIN' }},
-  {path: 'avisos/list',component:AvisosComponent,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }}
+  {path: 'avisos/list',component:AvisosComponent}//,canActivate: [AuthGuard, RoleGuard],data: { role: 'ROLE_DOCENTE' }}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabled'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
