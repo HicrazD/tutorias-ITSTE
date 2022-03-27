@@ -69,6 +69,7 @@ console.log(this.suma)
   }
 
   exportPdf(){
+    if (isPlatformBrowser(this.platformId)){
     let element = document.getElementById('element-to-print');
     const opt = {
       margin:       0.4,
@@ -77,7 +78,7 @@ console.log(this.suma)
       html2canvas:  { scale: 2 },
       jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
-    html2pdf().from(element).set(opt).save();
+    html2pdf().from(element).set(opt).save();}
   }
 
   cerrar(): void {

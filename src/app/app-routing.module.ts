@@ -31,6 +31,11 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
+  {
+    path: 'Alumnos',
+    loadChildren: () => import('./components/alumnos/alumnos.module').then(m => m.AlumnosModule),
+    canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }
+  },
   {path: 'home', component:HomeComponent},
   {path: 'alumnos', component: AlumnosComponent,canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' }},
   {path: 'alumnos/form/:id', component:AlumnosFormComponent},

@@ -78,15 +78,15 @@ registerLocaleData(LocaleES,'es');
 @NgModule({
   declarations: [
     AppComponent,
-    AlumnosComponent,
+    //AlumnosComponent,
     DocentesComponent,
     UsuariosComponent,
     LoginComponent,
-    AlumnosFormComponent,
+    //AlumnosFormComponent,
     UsuariosFormComponent,
     RolUsuarioComponent,
     AsignarAlumnosComponent,
-    AlumnoPerfilComponent,
+   // AlumnoPerfilComponent,
     DocentePerfilComponent,
     DocenteFormComponent,
     ArchivosComponent,
@@ -97,10 +97,10 @@ registerLocaleData(LocaleES,'es');
     LoginAdminComponent,
     AsignarExamenesComponent,
     ExamenesComponent,
-    ExamenesFormComponent,
+    ExamenesFormComponent,/*
     ResponderExamenComponent,
     ResponderExamenModalComponent,
-    VerExamenModalComponent,
+    VerExamenModalComponent,*/
     FooterComponent,
     VerResultadosModalComponent,
     FooterResportesComponent,
@@ -160,7 +160,7 @@ registerLocaleData(LocaleES,'es');
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'es'},
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

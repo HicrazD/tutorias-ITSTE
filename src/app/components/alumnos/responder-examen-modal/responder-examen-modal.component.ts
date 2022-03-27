@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+//import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { Alumno } from 'src/app/models/alumno';
 import { Docente } from 'src/app/models/docente';
 import { Examen } from 'src/app/models/examen';
